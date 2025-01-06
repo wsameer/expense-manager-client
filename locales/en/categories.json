@@ -1,0 +1,25 @@
+{
+  "category-name": "Category Name",
+  "subcategory-name": "Subcategory Name",
+  "description": "Description",
+  "save-changes": "Save changes",
+  "create": "Create",
+  "expense": {
+    "expense-category": "Expense category",
+    "category-is-deleted": "Expense category has been deleted",
+    "subcategory-is-deleted": "Expense Subcategory has been deleted",
+    "failed-to-delete": "Failed to delete category",
+    "failed-to-delete-subcategory": "Failed to delete Subcategory",
+    "add-subcategory": "Add Subcategory",
+    "category-delete-warning-message": "This action cannot be undone. This will permanently delete the category and all related subcategories.",
+    "new-expense-category": "New Expense Category",
+    "create-subcategory": "Create Expense Subcategory"
+  },
+  "income": {
+    "income-category": "Income category",
+    "new-income-category": "New Income Category",
+    "category-is-deleted": "Income category has been deleted",
+    "failed-to-delete": "Failed to delete category",
+    "category-delete-warning-message": "This action cannot be undone. This will permanently delete the category,"
+  }
+}

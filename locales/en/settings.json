@@ -1,0 +1,17 @@
+{
+  "export-import": "Export/Import",
+  "import-from-csv": "Import from CSV",
+  "export-to-csv": "Export to CSV",
+  "export-to-pdf": "Export to PDF",
+  "other": "Other",
+  "erase-data": "Erase All Content and Settings",
+  "delete-all-transactions": "Delete All Transactions",
+  "submit": "Upload & Process CSV",
+  "uploading": "Uploading...",
+  "data": {
+    "csv-file": "CSV File",
+    "cancel": "Cancel",
+    "upload-csv-file": "Upload CSV File",
+    "upload-csv-hint": "Your file must follow the given format or it won't be accepted for processing"
+  }
+}

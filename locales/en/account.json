@@ -1,0 +1,22 @@
+{
+  "create-account-form": {
+    "add-new-account": "Add new account",
+    "edit": "Edit",
+    "edit-an-account": "Edit an account",
+    "save-changes": "Save changes",
+    "cancel": "Cancel",
+    "name": "Name",
+    "balance": "Balance",
+    "description": "Description",
+    "create-account": "Create account",
+    "save": "Save",
+    "delete-account": "Delete account",
+    "group": "Group",
+    "payment": "Payment"
+  },
+  "your-account-has-been-deleted": "Your account has been deleted.",
+  "account-failed-to-delete": "Your account cannot be deleted at the moment. Please try again.",
+  "select-account-first": "Select an account first to see the details",
+  "invalid-request": "Invalid Request!",
+  "account-does-not-exist": "This account doesn't exist"
+}

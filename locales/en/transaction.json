@@ -1,0 +1,19 @@
+{
+  "date": "Date",
+  "amount": "Amount",
+  "category": "Category",
+  "account": "Account",
+  "note": "Note",
+  "create": "Create",
+  "cancel": "Cancel",
+  "update": "Update",
+  "select-a-category": "Select a category",
+  "select-account": "Select an account",
+  "get-error-message": "Error in getting Transactions. Please try again.",
+  "record": "Record",
+  "delete-warning-message": "This operation is irreversible. Please double check before proceeding",
+  "failed-to-delete": "Failed to delete the transaction. Please try again.",
+  "transaction-is-deleted": "Transaction is deleted",
+  "enter-and-submit-your-transaction": "Enter and submit the details of your transaction",
+  "all-transactions-deleted": "You have just deleted all transactions."
+}
