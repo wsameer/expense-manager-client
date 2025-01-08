@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '../ui/button';
 
-
 interface MonthSelectorProps {
   currentDate?: Date;
   onSelectMonth: (year: number, month: number) => void;

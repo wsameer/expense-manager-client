@@ -11,7 +11,7 @@ import { Button } from '@/components/ui/button';
 import { LOGIN_ROUTE } from '@/router/routes';
 import { Link } from '@/components/ui/link';
 import { toast } from '@/hooks';
-import { useAuth } from '@/hooks/use-auth';
+import { useAuth } from '@/hooks';
 
 type RegisterFormProps = {
   onSuccess: () => void;

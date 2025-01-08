@@ -5,17 +5,22 @@ import { useNavigate } from 'react-router-dom'
 import { Head } from '@/components/seo/head'
 import { Button } from '@/components/ui/button'
 import { Link } from '@/components/ui/link'
-import { LOGIN_ROUTE, DASHBOARD_ROUTE, REGISTER_ROUTE } from '@/router/routes'
+import { LOGIN_ROUTE, DASHBOARD_ROUTE, APP_ROUTE } from '@/router/routes'
 import { useTranslation } from 'react-i18next'
+import { useAuth } from '@/hooks'
 
 export const Welcome = () => {
   const navigate = useNavigate();
   const { t } = useTranslation('common');
-  const user = false;
+  const { user } = useAuth();
 
   const handleStart = () => {
-    navigate(REGISTER_ROUTE)
-  }
+    if (user) {
+      navigate(APP_ROUTE);
+    } else {
+      navigate(LOGIN_ROUTE);
+    }
+  };
 
   return (
     <div className="flex min-h-screen w-full flex-col bg-muted/40">

@@ -38,5 +38,6 @@
     "this-action-cannot-be-undone": "This action cannot be undone. This will permanently delete your account and remove your data from our servers.",
     "deleted": "Deleted!"
   },
-  "no-data-for-this-month": "No data available for this month"
+  "no-data-for-this-month": "No data available for this month",
+  "no-data-available": "No data available"
 }

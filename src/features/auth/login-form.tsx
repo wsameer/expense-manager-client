@@ -11,7 +11,7 @@ import { Input } from '@/components/ui/input';
 import { FORGOT_PASSWORD, REGISTER_ROUTE } from '@/router/routes';
 import { Button } from '@/components/ui/button';
 import { Link } from '@/components/ui/link';
-import { useAuth } from '@/hooks/use-auth';
+import { useAuth } from '@/hooks';
 
 
 type LoginFormProps = {

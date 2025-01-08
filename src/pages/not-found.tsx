@@ -2,6 +2,7 @@ import React from 'react';
 import { Home } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link } from '@/components/ui/link';
+import { APP_ROUTE } from '@/router/routes';
 
 export const NotFoundRoute = () => {
 
@@ -13,13 +14,13 @@ export const NotFoundRoute = () => {
       <p className="leading-7 [&:not(:first-child)]:mt-6 mb-6">
         This page doesn't exist
       </p>
-      <Button variant="outline">
+      <Button variant="outline" asChild>
         <Link
-          to="/"
-          className="flex items-center"
+          to={APP_ROUTE}
+          className="flex items-center dark:text-white"
           replace
         >
-          <Home className="mr-2 h-4 w-4" />
+          <Home className="h-4 w-4" />
           Go to home
         </Link>
       </Button>

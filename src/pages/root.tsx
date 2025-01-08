@@ -4,11 +4,12 @@ import { Outlet, useLocation } from 'react-router-dom';
 
 import { Navigation } from '@/components/navigation';
 import { Spinner } from '@/components/ui/spinner';
-// import { useResponsive } from '@/hooks';
+import { useResponsive } from '@/hooks';
+import { AddTransaction } from '@/features/add-transaction';
 
 export const AppRoot = () => {
   const location = useLocation();
-  // const { isMobile } = useResponsive();
+  const { isMobile } = useResponsive();
 
   return (
     <div className="relative flex min-h-screen flex-col bg-muted/40">
@@ -25,7 +26,7 @@ export const AppRoot = () => {
         >
           <Navigation />
           <Outlet />
-          {/* {!isMobile && <AddTransaction />} */}
+          {!isMobile && <AddTransaction />}
         </ErrorBoundary>
       </Suspense>
     </div>

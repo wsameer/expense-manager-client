@@ -2,6 +2,7 @@ import React from 'react';
 
 import { WalletMinimal } from 'lucide-react';
 import { NavLink } from 'react-router-dom';
+import { DASHBOARD_ROUTE } from '@/router/routes';
 
 interface BrandLogoProps {
   size?: 'small' | 'large' | 'extra-large';
@@ -22,7 +23,7 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({ size = 'small' }) => {
 
   return (
     <NavLink
-      to="/app"
+      to={DASHBOARD_ROUTE}
       className={`group flex ${sizeClasses[size]} shrink-0 items-center justify-center gap-2 rounded-full bg-primary font-semibold text-primary-foreground`}
     >
       <WalletMinimal
