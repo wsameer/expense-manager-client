@@ -50,7 +50,7 @@ export const AddTransaction = () => {
             variant="destructive"
             size="icon"
           >
-            <Plus className="h-6 w-6" />
+            <Plus className="h-64 w-64" />
           </Button>
         </DrawerTrigger>
         <DrawerContent>
