@@ -1,6 +1,7 @@
 import React from 'react';
 import { SETTINGS_ROUTE } from '@/router/routes';
 import { PageLayout } from '@/components/layout';
+import { IncomeCategoryList } from '@/features/income-category/list';
 
 export const IncomeCategoryRoute = () => {
   return (

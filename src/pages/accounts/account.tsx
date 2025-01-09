@@ -8,6 +8,10 @@ import { ACCOUNTS_ROUTE } from '@/router/routes';
 import { PageLayout } from '@/components/layout';
 import { useConfirmDialog } from '@/components/ui/confirmable';
 import { Button } from '@/components/ui/button';
+import { useDeleteAccount } from '@/features/accounts/api/delete-account';
+import { useAccountById } from '@/features/accounts/api/get-account';
+import { EditAccount } from '@/features/accounts/components/edit-account';
+import { AccountDetails } from '@/features/accounts/components/account-details';
 
 export const AccountDetailsRoute = () => {
   const { id } = useParams();

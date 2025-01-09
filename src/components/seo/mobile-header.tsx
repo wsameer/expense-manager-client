@@ -32,8 +32,8 @@ export const MobileHeader = ({
               variant="ghost"
               asChild
             >
-              <Link to={backButton.url}>
-                <ChevronLeft className="h-5 w-5 mr-0.5" />
+              <Link to={backButton.url} className='gap-0 dark:text-white'>
+                <ChevronLeft className="h-5 w-5" />
                 {backButton.title && (
                   <small className="text-sm font-medium leading-none">
                     {backButton.title}

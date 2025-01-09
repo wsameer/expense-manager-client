@@ -9,7 +9,7 @@ interface Option {
 
 type Props = {
   options: Option[];
-  onSelect: (value: unknown) => void;
+  onSelect: (value: any) => void;
 };
 
 export const OptionSelector = React.memo<Props>(({ options, onSelect }) => {
