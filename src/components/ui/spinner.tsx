@@ -1,5 +1,4 @@
 import { cn } from '@/lib/utils';
-import * as React from 'react';
 
 const sizes = {
   sm: 'h-4 w-4',

@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import { memo } from 'react';
 import { Skeleton } from '@/components/ui/skeleton';
 
 export const Busy = memo(() => {

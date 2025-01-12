@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect } from 'react';
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
@@ -80,7 +81,7 @@ export const AddIncomeCategoryForm = ({
       }
       form.reset();
       return onOpenChange(false);
-    } catch (error: unknown) {
+    } catch (error: any) {
       toast({
         title: 'Operation failed!',
         description: error.message,

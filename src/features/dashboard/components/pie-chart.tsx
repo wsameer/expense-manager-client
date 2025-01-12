@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import { Pie, Cell, PieChart, Sector } from 'recharts';
 import { PieSectorDataItem } from 'recharts/types/polar/Pie';
