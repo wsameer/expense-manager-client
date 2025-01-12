@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button } from '../ui/button';
 import { cn } from '@/lib/utils';
+import { Account } from '@/types/api';
 
 interface Option {
   id: number;
@@ -9,7 +10,7 @@ interface Option {
 
 type Props = {
   options: Option[];
-  onSelect: (value: any) => void;
+  onSelect: (value: Account) => void;
 };
 
 export const OptionSelector = React.memo<Props>(({ options, onSelect }) => {

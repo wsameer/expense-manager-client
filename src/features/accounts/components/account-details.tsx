@@ -1,12 +1,8 @@
 import React from 'react';
+
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Account } from '@/types/api';
 
-type Props = {
-  data: Account;
-};
-
-export const AccountDetails = React.memo(({ data }: Props) => {
+export const AccountDetails = React.memo(() => {
   return (
     <div>
       <Tabs defaultValue="daily">

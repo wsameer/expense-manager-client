@@ -1,13 +1,12 @@
-import React from 'react'
-import { Github } from 'lucide-react'
-import { useNavigate } from 'react-router-dom'
+import { Github } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
-import { Head } from '@/components/seo/head'
-import { Button } from '@/components/ui/button'
-import { Link } from '@/components/ui/link'
-import { LOGIN_ROUTE, DASHBOARD_ROUTE, APP_ROUTE } from '@/router/routes'
-import { useTranslation } from 'react-i18next'
-import { useAuth } from '@/hooks'
+import { Head } from '@/components/seo/head';
+import { Button } from '@/components/ui/button';
+import { Link } from '@/components/ui/link';
+import { LOGIN_ROUTE, DASHBOARD_ROUTE, APP_ROUTE } from '@/router/routes';
+import { useTranslation } from 'react-i18next';
+import { useAuth } from '@/hooks';
 
 export const Welcome = () => {
   const navigate = useNavigate();
@@ -69,5 +68,5 @@ export const Welcome = () => {
         </div>
       </main>
     </div>
-  )
-}
+  );
+};

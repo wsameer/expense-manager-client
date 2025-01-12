@@ -1,4 +1,3 @@
-import React from 'react';
 import { Settings } from '@/features/settings';
 import { PageLayout } from '@/components/layout';
 

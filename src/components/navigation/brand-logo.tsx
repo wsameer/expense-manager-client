@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { WalletMinimal } from 'lucide-react';
 import { NavLink } from 'react-router-dom';
 import { DASHBOARD_ROUTE } from '@/router/routes';

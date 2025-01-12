@@ -74,6 +74,7 @@ export const AddExpenseCategoryForm = ({
       refetchExpenseCategories();
       form.reset();
       return onOpenChange(false);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       toast({
         title: 'Operation failed!',
@@ -120,7 +121,7 @@ export const AddExpenseCategoryForm = ({
     form.reset({
       categoryName: selectedCategory ? selectedCategory.name : '',
     });
-  }, [selectedCategory, form.reset]);
+  }, [selectedCategory, form]);
 
   if (isMobile) {
     return (

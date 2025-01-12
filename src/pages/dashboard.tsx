@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import { PageLayout } from '@/components/layout';
 import { useResponsive } from '@/hooks';
@@ -25,9 +25,7 @@ export const DashboardRoute = () => {
           handleMonthChange={handleMonthChange}
           options={{ timeJump: true }}
         />
-        <div>
-          Hello world!
-        </div>
+        <div>Hello world!</div>
       </div>
     </PageLayout>
   );

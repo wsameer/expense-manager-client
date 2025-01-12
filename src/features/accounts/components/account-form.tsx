@@ -227,7 +227,7 @@ export const AccountForm = ({
                     <SelectContent>
                       {allAccounts?.map(({ id, group, name }) =>
                         group === AccountGroup.CHEQUING ||
-                          group === AccountGroup.SAVINGS ? (
+                        group === AccountGroup.SAVINGS ? (
                           <SelectItem
                             key={id}
                             value={id}

@@ -1,5 +1,11 @@
 import { useResponsive } from '@/hooks';
-import React, { ReactNode, ReactElement, useRef, useState, useEffect } from 'react'
+import React, {
+  ReactNode,
+  ReactElement,
+  useRef,
+  useState,
+  useEffect,
+} from 'react';
 import { AppHeader, Head, MobileHeader } from '../seo';
 import { cn } from '@/lib/utils';
 

@@ -5,7 +5,6 @@ import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover';
 import { MonthSelector } from './month-selector';
 import { getFullMonthAndDate } from '@/lib/utils';
 
-
 type MonthNavigatorProps = {
   currentDate: Date;
   handleMonthChange: (year: number, month: number) => void;

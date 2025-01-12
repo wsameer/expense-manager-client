@@ -1,4 +1,4 @@
-import { API_BASE_URL } from "@/lib/constants";
+import { API_BASE_URL } from '@/lib/constants';
 
 export const ACCOUNTS_API = API_BASE_URL + 'accounts';
 export const ACCOUNT_BY_ID_API = API_BASE_URL + 'accounts/:id';

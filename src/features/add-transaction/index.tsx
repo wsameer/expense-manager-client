@@ -26,7 +26,6 @@ import { useTranslation } from 'react-i18next';
 import { TransactionType } from '@/types';
 import { Transactions } from './components/transactions';
 
-
 export const AddTransaction = () => {
   const { t } = useTranslation('transaction');
   const [open, setOpen] = useState(false);

@@ -1,4 +1,3 @@
-import React from 'react';
 import { TrendingDown, TrendingUp, DollarSign } from 'lucide-react';
 
 import { useResponsive } from '@/hooks';

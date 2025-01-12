@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { PageLayout } from '@/components/layout'
+import { useState } from 'react';
+import { PageLayout } from '@/components/layout';
 import { useResponsive } from '@/hooks';
 import { cn } from '@/lib/utils';
 import { MonthNavigator } from '@/components/shared/month-navigator';
@@ -28,5 +28,5 @@ export const TransactionsRoute = () => {
         <TransactionList currentDate={currentDate} />
       </div>
     </PageLayout>
-  )
-}
+  );
+};

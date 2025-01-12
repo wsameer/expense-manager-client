@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { useTranslation } from 'react-i18next';
@@ -90,6 +90,7 @@ export const TransferForm = ({ existingData, setOpen }: FormProps) => {
       }
       form.reset();
       return setOpen(false);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       toast({
         title: 'Operation failed!',
@@ -118,7 +119,7 @@ export const TransferForm = ({ existingData, setOpen }: FormProps) => {
         note: existingData.note ?? '',
       });
     }
-  }, [existingData, form.reset]);
+  }, [existingData, form]);
 
   return (
     <Form {...form}>

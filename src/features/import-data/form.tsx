@@ -1,4 +1,5 @@
-import React, { useCallback, useEffect, useState } from 'react'
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import React, { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
@@ -10,7 +11,14 @@ import { cleanString, getFormattedDateTime } from '@/lib/utils';
 import { TransactionType } from '@/types';
 import { parseAndValidateCSV, Transaction } from './utils/csv-parser';
 import { Button } from '@/components/ui/button';
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Progress } from '@/components/ui/progress';
 import { Subcategory } from '../expense-category/types';
@@ -37,7 +45,6 @@ const csvFileSchema = z.object({
 type CSVFormData = z.infer<typeof csvFileSchema>;
 
 export const ImportCsvForm = () => {
-
   const [isUploading, setIsUploading] = useState(false);
   const [parseProgress, setParseProgress] = useState(0);
   const [uploadProgress, setUploadProgress] = useState(0);
@@ -45,7 +52,7 @@ export const ImportCsvForm = () => {
     success: 0,
     failed: 0,
   });
-  const [failedRows, setFailedRows] = useState<{ row: number; error: string }[]>([]);
+  const [, setFailedRows] = useState<{ row: number; error: string }[]>([]);
 
   const { t } = useTranslation('settings');
   const { allAccounts } = useAccounts();
@@ -56,7 +63,6 @@ export const ImportCsvForm = () => {
   const form = useForm<CSVFormData>({
     resolver: zodResolver(csvFileSchema),
   });
-
 
   useEffect(() => {
     return () => {
@@ -81,15 +87,20 @@ export const ImportCsvForm = () => {
     setUploadProgress(0);
   };
 
-  const getSubCategoryId = useCallback((transaction: Transaction) => {
-    const category = expenseCategories?.find(
-      (expense) => cleanString(expense.name) === cleanString(transaction.Category),
-    );
-    const subcategory = category?.subcategories?.find(
-      (subC: Subcategory) => cleanString(subC.name) === cleanString(transaction.Subcategory),
-    );
-    return subcategory?.id;
-  }, [expenseCategories]);
+  const getSubCategoryId = useCallback(
+    (transaction: Transaction) => {
+      const category = expenseCategories?.find(
+        (expense) =>
+          cleanString(expense.name) === cleanString(transaction.Category),
+      );
+      const subcategory = category?.subcategories?.find(
+        (subC: Subcategory) =>
+          cleanString(subC.name) === cleanString(transaction.Subcategory),
+      );
+      return subcategory?.id;
+    },
+    [expenseCategories],
+  );
 
   const postTransaction = async (transaction: Transaction) => {
     let transactionPayload = null;
@@ -102,11 +113,15 @@ export const ImportCsvForm = () => {
           amount: transaction.Amount,
           fromAccountId:
             allAccounts?.find(
-              (account) => cleanString(account.name) === cleanString(transaction.FromAccount),
+              (account) =>
+                cleanString(account.name) ===
+                cleanString(transaction.FromAccount),
             )?.id ?? 0,
           toAccountId:
             allAccounts?.find(
-              (account) => cleanString(account.name) === cleanString(transaction.ToAccount),
+              (account) =>
+                cleanString(account.name) ===
+                cleanString(transaction.ToAccount),
             )?.id ?? 0,
           note: transaction.Note,
         };
@@ -119,11 +134,14 @@ export const ImportCsvForm = () => {
           amount: transaction.Amount,
           fromAccountId:
             allAccounts?.find(
-              (account) => cleanString(account.name) === cleanString(transaction.FromAccount),
+              (account) =>
+                cleanString(account.name) ===
+                cleanString(transaction.FromAccount),
             )?.id ?? 0,
           expenseCategoryId:
             expenseCategories?.find(
-              (expense) => cleanString(expense.name) === cleanString(transaction.Category),
+              (expense) =>
+                cleanString(expense.name) === cleanString(transaction.Category),
             )?.id ?? 0,
           expenseSubcategoryId: getSubCategoryId(transaction),
           note: transaction.Note,
@@ -137,11 +155,14 @@ export const ImportCsvForm = () => {
           amount: transaction.Amount,
           incomeCategoryId:
             incomeCategories?.find(
-              (income) => cleanString(income.name) === cleanString(transaction.Category),
+              (income) =>
+                cleanString(income.name) === cleanString(transaction.Category),
             )?.id ?? 0,
           fromAccountId:
             allAccounts?.find(
-              (account) => cleanString(account.name) === cleanString(transaction.FromAccount),
+              (account) =>
+                cleanString(account.name) ===
+                cleanString(transaction.FromAccount),
             )?.id ?? 0,
           note: transaction.Note,
         };
@@ -173,7 +194,9 @@ export const ImportCsvForm = () => {
 
       fileReader.onload = async () => {
         try {
-          const { validTransactions, failedRows } = await parseAndValidateCSV(data.file);
+          const { validTransactions, failedRows } = await parseAndValidateCSV(
+            data.file,
+          );
 
           setFailedRows(failedRows);
           setResults((prev) => ({ ...prev, failed: failedRows.length }));
@@ -186,7 +209,10 @@ export const ImportCsvForm = () => {
               setResults((prev) => ({ ...prev, success: prev.success + 1 }));
             } catch (error: unknown) {
               setResults((prev) => ({ ...prev, failed: prev.failed + 1 }));
-              setFailedRows((prev) => [...prev, { row: i + 2, error: 'API error' }]);
+              setFailedRows((prev) => [
+                ...prev,
+                { row: i + 2, error: 'API error' },
+              ]);
             }
             setUploadProgress(((i + 1) / totalTransactions) * 100);
           }
@@ -213,7 +239,9 @@ export const ImportCsvForm = () => {
               name="file"
               render={() => (
                 <FormItem>
-                  <FormLabel htmlFor="csv-upload">{t('data.csv-file')}</FormLabel>
+                  <FormLabel htmlFor="csv-upload">
+                    {t('data.csv-file')}
+                  </FormLabel>
                   <FormControl>
                     <Input
                       id="csv-upload"
@@ -251,11 +279,17 @@ export const ImportCsvForm = () => {
         <div className="px-4 py-2 space-y-4">
           <div>
             <p className="text-sm font-medium mb-1">File Parsing Progress</p>
-            <Progress value={parseProgress} className="w-full" />
+            <Progress
+              value={parseProgress}
+              className="w-full"
+            />
           </div>
           <div>
             <p className="text-sm font-medium mb-1">Upload Progress</p>
-            <Progress value={uploadProgress} className="w-full" />
+            <Progress
+              value={uploadProgress}
+              className="w-full"
+            />
           </div>
           <div className="flex justify-between text-sm text-gray-600">
             <span>Processed: {results.success + results.failed}</span>
@@ -283,5 +317,5 @@ export const ImportCsvForm = () => {
         </div>
       )}
     </>
-  )
-}
+  );
+};

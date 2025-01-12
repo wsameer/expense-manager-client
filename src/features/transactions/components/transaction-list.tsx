@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
   CircleArrowDown,
@@ -30,6 +30,7 @@ import { Transaction, TypeTotals } from '../types';
 import { groupTransactionsByDate } from '../utils';
 import { TransactionItem } from './transaction-item';
 import { useTransactions } from '../api/get-transaction';
+import { ErrorMessage } from '@/components/errors/error-message';
 
 type Props = {
   currentDate: Date;
@@ -98,13 +99,7 @@ export const TransactionList = ({ currentDate }: Props) => {
   };
 
   if (isError) {
-    return (
-      <div className="grid grid-cols-1 gap-4">
-        <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">
-          {t('get-error-message')}
-        </h3>
-      </div>
-    );
+    return <ErrorMessage message={t('get-error-message')} />;
   }
 
   if (isLoading) {

@@ -1,4 +1,3 @@
-import React from 'react';
 import { TooltipProps } from 'recharts';
 
 interface CustomTooltipProps extends TooltipProps<number, string> {

@@ -1,12 +1,28 @@
-import { ChevronDown, MoreVertical, Pencil, Plus, PlusCircle, Trash2 } from 'lucide-react';
+import {
+  ChevronDown,
+  MoreVertical,
+  Pencil,
+  Plus,
+  PlusCircle,
+  Trash2,
+} from 'lucide-react';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { ErrorMessage } from '@/components/errors/error-message';
 import { Busy } from '@/components/shared/busy';
 import { Button } from '@/components/ui/button';
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from '@/components/ui/collapsible';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
 import { toast } from '@/hooks';
 import { useConfirmDialog } from '@/components/ui/confirmable';
 import { AddExpenseCategoryForm } from './components/add-category-form';
@@ -68,7 +84,7 @@ export const ExpenseCategoryList: React.FC = () => {
   };
 
   if (isError) {
-    return <ErrorMessage classes='pt-48' />;
+    return <ErrorMessage classes="pt-48" />;
   }
 
   return (

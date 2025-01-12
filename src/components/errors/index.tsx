@@ -1,4 +1,3 @@
-import React from 'react'
 import { Button } from '@/components/ui/button';
 import { isRouteErrorResponse, useRouteError } from 'react-router-dom';
 
@@ -34,5 +33,5 @@ export const MainErrorFallback = () => {
         Refresh
       </Button>
     </div>
-  )
-}
+  );
+};

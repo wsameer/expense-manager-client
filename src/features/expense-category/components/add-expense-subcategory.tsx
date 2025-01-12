@@ -160,7 +160,7 @@ export const AddExpenseSubCategory = ({
         keepDefaultValues: false, // Ensure it completely resets
       },
     );
-  }, [selectedCategory, selectedSubcategory, form.reset]);
+  }, [selectedCategory, selectedSubcategory, form]);
 
   if (isMobile) {
     return (

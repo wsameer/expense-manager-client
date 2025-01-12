@@ -1,4 +1,3 @@
-import React from 'react';
 import { Trash } from 'lucide-react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
@@ -106,7 +105,7 @@ export const AccountDetailsRoute = () => {
         </div>
       }
     >
-      <AccountDetails data={account} />
+      <AccountDetails />
     </PageLayout>
   );
 };

@@ -1,18 +1,29 @@
-import React from 'react'
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslation } from 'react-i18next';
 import { useSearchParams } from 'react-router-dom';
 import { z } from 'zod';
 
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { FORGOT_PASSWORD, REGISTER_ROUTE } from '@/router/routes';
 import { Button } from '@/components/ui/button';
 import { Link } from '@/components/ui/link';
 import { useAuth } from '@/hooks';
-
 
 type LoginFormProps = {
   onSuccess: () => void;
@@ -21,7 +32,7 @@ type LoginFormProps = {
 const loginFormSchema = z.object({
   email: z.string().min(8, 'Email is required').email('Invalid email address'),
   password: z.string().min(8, 'Password must be at least 8 characters'),
-})
+});
 
 export type UserLoginParameters = z.infer<typeof loginFormSchema>;
 
@@ -41,8 +52,8 @@ export const LoginForm = ({ onSuccess }: LoginFormProps) => {
   });
 
   const onSubmit = async (values: z.infer<typeof loginFormSchema>) => {
-    const response = await login(values.email, values.password)
-    console.log("🚀 ~ onSubmit ~ response:", response)
+    const response = await login(values.email, values.password);
+    console.log('🚀 ~ onSubmit ~ response:', response);
     if (response) onSuccess();
   };
 
@@ -126,4 +137,4 @@ export const LoginForm = ({ onSuccess }: LoginFormProps) => {
       </CardContent>
     </Card>
   );
-}
+};

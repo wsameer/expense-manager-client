@@ -16,7 +16,7 @@ export const handleError = (error: unknown): FetchError => {
 
     if (error.response?.status === 400) {
       fetchError.message = 'Invalid account data';
-    } else if (error.response?.status >= 500) {
+    } else if (error.response && error.response?.status >= 500) {
       fetchError.message = 'Server error. Please try again later.';
     }
   } else if (error instanceof Error) {

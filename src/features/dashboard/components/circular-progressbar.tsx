@@ -1,5 +1,3 @@
-import React from 'react';
-
 interface CircularProgressBarProps {
   percentage: number;
   size?: number;

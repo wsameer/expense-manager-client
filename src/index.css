@@ -33,7 +33,7 @@
     --chart-8: rgb(77, 144, 142);
     --chart-9: rgb(87, 117, 144);
     --chart-10: rgb(39, 125, 161);
-    --radius: 0.5rem
+    --radius: 0.5rem;
   }
   .dark {
     --background: 240 10% 3.9%;
@@ -82,4 +82,3 @@
     padding-right: 1rem;
   }
 }
-

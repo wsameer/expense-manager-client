@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { SideNavigationItem } from './types';
 import { NavLink } from 'react-router-dom';
 import { Tooltip, TooltipContent, TooltipTrigger } from '../ui/tooltip';

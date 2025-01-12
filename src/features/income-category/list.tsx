@@ -50,7 +50,7 @@ export const IncomeCategoryList = () => {
   };
 
   if (isError) {
-    return <ErrorMessage classes='pt-48' />;
+    return <ErrorMessage classes="pt-48" />;
   }
 
   return (

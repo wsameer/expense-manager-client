@@ -34,7 +34,6 @@ const convertKeys = (obj: any, converter: (key: string) => string): any => {
   return newObj;
 };
 
-
 const axiosInstance = axios.create({
   baseURL: API_BASE_URL,
   headers: {

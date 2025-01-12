@@ -1,4 +1,3 @@
-import React from 'react';
 import {
   CreditCardIcon,
   EllipsisIcon,
@@ -20,6 +19,7 @@ import {
 import { Button } from '../ui/button';
 import { cn } from '@/lib/utils';
 import { AddTransaction } from '@/features/add-transaction';
+import React from 'react';
 
 export const Navigation = () => {
   const { isMobile } = useResponsive();

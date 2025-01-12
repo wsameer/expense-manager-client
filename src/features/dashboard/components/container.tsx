@@ -13,7 +13,6 @@ import { CircularProgressBar } from './circular-progressbar';
 import { COLORS } from '../constants';
 import { DashboardPieChart } from './pie-chart';
 
-
 type Props = {
   currentDate: Date;
 };

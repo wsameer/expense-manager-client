@@ -1,11 +1,23 @@
-import React from 'react'
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { useTranslation } from 'react-i18next';
 import { zodResolver } from '@hookform/resolvers/zod';
 
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { LOGIN_ROUTE } from '@/router/routes';
@@ -48,7 +60,7 @@ export const RegisterForm = ({ onSuccess }: RegisterFormProps) => {
       password: '',
       password_confirmation: '',
     },
-  })
+  });
 
   const onSubmit = async (values: UserRegistrationParams) => {
     const success = await register(values.name, values.email, values.password);
@@ -169,4 +181,4 @@ export const RegisterForm = ({ onSuccess }: RegisterFormProps) => {
       </CardContent>
     </Card>
   );
-}
+};

@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react'
+import { ReactElement } from 'react';
 import { Button } from '../ui/button';
 import { Link } from '../ui/link';
 import { ChevronLeft } from 'lucide-react';
@@ -32,7 +32,10 @@ export const MobileHeader = ({
               variant="ghost"
               asChild
             >
-              <Link to={backButton.url} className='gap-0 dark:text-white'>
+              <Link
+                to={backButton.url}
+                className="gap-0 dark:text-white"
+              >
                 <ChevronLeft className="h-5 w-5" />
                 {backButton.title && (
                   <small className="text-sm font-medium leading-none">

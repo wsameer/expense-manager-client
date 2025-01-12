@@ -1,4 +1,3 @@
-import React from 'react'
 import { useNavigate } from 'react-router-dom';
 
 import { RegisterForm } from '@/features/auth/register-form';
@@ -20,5 +19,5 @@ export const RegisterRoute = () => {
         }
       />
     </AuthLayout>
-  )
-}
+  );
+};

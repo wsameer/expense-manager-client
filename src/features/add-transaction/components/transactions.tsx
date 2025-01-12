@@ -17,33 +17,36 @@ export const Transactions: React.FC<TransactionsProps> = React.memo(
   ({ selectedTab, data, setSelectedTab, setOpen }) => {
     const transactionTypes = useMemo(() => Object.values(TransactionType), []);
 
-    const renderContent = useCallback((type: TransactionType) => {
-      switch (type) {
-        case TransactionType.EXPENSE:
-          return (
-            <ExpenseForm
-              setOpen={setOpen}
-              existingData={data}
-            />
-          );
-        case TransactionType.INCOME:
-          return (
-            <IncomeForm
-              setOpen={setOpen}
-              existingData={data}
-            />
-          );
-        case TransactionType.TRANSFER:
-          return (
-            <TransferForm
-              setOpen={setOpen}
-              existingData={data}
-            />
-          );
-        default:
-          return null;
-      }
-    }, []);
+    const renderContent = useCallback(
+      (type: TransactionType) => {
+        switch (type) {
+          case TransactionType.EXPENSE:
+            return (
+              <ExpenseForm
+                setOpen={setOpen}
+                existingData={data}
+              />
+            );
+          case TransactionType.INCOME:
+            return (
+              <IncomeForm
+                setOpen={setOpen}
+                existingData={data}
+              />
+            );
+          case TransactionType.TRANSFER:
+            return (
+              <TransferForm
+                setOpen={setOpen}
+                existingData={data}
+              />
+            );
+          default:
+            return null;
+        }
+      },
+      [data, setOpen],
+    );
 
     return (
       <Tabs

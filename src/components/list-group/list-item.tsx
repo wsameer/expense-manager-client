@@ -35,7 +35,7 @@ export const ListItem = forwardRef<HTMLButtonElement, Props>(
       <div>
         <div
           className={cn('flex', {
-            'flex items-center': icon,
+            'items-center': icon,
           })}
         >
           {icon ? icon : null}

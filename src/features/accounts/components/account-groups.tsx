@@ -1,4 +1,3 @@
-import React from 'react';
 import { ListGroup } from '@/components/list-group';
 import { ListItem } from '@/components/list-group/list-item';
 import { AccountGroup } from '@/types/api';
@@ -13,7 +12,6 @@ import { AccountGroupEnum } from '../types';
 import { useAccounts } from '../api/get-accounts';
 import { AddAccount } from './add-account';
 
-
 const displaySkeletonLoader = () => (
   <div>
     <Skeleton className="h-[24px] w-[150px] rounded-xl" />
@@ -27,9 +25,7 @@ export const AccountGroups = () => {
   const navigate = useNavigate();
 
   if (isError) {
-    return (
-      <ErrorMessage message='Unable to get your accounts data.' />
-    );
+    return <ErrorMessage message="Unable to get your accounts data." />;
   }
 
   if (isLoading) {

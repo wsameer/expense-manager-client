@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useResponsive } from '@/hooks';
 import { cn } from '@/lib/utils';
 import { MonthNavigator } from '@/components/shared/month-navigator';

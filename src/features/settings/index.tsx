@@ -1,4 +1,3 @@
-import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import {
@@ -12,7 +11,6 @@ import {
   Sun,
   WalletCards,
 } from 'lucide-react';
-import { z } from 'zod';
 
 import { Switch } from '@/components/ui/switch';
 import { Button } from '@/components/ui/button';
@@ -37,16 +35,6 @@ export const Settings = () => {
   });
 
   const onSettingItemClick = (url: string) => navigate(url);
-
-  /**
-   * @TODO
-   */
-  const searchFormSchema = z.object({
-    query: z
-      .string()
-      .min(1, 'Search query cannot be empty')
-      .max(100, 'Search query is too long'),
-  });
 
   return (
     <div
@@ -76,7 +64,7 @@ export const Settings = () => {
           label="Dark Mode (Beta)"
           rightElement={
             <Switch
-              className="w-10"
+              className="w-9"
               checked={theme === 'dark'}
               onCheckedChange={() =>
                 setTheme(theme === 'dark' ? 'light' : 'dark')
