@@ -12,8 +12,8 @@ const createAccountFetcher = async (
   { arg }: { arg: CreateAccountForm },
 ): Promise<Account> => {
   try {
-    const response = await axiosInstance.post<Account>(url, arg);
-    return response.data;
+    const response = await axiosInstance.post<{success: boolean, data: Account}>(url, arg);
+    return response.data.data;
   } catch (error) {
     throw handleError(error);
   }

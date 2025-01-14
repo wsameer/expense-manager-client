@@ -20,9 +20,9 @@ const displaySkeletonLoader = () => (
 );
 
 export const AccountGroups = () => {
+  const navigate = useNavigate();
   const { allAccounts, isError, isLoading, getBalanceSumByGroup } =
     useAccounts();
-  const navigate = useNavigate();
 
   if (isError) {
     return <ErrorMessage message="Unable to get your accounts data." />;

@@ -7,16 +7,12 @@ import { Account, AccountGroup } from '@/types/api';
 import { ACCOUNTS_API } from '../constants';
 
 const fetchAccounts = async (url: string): Promise<Account[]> => {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const res = await axiosInstance.get<any[]>(url);
-  return res.data.map((account) => ({
-    ...account,
-    balance: parseFloat(account.balance),
-  }));
+  const res = await axiosInstance.get(url);
+  return res.data.data;
 };
 
 export const useAccounts = () => {
-  const { data, error, mutate } = useSWR<Account[], AxiosError>(
+  const { data, error } = useSWR<Account[], AxiosError>(
     ACCOUNTS_API,
     fetchAccounts,
     {
@@ -36,13 +32,10 @@ export const useAccounts = () => {
     [data],
   );
 
-  const refetchAccounts = useCallback(() => mutate(), [mutate]);
-
   return {
     allAccounts: data,
     isLoading: !error && !data,
     isError: error,
-    refetchAccounts,
     getBalanceSumByGroup,
   };
 };
