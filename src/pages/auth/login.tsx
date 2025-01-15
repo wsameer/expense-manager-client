@@ -9,7 +9,6 @@ export const LoginRoute = () => {
   const { t } = useTranslation('auth', { keyPrefix: 'forms' });
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  console.log('🚀 ~ LoginRoute ~ searchParams:', searchParams);
   const redirectTo = searchParams.get('redirectTo');
 
   return (
