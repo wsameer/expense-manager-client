@@ -61,7 +61,7 @@ export const useAuth = () => {
     } catch (error) {
       // Handle different types of errors
       if (error instanceof AxiosError) {
-        showErrorToast(undefined, error?.response?.data.message);
+        showErrorToast(undefined, error?.response?.data.errors[0].message);
       } else {
         // Handle unexpected errors
         showErrorToast(

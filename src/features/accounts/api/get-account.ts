@@ -13,14 +13,13 @@ interface FetchError {
 
 const fetchAccountById = async (url: string): Promise<Account> => {
   try {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const res = await axiosInstance.get<any>(url);
+    const res = await axiosInstance.get<Account>(url);
     if (!res.data) {
       throw new Error('No data received from the server');
     }
     return {
       ...res.data,
-      balance: parseFloat(res.data.balance),
+      balance: parseFloat(res.data.balance.toString()),
     };
   } catch (error) {
     const fetchError: FetchError = {

@@ -7,8 +7,8 @@ import { Account, AccountGroup } from '@/types/api';
 import { ACCOUNTS_API } from '../constants';
 
 const fetchAccounts = async (url: string): Promise<Account[]> => {
-  const res = await axiosInstance.get(url);
-  return res.data.data;
+  const res = await axiosInstance.get<Account[]>(url);
+  return res.data;
 };
 
 export const useAccounts = () => {

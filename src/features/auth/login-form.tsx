@@ -53,7 +53,6 @@ export const LoginForm = ({ onSuccess }: LoginFormProps) => {
 
   const onSubmit = async (values: z.infer<typeof loginFormSchema>) => {
     const response = await login(values.email, values.password);
-    console.log('🚀 ~ onSubmit ~ response:', response);
     if (response) onSuccess();
   };
 
