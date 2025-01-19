@@ -14,12 +14,14 @@ type Props = {
   icon: LucideIcon;
 };
 
+type ApiResponse = {statType: string, totalBalance: number}
+
 export const AccountOverviewStat = React.memo(
   ({ label, queryKey, icon: Icon }: Props) => {
     const { data, isLoading } = useSWR(
       ACCOUNTS_STATS_API + queryKey,
       async () => {
-        const res = await axiosInstance.get(ACCOUNTS_STATS_API, {
+        const res = await axiosInstance.get<ApiResponse>(ACCOUNTS_STATS_API, {
           params: { type: queryKey },
         });
         return res.data;
@@ -31,11 +33,11 @@ export const AccountOverviewStat = React.memo(
     );
 
     const formattedBalance = useMemo(() => {
-      if (data?.data?.totalBalance != null) {
-        return CAD.format(data.data.totalBalance);
+      if (data?.totalBalance != null) {
+        return CAD.format(data.totalBalance);
       }
       return '';
-    }, [data?.data?.totalBalance]);
+    }, [data?.totalBalance]);
 
     const labelColor = useMemo(() => {
       if (queryKey === 'debt') return 'text-red-600';
