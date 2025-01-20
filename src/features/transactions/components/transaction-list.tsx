@@ -132,7 +132,7 @@ export const TransactionList = ({ currentDate }: Props) => {
     return <EmptyTransactions />;
   }
 
-  const groupedTransactions = groupTransactionsByDate(allTransactions!);
+  const groupedTransactions = groupTransactionsByDate(allTransactions ?? []);
   const sortedDates = Object.keys(groupedTransactions).sort(
     (a, b) => new Date(b).getTime() - new Date(a).getTime(),
   );

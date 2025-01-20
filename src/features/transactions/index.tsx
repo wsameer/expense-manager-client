@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useResponsive } from '@/hooks';
 import { cn } from '@/lib/utils';
 import { MonthNavigator } from '@/components/shared/month-navigator';
+import { TransactionList } from './components/transaction-list';
 
 export const TransactionsPage = () => {
   const { isDesktop } = useResponsive();
@@ -21,7 +22,7 @@ export const TransactionsPage = () => {
         currentDate={currentDate}
         handleMonthChange={handleMonthChange}
       />
-      {/* <TransactionList currentDate={currentDate} /> */}
+      <TransactionList currentDate={currentDate} />
     </div>
   );
 };
