@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { useTranslation } from 'react-i18next';
 
+import { toast } from '@/hooks';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
   Form,
@@ -14,17 +15,16 @@ import {
 } from '@/components/ui/form';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-
+import { OptionSelector } from '@/components/option-selector';
+import { cn } from '@/lib/utils';
 import { Account } from '@/types/api';
 import { useAccounts } from '@/features/accounts/api/get-accounts';
-import { FormProps } from './types';
-import { toast } from '@/hooks';
 import { TransactionType } from '@/types';
+
 import { useCreateTransaction } from '../api/create-transaction';
 import { useUpdateTransaction } from '../api/update-transaction';
-import { cn, getFormattedDateTime } from '@/lib/utils';
 import { DateSelector } from './form-fields/date-selector';
-import { OptionSelector } from '@/components/option-selector';
+import { FormProps } from './types';
 
 const formSchema = z
   .object({
@@ -78,8 +78,7 @@ export const TransferForm = ({ existingData, setOpen }: FormProps) => {
     try {
       const transactionData = {
         ...values,
-        // Format: YYYY-MM-DD HH:MM:SS
-        date: getFormattedDateTime(values.date),
+        date: values.date.toISOString(),
         type: TransactionType.TRANSFER,
       };
 

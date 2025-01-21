@@ -14,6 +14,7 @@ export const TransactionItem: React.FC<TransactionItemProps> = ({
   transaction,
   onTransactionClick,
 }) => {
+
   const getCategory = useCallback(() => {
     if (
       transaction.type === TransactionType.EXPENSE &&
@@ -43,6 +44,26 @@ export const TransactionItem: React.FC<TransactionItemProps> = ({
     }
   }, [transaction]);
 
+  const getBankName = useCallback(
+    (transactionType: TransactionType) => {
+      switch (transactionType) {
+        case TransactionType.EXPENSE:
+          return transaction.fromAccount?.name;
+
+        case TransactionType.INCOME:
+          return transaction.toAccount?.name;
+
+        case TransactionType.TRANSFER:
+          return `${transaction.fromAccount?.name} → ${transaction.toAccount?.name}`
+      
+        default:
+          break;
+      }
+    },
+    [transaction],
+  )
+  
+
   return (
     <Button
       className="flex h-12 items-center justify-between py-1 px-2 bg-white dark:bg-zinc-800 dark:hover:bg-zinc-900 border-t border-zinc-200 dark:border-zinc-900 cursor-pointer first:border-t-0"
@@ -70,9 +91,7 @@ export const TransactionItem: React.FC<TransactionItemProps> = ({
             className="mt-0.5 text-muted-foreground"
             style={{ fontSize: '11px' }}
           >
-            {transaction.type === TransactionType.TRANSFER
-              ? `${transaction.fromAccount.name} → ${transaction.toAccount?.name}`
-              : transaction.fromAccount.name}
+            {getBankName(transaction.type)}
           </p>
         </div>
         <div className="col-span-3 text-right">

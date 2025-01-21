@@ -12,9 +12,9 @@ export const ACCOUNTS = [
 
 export type CreateTransactionPayload = {
   type: TransactionType;
-  date: string;
+  date: string; // ISO 8601
   amount: number;
-  fromAccountId: number;
+  fromAccountId?: number;
   toAccountId?: number;
   expenseCategoryId?: number;
   incomeCategoryId?: number;
@@ -26,7 +26,7 @@ export interface Transaction {
   id: number;
   user_id: number;
   type: TransactionType;
-  date: string;
+  date: string; // ISO 8601
   amount: number;
   fromAccountId: number;
   toAccountId: number | null;
@@ -36,7 +36,7 @@ export interface Transaction {
   note: string | null;
   createdAt: string;
   updatedAt: string;
-  fromAccount: Account;
+  fromAccount: Account | null;
   toAccount: Account | null;
   expenseCategory: Category | null;
   expenseSubcategory: Category | null;
