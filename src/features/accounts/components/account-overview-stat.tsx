@@ -14,7 +14,7 @@ type Props = {
   icon: LucideIcon;
 };
 
-type ApiResponse = {statType: string, totalBalance: number}
+type ApiResponse = { statType: string; totalBalance: number };
 
 export const AccountOverviewStat = React.memo(
   ({ label, queryKey, icon: Icon }: Props) => {

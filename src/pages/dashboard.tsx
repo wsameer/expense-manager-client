@@ -4,13 +4,14 @@ import { PageLayout } from '@/components/layout';
 import { useResponsive } from '@/hooks';
 import { cn } from '@/lib/utils';
 import { MonthNavigator } from '@/components/shared/month-navigator';
+import { DateTime } from 'luxon';
 
 export const DashboardRoute = () => {
-  const [currentDate, setCurrentDate] = useState(new Date());
+  const [currentDate, setCurrentDate] = useState<DateTime>(DateTime.now());
   const { isDesktop } = useResponsive();
 
   const handleMonthChange = (year: number, month: number) => {
-    setCurrentDate(new Date(year, month));
+    setCurrentDate(DateTime.fromObject({ year, month }));
   };
 
   return (

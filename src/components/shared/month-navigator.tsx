@@ -4,9 +4,10 @@ import { Button } from '../ui/button';
 import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover';
 import { MonthSelector } from './month-selector';
 import { getFullMonthAndDate } from '@/lib/utils';
+import { DateTime } from 'luxon';
 
 type MonthNavigatorProps = {
-  currentDate: Date;
+  currentDate: DateTime;
   handleMonthChange: (year: number, month: number) => void;
   options?: {
     timeJump?: boolean;
@@ -23,17 +24,24 @@ export const MonthNavigator = memo<MonthNavigatorProps>(
     };
 
     const handlePreviousMonth = () => {
-      return handleMonthChange(
-        currentDate.getFullYear(),
-        currentDate.getMonth() - 1,
-      );
+      let currentYear = currentDate.year;
+      let currentMonth = currentDate.month - 1;
+      if (currentMonth === 0) {
+        currentMonth = 12;
+        currentYear -= 1;
+      }
+      return handleMonthChange(currentYear, currentMonth);
     };
 
     const handleNextMonth = () => {
-      return handleMonthChange(
-        currentDate.getFullYear(),
-        currentDate.getMonth() + 1,
-      );
+      let currentYear = currentDate.year;
+      let currentMonth = currentDate.month + 1;
+      if (currentMonth === 13) {
+        currentMonth = 1;
+        currentYear = currentYear + 1;
+      }
+
+      return handleMonthChange(currentYear, currentMonth);
     };
 
     return (

@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '../ui/button';
+import { DateTime } from 'luxon';
 
 interface MonthSelectorProps {
-  currentDate?: Date;
+  currentDate?: DateTime;
   onSelectMonth: (year: number, month: number) => void;
 }
 
@@ -23,16 +24,16 @@ const MONTHS = [
 ];
 
 export const MonthSelector: React.FC<MonthSelectorProps> = ({
-  currentDate = new Date(),
+  currentDate = DateTime.now(),
   onSelectMonth,
 }) => {
-  const today = new Date();
-  const currentYear = today.getFullYear();
-  const currentMonth = today.getMonth();
+  const today = DateTime.now();
+  const currentYear = today.year;
+  const currentMonth = today.month;
 
-  const [selectedYear, setSelectedYear] = useState(currentDate.getFullYear());
+  const [selectedYear, setSelectedYear] = useState(currentDate.year);
 
-  const selectedMonth = currentDate.getMonth();
+  const selectedMonth = currentDate.month;
 
   const handlePreviousYear = () => {
     setSelectedYear((prev: number) => prev - 1);
@@ -47,7 +48,7 @@ export const MonthSelector: React.FC<MonthSelectorProps> = ({
     if (selectedYear === currentYear && monthIndex > currentMonth) {
       return; // Do nothing for future months
     }
-    onSelectMonth(selectedYear, monthIndex);
+    onSelectMonth(selectedYear, monthIndex + 1);
   };
 
   const getMonthStyle = (index: number): string => {
@@ -68,7 +69,7 @@ export const MonthSelector: React.FC<MonthSelectorProps> = ({
     }
 
     // Selected month
-    if (index === selectedMonth && selectedYear === currentDate.getFullYear()) {
+    if (index === selectedMonth && selectedYear === currentDate.year) {
       return 'bg-red-800 text-white hover:bg-red-900';
     }
 

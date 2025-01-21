@@ -31,7 +31,7 @@ import { useTranslation } from 'react-i18next';
 import { FormProps } from './types';
 import { useUpdateTransaction } from '../api/update-transaction';
 import { TransactionType } from '@/types';
-import { cn, getFormattedDateTime } from '@/lib/utils';
+import { cn } from '@/lib/utils';
 
 const formSchema = z.object({
   date: z.date({
@@ -119,7 +119,7 @@ export const ExpenseForm = ({ existingData, setOpen }: FormProps) => {
     try {
       const transactionData = {
         ...values,
-        date: getFormattedDateTime(values.date),
+        date: values.date.toISOString(),
         type: TransactionType.EXPENSE,
       };
 
@@ -147,7 +147,7 @@ export const ExpenseForm = ({ existingData, setOpen }: FormProps) => {
         amount: existingData.amount,
         expenseCategoryId: existingData.expenseCategoryId!,
         expenseSubcategoryId: existingData.expenseSubcategoryId ?? null,
-        fromAccountId: existingData.fromAccountId,
+        fromAccountId: existingData.fromAccountId ?? undefined,
         note: existingData.note ?? '',
       });
     }

@@ -39,7 +39,7 @@ const formSchema = z.object({
   incomeCategoryId: z.coerce.number({
     required_error: 'Please select a category',
   }),
-  fromAccountId: z.coerce.number({
+  toAccountId: z.coerce.number({
     required_error: 'Please select an account',
   }),
   note: z.optional(
@@ -130,7 +130,7 @@ export const IncomeForm = ({ existingData, setOpen }: FormProps) => {
         transactionDate: new Date(existingData.date),
         amount: existingData.amount,
         incomeCategoryId: existingData.incomeCategoryId!,
-        fromAccountId: existingData.fromAccountId,
+        toAccountId: existingData.toAccountId ?? undefined,
         note: existingData.note ?? '',
       });
     }
@@ -227,13 +227,13 @@ export const IncomeForm = ({ existingData, setOpen }: FormProps) => {
         />
 
         <FormField
-          name="fromAccountId"
+          name="toAccountId"
           control={form.control}
           render={({ field }) => (
             <FormItem>
               <div className="flex items-center mt-4 space-y-0 space-x-2">
                 <FormLabel
-                  htmlFor="fromAccountId"
+                  htmlFor="toAccountId"
                   className="w-1/4"
                 >
                   {t('transaction:account')}
@@ -287,7 +287,7 @@ export const IncomeForm = ({ existingData, setOpen }: FormProps) => {
             <OptionSelector
               options={allAccounts!}
               onSelect={(value: Account) => {
-                form.setValue('fromAccountId', value.id);
+                form.setValue('toAccountId', value.id);
                 setShowAccountSelector(false);
               }}
             />
