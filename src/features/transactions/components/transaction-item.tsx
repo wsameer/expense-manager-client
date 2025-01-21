@@ -1,9 +1,9 @@
 import React, { useCallback } from 'react';
-import { cn } from '@/lib/utils';
-import { Button } from '@/components/ui/button';
-import { TransactionType } from '@/types';
 
+import { Button } from '@/components/ui/button';
 import { Transaction } from '../types';
+import { TransactionType } from '@/types';
+import { cn } from '@/lib/utils';
 
 type TransactionItemProps = {
   transaction: Transaction;
@@ -72,7 +72,7 @@ export const TransactionItem: React.FC<TransactionItemProps> = ({
           >
             {transaction.type === TransactionType.TRANSFER
               ? `${transaction.fromAccount.name} → ${transaction.toAccount?.name}`
-              : transaction.toAccount?.name}
+              : transaction.fromAccount.name}
           </p>
         </div>
         <div className="col-span-3 text-right">

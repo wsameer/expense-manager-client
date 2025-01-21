@@ -1,19 +1,12 @@
 import { clsx, type ClassValue } from 'clsx';
-import { DateTime } from 'luxon';
 import { twMerge } from 'tailwind-merge';
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-/**
- * @returns April 2025
- */
-export function getFullMonthAndDate(date: DateTime): string {
-  return date.toLocaleString(
-    { month: 'long', year: 'numeric' },
-    { locale: 'en-CA' },
-  );
+export function getFullMonthAndDate(date: Date): string {
+  return date.toLocaleDateString('en-CA', { month: 'long', year: 'numeric' });
 }
 
 export const getInitials = (name: string): string => {

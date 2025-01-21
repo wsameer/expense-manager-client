@@ -4,14 +4,13 @@ import { useResponsive } from '@/hooks';
 import { cn } from '@/lib/utils';
 import { MonthNavigator } from '@/components/shared/month-navigator';
 import { TransactionList } from '@/features/transactions/components/transaction-list';
-import { DateTime } from 'luxon';
 
 export const TransactionsRoute = () => {
-  const [currentDate, setCurrentDate] = useState<DateTime>(DateTime.now());
   const { isDesktop } = useResponsive();
+  const [currentDate, setCurrentDate] = useState(new Date());
 
   const handleMonthChange = (year: number, month: number) => {
-    setCurrentDate(DateTime.fromObject({ year, month }));
+    setCurrentDate(new Date(year, month));
   };
 
   return (

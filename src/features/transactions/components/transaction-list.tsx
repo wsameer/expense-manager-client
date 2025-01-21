@@ -1,5 +1,4 @@
 import { useMemo, useState } from 'react';
-import { DateTime } from 'luxon';
 import { useTranslation } from 'react-i18next';
 import {
   CircleArrowDown,
@@ -34,7 +33,7 @@ import { useTransactions } from '../api/get-transaction';
 import { ErrorMessage } from '@/components/errors/error-message';
 
 type Props = {
-  currentDate: DateTime;
+  currentDate: Date;
 };
 
 const calculateTotalsByType = (transactions: Transaction[]): TypeTotals => {
@@ -54,11 +53,11 @@ export const TransactionList = ({ currentDate }: Props) => {
   const { t } = useTranslation(['transaction', 'common']);
   const { openConfirmDialog } = useConfirmDialog();
   const { allTransactions, isError, isLoading } = useTransactions(
-    currentDate.toString().slice(0, 7),
+    new Date(currentDate).toISOString().slice(0, 7),
   );
 
   const { deleteTransaction } = useDeleteTransaction(
-    currentDate.toString().slice(0, 7),
+    new Date(currentDate).toISOString().slice(0, 7),
   );
 
   const [open, setOpen] = useState(false);
