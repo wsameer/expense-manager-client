@@ -23,6 +23,7 @@ import {
   EXPENSE_CATEGORY_SETTINGS_ROUTE,
   DATA_SETTINGS_ROUTE,
   INCOME_CATEGORY_SETTINGS_ROUTE,
+  ACCOUNT_SETTINGS_ROUTE,
 } from '@/router/routes';
 import { useAuth } from '@/hooks';
 
@@ -98,6 +99,7 @@ export const Settings = () => {
             <CreditCard className="h-4 w-4 text-zinc-600 dark:text-zinc-300" />
           }
           label={'Accounts Setting'}
+          onClick={() => onSettingItemClick(ACCOUNT_SETTINGS_ROUTE)}
           rightElement={
             <ChevronRight className="h-4 w-4 text-zinc-600 dark:text-zinc-300" />
           }

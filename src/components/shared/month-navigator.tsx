@@ -23,17 +23,25 @@ export const MonthNavigator = memo<MonthNavigatorProps>(
     };
 
     const handlePreviousMonth = () => {
-      return handleMonthChange(
-        currentDate.getFullYear(),
-        currentDate.getMonth() - 1,
-      );
+      let year = currentDate.getFullYear();
+      let month = currentDate.getMonth() - 1;
+      if (month < 0) {
+        month = 11
+        year = year - 1 
+      }
+      return handleMonthChange(year, month);
     };
 
     const handleNextMonth = () => {
-      return handleMonthChange(
-        currentDate.getFullYear(),
-        currentDate.getMonth() + 1,
-      );
+      let year = currentDate.getFullYear();
+      let month = currentDate.getMonth() + 1;
+
+      if (month === 12) {
+        month = 0;
+        year += 1
+      }
+
+      return handleMonthChange(year, month);
     };
 
     return (

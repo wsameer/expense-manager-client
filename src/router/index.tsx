@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import {
+  ACCOUNT_SETTINGS_ROUTE,
   ACCOUNTS_ROUTE,
   APP_ROUTE,
   BASE_ROUTE,
@@ -97,6 +98,15 @@ const createRouter = () =>
               '../pages/settings/income-category'
             );
             return { Component: IncomeCategoryRoute };
+          },
+        },
+        {
+          path: ACCOUNT_SETTINGS_ROUTE,
+          lazy: async () => {
+            const { AccountSettingsRoute } = await import(
+              '../pages/settings/account-settings'
+            );
+            return { Component: AccountSettingsRoute };
           },
         },
         {

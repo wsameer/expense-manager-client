@@ -24,7 +24,6 @@ export const TransactionsRoute = () => {
           currentDate={currentDate}
           handleMonthChange={handleMonthChange}
         />
-
         <TransactionList currentDate={currentDate} />
       </div>
     </PageLayout>

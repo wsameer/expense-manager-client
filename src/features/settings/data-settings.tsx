@@ -3,11 +3,11 @@ import { Eraser, FileDown, Trash2 } from 'lucide-react';
 
 import { toast } from '@/hooks';
 import { useConfirmDialog } from '@/components/ui/confirmable';
+import { ListGroup } from '@/components/list-group';
+import { ListItem } from '@/components/list-group/list-item';
 
 import { ImportDataDialog } from '../import-data';
 import { useDeleteTransaction } from '../transactions/api/delete-transaction';
-import { ListGroup } from '@/components/list-group';
-import { ListItem } from '@/components/list-group/list-item';
 
 export const DataSettings = () => {
   const { t } = useTranslation(['common', 'settings']);
