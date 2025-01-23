@@ -2,20 +2,17 @@ import React from 'react';
 import { Button } from '../ui/button';
 import { cn } from '@/lib/utils';
 import { Account } from '@/types/api';
-
-interface Option {
-  id: number;
-  name: string;
-}
+import { SelectorOption } from './types';
 
 type Props = {
-  options: Option[];
+  options: SelectorOption[];
   onSelect: (value: Account) => void;
 };
 
 export const OptionSelector = React.memo<Props>(({ options, onSelect }) => {
-  // Ensure we always have 9 slots (3 rows x 3 columns)
-  const filledOptions = [...options, ...Array(9).fill(null)].slice(0, 9);
+  const filledOptions = options.length < 9 
+  ? [...options, ...Array(9 - options.length).fill(null)] 
+  : options;
 
   return (
     <div className="grid grid-cols-3 gap-1">

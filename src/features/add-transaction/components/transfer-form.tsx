@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { useTranslation } from 'react-i18next';
@@ -25,6 +25,7 @@ import { useCreateTransaction } from '../api/create-transaction';
 import { useUpdateTransaction } from '../api/update-transaction';
 import { DateSelector } from './form-fields/date-selector';
 import { FormProps } from './types';
+import { SelectorOption } from '@/components/option-selector/types';
 
 const formSchema = z
   .object({
@@ -61,6 +62,16 @@ export const TransferForm = ({ existingData, setOpen }: FormProps) => {
   const [showAccountSelector, setShowAccountSelector] = useState<
     'fromAccountId' | 'toAccountId' | false
   >(false);
+
+  const accountOptions: SelectorOption[] = useMemo(() => {
+      if (!allAccounts) return []
+      return allAccounts.map((acc) => {
+        return {
+          id: acc.id, 
+          name: acc.name
+        }
+      })
+    }, [allAccounts])
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -261,7 +272,7 @@ export const TransferForm = ({ existingData, setOpen }: FormProps) => {
         >
           {showAccountSelector && (
             <OptionSelector
-              options={allAccounts ?? []}
+              options={accountOptions}
               onSelect={(value: Account) => {
                 form.setValue(showAccountSelector, value.id);
                 setShowAccountSelector(false);

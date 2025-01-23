@@ -36,6 +36,7 @@
   "alert": {
     "are-you-sure": "Are you absolutely sure?",
     "this-action-cannot-be-undone": "This action cannot be undone. This will permanently delete your account and remove your data from our servers.",
+    "your-account-has-been-deleted": "Your account has been deleted",
     "deleted": "Deleted!"
   },
   "no-data-for-this-month": "No data available for this month",

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
@@ -25,6 +25,7 @@ import { FormProps } from './types';
 import { useUpdateTransaction } from '../api/update-transaction';
 import { cn } from '@/lib/utils';
 import { OptionSelector } from '@/components/option-selector';
+import { SelectorOption } from '@/components/option-selector/types';
 
 const formSchema = z.object({
   transactionDate: z.date({
@@ -48,14 +49,23 @@ const formSchema = z.object({
 });
 
 export const IncomeForm = ({ existingData, setOpen }: FormProps) => {
-  const [showAccountSelector, setShowAccountSelector] = useState(false);
-  const [showCategorySelector, setShowCategorySelector] = useState(false);
+  const [selectorType, setSelectorType] = useState<'account' | 'category' | null>(null);
 
   const { t } = useTranslation('transaction');
   const { allAccounts } = useAccounts();
   const { incomeCategories } = useIncomeCategories();
   const { createTransaction } = useCreateTransaction();
   const { updateTransaction } = useUpdateTransaction();
+
+  const accountOptions: SelectorOption[] = useMemo(() => {
+    if (!allAccounts) return []
+    return allAccounts.map((acc) => {
+      return {
+        id: acc.id, 
+        name: acc.name
+      }
+    })
+  }, [allAccounts])
 
   const incomeCategoryOptions = useCallback(() => {
     if (!incomeCategories) return [];
@@ -157,10 +167,7 @@ export const IncomeForm = ({ existingData, setOpen }: FormProps) => {
                   aria-invalid={formErrors.transactionDate ? 'true' : 'false'}
                   selected={field.value}
                   onSelect={(value: Date) => field.onChange(value)}
-                  closeOtherControls={() => {
-                    setShowAccountSelector(false);
-                    setShowCategorySelector(false);
-                  }}
+                  closeOtherControls={() => setSelectorType(null)}
                 />
               </div>
               <FormMessage role="alert" />
@@ -185,7 +192,7 @@ export const IncomeForm = ({ existingData, setOpen }: FormProps) => {
                     type="number"
                     className="w-3/4"
                     aria-invalid={formErrors.amount ? 'true' : 'false'}
-                    onFocus={() => setShowAccountSelector(false)}
+                    onFocus={() => setSelectorType(null)}
                     {...field}
                   />
                 </FormControl>
@@ -211,10 +218,7 @@ export const IncomeForm = ({ existingData, setOpen }: FormProps) => {
                   <Input
                     className="w-3/4"
                     placeholder={t('transaction:select-a-category')}
-                    onClick={() => {
-                      setShowAccountSelector(false);
-                      setShowCategorySelector(true);
-                    }}
+                    onClick={() => setSelectorType('category')}
                     value={getSelectedCategoryName(field.value)}
                     readOnly
                   />
@@ -241,7 +245,7 @@ export const IncomeForm = ({ existingData, setOpen }: FormProps) => {
                   <Input
                     className="w-3/4"
                     placeholder={t('transaction:select-account')}
-                    onClick={() => setShowAccountSelector(true)}
+                    onClick={() => setSelectorType('account')}
                     value={getSelectedAccountName(field.value)}
                     readOnly
                   />
@@ -267,7 +271,7 @@ export const IncomeForm = ({ existingData, setOpen }: FormProps) => {
                 <FormControl className="m-0">
                   <Input
                     className="w-3/4"
-                    onFocus={() => setShowAccountSelector(false)}
+                    onFocus={() => setSelectorType(null)}
                     {...field}
                   />
                 </FormControl>
@@ -279,25 +283,25 @@ export const IncomeForm = ({ existingData, setOpen }: FormProps) => {
 
         <div
           className={cn('overflow-x-auto', {
-            'h-44': showAccountSelector || showCategorySelector,
+            'h-44': selectorType,
           })}
         >
-          {showAccountSelector && (
+          {selectorType === 'account' && (
             <OptionSelector
-              options={allAccounts!}
+              options={accountOptions}
               onSelect={(value: Account) => {
                 form.setValue('toAccountId', value.id);
-                setShowAccountSelector(false);
+                setSelectorType(null);
               }}
             />
           )}
 
-          {showCategorySelector && (
+          {selectorType === 'category' && (
             <OptionSelector
               options={incomeCategoryOptions()}
               onSelect={(option) => {
                 form.setValue('incomeCategoryId', option.id);
-                setShowCategorySelector(false);
+                setSelectorType(null);
               }}
             />
           )}
