@@ -38,7 +38,7 @@ export const ExpenseCategoryList: React.FC = () => {
   const { deleteCategory } = useDeleteExpenseCategory();
   const { expenseCategories, isLoading, isError, refetchExpenseCategories } =
     useExpenseCategories();
-  
+
   const [expandedCategories, setExpandedCategories] = useState<Set<number>>(
     new Set(),
   );

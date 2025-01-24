@@ -1,7 +1,7 @@
 import { Transaction } from './types';
 
 /**
- * This function takes a JavaScript Date object and 
+ * This function takes a JavaScript Date object and
  * converts it into a string in "YYYY-MM-DD" format.
  * @param date JavaScript Date object
  * @returns "2024-01-20"
@@ -15,7 +15,7 @@ export const groupTransactionsByDate = (
 ): Record<string, Transaction[]> => {
   return transactions.reduce(
     (acc, transaction) => {
-      const date = new Date(transaction.date)
+      const date = new Date(transaction.date);
       const dateKey = getDateKey(date);
       if (!acc[dateKey]) {
         acc[dateKey] = [];

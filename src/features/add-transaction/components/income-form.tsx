@@ -49,7 +49,9 @@ const formSchema = z.object({
 });
 
 export const IncomeForm = ({ existingData, setOpen }: FormProps) => {
-  const [selectorType, setSelectorType] = useState<'account' | 'category' | null>(null);
+  const [selectorType, setSelectorType] = useState<
+    'account' | 'category' | null
+  >(null);
 
   const { t } = useTranslation('transaction');
   const { allAccounts } = useAccounts();
@@ -58,14 +60,14 @@ export const IncomeForm = ({ existingData, setOpen }: FormProps) => {
   const { updateTransaction } = useUpdateTransaction();
 
   const accountOptions: SelectorOption[] = useMemo(() => {
-    if (!allAccounts) return []
+    if (!allAccounts) return [];
     return allAccounts.map((acc) => {
       return {
-        id: acc.id, 
-        name: acc.name
-      }
-    })
-  }, [allAccounts])
+        id: acc.id,
+        name: acc.name,
+      };
+    });
+  }, [allAccounts]);
 
   const incomeCategoryOptions = useCallback(() => {
     if (!incomeCategories) return [];

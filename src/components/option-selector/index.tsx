@@ -10,9 +10,10 @@ type Props = {
 };
 
 export const OptionSelector = React.memo<Props>(({ options, onSelect }) => {
-  const filledOptions = options.length < 9 
-  ? [...options, ...Array(9 - options.length).fill(null)] 
-  : options;
+  const filledOptions =
+    options.length < 9
+      ? [...options, ...Array(9 - options.length).fill(null)]
+      : options;
 
   return (
     <div className="grid grid-cols-3 gap-1">

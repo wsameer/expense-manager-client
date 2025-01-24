@@ -18,4 +18,4 @@ export const EXPENSE_CATEGORY_SETTINGS_ROUTE =
 export const INCOME_CATEGORY_SETTINGS_ROUTE =
   SETTINGS_ROUTE + '/income-categories';
 export const DATA_SETTINGS_ROUTE = SETTINGS_ROUTE + '/data';
-export const ACCOUNT_SETTINGS_ROUTE = SETTINGS_ROUTE + '/accounts'
+export const ACCOUNT_SETTINGS_ROUTE = SETTINGS_ROUTE + '/accounts';

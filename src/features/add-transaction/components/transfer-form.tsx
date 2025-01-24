@@ -64,14 +64,14 @@ export const TransferForm = ({ existingData, setOpen }: FormProps) => {
   >(false);
 
   const accountOptions: SelectorOption[] = useMemo(() => {
-      if (!allAccounts) return []
-      return allAccounts.map((acc) => {
-        return {
-          id: acc.id, 
-          name: acc.name
-        }
-      })
-    }, [allAccounts])
+    if (!allAccounts) return [];
+    return allAccounts.map((acc) => {
+      return {
+        id: acc.id,
+        name: acc.name,
+      };
+    });
+  }, [allAccounts]);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),

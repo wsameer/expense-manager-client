@@ -1,29 +1,133 @@
-import { useState } from 'react';
-import { useResponsive } from '@/hooks';
-import { cn } from '@/lib/utils';
-import { MonthNavigator } from '@/components/shared/month-navigator';
-import { Container } from './components/container';
+import { memo, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
-export const DashboardPage = () => {
-  const [currentDate, setCurrentDate] = useState(new Date());
-  const { isDesktop } = useResponsive();
+import { Card } from '@/components/ui/card';
+import { TransactionType } from '@/types';
+import { CAD } from '@/lib/constants';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { capitalize } from '@/lib/utils';
+import { Skeleton } from '@/components/ui/skeleton';
+import { toast } from '@/hooks';
+import { ErrorMessage } from '@/components/errors/error-message';
+import { useChartData } from './api/get-chart-data';
+import { DashboardPieChart } from './components/pie-chart';
+import { COLORS } from './constants';
+import { CircularProgressBar } from './components/circular-progressbar';
 
-  const handleMonthChange = (year: number, month: number) => {
-    setCurrentDate(new Date(year, month));
+type Props = {
+  currentDate: Date;
+};
+
+export const DashboardPage = memo(({ currentDate }: Props) => {
+  const { t } = useTranslation('common');
+  const [transactionType, setTransactionType] = useState<TransactionType>(
+    TransactionType.EXPENSE,
+  );
+
+  const month = new Date(currentDate).toISOString().slice(0, 7);
+
+  const { pieChartData, error, isLoading } = useChartData(
+    month,
+    transactionType,
+  );
+
+  const totalAmount = pieChartData?.reduce(
+    (acc, item) => acc + item.totalAmount,
+    0,
+  );
+
+  const handleTabChange = (value: string) => {
+    setTransactionType(value as TransactionType);
   };
 
+  const renderNoData = () => {
+    return (
+      <div className="flex items-center justify-center mt-8">
+        <p className="text-sm text-muted-foreground">
+          {t('no-data-for-this-month')}
+        </p>
+      </div>
+    );
+  };
+
+  const renderCategoryList = () => {
+    return pieChartData?.map((data, index) => (
+      <Card
+        key={data.id}
+        className="flex justify-between bg-white dark:bg-zinc-800 rounded-2xl px-4 py-2 mb-2"
+      >
+        <div className="flex gap-4">
+          <CircularProgressBar
+            strokeColor={COLORS[index % COLORS.length]}
+            percentage={Number.parseInt(
+              ((data.totalAmount / (totalAmount ?? 100)) * 100).toFixed(0),
+            )}
+          />
+          <small className="text-zinc-900 dark:text-white text-sm font-medium leading-7">
+            {data.category}
+          </small>
+        </div>
+        <small className="text-zinc-900 dark:text-white text-sm font-mono leading-7">
+          {CAD.format(data.totalAmount)}
+        </small>
+      </Card>
+    ));
+  };
+
+  if (error) {
+    toast({
+      title: error.code,
+      description: error.message,
+    });
+
+    return <ErrorMessage message={error.message} />;
+  }
+
   return (
-    <div
-      className={cn('grid grid-cols-1 gap-3', {
-        'w-1/3': isDesktop,
-      })}
+    <Tabs
+      defaultValue={TransactionType.EXPENSE}
+      onValueChange={handleTabChange}
     >
-      <MonthNavigator
-        currentDate={currentDate}
-        handleMonthChange={handleMonthChange}
-        options={{ timeJump: true }}
-      />
-      <Container currentDate={currentDate} />
-    </div>
+      <TabsList className="grid w-full grid-cols-2">
+        <TabsTrigger value={TransactionType.INCOME}>
+          {capitalize(TransactionType.INCOME)}
+        </TabsTrigger>
+        <TabsTrigger value={TransactionType.EXPENSE}>
+          {capitalize(TransactionType.EXPENSE)}
+        </TabsTrigger>
+      </TabsList>
+      <TabsContent value={TransactionType.EXPENSE}>
+        {isLoading && (
+          <div className="flex items-center justify-center mt-8">
+            <Skeleton className="h-40 w-40 rounded-full" />
+          </div>
+        )}
+        {!isLoading && pieChartData!.length < 1 ? (
+          renderNoData()
+        ) : (
+          <>
+            <DashboardPieChart chartData={pieChartData ?? []} />
+            {renderCategoryList()}
+          </>
+        )}
+      </TabsContent>
+      <TabsContent value={TransactionType.INCOME}>
+        {isLoading && (
+          <div className="flex items-center justify-center mt-8">
+            <Skeleton className="h-40 w-40 rounded-full" />
+          </div>
+        )}
+        {!isLoading && pieChartData!.length < 1 ? (
+          renderNoData()
+        ) : (
+          <>
+            <DashboardPieChart chartData={pieChartData ?? []} />
+            {renderCategoryList()}
+          </>
+        )}
+      </TabsContent>
+    </Tabs>
   );
-};
+});
+
+DashboardPage.displayName = 'DashboardPage';

@@ -39,7 +39,7 @@ export const useChartData = (month: string, type: TransactionType) => {
   return {
     pieChartData: data,
     isLoading: !error && !data,
-    isError: error,
+    error,
     refetchPieChart,
   };
 };

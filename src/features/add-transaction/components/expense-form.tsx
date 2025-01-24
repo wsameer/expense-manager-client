@@ -59,7 +59,9 @@ const formSchema = z.object({
 export type TransactionForm = z.infer<typeof formSchema>;
 
 export const ExpenseForm = ({ existingData, setOpen }: FormProps) => {
-  const [selectorType, setSelectorType] = useState<'account' | 'category' | null>(null);
+  const [selectorType, setSelectorType] = useState<
+    'account' | 'category' | null
+  >(null);
 
   const { t } = useTranslation('transaction');
   const { allAccounts } = useAccounts();
@@ -93,14 +95,14 @@ export const ExpenseForm = ({ existingData, setOpen }: FormProps) => {
     Boolean(expenseCategoryId) && subcategories.length === 0;
 
   const accountOptions: SelectorOption[] = useMemo(() => {
-    if (!allAccounts) return []
+    if (!allAccounts) return [];
     return allAccounts.map((acc) => {
       return {
-        id: acc.id, 
-        name: acc.name
-      }
-    })
-  }, [allAccounts])
+        id: acc.id,
+        name: acc.name,
+      };
+    });
+  }, [allAccounts]);
 
   const getSelectedAccountName = useCallback(
     (id: number) => {

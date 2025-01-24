@@ -26,8 +26,8 @@ export const MonthNavigator = memo<MonthNavigatorProps>(
       let year = currentDate.getFullYear();
       let month = currentDate.getMonth() - 1;
       if (month < 0) {
-        month = 11
-        year = year - 1 
+        month = 11;
+        year = year - 1;
       }
       return handleMonthChange(year, month);
     };
@@ -38,7 +38,7 @@ export const MonthNavigator = memo<MonthNavigatorProps>(
 
       if (month === 12) {
         month = 0;
-        year += 1
+        year += 1;
       }
 
       return handleMonthChange(year, month);

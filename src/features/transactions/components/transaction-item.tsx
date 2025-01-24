@@ -14,7 +14,6 @@ export const TransactionItem: React.FC<TransactionItemProps> = ({
   transaction,
   onTransactionClick,
 }) => {
-
   const getCategory = useCallback(() => {
     if (
       transaction.type === TransactionType.EXPENSE &&
@@ -54,15 +53,14 @@ export const TransactionItem: React.FC<TransactionItemProps> = ({
           return transaction.toAccount?.name;
 
         case TransactionType.TRANSFER:
-          return `${transaction.fromAccount?.name} → ${transaction.toAccount?.name}`
-      
+          return `${transaction.fromAccount?.name} → ${transaction.toAccount?.name}`;
+
         default:
           break;
       }
     },
     [transaction],
-  )
-  
+  );
 
   return (
     <Button
