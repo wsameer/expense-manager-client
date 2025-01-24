@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   CreditCardIcon,
   EllipsisIcon,
@@ -16,10 +17,8 @@ import {
   SETTINGS_ROUTE,
   TRANSACTIONS_ROUTE,
 } from '@/router/routes';
-import { Button } from '../ui/button';
 import { cn } from '@/lib/utils';
 import { AddTransaction } from '@/features/add-transaction';
-import React from 'react';
 
 export const Navigation = () => {
   const { isMobile } = useResponsive();
@@ -42,46 +41,46 @@ export const Navigation = () => {
 
   if (isMobile) {
     return (
-      <nav className="fixed px-3 bottom-0 left-0 right-0 grid grid-cols-5 gap-3 justify-items-center items-center bg-white dark:bg-zinc-800 border-t border-zinc-200 dark:border-zinc-900 h-20 z-10">
-        {navItems.slice(0, -1).map((item, index) => (
-          <React.Fragment key={item.path}>
-            <Button
-              variant="ghost"
-              size="icon"
-              className={cn('p-0 hover:bg-white dark:hover:bg-zinc-800', {
-                'text-zinc-800 dark:text-zinc-100':
-                  location.pathname === item.path,
-                'text-zinc-400 dark:hover:text-zinc-100':
-                  location.pathname !== item.path,
-              })}
-              onClick={() => navigate(item.path)}
-            >
-              <div className="flex flex-col items-center justify-center">
-                <item.icon className="h-5 w-5" />
-                <p className="text-xs">{item.label}</p>
-              </div>
-            </Button>
-            {index === 1 && <AddTransaction />}
-          </React.Fragment>
-        ))}
-        <Button
-          variant="ghost"
-          size="icon"
-          className={cn(
-            'p-0 hover:bg-white dark:hover:bg-zinc-800 text-zinc-400 dark:hover:text-zinc-100',
-            {
-              'text-zinc-400 dark:text-zinc-100': location.pathname.includes(
-                navItems[navItems.length - 1].path,
-              ),
-            },
-          )}
-          onClick={() => navigate(navItems[navItems.length - 1].path)}
-        >
-          <div className="flex flex-col items-center justify-center">
-            <EllipsisIcon className="h-5 w-5" />
-            <p className="text-xs">{navItems[navItems.length - 1].label}</p>
-          </div>
-        </Button>
+      <nav className="fixed z-50 w-11/12 h-16 max-w-lg -translate-x-1/2 bg-zinc-900 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-900 rounded-full bottom-8 left-1/2">
+        <div className="grid h-full max-w-lg grid-cols-5 place-items-center place-content-center p-2 gap-2">
+          {navItems.slice(0, -1).map((item, index) => (
+            <React.Fragment key={item.path}>
+              <button
+                className={cn(
+                  'inline-flex flex-col items-center justify-center rounded-full w-12 h-12 px-3 hover:text-white hover:bg-zinc-700 dark:hover:bg-zinc-900',
+                  {
+                    'text-white bg-zinc-700 dark:bg-zinc-900':
+                      location.pathname === item.path,
+                    'text-zinc-500 ': location.pathname !== item.path,
+                  },
+                )}
+                onClick={() => navigate(item.path)}
+              >
+                <div className="flex flex-col items-center justify-center">
+                  <item.icon className="h-5 w-5" />
+                </div>
+              </button>
+              {index === 1 && <AddTransaction />}
+            </React.Fragment>
+          ))}
+
+          <button
+            className={cn(
+              'inline-flex flex-col items-center justify-center rounded-full w-12 h-12 px-3 text-zinc-500 hover:text-white hover:bg-zinc-700 dark:hover:bg-zinc-900',
+              {
+                'text-white bg-zinc-700 dark:bg-zinc-900':
+                  location.pathname.includes(
+                    navItems[navItems.length - 1].path,
+                  ),
+              },
+            )}
+            onClick={() => navigate(navItems[navItems.length - 1].path)}
+          >
+            <div className="flex flex-col items-center justify-center">
+              <EllipsisIcon className="h-5 w-5" />
+            </div>
+          </button>
+        </div>
       </nav>
     );
   }

@@ -45,11 +45,13 @@ export const AddTransaction = () => {
       >
         <DrawerTrigger asChild>
           <Button
-            className="rounded-full h-12 w-12"
+            className="rounded-full h-11 w-11"
             variant="destructive"
             size="icon"
           >
-            <Plus />
+            <div className="flex flex-col items-center justify-center">
+              <Plus className="h-5 w-5" />
+            </div>
           </Button>
         </DrawerTrigger>
         <DrawerContent>
