@@ -1,9 +1,9 @@
 import React from 'react';
 import {
   CreditCardIcon,
-  EllipsisIcon,
   FileTextIcon,
   HomeIcon,
+  MenuIcon,
   Settings,
 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
@@ -17,9 +17,8 @@ import {
   SETTINGS_ROUTE,
   TRANSACTIONS_ROUTE,
 } from '@/router/routes';
-import { cn } from '@/lib/utils';
 import { AddTransaction } from '@/features/add-transaction';
-import { Button } from '../ui/button';
+import { NavigationButton } from './navbar-button';
 
 export const Navigation = () => {
   const { isMobile } = useResponsive();
@@ -42,47 +41,33 @@ export const Navigation = () => {
 
   if (isMobile) {
     return (
-      <nav className="fixed z-50 w-11/12 h-16 max-w-lg -translate-x-1/2 bg-zinc-900 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-900 rounded-full drop-shadow-lg bottom-8 left-1/2">
-        <div className="grid h-full max-w-lg grid-cols-5 place-items-center place-content-center p-2 gap-2">
-          {navItems.slice(0, -1).map((item, index) => (
-            <React.Fragment key={item.path}>
-              <Button
-                className={cn('rounded-full h-12 w-12 hover:text-white hover:bg-zinc-700 dark:hover:bg-zinc-900', 
-                  {
-                    'text-white bg-zinc-700 dark:bg-zinc-900':
-                      location.pathname === item.path,
-                    'text-zinc-500': location.pathname !== item.path,
-                  }
-                )}
-                variant="link"
-                onClick={() => navigate(item.path)}
-               >
-                <div className="flex flex-col items-center justify-center">
-                  <item.icon className="h-5 w-5" />
-                </div>
-              </Button>
-              {index === 1 && <AddTransaction />}
-            </React.Fragment>
-          ))}
+      <div className="fixed bottom-8 left-1/2 -translate-x-1/2 w-[80%]">
+        <nav className="flex h-16 items-center justify-between rounded-full bg-zinc-800 px-3">
+          {navItems.slice(0, -1).map((item, index) => {
+            const Icon = item.icon;
+            return (
+              <React.Fragment key={item.path}>
+                <NavigationButton
+                  icon={<Icon className="h-6 w-6" />}
+                  isActive={location.pathname === item.path}
+                  label={item.label}
+                  onClick={() => navigate(item.path)}
+                />
+                {index === 1 && <AddTransaction />}
+              </React.Fragment>
+            );
+          })}
 
-          <Button
-            className={cn('rounded-full h-12 w-12 text-zinc-500 hover:text-white hover:bg-zinc-700 dark:hover:bg-zinc-900', 
-              {
-                'text-white bg-zinc-700 dark:bg-zinc-900':
-                  location.pathname.includes(
-                    navItems[navItems.length - 1].path,
-                  ),
-              }
+          <NavigationButton
+            icon={<MenuIcon className="h-6 w-6" />}
+            isActive={location.pathname.includes(
+              navItems[navItems.length - 1].path,
             )}
-            variant="link"
+            label={navItems[navItems.length - 1].label}
             onClick={() => navigate(navItems[navItems.length - 1].path)}
-          >
-            <div className="flex flex-col items-center justify-center">
-              <EllipsisIcon className="h-5 w-5" />
-            </div>
-          </Button>
-        </div>
-      </nav>
+          />
+        </nav>
+      </div>
     );
   }
 

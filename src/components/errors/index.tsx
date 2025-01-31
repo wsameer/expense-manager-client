@@ -23,7 +23,7 @@ export const MainErrorFallback = () => {
       role="alert"
     >
       <h2 className="text-lg font-semibold">Ooops, something went wrong :( </h2>
-      <p className="text-slate-400">
+      <p className="text-zinc-400">
         <i>{errorMessage}</i>
       </p>
       <Button

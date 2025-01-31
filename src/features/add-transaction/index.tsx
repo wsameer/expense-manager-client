@@ -50,7 +50,7 @@ export const AddTransaction = () => {
             size="icon"
           >
             <div className="flex flex-col items-center justify-center">
-              <Plus className="h-5 w-5" />
+              <Plus className="h-6 w-6" />
             </div>
           </Button>
         </DrawerTrigger>
