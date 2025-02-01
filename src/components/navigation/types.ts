@@ -1,5 +1,7 @@
+import { LucideIcon } from 'lucide-react';
+
 export type SideNavigationItem = {
-  icon: (props: React.SVGProps<SVGSVGElement>) => JSX.Element;
+  icon: LucideIcon;
   path: string;
   label: string;
 };

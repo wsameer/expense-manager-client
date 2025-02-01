@@ -7,8 +7,6 @@ import {
   DrawerTitle,
   DrawerHeader,
   DrawerTrigger,
-  DrawerFooter,
-  DrawerClose,
 } from '@/components/ui/drawer';
 import { Button } from '@/components/ui/button';
 import {
@@ -50,12 +48,12 @@ export const AddTransaction = () => {
             size="icon"
           >
             <div className="flex flex-col items-center justify-center">
-              <Plus className="h-6 w-6" />
+              <Plus />
             </div>
           </Button>
         </DrawerTrigger>
         <DrawerContent>
-          <div className="mx-auto w-full max-w-sm">
+          <div className="mx-auto w-full max-w-sm mb-8">
             <DrawerHeader className="text-left">
               <DrawerTitle>
                 Record {selectedTab === TransactionType.TRANSFER ? 'a' : 'an'}{' '}
@@ -69,11 +67,6 @@ export const AddTransaction = () => {
                 setOpen={setOpen}
               />
             </div>
-            <DrawerFooter>
-              <DrawerClose asChild>
-                <Button variant="secondary">{t('cancel')}</Button>
-              </DrawerClose>
-            </DrawerFooter>
           </div>
         </DrawerContent>
       </Drawer>

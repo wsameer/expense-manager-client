@@ -124,8 +124,8 @@ export const Settings = () => {
       </ListGroup>
 
       <Button
-        className="mb-6 w-full border-solid border border-zinc-300"
-        variant="secondary"
+        className="mb-6 w-full rounded-xl"
+        variant="destructive"
         onClick={logout}
       >
         {t('logout')}

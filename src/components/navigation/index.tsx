@@ -2,7 +2,7 @@ import React from 'react';
 import {
   CreditCardIcon,
   FileTextIcon,
-  HomeIcon,
+  HouseIcon,
   MenuIcon,
   Settings,
 } from 'lucide-react';
@@ -29,7 +29,7 @@ export const Navigation = () => {
   const month = date.toLocaleString('default', { month: 'short' });
 
   const navItems = [
-    { icon: HomeIcon, label: 'Home', path: DASHBOARD_ROUTE },
+    { icon: HouseIcon, label: 'Home', path: DASHBOARD_ROUTE },
     {
       icon: FileTextIcon,
       label: `${day}-${month}`,
@@ -42,13 +42,13 @@ export const Navigation = () => {
   if (isMobile) {
     return (
       <div className="fixed bottom-8 left-1/2 -translate-x-1/2 w-[80%]">
-        <nav className="flex h-16 items-center justify-between rounded-full bg-zinc-800 px-3">
+        <nav className="flex h-16 items-center justify-between rounded-full bg-zinc-800 dark:bg-zinc-800 px-3 shadow-lg">
           {navItems.slice(0, -1).map((item, index) => {
             const Icon = item.icon;
             return (
               <React.Fragment key={item.path}>
                 <NavigationButton
-                  icon={<Icon className="h-6 w-6" />}
+                  icon={<Icon />}
                   isActive={location.pathname === item.path}
                   label={item.label}
                   onClick={() => navigate(item.path)}
@@ -59,7 +59,7 @@ export const Navigation = () => {
           })}
 
           <NavigationButton
-            icon={<MenuIcon className="h-6 w-6" />}
+            icon={<MenuIcon />}
             isActive={location.pathname.includes(
               navItems[navItems.length - 1].path,
             )}

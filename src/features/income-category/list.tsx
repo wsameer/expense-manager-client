@@ -56,18 +56,16 @@ export const IncomeCategoryList = () => {
   return (
     <div className="grid justify-items-center grid-cols-1 gap-2 mt-4">
       <Button
-        className="flex justify-start content-center gap-2 mb-3 w-full"
+        className="flex justify-center content-center gap-2 mb-3 w-full rounded-xl"
         variant="dashed"
-        size="sm"
+        size="lg"
         onClick={() => {
           setSelectedCategory(undefined);
           setOpenCategoryModal(true);
         }}
       >
         <Plus className="h-4 w-4" />
-        <small className="text-sm font-medium leading-none">
-          {t('categories:income.new-income-category')}
-        </small>
+        {t('categories:income.new-income-category')}
       </Button>
 
       {isLoading ? (
@@ -76,7 +74,7 @@ export const IncomeCategoryList = () => {
         <>
           {incomeCategories?.map((category) => (
             <div
-              className="bg-white border dark:bg-zinc-800 rounded-xl overflow-hidden w-full"
+              className="bg-white dark:bg-zinc-800 rounded-xl overflow-hidden w-full"
               key={category.id}
             >
               <div className="flex items-center justify-between space-x-4 pl-4 pr-2 py-2">

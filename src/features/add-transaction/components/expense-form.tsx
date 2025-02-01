@@ -386,8 +386,9 @@ export const ExpenseForm = ({ existingData, setOpen }: FormProps) => {
         </div>
 
         <Button
-          className="w-full"
+          className="w-full h-12 rounded-full"
           variant="destructive"
+          size="lg"
           type="submit"
         >
           {existingData ? t('transaction:update') : t('transaction:create')}

@@ -13,20 +13,25 @@ export const NavigationButton = ({ icon, isActive, label, onClick }: Props) => {
   return (
     <Button
       className={cn(
-        'relative flex h-[42px] w-[42px] items-center justify-center rounded-full text-zinc-400 hover:text-zinc-100',
+        'relative flex h-[42px] w-[42px] items-center justify-center rounded-full text-background dark:text-foreground opacity-50 hover:opacity-100',
         {
-          'text-zinc-900 hover:text-zinc-900': isActive,
+          'opacity-100 text-foreground': isActive,
         },
       )}
       variant="link"
       onClick={onClick}
+      size="icon"
     >
       <div
-        className={`absolute inset-0 rounded-full bg-white transition-opacity ${
+        className={`absolute inset-0 rounded-full bg-white dark:bg-zinc-900 transition-opacity ${
           isActive ? 'opacity-100' : 'opacity-0'
         }`}
       />
-      <span className="relative">{icon}</span>
+      <span className="relative">
+        {React.cloneElement(icon, {
+          className: isActive ? 'fill-background' : '',
+        })}
+      </span>
       <span className="sr-only">{label}</span>
     </Button>
   );
