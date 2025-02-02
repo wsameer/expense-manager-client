@@ -90,7 +90,7 @@ export const ExpenseCategoryList: React.FC = () => {
   return (
     <div className="grid justify-items-center grid-cols-1 gap-2 mt-4">
       <Button
-        className="flex justify-start content-center gap-2 mb-3 w-full"
+        className="flex justify-center content-center gap-2 mb-3 w-full rounded-xl"
         variant="dashed"
         size="sm"
         onClick={() => {

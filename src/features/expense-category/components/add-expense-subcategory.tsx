@@ -22,9 +22,7 @@ import {
 import { toast, useResponsive } from '@/hooks';
 import {
   Drawer,
-  DrawerClose,
   DrawerContent,
-  DrawerFooter,
   DrawerHeader,
   DrawerTitle,
 } from '@/components/ui/drawer';
@@ -139,8 +137,9 @@ export const AddExpenseSubCategory = ({
           )}
         />
         <Button
+          className="w-full h-12 rounded-full text-md shadow-md"
+          size="lg"
           type="submit"
-          className="w-full"
         >
           {selectedSubcategory
             ? t('categories:save-changes')
@@ -174,12 +173,12 @@ export const AddExpenseSubCategory = ({
               {t('categories:expense.expense-category')}
             </DrawerTitle>
           </DrawerHeader>
-          <div className="px-4">{renderForm()}</div>
-          <DrawerFooter>
+          <div className="px-4 pb-8">{renderForm()}</div>
+          {/* <DrawerFooter>
             <DrawerClose asChild>
-              <Button variant="outline">{t('common:cancel')}</Button>
+              <Button variant="outline" className='w-full h-12 rounded-full text-md'>{t('common:cancel')}</Button>
             </DrawerClose>
-          </DrawerFooter>
+          </DrawerFooter> */}
         </DrawerContent>
       </Drawer>
     );

@@ -55,7 +55,7 @@ export const AddTransaction = () => {
         <DrawerContent>
           <div className="mx-auto w-full max-w-sm mb-8">
             <DrawerHeader className="text-left">
-              <DrawerTitle>
+              <DrawerTitle className="text-2xl font-light">
                 Record {selectedTab === TransactionType.TRANSFER ? 'a' : 'an'}{' '}
                 {tabTitle}
               </DrawerTitle>

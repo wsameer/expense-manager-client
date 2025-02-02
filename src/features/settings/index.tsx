@@ -48,7 +48,7 @@ export const Settings = () => {
           <Input
             type="search"
             placeholder="Search products..."
-            className="pl-8 sm:w-[300px] md:w-[200px] lg:w-[300px]"
+            className="pl-8 sm:w-[300px] md:w-[200px] lg:w-[300px] rounded-full"
           />
         </div>
       </form>
@@ -62,7 +62,7 @@ export const Settings = () => {
               <Sun className="h-4 w-4 text-zinc-600 dark:text-zinc-300" />
             )
           }
-          label="Dark Mode (Beta)"
+          label="Dark Mode"
           rightElement={
             <Switch
               className="w-9"
@@ -124,7 +124,7 @@ export const Settings = () => {
       </ListGroup>
 
       <Button
-        className="mb-6 w-full rounded-xl"
+        className="mb-6 w-full h-12 rounded-full"
         variant="destructive"
         onClick={logout}
       >

@@ -20,9 +20,12 @@ export const OptionSelector = React.memo<Props>(({ options, onSelect }) => {
       {filledOptions.map((option, index) => (
         <Button
           key={option ? option.id : `empty-${index}`}
-          className={cn('px-2 h-14 whitespace-normal text-center leading-3', {
-            'bg-zinc-200': !option,
-          })}
+          className={cn(
+            'px-2 h-14 rounded-xl whitespace-normal text-center leading-3',
+            {
+              'bg-zinc-200': !option,
+            },
+          )}
           variant="outline"
           size="lg"
           style={{ fontSize: '11px' }}

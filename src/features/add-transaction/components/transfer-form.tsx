@@ -147,7 +147,7 @@ export const TransferForm = ({ existingData, setOpen }: FormProps) => {
                   htmlFor="date"
                   className="w-1/4"
                 >
-                  Date
+                  {t('transaction:date')}
                 </FormLabel>
                 <DateSelector
                   aria-invalid={formErrors.date ? 'true' : 'false'}
@@ -171,12 +171,12 @@ export const TransferForm = ({ existingData, setOpen }: FormProps) => {
                   htmlFor="amount"
                   className="w-1/4"
                 >
-                  Amount
+                  {t('transaction:amount')}
                 </FormLabel>
                 <FormControl className="m-0">
                   <Input
                     type="number"
-                    className="w-3/4"
+                    className="w-3/4 text-sm"
                     aria-invalid={formErrors.amount ? 'true' : 'false'}
                     onFocus={() => setShowAccountSelector(false)}
                     {...field}
@@ -198,11 +198,11 @@ export const TransferForm = ({ existingData, setOpen }: FormProps) => {
                   htmlFor="fromAccountId"
                   className="w-1/4"
                 >
-                  From
+                  {t('transaction:from')}
                 </FormLabel>
                 <Input
-                  className="w-3/4"
-                  placeholder="Select an account"
+                  className="w-3/4 text-sm"
+                  placeholder={t('transaction:select-account')}
                   onClick={() => setShowAccountSelector('fromAccountId')}
                   value={getSelectedAccountName(field.value)}
                   readOnly
@@ -223,12 +223,12 @@ export const TransferForm = ({ existingData, setOpen }: FormProps) => {
                   htmlFor="toAccountId"
                   className="w-1/4"
                 >
-                  To
+                  {t('transaction:to')}
                 </FormLabel>
                 <FormControl className="m-0">
                   <Input
-                    className="w-3/4"
-                    placeholder="Select an account"
+                    className="w-3/4 text-sm"
+                    placeholder={t('transaction:select-account')}
                     onClick={() => setShowAccountSelector('toAccountId')}
                     value={getSelectedAccountName(field.value)}
                     readOnly
@@ -250,12 +250,13 @@ export const TransferForm = ({ existingData, setOpen }: FormProps) => {
                   htmlFor="note"
                   className="w-1/4"
                 >
-                  Note
+                  {t('transaction:note')}
                 </FormLabel>
                 <FormControl className="m-0">
                   <Input
-                    className="w-3/4"
+                    className="w-3/4 text-sm"
                     onFocus={() => setShowAccountSelector(false)}
+                    placeholder={t('transaction:note-placeholder')}
                     {...field}
                   />
                 </FormControl>
@@ -282,7 +283,7 @@ export const TransferForm = ({ existingData, setOpen }: FormProps) => {
         </div>
 
         <Button
-          className="w-full"
+          className="w-full h-12 rounded-full text-md shadow-md"
           variant="destructive"
           type="submit"
         >

@@ -3,7 +3,6 @@ import {
   CreditCardIcon,
   FileTextIcon,
   HouseIcon,
-  MenuIcon,
   Settings,
 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
@@ -36,13 +35,13 @@ export const Navigation = () => {
       path: TRANSACTIONS_ROUTE,
     },
     { icon: CreditCardIcon, label: 'Accounts', path: ACCOUNTS_ROUTE },
-    { icon: Settings, label: 'More', path: SETTINGS_ROUTE },
+    { icon: Settings, label: 'Settings', path: SETTINGS_ROUTE },
   ].filter(Boolean) as SideNavigationItem[];
 
   if (isMobile) {
     return (
       <div className="fixed bottom-8 left-1/2 -translate-x-1/2 w-[80%]">
-        <nav className="flex h-16 items-center justify-between rounded-full bg-zinc-800 dark:bg-zinc-800 px-3 shadow-lg">
+        <nav className="flex items-center justify-between rounded-full bg-zinc-800 dark:bg-zinc-800 dark:border dark:border-zinc-900 p-2 shadow-lg">
           {navItems.slice(0, -1).map((item, index) => {
             const Icon = item.icon;
             return (
@@ -57,9 +56,8 @@ export const Navigation = () => {
               </React.Fragment>
             );
           })}
-
           <NavigationButton
-            icon={<MenuIcon />}
+            icon={<Settings />}
             isActive={location.pathname.includes(
               navItems[navItems.length - 1].path,
             )}

@@ -192,7 +192,7 @@ export const IncomeForm = ({ existingData, setOpen }: FormProps) => {
                 <FormControl className="m-0">
                   <Input
                     type="number"
-                    className="w-3/4"
+                    className="w-3/4 text-sm"
                     aria-invalid={formErrors.amount ? 'true' : 'false'}
                     onFocus={() => setSelectorType(null)}
                     {...field}
@@ -218,7 +218,7 @@ export const IncomeForm = ({ existingData, setOpen }: FormProps) => {
                 </FormLabel>
                 <FormControl>
                   <Input
-                    className="w-3/4"
+                    className="w-3/4 text-sm"
                     placeholder={t('transaction:select-a-category')}
                     onClick={() => setSelectorType('category')}
                     value={getSelectedCategoryName(field.value)}
@@ -245,7 +245,7 @@ export const IncomeForm = ({ existingData, setOpen }: FormProps) => {
                 </FormLabel>
                 <FormControl className="m-0">
                   <Input
-                    className="w-3/4"
+                    className="w-3/4 text-sm"
                     placeholder={t('transaction:select-account')}
                     onClick={() => setSelectorType('account')}
                     value={getSelectedAccountName(field.value)}
@@ -272,8 +272,9 @@ export const IncomeForm = ({ existingData, setOpen }: FormProps) => {
                 </FormLabel>
                 <FormControl className="m-0">
                   <Input
-                    className="w-3/4"
+                    className="w-3/4 text-sm"
                     onFocus={() => setSelectorType(null)}
+                    placeholder={t('transaction:note-placeholder')}
                     {...field}
                   />
                 </FormControl>
@@ -310,7 +311,7 @@ export const IncomeForm = ({ existingData, setOpen }: FormProps) => {
         </div>
 
         <Button
-          className="w-full"
+          className="w-full h-12 rounded-full text-md shadow-md"
           variant="destructive"
           type="submit"
         >

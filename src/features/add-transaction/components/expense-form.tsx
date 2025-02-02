@@ -181,7 +181,7 @@ export const ExpenseForm = ({ existingData, setOpen }: FormProps) => {
                   htmlFor="date"
                   className="w-1/4"
                 >
-                  Date
+                  {t('transaction:date')}
                 </FormLabel>
                 <DateSelector
                   aria-invalid={formErrors.date ? 'true' : 'false'}
@@ -205,12 +205,12 @@ export const ExpenseForm = ({ existingData, setOpen }: FormProps) => {
                   htmlFor="amount"
                   className="w-1/4"
                 >
-                  Amount
+                  {t('transaction:amount')}
                 </FormLabel>
                 <FormControl className="m-0">
                   <Input
                     type="number"
-                    className="w-3/4"
+                    className="w-3/4 text-sm"
                     aria-invalid={formErrors.amount ? 'true' : 'false'}
                     onFocus={() => setSelectorType(null)}
                     {...field}
@@ -232,12 +232,12 @@ export const ExpenseForm = ({ existingData, setOpen }: FormProps) => {
                   htmlFor="expenseCategoryId"
                   className="w-1/4"
                 >
-                  Category
+                  {t('transaction:category')}
                 </FormLabel>
                 <FormControl>
                   <Input
-                    className="w-3/4"
-                    placeholder="Select a category"
+                    className="w-3/4 text-sm"
+                    placeholder={t('transaction:select-a-category')}
                     value={getSelectedCategoryName(field.value)}
                     onFocus={() => setSelectorType('category')}
                     readOnly
@@ -260,7 +260,7 @@ export const ExpenseForm = ({ existingData, setOpen }: FormProps) => {
                     htmlFor="expenseSubcategoryId"
                     className="w-1/4"
                   >
-                    Subcategory
+                    {t('transaction:sub-category')}
                   </FormLabel>
                   <Select
                     onValueChange={field.onChange}
@@ -286,7 +286,7 @@ export const ExpenseForm = ({ existingData, setOpen }: FormProps) => {
                           value={'empty'}
                           disabled
                         >
-                          No subcategories
+                          {t('transaction:no-subcategories')}
                         </SelectItem>
                       ) : (
                         subcategories.map((subcategory) => (
@@ -317,12 +317,12 @@ export const ExpenseForm = ({ existingData, setOpen }: FormProps) => {
                   htmlFor="fromAccountId"
                   className="w-1/4"
                 >
-                  Account
+                  {t('transaction:account')}
                 </FormLabel>
                 <FormControl className="m-0">
                   <Input
-                    className="w-3/4"
-                    placeholder="Select an account"
+                    className="w-3/4 text-sm"
+                    placeholder={t('transaction:select-account')}
                     onClick={() => setSelectorType('account')}
                     value={getSelectedAccountName(field.value)}
                     readOnly
@@ -344,12 +344,13 @@ export const ExpenseForm = ({ existingData, setOpen }: FormProps) => {
                   htmlFor="note"
                   className="w-1/4"
                 >
-                  Note
+                  {t('transaction:note')}
                 </FormLabel>
                 <FormControl className="m-0">
                   <Input
-                    className="w-3/4"
                     {...field}
+                    className="w-3/4 text-sm"
+                    placeholder={t('transaction:note-placeholder')}
                     onFocus={() => setSelectorType(null)}
                   />
                 </FormControl>
@@ -386,7 +387,7 @@ export const ExpenseForm = ({ existingData, setOpen }: FormProps) => {
         </div>
 
         <Button
-          className="w-full h-12 rounded-full"
+          className="w-full h-12 rounded-full text-md shadow-md"
           variant="destructive"
           size="lg"
           type="submit"
