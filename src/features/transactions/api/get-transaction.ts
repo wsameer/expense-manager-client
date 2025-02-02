@@ -28,8 +28,15 @@ export const useTransactions = (month: string) => {
 
   const refetchTransactions = useCallback(() => mutate(), [mutate]);
 
+  const transformData = (transactions: Transaction[]): Transaction[] => {
+    return transactions.map((t) => ({
+      ...t,
+      amount: Number(t.amount),
+    }));
+  };
+
   return {
-    allTransactions: data,
+    allTransactions: transformData(data ?? []),
     isLoading: !error && !data,
     isError: error,
     refetchTransactions,

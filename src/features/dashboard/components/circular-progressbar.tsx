@@ -57,7 +57,7 @@ export const CircularProgressBar: React.FC<CircularProgressBarProps> = ({
       <div className="absolute inset-0 flex items-center justify-center">
         <small
           className="text-center dark:text-white"
-          style={{ fontSize: '8px' }}
+          style={{ fontSize: percentage < 100 ? '8px' : '7px' }}
         >
           {percentage}%
         </small>

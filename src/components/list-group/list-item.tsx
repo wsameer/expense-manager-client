@@ -14,7 +14,7 @@ type Props = {
 };
 
 const variantStyles: Record<Variant, string> = {
-  default: 'bg-white dark:bg-zinc-800 dark:hover:bg-zinc-900',
+  default: 'bg-white dark:bg-gunmetal-600 dark:hover:bg-gunmetal-700',
   danger: 'bg-red hover:bg-red-100 dark:bg-red-900 dark:hover:bg-red-950',
 };
 
@@ -24,7 +24,7 @@ export const ListItem = forwardRef<HTMLButtonElement, Props>(
       ref={ref}
       className={cn(
         'flex h-10 items-center justify-between py-1 px-4',
-        'border-t border-zinc-200 dark:border-zinc-900',
+        'border-t border-gray-200 dark:gunmetal-800',
         'cursor-pointer first:border-t-0',
         variantStyles[variant],
       )}
@@ -42,7 +42,7 @@ export const ListItem = forwardRef<HTMLButtonElement, Props>(
           <small
             className={cn('dark:text-white text-sm font-medium leading-none', {
               'ml-3': icon,
-              'text-zinc-900': variant === 'default',
+              'text-gunmetal-800': variant === 'default',
               'text-red-600': variant === 'danger',
             })}
           >
