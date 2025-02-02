@@ -283,9 +283,10 @@ export const TransferForm = ({ existingData, setOpen }: FormProps) => {
         </div>
 
         <Button
-          className="w-full h-12 rounded-full text-md shadow-md"
-          variant="destructive"
           type="submit"
+          className="w-full rounded-full text-md"
+          size="lg"
+          variant="destructive"
         >
           {existingData ? t('transaction:update') : t('transaction:create')}
         </Button>

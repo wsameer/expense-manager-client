@@ -104,7 +104,7 @@ export const AddExpenseCategoryForm = ({
           )}
         />
         <Button
-          className="w-full h-12 rounded-full text-md shadow-md"
+          className="w-full h-12 rounded-full text-md"
           size="lg"
           type="submit"
         >
@@ -134,12 +134,7 @@ export const AddExpenseCategoryForm = ({
               {t('categories:expense.expense-category')}
             </DrawerTitle>
           </DrawerHeader>
-          <div className="px-4 pb-8">{renderForm()}</div>
-          {/* <DrawerFooter>
-            <DrawerClose asChild>
-              <Button variant="outline" className='w-full h-12 rounded-full text-md'>{t('common:cancel')}</Button>
-            </DrawerClose>
-          </DrawerFooter> */}
+          <div className="px-4">{renderForm()}</div>
         </DrawerContent>
       </Drawer>
     );

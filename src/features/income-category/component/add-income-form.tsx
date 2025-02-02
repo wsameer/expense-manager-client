@@ -24,9 +24,7 @@ import { toast, useResponsive } from '@/hooks';
 import { Textarea } from '@/components/ui/textarea';
 import {
   Drawer,
-  DrawerClose,
   DrawerContent,
-  DrawerFooter,
   DrawerHeader,
   DrawerTitle,
 } from '@/components/ui/drawer';
@@ -111,8 +109,9 @@ export const AddIncomeCategoryForm = ({
                 {t('categories:category-name')}
               </FormLabel>
               <Input
-                placeholder="Category Name"
                 {...field}
+                placeholder={t('categories:category-name')}
+                className="text-sm"
               />
               <FormMessage role="alert" />
             </FormItem>
@@ -127,8 +126,9 @@ export const AddIncomeCategoryForm = ({
                 {t('categories:description')}
               </FormLabel>
               <Textarea
-                placeholder="Type your description here"
                 {...field}
+                placeholder={t('categories:description-hint')}
+                className="text-sm"
               />
               <FormMessage role="alert" />
             </FormItem>
@@ -136,7 +136,8 @@ export const AddIncomeCategoryForm = ({
         />
         <Button
           type="submit"
-          className="w-full"
+          className="w-full rounded-full text-md"
+          size="lg"
         >
           {selectedCategory
             ? t('categories:save-changes')
@@ -157,11 +158,6 @@ export const AddIncomeCategoryForm = ({
             <DrawerTitle>{t('categories:income.income-category')}</DrawerTitle>
           </DrawerHeader>
           <div className="px-4">{renderForm()}</div>
-          <DrawerFooter>
-            <DrawerClose asChild>
-              <Button variant="outline">{t('common:cancel')}</Button>
-            </DrawerClose>
-          </DrawerFooter>
         </DrawerContent>
       </Drawer>
     );
