@@ -16,8 +16,6 @@ import {
   DrawerTitle,
   DrawerHeader,
   DrawerTrigger,
-  DrawerFooter,
-  DrawerClose,
 } from '@/components/ui/drawer';
 import { useResponsive } from '@/hooks';
 import { AccountForm } from './account-form';
@@ -40,6 +38,7 @@ export const AddAccount = ({ group }: { group: AccountGroupEnum }) => {
           <Button
             className="w-full rounded-xl border-zinc-400"
             variant="dashed"
+            size="lg"
           >
             <Plus className="h-4 w-4 mr-2" />
             <p>{t('add-new-account')}</p>
@@ -54,11 +53,6 @@ export const AddAccount = ({ group }: { group: AccountGroupEnum }) => {
             group={group}
             setOpen={setOpen}
           />
-          <DrawerFooter className="pt-2">
-            <DrawerClose asChild>
-              <Button variant="outline">{t('cancel')}</Button>
-            </DrawerClose>
-          </DrawerFooter>
         </DrawerContent>
       </Drawer>
     );
