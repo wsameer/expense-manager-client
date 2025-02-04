@@ -68,7 +68,7 @@ export const PageLayout = React.memo<PageLayoutProps>(
         <main className="flex-1 overflow-y-auto">
           <div className="container pb-24">
             <div className="mx-auto w-full min-w-0">
-              <div className="space-y-2">
+              <div>
                 {!showHeaderText && (
                   <h1
                     ref={pageTitleRef}
@@ -79,7 +79,7 @@ export const PageLayout = React.memo<PageLayoutProps>(
                   </h1>
                 )}
                 {subTitle && (
-                  <p className="text-sm text-muted-foreground">{subTitle}</p>
+                  <p className="text-sm mt-1 text-muted-foreground">{subTitle}</p>
                 )}
               </div>
               <div
