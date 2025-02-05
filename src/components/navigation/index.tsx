@@ -40,7 +40,7 @@ export const Navigation = () => {
 
   if (isMobile) {
     return (
-      <div className="fixed bottom-8 left-1/2 -translate-x-1/2 w-[80%]">
+      <div className="fixed bottom-8 left-1/2 -translate-x-1/2 w-[80%] z-10">
         <nav className="flex items-center justify-between rounded-full bg-zinc-800 dark:bg-zinc-800 dark:border dark:border-zinc-900 p-2 shadow-lg">
           {navItems.slice(0, -1).map((item, index) => {
             const Icon = item.icon;
