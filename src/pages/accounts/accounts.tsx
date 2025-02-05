@@ -1,4 +1,4 @@
-import { PageLayout } from '@/components/layout';
+import { PageLayout } from '@/components/layout/page-layout';
 import { AccountsPage } from '@/features/accounts';
 
 export const AccountsRoute = () => {

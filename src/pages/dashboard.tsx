@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { PageLayout } from '@/components/layout';
+import { PageLayout } from '@/components/layout/page-layout';
 import { useResponsive } from '@/hooks';
 import { cn } from '@/lib/utils';
 import { MonthNavigator } from '@/components/shared/month-navigator';

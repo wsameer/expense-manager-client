@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { RegisterForm } from '@/features/auth/register-form';
 import { LOGIN_ROUTE } from '@/router/routes';
-import { AuthLayout } from '@/components/layout';
+import { AuthLayout } from '@/components/layout/auth-layout';
 import { useTranslation } from 'react-i18next';
 
 export const RegisterRoute = () => {

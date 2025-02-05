@@ -25,10 +25,12 @@ import {
   INCOME_CATEGORY_SETTINGS_ROUTE,
   ACCOUNT_SETTINGS_ROUTE,
 } from '@/router/routes';
-import { useAuth } from '@/hooks';
+import { useAuth, useResponsive } from '@/hooks';
+import { cn } from '@/lib/utils';
 
 export const Settings = () => {
   const navigate = useNavigate();
+  const {isDesktop} = useResponsive()
   const { theme, setTheme } = useTheme();
   const { logout } = useAuth();
   const { t } = useTranslation('common', {
@@ -40,7 +42,7 @@ export const Settings = () => {
   return (
     <div
       id="app-settings"
-      className="grid grid-cols-1 gap-6"
+      className={cn('grid grid-cols-1 gap-6 w-full', isDesktop && 'w-1/3')}
     >
       <form className="ml-auto w-full sm:flex-initial">
         <div className="relative">
@@ -48,7 +50,7 @@ export const Settings = () => {
           <Input
             type="search"
             placeholder="Search products..."
-            className="pl-8 sm:w-[300px] md:w-[200px] lg:w-[300px] rounded-full"
+            className="pl-8 rounded-full"
           />
         </div>
       </form>
@@ -124,12 +126,13 @@ export const Settings = () => {
       </ListGroup>
 
       <Button
-        className="mb-6 w-full h-12 rounded-full"
+        className="mb-6 w-full h-12 rounded-full block md:hidden"
         variant="destructive"
         onClick={logout}
       >
         {t('logout')}
       </Button>
+      
     </div>
   );
 };

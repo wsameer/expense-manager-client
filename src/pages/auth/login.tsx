@@ -2,7 +2,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 
 import { APP_ROUTE } from '@/router/routes';
 import { useTranslation } from 'react-i18next';
-import { AuthLayout } from '@/components/layout';
+import { AuthLayout } from '@/components/layout/auth-layout';
 import { LoginForm } from '@/features/auth/login-form';
 
 export const LoginRoute = () => {

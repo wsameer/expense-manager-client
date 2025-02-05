@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 
 import { toast } from '@/hooks';
 import { ACCOUNTS_ROUTE } from '@/router/routes';
-import { PageLayout } from '@/components/layout';
+import { PageLayout } from '@/components/layout/page-layout';
 import { useConfirmDialog } from '@/components/ui/confirmable';
 import { Button } from '@/components/ui/button';
 import { useDeleteAccount } from '@/features/accounts/api/delete-account';

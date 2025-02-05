@@ -1,4 +1,4 @@
-import { PageLayout } from '@/components/layout';
+import { PageLayout } from '@/components/layout/page-layout';
 import { SETTINGS_ROUTE } from '@/router/routes';
 
 export const AccountSettingsRoute = () => {

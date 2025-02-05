@@ -1,5 +1,5 @@
 import { Settings } from '@/features/settings';
-import { PageLayout } from '@/components/layout';
+import { PageLayout } from '@/components/layout/page-layout';
 
 export const SettingsRoute = () => {
   return (

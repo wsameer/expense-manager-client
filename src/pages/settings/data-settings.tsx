@@ -1,6 +1,6 @@
 import { SETTINGS_ROUTE } from '@/router/routes';
 import { DataSettings } from '@/features/settings/data-settings';
-import { PageLayout } from '@/components/layout';
+import { PageLayout } from '@/components/layout/page-layout';
 
 export const DataSettingsRoute = () => {
   return (

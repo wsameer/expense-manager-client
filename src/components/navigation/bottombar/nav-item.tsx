@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button } from '../ui/button';
+import { Button } from '../../ui/button';
 import { cn } from '@/lib/utils';
 
 type Props = {
@@ -9,7 +9,7 @@ type Props = {
   onClick: () => void;
 };
 
-export const NavigationButton = ({ icon, isActive, label, onClick }: Props) => {
+export const NavItem = ({ icon, isActive, label, onClick }: Props) => {
   return (
     <Button
       className={cn(
