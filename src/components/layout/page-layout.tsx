@@ -27,7 +27,6 @@ interface PageLayoutProps {
 
 export const PageLayout = React.memo<PageLayoutProps>(
   ({ title, children, subTitle, showHeaderText = false }) => {
-
     return (
       <div className="flex flex-col sm:gap-2 md:pt-0">
         <SidebarProvider>

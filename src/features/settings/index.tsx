@@ -30,7 +30,7 @@ import { cn } from '@/lib/utils';
 
 export const Settings = () => {
   const navigate = useNavigate();
-  const {isDesktop} = useResponsive()
+  const { isDesktop } = useResponsive();
   const { theme, setTheme } = useTheme();
   const { logout } = useAuth();
   const { t } = useTranslation('common', {
@@ -132,7 +132,6 @@ export const Settings = () => {
       >
         {t('logout')}
       </Button>
-      
     </div>
   );
 };

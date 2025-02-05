@@ -16,14 +16,13 @@ import { useAuth } from '@/hooks';
 import { NavSecondary } from './nav-secondary';
 import { APP_META_DATA, PRIMARY_NAV, SECONDARY_NAV } from '../constants';
 
-
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const { user } = useAuth();
 
   return (
     <Sidebar
       collapsible="icon"
-      className='block sm:hidden'
+      className="block sm:hidden"
       {...props}
     >
       <SidebarHeader>
@@ -31,7 +30,10 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       </SidebarHeader>
       <SidebarContent>
         <NavMain items={PRIMARY_NAV} />
-        <NavSecondary items={SECONDARY_NAV} className="mt-auto" />
+        <NavSecondary
+          items={SECONDARY_NAV}
+          className="mt-auto"
+        />
       </SidebarContent>
       <SidebarFooter>{user && <NavUser user={user} />}</SidebarFooter>
       <SidebarRail />
