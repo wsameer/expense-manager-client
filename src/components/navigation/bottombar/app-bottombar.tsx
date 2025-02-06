@@ -14,7 +14,10 @@ export const AppBottomBar = () => {
   // const month = date.toLocaleString('default', { month: 'short' });
 
   return (
-    <div className="fixed bottom-8 left-1/2 -translate-x-1/2 w-3/4 z-10 block md:hidden">
+    <div
+      className="fixed bottom-8 left-1/2 -translate-x-1/2 w-3/4 z-10 block md:hidden"
+      id="app-bottom-bar"
+    >
       <nav className="flex items-center justify-between rounded-full bg-zinc-800 dark:bg-zinc-800 dark:border dark:border-zinc-900 p-2 shadow-lg">
         {PRIMARY_NAV.slice(0, -1).map((item, index) => {
           const Icon = item.icon;

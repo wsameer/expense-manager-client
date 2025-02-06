@@ -5,6 +5,7 @@ interface CircularProgressBarProps {
   strokeWidth?: number;
   backgroundColor?: string;
   darkModeBackgroundColor?: string;
+  fontSize?: number;
 }
 
 export const CircularProgressBar: React.FC<CircularProgressBarProps> = ({
@@ -12,6 +13,7 @@ export const CircularProgressBar: React.FC<CircularProgressBarProps> = ({
   size = 28,
   strokeColor,
   strokeWidth = 3,
+  fontSize = 9,
 }) => {
   const center = size / 2;
   const radius = (size - strokeWidth * 2) / 2;
@@ -57,7 +59,7 @@ export const CircularProgressBar: React.FC<CircularProgressBarProps> = ({
       <div className="absolute inset-0 flex items-center justify-center">
         <small
           className="text-center dark:text-white"
-          style={{ fontSize: percentage > 99 ? '7px' : '8px' }}
+          style={{ fontSize }}
         >
           {percentage}%
         </small>

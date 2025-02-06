@@ -1,9 +1,9 @@
 import { memo, useState } from 'react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { Calendar, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '../ui/button';
 import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover';
 import { MonthSelector } from './month-selector';
-import { getFullMonthAndDate } from '@/lib/utils';
+import { cn, getFullMonthAndDate } from '@/lib/utils';
 
 type MonthNavigatorProps = {
   currentDate: Date;
@@ -11,10 +11,11 @@ type MonthNavigatorProps = {
   options?: {
     timeJump?: boolean;
   };
+  className?: string;
 };
 
 export const MonthNavigator = memo<MonthNavigatorProps>(
-  ({ currentDate, handleMonthChange, options }) => {
+  ({ currentDate, handleMonthChange, options, className }) => {
     const [monthSelectorOpen, setMonthSelectorOpen] = useState(false);
 
     const handleMonthSelect = (year: number, month: number) => {
@@ -45,11 +46,12 @@ export const MonthNavigator = memo<MonthNavigatorProps>(
     };
 
     return (
-      <div className="flex items-center justify-between">
+      <div className={cn('flex items-between gap-2 px-1 w-full', className)}>
         <Button
-          className="p-0"
+          className="rounded-xl dark:hover:bg-background/40"
           onClick={handlePreviousMonth}
-          variant={'ghost'}
+          variant="ghost"
+          size="icon"
         >
           <ChevronLeft size={20} />
         </Button>
@@ -58,8 +60,9 @@ export const MonthNavigator = memo<MonthNavigatorProps>(
             open={monthSelectorOpen}
             onOpenChange={setMonthSelectorOpen}
           >
-            <PopoverTrigger className="font-bold">
-              {getFullMonthAndDate(currentDate)}
+            <PopoverTrigger className="flex items-center gap-1 font-bold">
+              <Calendar className="h-3.5 w-3.5" />{' '}
+              {getFullMonthAndDate(currentDate, 'short')}
             </PopoverTrigger>
             <PopoverContent>
               <MonthSelector
@@ -69,12 +72,15 @@ export const MonthNavigator = memo<MonthNavigatorProps>(
             </PopoverContent>
           </Popover>
         ) : (
-          <p className="text-l font-bold">{getFullMonthAndDate(currentDate)}</p>
+          <p className="text-l font-bold">
+            {getFullMonthAndDate(currentDate, 'long')}
+          </p>
         )}
         <Button
-          className="p-0"
+          className="rounded-xl dark:hover:bg-background/40"
           onClick={handleNextMonth}
-          variant={'ghost'}
+          variant="ghost"
+          size="icon"
         >
           <ChevronRight size={20} />
         </Button>

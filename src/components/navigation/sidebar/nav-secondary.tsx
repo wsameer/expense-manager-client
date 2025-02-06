@@ -22,6 +22,7 @@ export function NavSecondary({
           {items.map((item) => (
             <SidebarMenuItem key={item.path}>
               <SidebarMenuButton
+                tooltip={item.label}
                 asChild
                 size="sm"
               >

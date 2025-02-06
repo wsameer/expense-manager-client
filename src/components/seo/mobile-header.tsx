@@ -5,7 +5,7 @@ import { ChevronLeft } from 'lucide-react';
 
 type Props = {
   title?: string;
-  showStickyHeader: boolean;
+  showStickyHeader?: boolean;
   backButton?: {
     url?: string;
     title?: string;
@@ -20,7 +20,7 @@ export const MobileHeader = ({
   backButton,
 }: Props) => (
   <header
-    id="mobile-header"
+    id="app-header-mobile"
     className="sticky top-0 h-14 z-50 w-full border-border/40 bg-background/15 backdrop-blur supports-[backdrop-filter]:bg-background/20"
   >
     {showStickyHeader ? (

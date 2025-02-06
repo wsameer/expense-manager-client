@@ -55,7 +55,7 @@ export const MonthSelector: React.FC<MonthSelectorProps> = ({
       selectedYear > currentYear ||
       (selectedYear === currentYear && index > currentMonth)
     ) {
-      return 'bg-zinc-800 text-zinc-400 hover:text-zinc-400 hover:bg-zinc-800 cursor-not-allowed';
+      return 'bg-background/60 text-zinc-400 hover:text-zinc-400 hover:bg-background/60 cursor-not-allowed';
     }
 
     // Current month in current year
@@ -103,7 +103,7 @@ export const MonthSelector: React.FC<MonthSelectorProps> = ({
             key={month}
             onClick={() => handleMonthClick(index)}
             className={`
-              p-2 rounded-lg text-center text-xs transition-colors
+              p-2 border rounded-lg text-center text-xs transition-colors
               ${getMonthStyle(index)}
             `}
           >

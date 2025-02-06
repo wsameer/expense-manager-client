@@ -17,7 +17,7 @@ export const TransactionsRoute = () => {
     <PageLayout title="Transactions">
       <div
         className={cn('grid grid-cols-1 gap-3', {
-          'w-1/3': isDesktop,
+          'w-3/5': isDesktop,
         })}
       >
         <MonthNavigator

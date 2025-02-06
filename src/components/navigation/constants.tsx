@@ -2,7 +2,7 @@ import {
   HouseIcon,
   FileTextIcon,
   CreditCardIcon,
-  Settings,
+  Settings2,
   Wallet2,
   LifeBuoy,
   Send,
@@ -25,7 +25,7 @@ export const PRIMARY_NAV = [
     path: TRANSACTIONS_ROUTE,
   },
   { icon: CreditCardIcon, label: 'Accounts', path: ACCOUNTS_ROUTE },
-  { icon: Settings, label: 'Settings', path: SETTINGS_ROUTE },
+  { icon: Settings2, label: 'Settings', path: SETTINGS_ROUTE },
 ].filter(Boolean) as SideNavigationItem[];
 
 export const APP_META_DATA = {
