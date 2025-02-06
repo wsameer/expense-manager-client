@@ -1,15 +1,11 @@
 import { ReactElement } from 'react';
-import { Button } from '../ui/button';
 import { Link } from '../ui/link';
 import { ChevronLeft } from 'lucide-react';
 
 type Props = {
   title?: string;
   showStickyHeader?: boolean;
-  backButton?: {
-    url?: string;
-    title?: string;
-  };
+  backButtonUrl?: string;
   rightElement?: ReactElement;
 };
 
@@ -17,7 +13,7 @@ export const MobileHeader = ({
   title,
   showStickyHeader,
   rightElement,
-  backButton,
+  backButtonUrl,
 }: Props) => (
   <header
     id="app-header-mobile"
@@ -26,24 +22,13 @@ export const MobileHeader = ({
     {showStickyHeader ? (
       <div className="container flex h-14 max-w-screen-2xl items-center">
         <div className="flex-1 text-left">
-          {backButton && backButton.url && (
-            <Button
-              className="p-0 h-8 rounded-full justify-center hover:bg-transparent"
-              variant="ghost"
-              asChild
+          {backButtonUrl && (
+            <Link
+              to={backButtonUrl}
+              className="gap-0 text-foreground hover:bg-red-900"
             >
-              <Link
-                to={backButton.url}
-                className="gap-0 dark:text-white"
-              >
-                <ChevronLeft className="h-5 w-5" />
-                {backButton.title && (
-                  <small className="text-sm font-medium leading-none">
-                    {backButton.title}
-                  </small>
-                )}
-              </Link>
-            </Button>
+              <ChevronLeft className="h-5 w-5" />
+            </Link>
           )}
         </div>
         <div className="flex text-center">

@@ -46,9 +46,9 @@ export const MonthNavigator = memo<MonthNavigatorProps>(
     };
 
     return (
-      <div className={cn('flex items-between gap-2 px-1 w-full', className)}>
+      <div className={cn('flex items-center px-1 w-full', className)}>
         <Button
-          className="rounded-xl dark:hover:bg-background/40"
+          className="rounded-xl h-8 w-8 dark:hover:bg-background/40"
           onClick={handlePreviousMonth}
           variant="ghost"
           size="icon"
@@ -61,8 +61,10 @@ export const MonthNavigator = memo<MonthNavigatorProps>(
             onOpenChange={setMonthSelectorOpen}
           >
             <PopoverTrigger className="flex items-center gap-1 font-bold">
-              <Calendar className="h-3.5 w-3.5" />{' '}
-              {getFullMonthAndDate(currentDate, 'short')}
+              <Calendar className="h-3.5 w-3.5" />
+              <p className="leading-7 text-sm">
+                {getFullMonthAndDate(currentDate, 'short')}
+              </p>
             </PopoverTrigger>
             <PopoverContent>
               <MonthSelector
@@ -77,7 +79,7 @@ export const MonthNavigator = memo<MonthNavigatorProps>(
           </p>
         )}
         <Button
-          className="rounded-xl dark:hover:bg-background/40"
+          className="rounded-xl h-8 w-8 dark:hover:bg-background/40"
           onClick={handleNextMonth}
           variant="ghost"
           size="icon"

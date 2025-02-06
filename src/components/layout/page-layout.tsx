@@ -1,8 +1,11 @@
 import React, { ReactNode, ReactElement } from 'react';
-import { AppHeader, Head } from '../seo';
+
+import { useResponsive } from '@/hooks';
+
 import { SidebarInset, SidebarProvider } from '../ui/sidebar';
 import { AppSidebar } from '../navigation/sidebar/app-sidebar';
 import { AppBottomBar } from '../navigation/bottombar/app-bottombar';
+import { AppHeader, Head, MobileHeader } from '../seo';
 
 interface PageLayoutProps {
   title?: string;
@@ -11,45 +14,28 @@ interface PageLayoutProps {
   showHeaderText?: boolean;
   showStickyHeader?: boolean;
   rightElement?: ReactElement;
-  backButton?: {
-    url: string;
-    title?: string;
-  };
+  backButtonUrl?: string;
 }
 
-export const PageLayout = React.memo<PageLayoutProps>(
-  ({
-    title,
-    children,
-    subTitle,
-    rightElement,
-    showStickyHeader,
-    showHeaderText = false,
-    backButton,
-  }) => {
-    return (
-      <div className="flex flex-col sm:gap-2 md:pt-0">
-        <SidebarProvider>
-          <Head title={title} />
-          <AppSidebar />
-          <AppBottomBar />
-          <SidebarInset>
-            <AppHeader
-              title={title}
-              subTitle={subTitle}
-              rightElement={rightElement}
-              showStickyHeader={showStickyHeader}
-              backButton={backButton}
-            />
-            <div className="flex flex-1 flex-col gap-4 p-4 pt-0 pb-24">
-              {children}
-            </div>
-          </SidebarInset>
-        </SidebarProvider>
-      </div>
-    );
-  },
-);
+export const PageLayout = React.memo<PageLayoutProps>((props) => {
+  const { title, children } = props;
+  const { isMobile } = useResponsive();
+  return (
+    <div className="flex flex-col sm:gap-2 md:pt-0">
+      <SidebarProvider>
+        <Head title={title} />
+        <AppSidebar />
+        <AppBottomBar />
+        <SidebarInset>
+          {isMobile ? <MobileHeader {...props} /> : <AppHeader {...props} />}
+          <div className="flex flex-1 flex-col gap-4 p-4 pt-0 pb-24">
+            {children}
+          </div>
+        </SidebarInset>
+      </SidebarProvider>
+    </div>
+  );
+});
 
 // export const PageLayout = React.memo<PageLayoutProps>(
 //   ({

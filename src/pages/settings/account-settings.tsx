@@ -5,11 +5,9 @@ export const AccountSettingsRoute = () => {
   return (
     <PageLayout
       title="Accounts"
-      showHeaderText={true}
-      backButton={{
-        url: SETTINGS_ROUTE,
-        title: 'Settings',
-      }}
+      backButtonUrl={SETTINGS_ROUTE}
+      showHeaderText
+      showStickyHeader
     >
       <h1>Hello!</h1>
     </PageLayout>

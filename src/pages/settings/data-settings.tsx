@@ -6,11 +6,9 @@ export const DataSettingsRoute = () => {
   return (
     <PageLayout
       title="My Data"
-      showHeaderText={true}
-      backButton={{
-        url: SETTINGS_ROUTE,
-        title: 'Settings',
-      }}
+      backButtonUrl={SETTINGS_ROUTE}
+      showHeaderText
+      showStickyHeader
     >
       <DataSettings />
     </PageLayout>

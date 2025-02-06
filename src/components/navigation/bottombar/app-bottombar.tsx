@@ -8,11 +8,6 @@ import { NavItem } from './nav-item';
 
 export const AppBottomBar = () => {
   const navigate = useNavigate();
-
-  // const date = new Date();
-  // const day = date.getDate().toString().padStart(2, '0');
-  // const month = date.toLocaleString('default', { month: 'short' });
-
   return (
     <div
       className="fixed bottom-8 left-1/2 -translate-x-1/2 w-3/4 z-10 block md:hidden"

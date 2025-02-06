@@ -6,11 +6,9 @@ export const ExpenseCategoryRoute = () => {
   return (
     <PageLayout
       title="Expense Categories"
-      showHeaderText={true}
-      backButton={{
-        url: SETTINGS_ROUTE,
-        title: 'Settings',
-      }}
+      backButtonUrl={SETTINGS_ROUTE}
+      showHeaderText
+      showStickyHeader
     >
       <ExpenseCategoryList />
     </PageLayout>

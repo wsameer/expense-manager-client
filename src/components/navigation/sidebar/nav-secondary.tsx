@@ -25,6 +25,7 @@ export function NavSecondary({
                 tooltip={item.label}
                 asChild
                 size="sm"
+                isActive={location.pathname === item.path}
               >
                 <NavLink to={item.path}>
                   {item.icon && <item.icon />}

@@ -20,6 +20,11 @@ export const TransactionsRoute = () => {
           'w-3/5': isDesktop,
         })}
       >
+        <div className="flex-[1] flex flex-col min-w-0">
+          <h2 className="text-3xl font-normal text-foreground tracking-tight">
+            Transactions
+          </h2>
+        </div>
         <MonthNavigator
           currentDate={currentDate}
           handleMonthChange={handleMonthChange}
