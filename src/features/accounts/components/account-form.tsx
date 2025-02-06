@@ -134,6 +134,7 @@ export const AccountForm = ({
                 <Input
                   placeholder="Account Name"
                   {...field}
+                  className="text-sm"
                 />
               </div>
               <FormMessage role="alert" />
@@ -257,7 +258,10 @@ export const AccountForm = ({
                 >
                   {t('balance')}
                 </FormLabel>
-                <Input {...field} />
+                <Input
+                  {...field}
+                  className="text-sm"
+                />
               </div>
               <FormMessage role="alert" />
             </FormItem>
@@ -276,7 +280,10 @@ export const AccountForm = ({
                 >
                   {t('description')}
                 </FormLabel>
-                <Input {...field} />
+                <Input
+                  {...field}
+                  className="text-sm"
+                />
               </div>
               <FormMessage role="alert" />
             </FormItem>
@@ -286,9 +293,10 @@ export const AccountForm = ({
         <div className=""></div>
 
         <Button
-          className="w-full"
-          variant="destructive"
           type="submit"
+          className="w-full rounded-full text-md"
+          size="lg"
+          variant="destructive"
           disabled={isCreating || isUpdating}
         >
           {editMode ? t('save-changes') : t('create-account')}

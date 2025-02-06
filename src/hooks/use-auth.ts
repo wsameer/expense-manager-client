@@ -7,7 +7,6 @@ import {
   LOGIN_API,
   LOGOUT_API,
   REGISTRATION_API,
-  TOKEN_KEY,
 } from '@/lib/constants';
 import { LoginResponse } from '@/features/auth/types';
 import { User } from '@/types';
@@ -50,9 +49,8 @@ export const useAuth = () => {
       );
 
       if (response.data.success && response.data.data) {
-        const { name, email, token } = response.data.data;
+        const { name, email } = response.data.data;
         setUser({ name, email });
-        localStorage.setItem(TOKEN_KEY, token);
         return true;
       } else {
         showErrorToast('There was a problem with your request.');
@@ -111,7 +109,6 @@ export const useAuth = () => {
     const { data } = await axiosInstance.delete(LOGOUT_API);
     if (data.success) {
       setUser(null);
-      localStorage.removeItem(TOKEN_KEY);
       toast({
         variant: 'default',
         description: 'Logout successful',

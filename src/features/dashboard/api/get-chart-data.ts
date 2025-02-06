@@ -40,8 +40,15 @@ export const useChartData = (month: string, type: TransactionType) => {
 
   const refetchPieChart = useCallback(() => mutate(), [mutate]);
 
+  const parseTransactions = (transactions: PieChartData[]): PieChartData[] => {
+    return transactions.map((transaction) => ({
+      ...transaction,
+      totalAmount: Number(transaction.totalAmount),
+    }));
+  };
+
   return {
-    pieChartData: data,
+    pieChartData: parseTransactions(data ?? []),
     isLoading: !error && !data,
     error,
     refetchPieChart,

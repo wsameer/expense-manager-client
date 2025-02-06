@@ -2,6 +2,7 @@
   "category-name": "Category Name",
   "subcategory-name": "Subcategory Name",
   "description": "Description",
+  "description-hint": "Type your description here",
   "save-changes": "Save changes",
   "create": "Create",
   "expense": {

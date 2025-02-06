@@ -24,7 +24,7 @@ export const ListItem = forwardRef<HTMLButtonElement, Props>(
       ref={ref}
       className={cn(
         'flex h-10 items-center justify-between py-1 px-4',
-        'border-t border-zinc-200 dark:border-zinc-900',
+        'border-t border-background',
         'cursor-pointer first:border-t-0',
         variantStyles[variant],
       )}
@@ -42,7 +42,7 @@ export const ListItem = forwardRef<HTMLButtonElement, Props>(
           <small
             className={cn('dark:text-white text-sm font-medium leading-none', {
               'ml-3': icon,
-              'text-zinc-900': variant === 'default',
+              'text-zinc-800': variant === 'default',
               'text-red-600': variant === 'danger',
             })}
           >

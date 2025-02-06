@@ -10,7 +10,7 @@ export const ListGroup = React.memo<Props>(
   ({ title, rightSideElement, children }) => {
     return (
       <div>
-        <h2 className="text-sm font-medium text-zinc-500 dark:text-zinc-400 mb-1">
+        <h2 className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">
           <div className="flex justify-between">
             <p className="text-small">{title}</p>
             {rightSideElement}

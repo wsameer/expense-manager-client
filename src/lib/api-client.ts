@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { LOGIN_ROUTE } from '@/router/routes';
 import axios from 'axios';
-import { API_BASE_URL, TOKEN_KEY, USER_KEY } from './constants';
+import { API_BASE_URL, USER_KEY } from './constants';
 
 const snakeToCamel = (str: string): string =>
   str.replace(/([-_][a-z])/g, (group) =>
@@ -43,10 +43,6 @@ const axiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem(TOKEN_KEY);
-    if (token) {
-      config.headers['Authorization'] = `Bearer ${token}`;
-    }
     if (config.data) {
       config.data = convertKeys(config.data, camelToSnake);
     }
@@ -73,7 +69,6 @@ axiosInstance.interceptors.response.use(
   (error) => {
     if (error.response?.status === 401) {
       localStorage.removeItem(USER_KEY);
-      localStorage.removeItem(TOKEN_KEY);
       const searchParams = new URLSearchParams();
       const redirectTo = searchParams.get('redirectTo');
       window.location.href = `${LOGIN_ROUTE}?redirectTo=${redirectTo}`;
