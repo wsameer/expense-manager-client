@@ -20,7 +20,7 @@ export function NavSecondary({
       <SidebarGroupContent>
         <SidebarMenu>
           {items.map((item) => (
-            <SidebarMenuItem key={item.path}>
+            <SidebarMenuItem key={item.label}>
               <SidebarMenuButton
                 tooltip={item.label}
                 asChild

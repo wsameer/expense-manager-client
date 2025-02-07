@@ -15,7 +15,7 @@ export const NavMain = ({ items }: { items: SideNavigationItem[] }) => {
     <SidebarGroup>
       <SidebarMenu>
         {items.map((item) => (
-          <SidebarMenuItem key={item.path}>
+          <SidebarMenuItem key={item.label}>
             <SidebarMenuButton
               tooltip={item.label}
               isActive={location.pathname === item.path}

@@ -16,7 +16,7 @@ export const DashboardRoute = () => {
   };
 
   return (
-    <PageLayout title={user?.name}>
+    <PageLayout title="Dashboard">
       <div
         className={cn('grid grid-cols-1 gap-3', {
           'w-3/4': isDesktop,

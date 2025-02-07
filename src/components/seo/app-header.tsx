@@ -4,14 +4,6 @@ import { Input } from '@/components/ui/input';
 import { ModeToggle } from '@/features/theme/mode-toggle';
 import { SidebarTrigger } from '../ui/sidebar';
 import { Separator } from '../ui/separator';
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from '../ui/breadcrumb';
 
 type Props = {
   title?: string;
@@ -36,19 +28,12 @@ export const AppHeader = (props: Props) => {
           orientation="vertical"
           className="h-4"
         />
-        <Breadcrumb>
-          <BreadcrumbList>
-            <BreadcrumbItem>
-              <BreadcrumbLink href="#">
-                Building Your Application
-              </BreadcrumbLink>
-            </BreadcrumbItem>
-            <BreadcrumbSeparator />
-            <BreadcrumbItem>
-              <BreadcrumbPage>Data Fetching</BreadcrumbPage>
-            </BreadcrumbItem>
-          </BreadcrumbList>
-        </Breadcrumb>
+        <div className="flex flex-col min-w-0 pl-2">
+          <h2 className="text-2xl font-medium tracking-tight truncate max-w-[180px] sm:max-w-[240px]">
+            {props.title}
+          </h2>
+          <small className="text-foreground/50">{props.subTitle}</small>
+        </div>
       </div>
 
       <div className="flex items-center gap-4">
