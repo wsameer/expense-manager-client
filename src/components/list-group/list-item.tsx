@@ -14,7 +14,7 @@ type Props = {
 };
 
 const variantStyles: Record<Variant, string> = {
-  default: 'bg-white dark:bg-zinc-800 dark:hover:bg-zinc-900',
+  default: 'bg-background dark:bg-zinc-800 dark:hover:bg-zinc-900',
   danger: 'bg-red hover:bg-red-100 dark:bg-red-900 dark:hover:bg-red-950',
 };
 
@@ -24,7 +24,7 @@ export const ListItem = forwardRef<HTMLButtonElement, Props>(
       ref={ref}
       className={cn(
         'flex h-10 items-center justify-between py-1 px-4',
-        'border-t border-background',
+        'border-t',
         'cursor-pointer first:border-t-0',
         variantStyles[variant],
       )}
