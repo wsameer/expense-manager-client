@@ -1,4 +1,4 @@
-import { Github } from 'lucide-react';
+import { Github, ScanFace } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 import { Head } from '@/components/seo/head';
@@ -7,6 +7,8 @@ import { Link } from '@/components/ui/link';
 import { LOGIN_ROUTE, DASHBOARD_ROUTE, APP_ROUTE } from '@/router/routes';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '@/hooks';
+import { BrandLogo } from '@/components/navigation/brand-logo';
+import React from 'react';
 
 export const Welcome = () => {
   const navigate = useNavigate();
@@ -22,51 +24,91 @@ export const Welcome = () => {
   };
 
   return (
-    <div className="flex min-h-screen w-full flex-col bg-muted/40">
-      <Head title={t('welcome.title')} />
-      <main className="flex h-screen items-center bg-white dark:bg-zinc-900">
-        <div className="mx-auto max-w-7xl px-4 py-12 text-center sm:px-6 lg:px-8 lg:py-16">
-          <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
-            {t('welcome.app-name')}
-          </h1>
-          <p className="mt-2 px-6 sm:px-2">{t('welcome.app-description')}</p>
-          <div className="mt-8 flex justify-center">
-            {user ? (
-              <Button
-                variant="default"
-                asChild
-              >
-                <Link to={DASHBOARD_ROUTE}>{t('welcome.dashboard')}</Link>
-              </Button>
-            ) : (
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+    <div className="grid min-h-screen place-items-center bg-background">
+      <div className="relative flex h-screen w-full max-w-[400px] flex-col justify-between bg-background">
+        <div className="flex flex-1 flex-col px-6 mt-20">
+          <Head />
+
+          <main className="flex flex-1 flex-col gap-24 md:gap-12 md:justify-center">
+            <div className="">
+              <BrandLogo size="large" />
+            </div>
+
+            <section className="space-y-8">
+              <h1 className="text-5xl font-light leading-tight text-zinc-900">
+                {'Track.\nSave.\nGrow.\nEffortlessly.'
+                  .split('\n')
+                  .map((text, i) => (
+                    <React.Fragment key={i}>
+                      {text}
+                      <br />
+                    </React.Fragment>
+                  ))}
+              </h1>
+
+              <p className="text-2xl font-light text-zinc-400">
+                Welcome to new era of{' '}
+                <span className="block">managing your finances</span>
+              </p>
+            </section>
+
+            <div className="absolute p-6 bottom-6 left-0 right-0 space-y-4 bg-background md:relative md:px-0">
+              {user ? (
                 <Button
                   variant="default"
                   asChild
                 >
-                  <Link to={LOGIN_ROUTE}>{t('welcome.login')}</Link>
+                  <Link to={DASHBOARD_ROUTE}>{t('welcome.dashboard')}</Link>
                 </Button>
-                <Button
-                  variant="destructive"
-                  onClick={handleStart}
-                >
-                  {t('welcome.get-started')}
-                </Button>
-                <a
-                  href="https://github.com/wsameer/budget-tracker"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <Button variant="outline">
-                    <Github className="mr-2 h-4 w-4" />{' '}
-                    {t('welcome.github-repo')}
-                  </Button>
-                </a>
-              </div>
-            )}
-          </div>
+              ) : (
+                <>
+                  <div className="flex gap-4">
+                    <Button
+                      variant="default"
+                      className="flex-1 rounded-full hover:text-background h-14 text-lg"
+                      asChild
+                    >
+                      <Link to={LOGIN_ROUTE}>{t('welcome.login')}</Link>
+                    </Button>
+                    <Button
+                      variant="destructive"
+                      size="icon"
+                      className="rounded-full h-14 w-14"
+                    >
+                      <ScanFace className="h-6 w-6" />
+                      <span className="sr-only">Face ID</span>
+                    </Button>
+                  </div>
+                  <div className="flex gap-4">
+                    <a
+                      href="https://github.com/wsameer/expense-manager-server"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      <Button
+                        size="icon"
+                        className="rounded-full h-14 w-14"
+                      >
+                        <Github className="h-6 w-6" />
+                        <span className="sr-only">
+                          {t('welcome.github-repo')}
+                        </span>
+                      </Button>
+                    </a>
+                    <Button
+                      className="flex-1 rounded-full h-14 text-lg"
+                      variant="destructive"
+                      onClick={handleStart}
+                    >
+                      {t('welcome.get-started')}
+                    </Button>
+                  </div>
+                </>
+              )}
+            </div>
+          </main>
         </div>
-      </main>
+      </div>
     </div>
   );
 };
