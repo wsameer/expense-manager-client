@@ -25,17 +25,18 @@ export const AuthLayout = ({ title, children }: LayoutProps) => {
   }, [user, navigate]);
 
   return (
-    <>
-      <Head title={title} />
-      <div className="flex min-h-screen flex-col justify-center bg-zinc-50 dark:bg-zinc-800 py-12 sm:px-6 lg:px-8">
-        <div className="sm:mx-auto sm:w-full sm:max-w-md">
-          <div className="flex justify-center">
-            <BrandLogo size="large" />
-          </div>
-        </div>
+    <div className="flex min-h-screen items-center justify-center bg-background">
+      <div className="w-full max-w-[400px] space-y-6">
+        <div className="flex flex-1 flex-col px-6 pt-6 gap-10">
+          <Head title={title} />
 
-        <div className="mt-8 px-4">{children}</div>
+          <header className="flex justify-between items-center">
+            <BrandLogo size="large" />
+          </header>
+
+          <main className="flex flex-1 flex-col gap-8">{children}</main>
+        </div>
       </div>
-    </>
+    </div>
   );
 };

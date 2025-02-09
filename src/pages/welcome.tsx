@@ -4,7 +4,12 @@ import { useNavigate } from 'react-router-dom';
 import { Head } from '@/components/seo/head';
 import { Button } from '@/components/ui/button';
 import { Link } from '@/components/ui/link';
-import { LOGIN_ROUTE, DASHBOARD_ROUTE, APP_ROUTE } from '@/router/routes';
+import {
+  LOGIN_ROUTE,
+  DASHBOARD_ROUTE,
+  APP_ROUTE,
+  REGISTER_ROUTE,
+} from '@/router/routes';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '@/hooks';
 import { BrandLogo } from '@/components/navigation/brand-logo';
@@ -19,7 +24,7 @@ export const Welcome = () => {
     if (user) {
       navigate(APP_ROUTE);
     } else {
-      navigate(LOGIN_ROUTE);
+      navigate(REGISTER_ROUTE);
     }
   };
 
@@ -34,7 +39,7 @@ export const Welcome = () => {
               <BrandLogo size="large" />
             </div>
 
-            <section className="space-y-8">
+            <section className="space-y-4">
               <h1 className="text-5xl font-light leading-tight text-zinc-900">
                 {'Track.\nSave.\nGrow.\nEffortlessly.'
                   .split('\n')
@@ -46,9 +51,8 @@ export const Welcome = () => {
                   ))}
               </h1>
 
-              <p className="text-2xl font-light text-zinc-400">
-                Welcome to new era of{' '}
-                <span className="block">managing your finances</span>
+              <p className="text-xl font-light text-zinc-400">
+                Welcome to new era of managing your expenses
               </p>
             </section>
 
@@ -65,7 +69,7 @@ export const Welcome = () => {
                   <div className="flex gap-4">
                     <Button
                       variant="default"
-                      className="flex-1 rounded-full hover:text-background h-14 text-lg"
+                      className="flex-1 rounded-full h-12 text-lg"
                       asChild
                     >
                       <Link to={LOGIN_ROUTE}>{t('welcome.login')}</Link>
@@ -73,7 +77,7 @@ export const Welcome = () => {
                     <Button
                       variant="destructive"
                       size="icon"
-                      className="rounded-full h-14 w-14"
+                      className="rounded-full h-12 w-12"
                     >
                       <ScanFace className="h-6 w-6" />
                       <span className="sr-only">Face ID</span>
@@ -87,7 +91,7 @@ export const Welcome = () => {
                     >
                       <Button
                         size="icon"
-                        className="rounded-full h-14 w-14"
+                        className="rounded-full h-12 w-12"
                       >
                         <Github className="h-6 w-6" />
                         <span className="sr-only">
@@ -96,7 +100,7 @@ export const Welcome = () => {
                       </Button>
                     </a>
                     <Button
-                      className="flex-1 rounded-full h-14 text-lg"
+                      className="flex-1 rounded-full h-12 text-lg"
                       variant="destructive"
                       onClick={handleStart}
                     >

@@ -1,16 +1,8 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslation } from 'react-i18next';
-import { useSearchParams } from 'react-router-dom';
 import { z } from 'zod';
 
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
 import {
   Form,
   FormControl,
@@ -20,10 +12,11 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { FORGOT_PASSWORD, REGISTER_ROUTE } from '@/router/routes';
 import { Button } from '@/components/ui/button';
 import { Link } from '@/components/ui/link';
 import { useAuth } from '@/hooks';
+import { Checkbox } from '@/components/ui/checkbox';
+import { FORGOT_PASSWORD } from '@/router/routes';
 
 type LoginFormProps = {
   onSuccess: () => void;
@@ -32,6 +25,7 @@ type LoginFormProps = {
 const loginFormSchema = z.object({
   email: z.string().min(8, 'Email is required').email('Invalid email address'),
   password: z.string().min(8, 'Password must be at least 8 characters'),
+  rememberMe: z.boolean().default(false).optional(),
 });
 
 export type UserLoginParameters = z.infer<typeof loginFormSchema>;
@@ -40,14 +34,12 @@ export const LoginForm = ({ onSuccess }: LoginFormProps) => {
   const { t } = useTranslation('auth', { keyPrefix: 'forms' });
   const { login } = useAuth();
 
-  const [searchParams] = useSearchParams();
-  const redirectTo = searchParams.get('redirectTo');
-
   const form = useForm<UserLoginParameters>({
     resolver: zodResolver(loginFormSchema),
     defaultValues: {
       email: '',
       password: '',
+      rememberMe: false,
     },
   });
 
@@ -57,83 +49,81 @@ export const LoginForm = ({ onSuccess }: LoginFormProps) => {
   };
 
   return (
-    <Card className="mx-auto max-w-sm">
-      <CardHeader>
-        <CardTitle className="text-2xl">{t('login')}</CardTitle>
-        <CardDescription>{t('your-email-address')}</CardDescription>
-      </CardHeader>
-      <CardContent>
-        <Form {...form}>
-          <form
-            id="login-form"
-            className="grid gap-4"
-            onSubmit={form.handleSubmit(onSubmit)}
-          >
-            <FormField
-              control={form.control}
-              name="email"
-              render={({ field }) => (
-                <FormItem className="grid gap-2">
-                  <FormLabel htmlFor="email">{t('email')}</FormLabel>
-                  <FormControl>
-                    <Input
-                      placeholder={t('email-placeholder')}
-                      autoComplete="username"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+    <Form {...form}>
+      <form
+        id="login-form"
+        className="grid gap-4"
+        onSubmit={form.handleSubmit(onSubmit)}
+      >
+        <FormField
+          control={form.control}
+          name="email"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel htmlFor="email">{t('email')}</FormLabel>
+              <FormControl>
+                <Input
+                  placeholder={t('email-placeholder')}
+                  autoComplete="username"
+                  {...field}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
 
-            <FormField
-              control={form.control}
-              name="password"
-              render={({ field }) => (
-                <FormItem className="grid gap-2">
-                  <div className="flex items-center">
-                    <FormLabel htmlFor="password">{t('password')}</FormLabel>
-                    <Button
-                      variant="link"
-                      className="ml-auto inline-block text-sm underline"
-                      asChild
-                    >
-                      <Link to={FORGOT_PASSWORD}>
-                        {t('forgot-your-password')}
-                      </Link>
-                    </Button>
-                  </div>
-                  <FormControl>
-                    <Input
-                      type="password"
-                      placeholder="*******"
-                      autoComplete="current-password"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <Button
-              type="submit"
-              className="w-full"
-            >
-              {t('login')}
-            </Button>
-          </form>
-        </Form>
-        <div className="mt-4 text-center text-sm">
-          {t('dont-have-an-account')}{' '}
+        <FormField
+          control={form.control}
+          name="password"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel htmlFor="password">{t('password')}</FormLabel>
+              <FormControl>
+                <Input
+                  type="password"
+                  placeholder="*******"
+                  autoComplete="current-password"
+                  {...field}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <div className="flex items-center justify-between">
+          <FormField
+            control={form.control}
+            name="rememberMe"
+            render={({ field }) => (
+              <FormItem className="flex flex-row items-center space-x-2 space-y-0">
+                <FormControl>
+                  <Checkbox
+                    checked={field.value}
+                    onCheckedChange={field.onChange}
+                  />
+                </FormControl>
+                <FormLabel className="text-sm font-normal">
+                  {t('remember-me')}
+                </FormLabel>
+              </FormItem>
+            )}
+          />
           <Link
-            to={`${REGISTER_ROUTE}${redirectTo ? `?redirectTo=${encodeURIComponent(redirectTo)}` : ''}`}
-            className="underline dark:text-white"
+            to={FORGOT_PASSWORD}
+            className="text-sm text-zinc-500 hover:text-zinc-800"
           >
-            {t('sign-up')}
+            {t('forgot-your-password')}
           </Link>
         </div>
-      </CardContent>
-    </Card>
+        <Button
+          type="submit"
+          className="w-full rounded-full h-12 text-base mt-4"
+        >
+          {t('login')}
+        </Button>
+      </form>
+    </Form>
   );
 };

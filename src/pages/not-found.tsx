@@ -11,7 +11,7 @@ export const NotFoundRoute = () => {
         This page doesn't exist
       </p>
       <Button
-        variant="outline"
+        className="h-12 rounded-full w-3/4"
         asChild
       >
         <Link
