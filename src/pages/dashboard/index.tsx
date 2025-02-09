@@ -34,7 +34,7 @@ export const DashboardRoute = () => {
           </div>
 
           {/* Right Side: Month Navigator (50%) */}
-          <div className="flex-none flex justify-end overflow-hidden whitespace-nowrap bg-white border shadow-sm dark:bg-zinc-800 rounded-2xl py-1">
+          <div className="flex-none flex justify-end overflow-hidden whitespace-nowrap bg-white border shadow-sm dark:bg-zinc-800 rounded-2xl py-0.5">
             <MonthNavigator
               currentDate={currentDate}
               handleMonthChange={handleMonthChange}

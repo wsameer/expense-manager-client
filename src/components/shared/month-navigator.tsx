@@ -87,7 +87,7 @@ export const MonthNavigator = memo<MonthNavigatorProps>(
     return (
       <div className={cn('flex items-center px-1 w-full', className)}>
         <Button
-          className="rounded-xl h-8 w-8 dark:hover:bg-background/40"
+          className="rounded-xl h-6 w-6 dark:hover:bg-background/40"
           onClick={handlePreviousMonth}
           variant="ghost"
           size="icon"
@@ -118,7 +118,7 @@ export const MonthNavigator = memo<MonthNavigatorProps>(
           </p>
         )}
         <Button
-          className="rounded-xl h-8 w-8 dark:hover:bg-background/40"
+          className="rounded-xl h-6 w-6 dark:hover:bg-background/40"
           onClick={handleNextMonth}
           variant="ghost"
           size="icon"
