@@ -13,7 +13,8 @@ export const MobileHeader = ({ title, rightElement, backButtonUrl }: Props) => {
   return (
     <header
       id="app-header-mobile"
-      className="sticky top-0 h-14 z-50 w-full border-border/40 bg-background/15 backdrop-blur supports-[backdrop-filter]:bg-background/20"
+      // className="sticky top-0 h-14 z-50 w-full border-border/40 bg-background/15 backdrop-blur supports-[backdrop-filter]:bg-background/20"
+      className="sticky top-0 h-14 z-50 w-full bg-zinc-600"
     >
       <div className="container flex h-14 max-w-screen-2xl items-center">
         <div className="flex-1 text-left">

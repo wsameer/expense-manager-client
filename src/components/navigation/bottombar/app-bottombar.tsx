@@ -8,9 +8,31 @@ import { NavItem } from './nav-item';
 
 export const AppBottomBar = () => {
   const navigate = useNavigate();
+
+  const [isVisible, setIsVisible] = React.useState(true);
+  const [lastScrollY, setLastScrollY] = React.useState(0);
+
+  React.useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > lastScrollY) {
+        setIsVisible(false);
+      } else {
+        setIsVisible(true);
+      }
+      setLastScrollY(window.scrollY);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [lastScrollY]);
+
   return (
     <div
-      className="fixed bottom-8 left-1/2 -translate-x-1/2 w-3/4 z-10 block md:hidden"
+      className={`fixed bottom-8 left-1/2 w-3/4 -translate-x-1/2 z-10 block md:hidden transition-all duration-300 ease-in-out ${
+        isVisible
+          ? 'translate-y-0 opacity-100'
+          : 'translate-y-full opacity-0 pointer-events-none'
+      }`}
       id="app-bottom-bar"
     >
       <nav className="flex items-center justify-between rounded-full bg-zinc-800 dark:bg-zinc-800 dark:border dark:border-zinc-900 p-2 shadow-lg">
