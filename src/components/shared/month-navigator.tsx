@@ -1,14 +1,9 @@
 import { memo, useState } from 'react';
-import {
-  CalendarArrowDown,
-  CalendarArrowUp,
-  ChevronLeft,
-  ChevronRight,
-} from 'lucide-react';
+import { Calendar, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '../ui/button';
 import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover';
 import { MonthSelector } from './month-selector';
-import { getFullMonthAndDate } from '@/lib/utils';
+import { cn, getFullMonthAndDate } from '@/lib/utils';
 
 type MonthNavigatorProps = {
   currentDate: Date;
@@ -16,10 +11,11 @@ type MonthNavigatorProps = {
   options?: {
     timeJump?: boolean;
   };
+  className?: string;
 };
 
 export const MonthNavigator = memo<MonthNavigatorProps>(
-  ({ currentDate, handleMonthChange, options }) => {
+  ({ currentDate, handleMonthChange, options, className }) => {
     const [monthSelectorOpen, setMonthSelectorOpen] = useState(false);
 
     const handleMonthSelect = (year: number, month: number) => {
@@ -89,55 +85,46 @@ export const MonthNavigator = memo<MonthNavigatorProps>(
     // );
 
     return (
-      <div className="grid grid-flow-row auto-rows-max">
-        <div className="flex items-center justify-between">
-          <Button
-            className="p-0"
-            onClick={handlePreviousMonth}
-            variant={'ghost'}
+      <div className={cn('flex items-center px-1 w-full', className)}>
+        <Button
+          className="rounded-xl h-6 w-6 dark:hover:bg-background/40"
+          onClick={handlePreviousMonth}
+          variant="ghost"
+          size="icon"
+        >
+          <ChevronLeft size={20} />
+        </Button>
+        {options?.timeJump ? (
+          <Popover
+            open={monthSelectorOpen}
+            onOpenChange={setMonthSelectorOpen}
           >
-            <ChevronLeft size={20} />
-          </Button>
-          {options?.timeJump ? (
-            <Popover
-              open={monthSelectorOpen}
-              onOpenChange={setMonthSelectorOpen}
-            >
-              <PopoverTrigger className="font-bold">
-                <div className="flex gap-1 items-center p-2">
-                  {monthSelectorOpen ? (
-                    <CalendarArrowUp className="h-4 w-4" />
-                  ) : (
-                    <CalendarArrowDown className="h-4 w-4" />
-                  )}
-                  <span className="font-light text-lg">
-                    {currentDate.toLocaleDateString('en-CA', {
-                      month: 'short',
-                      year: 'numeric',
-                    })}
-                  </span>
-                </div>
-              </PopoverTrigger>
-              <PopoverContent>
-                <MonthSelector
-                  currentDate={currentDate}
-                  onSelectMonth={handleMonthSelect}
-                />
-              </PopoverContent>
-            </Popover>
-          ) : (
-            <p className="text-l font-bold">
-              {getFullMonthAndDate(currentDate)}
-            </p>
-          )}
-          <Button
-            className="p-0"
-            onClick={handleNextMonth}
-            variant={'ghost'}
-          >
-            <ChevronRight size={20} />
-          </Button>
-        </div>
+            <PopoverTrigger className="flex items-center gap-1 font-bold">
+              <Calendar className="h-3.5 w-3.5" />
+              <p className="leading-7 text-sm">
+                {getFullMonthAndDate(currentDate, 'short')}
+              </p>
+            </PopoverTrigger>
+            <PopoverContent>
+              <MonthSelector
+                currentDate={currentDate}
+                onSelectMonth={handleMonthSelect}
+              />
+            </PopoverContent>
+          </Popover>
+        ) : (
+          <p className="text-l font-bold">
+            {getFullMonthAndDate(currentDate, 'long')}
+          </p>
+        )}
+        <Button
+          className="rounded-xl h-6 w-6 dark:hover:bg-background/40"
+          onClick={handleNextMonth}
+          variant="ghost"
+          size="icon"
+        >
+          <ChevronRight size={20} />
+        </Button>
       </div>
     );
   },

@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 
 import { toast } from '@/hooks';
 import { ACCOUNTS_ROUTE } from '@/router/routes';
-import { PageLayout } from '@/components/layout';
+import { PageLayout } from '@/components/layout/page-layout';
 import { useConfirmDialog } from '@/components/ui/confirmable';
 import { Button } from '@/components/ui/button';
 import { useDeleteAccount } from '@/features/accounts/api/delete-account';
@@ -49,8 +49,7 @@ export const AccountDetailsRoute = () => {
     return (
       <PageLayout
         title={t('account:invalid-request')}
-        showHeaderText={true}
-        backButton={{ url: ACCOUNTS_ROUTE }}
+        backButtonUrl={ACCOUNTS_ROUTE}
       >
         <div className="grid justify-center">
           <p className="text-xl text-muted-foreground mt-72">
@@ -65,8 +64,7 @@ export const AccountDetailsRoute = () => {
     return (
       <PageLayout
         title={t('account:invalid-request')}
-        showHeaderText={true}
-        backButton={{ url: ACCOUNTS_ROUTE }}
+        backButtonUrl={ACCOUNTS_ROUTE}
       >
         <div className="grid justify-center">
           <p className="text-xl text-muted-foreground mt-72">
@@ -80,10 +78,7 @@ export const AccountDetailsRoute = () => {
   return (
     <PageLayout
       title={account.name}
-      showHeaderText={true}
-      backButton={{
-        url: ACCOUNTS_ROUTE,
-      }}
+      backButtonUrl={ACCOUNTS_ROUTE}
       rightElement={
         <div className="d-flex">
           <Button

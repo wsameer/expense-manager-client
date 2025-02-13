@@ -16,7 +16,7 @@ export const ListGroup = React.memo<Props>(
             {rightSideElement}
           </div>
         </h2>
-        <div className="bg-white border dark:bg-zinc-800 rounded-xl overflow-hidden">
+        <div className="bg-background border dark:bg-zinc-800 rounded-xl overflow-hidden">
           {children}
         </div>
       </div>

@@ -92,7 +92,7 @@ export const ExpenseCategoryList: React.FC = () => {
       <Button
         className="flex justify-center content-center gap-2 mb-3 w-full rounded-xl"
         variant="dashed"
-        size="sm"
+        size="lg"
         onClick={() => {
           setSelectedCategory(undefined);
           setOpenCategoryModal(true);
@@ -112,7 +112,7 @@ export const ExpenseCategoryList: React.FC = () => {
           return (
             <Collapsible
               key={category.id}
-              className="bg-white border dark:bg-zinc-800 rounded-xl overflow-hidden w-full"
+              className="bg-background border dark:bg-zinc-800 rounded-xl overflow-hidden w-full"
               open={isCollapsed}
               onOpenChange={() =>
                 category.subcategories.length > 0 && toggleCategory(category.id)

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { PageLayout } from '@/components/layout';
+import { PageLayout } from '@/components/layout/page-layout';
 import { useResponsive } from '@/hooks';
 import { cn } from '@/lib/utils';
 import { MonthNavigator } from '@/components/shared/month-navigator';
@@ -17,9 +17,14 @@ export const TransactionsRoute = () => {
     <PageLayout title="Transactions">
       <div
         className={cn('grid grid-cols-1 gap-3', {
-          'w-1/3': isDesktop,
+          'w-3/5': isDesktop,
         })}
       >
+        <div className="flex-[1] flex flex-col min-w-0">
+          <h2 className="text-3xl font-normal text-foreground tracking-tight">
+            Transactions
+          </h2>
+        </div>
         <MonthNavigator
           currentDate={currentDate}
           handleMonthChange={handleMonthChange}

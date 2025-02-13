@@ -9,7 +9,11 @@ import { TransactionType } from '@/types';
 
 const fetchChartData = async (url: string) => {
   const res = await axiosInstance.get<PieChartData[]>(url);
-  const sortedCategories = res.data.sort(
+  const transformedData = res.data.map((data) => ({
+    ...data,
+    totalAmount: Number(data.totalAmount),
+  }));
+  const sortedCategories = transformedData.sort(
     (a, b) => b.totalAmount - a.totalAmount,
   );
   return sortedCategories;

@@ -5,8 +5,14 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export function getFullMonthAndDate(date: Date): string {
-  return date.toLocaleDateString('en-CA', { month: 'long', year: 'numeric' });
+export function getFullMonthAndDate(
+  date: Date,
+  monthFormat: 'short' | 'long',
+): string {
+  return date.toLocaleDateString('en-CA', {
+    month: monthFormat,
+    year: 'numeric',
+  });
 }
 
 export const getInitials = (name: string): string => {

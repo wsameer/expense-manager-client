@@ -177,7 +177,7 @@ export const TransactionList = ({ currentDate }: Props) => {
               day: 'numeric',
             })}
           </p>
-          <ul className="bg-white border dark:bg-zinc-800 rounded-xl overflow-hidden">
+          <ul className="bg-background border dark:bg-zinc-800 rounded-xl overflow-hidden">
             {groupedTransactions[date].map((transaction) => (
               <TransactionItem
                 key={transaction.id}

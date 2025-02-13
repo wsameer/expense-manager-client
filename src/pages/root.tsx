@@ -2,7 +2,7 @@ import { Suspense } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 import { Outlet, useLocation } from 'react-router-dom';
 
-import { Navigation } from '@/components/navigation';
+// import { Navigation } from '@/components/navigation';
 import { Spinner } from '@/components/ui/spinner';
 import { useResponsive } from '@/hooks';
 import { AddTransaction } from '@/features/add-transaction';
@@ -24,7 +24,7 @@ export const AppRoot = () => {
           key={location.pathname}
           fallback={<div>Something went wrong!</div>}
         >
-          <Navigation />
+          {/* <Navigation /> */}
           <Outlet />
           {!isMobile && <AddTransaction />}
         </ErrorBoundary>

@@ -9,7 +9,10 @@ import { Transaction } from '../types';
 
 const fetchTransactions = async (url: string): Promise<Transaction[]> => {
   const res = await axiosInstance.get<any[]>(url);
-  return res.data;
+  return res.data.map((data) => ({
+    ...data,
+    amount: Number(data.amount),
+  }));
 };
 
 /**

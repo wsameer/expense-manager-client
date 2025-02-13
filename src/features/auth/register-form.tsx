@@ -4,13 +4,6 @@ import { useTranslation } from 'react-i18next';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
-import {
   Form,
   FormControl,
   FormField,
@@ -20,8 +13,6 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { LOGIN_ROUTE } from '@/router/routes';
-import { Link } from '@/components/ui/link';
 import { toast } from '@/hooks';
 import { useAuth } from '@/hooks';
 
@@ -77,108 +68,91 @@ export const RegisterForm = ({ onSuccess }: RegisterFormProps) => {
   };
 
   return (
-    <Card className="mx-auto max-w-sm">
-      <CardHeader>
-        <CardTitle className="text-xl">{t('sign-up')}</CardTitle>
-        <CardDescription>{t('enter-your-information')}</CardDescription>
-      </CardHeader>
-      <CardContent>
-        <Form {...form}>
-          <form
-            id="sign-up-form"
-            className="grid gap-4"
-            onSubmit={form.handleSubmit(onSubmit)}
-          >
-            <FormField
-              control={form.control}
-              name="name"
-              render={({ field }) => (
-                <FormItem className="grid gap-2">
-                  <FormLabel htmlFor="name">{t('name')}</FormLabel>
-                  <FormControl>
-                    <Input
-                      placeholder="John Doe"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="email"
-              render={({ field }) => (
-                <FormItem className="grid gap-2">
-                  <FormLabel htmlFor="email">{t('email')}</FormLabel>
-                  <FormControl>
-                    <Input
-                      placeholder="jon@doe.com"
-                      autoComplete="username"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="password"
-              render={({ field }) => (
-                <FormItem className="grid gap-2">
-                  <FormLabel htmlFor="password">{t('password')}</FormLabel>
-                  <FormControl>
-                    <Input
-                      type="password"
-                      placeholder="*******"
-                      autoComplete="new-password"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="password_confirmation"
-              render={({ field }) => (
-                <FormItem className="grid gap-2">
-                  <FormLabel htmlFor="password_confirmation">
-                    {t('confirm-password')}
-                  </FormLabel>
-                  <FormControl>
-                    <Input
-                      type="password"
-                      placeholder="*******"
-                      autoComplete="new-password"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <Button
-              className="mt-4 w-full"
-              variant="default"
-              type="submit"
-            >
-              {t('create-an-account')}
-            </Button>
-          </form>
-        </Form>
-        <div className="mt-4 text-center text-sm">
-          {t('have-an-account')}{' '}
-          <Link
-            to={LOGIN_ROUTE}
-            className="underline dark:text-white"
-          >
-            {t('sign-in')}
-          </Link>
-        </div>
-      </CardContent>
-    </Card>
+    <Form {...form}>
+      <form
+        id="sign-up-form"
+        className="flex flex-col gap-2"
+        onSubmit={form.handleSubmit(onSubmit)}
+      >
+        <FormField
+          control={form.control}
+          name="name"
+          render={({ field }) => (
+            <FormItem className="">
+              <FormLabel htmlFor="name">{t('name')}</FormLabel>
+              <FormControl>
+                <Input
+                  placeholder="John Doe"
+                  {...field}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="email"
+          render={({ field }) => (
+            <FormItem className="">
+              <FormLabel htmlFor="email">{t('email')}</FormLabel>
+              <FormControl>
+                <Input
+                  placeholder="jon@doe.com"
+                  autoComplete="username"
+                  {...field}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="password"
+          render={({ field }) => (
+            <FormItem className="">
+              <FormLabel htmlFor="password">{t('password')}</FormLabel>
+              <FormControl>
+                <Input
+                  type="password"
+                  placeholder="*******"
+                  autoComplete="new-password"
+                  {...field}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="password_confirmation"
+          render={({ field }) => (
+            <FormItem className="">
+              <FormLabel htmlFor="password_confirmation">
+                {t('confirm-password')}
+              </FormLabel>
+              <FormControl>
+                <Input
+                  type="password"
+                  placeholder="*******"
+                  autoComplete="new-password"
+                  {...field}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <Button
+          className="w-full rounded-full h-12 text-base mt-4"
+          variant="default"
+          type="submit"
+        >
+          {t('create-an-account')}
+        </Button>
+      </form>
+    </Form>
   );
 };

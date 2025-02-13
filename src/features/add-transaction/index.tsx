@@ -92,7 +92,7 @@ export const AddTransaction = () => {
           <DialogHeader>
             <DialogTitle>
               Record {selectedTab === TransactionType.TRANSFER ? 'a' : 'an'}{' '}
-              {selectedTab}
+              {tabTitle}
             </DialogTitle>
             <DialogDescription>
               {t('enter-and-submit-your-transaction')}
