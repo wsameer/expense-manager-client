@@ -7,7 +7,6 @@ export const DataSettingsRoute = () => {
     <PageLayout
       title="My Data"
       backButtonUrl={SETTINGS_ROUTE}
-      showHeaderText
       showStickyHeader
     >
       <DataSettings />

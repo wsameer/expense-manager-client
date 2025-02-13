@@ -49,8 +49,7 @@ export const AccountDetailsRoute = () => {
     return (
       <PageLayout
         title={t('account:invalid-request')}
-        showHeaderText={true}
-        backButton={{ url: ACCOUNTS_ROUTE }}
+        backButtonUrl={ACCOUNTS_ROUTE}
       >
         <div className="grid justify-center">
           <p className="text-xl text-muted-foreground mt-72">
@@ -65,8 +64,7 @@ export const AccountDetailsRoute = () => {
     return (
       <PageLayout
         title={t('account:invalid-request')}
-        showHeaderText={true}
-        backButton={{ url: ACCOUNTS_ROUTE }}
+        backButtonUrl={ACCOUNTS_ROUTE}
       >
         <div className="grid justify-center">
           <p className="text-xl text-muted-foreground mt-72">
@@ -80,10 +78,7 @@ export const AccountDetailsRoute = () => {
   return (
     <PageLayout
       title={account.name}
-      showHeaderText={true}
-      backButton={{
-        url: ACCOUNTS_ROUTE,
-      }}
+      backButtonUrl={ACCOUNTS_ROUTE}
       rightElement={
         <div className="d-flex">
           <Button

@@ -7,22 +7,31 @@ type Props = {
   title?: string;
   backButtonUrl?: string;
   rightElement?: ReactElement;
+  showStickyHeader?: boolean;
 };
 
-export const MobileHeader = ({ title, rightElement, backButtonUrl }: Props) => {
+export const MobileHeader = ({
+  title,
+  rightElement,
+  backButtonUrl,
+  showStickyHeader = false,
+}: Props) => {
+  if (!showStickyHeader) {
+    return <header className="h-14" />;
+  }
+
   return (
     <header
       id="app-header-mobile"
-      // className="sticky top-0 h-14 z-50 w-full border-border/40 bg-background/15 backdrop-blur supports-[backdrop-filter]:bg-background/20"
-      className="sticky top-0 h-14 z-50 w-full bg-zinc-600"
+      className="sticky top-0 z-50 w-full border-border/40 bg-background/15 backdrop-blur supports-[backdrop-filter]:bg-background/20"
     >
-      <div className="container flex h-14 max-w-screen-2xl items-center">
+      <div className="container h-16 flex max-w-screen-2xl items-center">
         <div className="flex-1 text-left">
           {backButtonUrl && (
             <Button
               size="icon"
               variant="outline"
-              className="rounded-full"
+              className="rounded-full text-foreground"
               asChild
             >
               <Link to={backButtonUrl}>

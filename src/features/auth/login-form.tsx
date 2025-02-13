@@ -110,12 +110,17 @@ export const LoginForm = ({ onSuccess }: LoginFormProps) => {
               </FormItem>
             )}
           />
-          <Link
-            to={FORGOT_PASSWORD}
-            className="text-sm text-zinc-500 hover:text-zinc-800"
+          <Button
+            variant="link"
+            asChild
           >
-            {t('forgot-your-password')}
-          </Link>
+            <Link
+              to={FORGOT_PASSWORD}
+              className="text-sm text-foreground dark:text-foreground"
+            >
+              {t('forgot-your-password')}
+            </Link>
+          </Button>
         </div>
         <Button
           type="submit"

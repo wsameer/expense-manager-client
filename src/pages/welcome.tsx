@@ -40,7 +40,7 @@ export const Welcome = () => {
             </div>
 
             <section className="space-y-4">
-              <h1 className="text-5xl font-light leading-tight text-zinc-900">
+              <h1 className="text-5xl font-light leading-tight text-zinc-900 dark:text-white">
                 {'Track.\nSave.\nGrow.\nEffortlessly.'
                   .split('\n')
                   .map((text, i) => (
@@ -59,7 +59,7 @@ export const Welcome = () => {
             <div className="absolute p-6 bottom-6 left-0 right-0 space-y-4 bg-background md:relative md:px-0">
               {user ? (
                 <Button
-                  variant="default"
+                  className="flex-1 w-full rounded-full h-12 text-lg"
                   asChild
                 >
                   <Link to={DASHBOARD_ROUTE}>{t('welcome.dashboard')}</Link>

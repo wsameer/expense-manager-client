@@ -16,7 +16,7 @@ export const LoginRoute = () => {
   return (
     <AuthLayout title={t('login')}>
       <div>
-        <h1 className="text-4xl font-light text-zinc-900">
+        <h1 className="text-4xl font-light text-zinc-900 dark:text-white">
           {t('welcome-back')}
         </h1>
         <p className="text-lg font-light text-zinc-400 mt-2">
@@ -63,11 +63,11 @@ export const LoginRoute = () => {
       </div>
 
       <div className="text-center">
-        <p className="text-sm text-zinc-500">
+        <p className="text-sm text-foreground/80">
           Don't have an account?{' '}
           <Link
             to={`${REGISTER_ROUTE}${redirectTo ? `?redirectTo=${encodeURIComponent(redirectTo)}` : ''}`}
-            className="font-medium text-zinc-900 hover:underline"
+            className="font-medium text-foreground hover:underline"
           >
             {t('sign-up')}
           </Link>

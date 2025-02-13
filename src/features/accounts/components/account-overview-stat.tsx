@@ -47,7 +47,7 @@ export const AccountOverviewStat = React.memo(
     }, [queryKey]);
 
     return (
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-1">
         <Icon className={`h-4 w-4 ${labelColor}`} />
         <div className="flex-1 space-y-1.5">
           {isLoading ? (

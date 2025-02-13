@@ -9,7 +9,6 @@ type Props = {
   title?: string;
   subTitle?: string;
   showStickyHeader?: boolean;
-  showHeaderText?: boolean;
   backButton?: {
     url?: string;
     title?: string;

@@ -7,7 +7,6 @@ export const IncomeCategoryRoute = () => {
     <PageLayout
       title="Income Categories"
       backButtonUrl={SETTINGS_ROUTE}
-      showHeaderText
       showStickyHeader
     >
       <IncomeCategoryList />
