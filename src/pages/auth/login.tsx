@@ -64,7 +64,7 @@ export const LoginRoute = () => {
 
       <div className="text-center">
         <p className="text-sm text-foreground/80">
-          Don't have an account?{' '}
+          {t('dont-have-an-account')}{' '}
           <Link
             to={`${REGISTER_ROUTE}${redirectTo ? `?redirectTo=${encodeURIComponent(redirectTo)}` : ''}`}
             className="font-medium text-foreground hover:underline"

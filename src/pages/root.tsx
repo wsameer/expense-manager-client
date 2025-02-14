@@ -24,7 +24,6 @@ export const AppRoot = () => {
           key={location.pathname}
           fallback={<div>Something went wrong!</div>}
         >
-          {/* <Navigation /> */}
           <Outlet />
           {!isMobile && <AddTransaction />}
         </ErrorBoundary>

@@ -12,7 +12,7 @@ export const RegisterRoute = () => {
   return (
     <AuthLayout title={t('sign-up')}>
       <div>
-        <h1 className="text-4xl font-light text-zinc-900">
+        <h1 className="text-4xl font-light text-zinc-900 dark:text-white">
           {t('stay-on-budget')}
         </h1>
         <p className="text-xl font-light text-zinc-400 mt-2">
@@ -34,7 +34,7 @@ export const RegisterRoute = () => {
         </div>
         <div className="relative flex justify-center text-xs uppercase">
           <span className="bg-background px-2 text-zinc-500">
-            Or continue with
+            {t('or-continue-with')}
           </span>
         </div>
       </div>
@@ -50,18 +50,6 @@ export const RegisterRoute = () => {
           </Link>
         </p>
       </div>
-    </AuthLayout>
-  );
-
-  return (
-    <AuthLayout title={t('sign-up')}>
-      <RegisterForm
-        onSuccess={() =>
-          navigate(LOGIN_ROUTE, {
-            replace: true,
-          })
-        }
-      />
     </AuthLayout>
   );
 };

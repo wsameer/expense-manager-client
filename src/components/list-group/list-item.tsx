@@ -24,7 +24,7 @@ export const ListItem = forwardRef<HTMLButtonElement, Props>(
       ref={ref}
       className={cn(
         'flex h-10 items-center justify-between py-1 px-4',
-        'border-t',
+        'border-t dark:border-background',
         'cursor-pointer first:border-t-0',
         variantStyles[variant],
       )}

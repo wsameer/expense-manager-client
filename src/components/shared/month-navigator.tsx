@@ -45,47 +45,11 @@ export const MonthNavigator = memo<MonthNavigatorProps>(
       return handleMonthChange(year, month);
     };
 
-    // const renderLongVariant = () => (
-    //   <div className="grid grid-cols-7 gap-1 items-center">
-    //     <div className="flex flex-col space-y-1 py-2.5 px-1">
-    //       <p className="text-sm text-center text-foreground font-medium">Dec</p>
-    //       <p className="text-xs text-center text-muted-foreground">2024</p>
-    //     </div>
-
-    //     <div className="flex flex-col space-y-1 py-2.5 px-1">
-    //       <p className="text-sm text-center text-foreground font-medium">Jan</p>
-    //       <p className="text-xs text-center text-muted-foreground">2025</p>
-    //     </div>
-
-    //     <div className="flex flex-col space-y-1 py-2.5 px-1 bg-zinc-600 rounded-3xl">
-    //       <p className="text-sm text-center text-foreground font-medium">Feb</p>
-    //       <p className="text-xs text-center text-muted-foreground">2025</p>
-    //     </div>
-
-    //     <div className="flex flex-col space-y-1 py-2.5 px-1">
-    //       <p className="text-sm text-center text-foreground font-medium">Mar</p>
-    //       <p className="text-xs text-center text-muted-foreground">2025</p>
-    //     </div>
-
-    //     <div className="flex flex-col space-y-1 py-2.5 px-1">
-    //       <p className="text-sm text-center text-foreground font-medium">Apr</p>
-    //       <p className="text-xs text-center text-muted-foreground">2025</p>
-    //     </div>
-
-    //     <div className="flex flex-col space-y-1 py-2.5 px-1">
-    //       <p className="text-sm text-center text-foreground font-medium">May</p>
-    //       <p className="text-xs text-center text-muted-foreground">2025</p>
-    //     </div>
-
-    //     <div className="flex flex-col space-y-1 py-2.5 px-1">
-    //       <p className="text-sm text-center text-foreground font-medium">Jun</p>
-    //       <p className="text-xs text-center text-muted-foreground">2025</p>
-    //     </div>
-    //   </div>
-    // );
-
     return (
-      <div className={cn('flex items-center px-1 w-full', className)}>
+      <div
+        id="month-navigator"
+        className={cn('flex items-center px-1 w-full', className)}
+      >
         <Button
           className="rounded-xl h-6 w-6 dark:hover:bg-background/40"
           onClick={handlePreviousMonth}

@@ -31,7 +31,7 @@ export const Welcome = () => {
   return (
     <div className="grid min-h-screen place-items-center bg-background">
       <div className="relative flex h-screen w-full max-w-[400px] flex-col justify-between bg-background">
-        <div className="flex flex-1 flex-col px-6 mt-20">
+        <div className="flex flex-1 flex-col px-6 mt-14">
           <Head />
 
           <main className="flex flex-1 flex-col gap-24 md:gap-12 md:justify-center">
