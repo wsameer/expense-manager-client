@@ -1,5 +1,5 @@
 export const USER_KEY = 'sameer.expense-manager.user';
-export const API_BASE_URL = `${import.meta.env.VITE_API_BASE_URL}`;
+export const API_BASE_URL = `${import.meta.env.VITE_BACKEND_URL}`;
 
 const AUTH = API_BASE_URL + 'auth/';
 
