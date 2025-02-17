@@ -1,6 +1,6 @@
-import { Rabbit } from 'lucide-react';
-import React from 'react';
+import { InfoIcon, Rabbit } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+import { Alert, AlertDescription } from '@/components/ui/alert';
 
 export const NoData = () => {
   const { t } = useTranslation('common');
@@ -11,6 +11,12 @@ export const NoData = () => {
       <p className="scroll-m-20 text-l tracking-tight text-muted-foreground">
         {t('no-data-for-this-month')}
       </p>
+      <Alert>
+        <InfoIcon className="h-4 w-4" />
+        <AlertDescription>
+          Start by creating your first transaction by clicking on + icon
+        </AlertDescription>
+      </Alert>
     </div>
   );
 };

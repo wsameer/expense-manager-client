@@ -26,8 +26,8 @@ export const AuthLayout = ({ title, children }: LayoutProps) => {
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-background">
-      <div className="w-full max-w-[400px] space-y-6">
-        <div className="flex flex-1 flex-col px-6 pt-6 gap-10">
+      <div className="w-full max-w-[400px]">
+        <div className="flex flex-1 flex-col px-6 gap-10">
           <Head title={title} />
 
           <header className="flex justify-between items-center">
