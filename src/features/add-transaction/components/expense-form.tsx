@@ -33,6 +33,11 @@ import { useTranslation } from 'react-i18next';
 import { FormProps } from './types';
 import { useUpdateTransaction } from '../api/update-transaction';
 import { SelectorOption } from '@/components/option-selector/types';
+import { useNavigate } from 'react-router-dom';
+import {
+  ACCOUNT_SETTINGS_ROUTE,
+  EXPENSE_CATEGORY_SETTINGS_ROUTE,
+} from '@/router/routes';
 
 const formSchema = z.object({
   date: z.date({
@@ -65,6 +70,7 @@ export const ExpenseForm = ({ existingData, setOpen }: FormProps) => {
 
   const { t } = useTranslation('transaction');
   const { allAccounts } = useAccounts();
+  const navigate = useNavigate();
   const { expenseCategories } = useExpenseCategories();
   const { createTransaction } = useCreateTransaction();
   const { updateTransaction } = useUpdateTransaction();
@@ -372,6 +378,7 @@ export const ExpenseForm = ({ existingData, setOpen }: FormProps) => {
                 form.setValue('fromAccountId', option.id);
                 setSelectorType(null);
               }}
+              createOptionCallback={() => navigate(ACCOUNT_SETTINGS_ROUTE)}
             />
           )}
 
@@ -382,6 +389,9 @@ export const ExpenseForm = ({ existingData, setOpen }: FormProps) => {
                 form.setValue('expenseCategoryId', option.id);
                 setSelectorType(null);
               }}
+              createOptionCallback={() =>
+                navigate(EXPENSE_CATEGORY_SETTINGS_ROUTE)
+              }
             />
           )}
         </div>

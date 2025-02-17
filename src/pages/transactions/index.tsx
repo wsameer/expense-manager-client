@@ -41,6 +41,10 @@ export const TransactionsRoute = () => {
     setDisplayedMonths(() => getMonthsToDisplay(currentDate));
   };
 
+  const handleMonthButtonClick = (year: number, month: number) => {
+    setCurrentDate(new Date(year, month));
+  };
+
   const handleMonthNavigation = (direction: number) => {
     const newCenterMonth = new Date(
       centerMonth.year,
@@ -93,7 +97,7 @@ export const TransactionsRoute = () => {
                     monthData.month === currentDate.getMonth() &&
                     monthData.year === currentDate.getFullYear()
                   }
-                  onSelect={handleMonthSelect}
+                  onSelect={handleMonthButtonClick}
                 />
               ))}
             </div>

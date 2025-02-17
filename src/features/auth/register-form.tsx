@@ -60,6 +60,7 @@ export const RegisterForm = ({ onSuccess }: RegisterFormProps) => {
       toast({
         title: t('registration-toast.title'),
         description: t('registration-toast.message'),
+        duration: 3000,
       });
       return onSuccess();
     } else {

@@ -112,6 +112,7 @@ export const useAuth = () => {
       toast({
         variant: 'default',
         description: 'Logout successful',
+        duration: 3000,
       });
       return true;
     } else {

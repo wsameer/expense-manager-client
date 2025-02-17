@@ -1,5 +1,4 @@
 import { memo, useState } from 'react';
-import { useTranslation } from 'react-i18next';
 
 import { Card } from '@/components/ui/card';
 import { TransactionType } from '@/types';
@@ -13,13 +12,13 @@ import { useChartData } from './api/get-chart-data';
 import { DashboardPieChart } from './components/pie-chart';
 import { COLORS } from './constants';
 import { CircularProgressBar } from './components/circular-progressbar';
+import { NoData } from './components/no-data';
 
 type Props = {
   currentDate: Date;
 };
 
 export const DashboardPage = memo(({ currentDate }: Props) => {
-  const { t } = useTranslation('common');
   const [transactionType, setTransactionType] = useState<TransactionType>(
     TransactionType.EXPENSE,
   );
@@ -40,15 +39,7 @@ export const DashboardPage = memo(({ currentDate }: Props) => {
     setTransactionType(value as TransactionType);
   };
 
-  const renderNoData = () => {
-    return (
-      <div className="flex items-center justify-center mt-8">
-        <p className="text-sm text-muted-foreground">
-          {t('no-data-for-this-month')}
-        </p>
-      </div>
-    );
-  };
+  const renderNoData = () => <NoData />;
 
   const renderCategoryList = () => {
     return pieChartData?.map((data, index) => {

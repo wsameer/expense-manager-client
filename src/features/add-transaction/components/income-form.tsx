@@ -26,6 +26,8 @@ import { useUpdateTransaction } from '../api/update-transaction';
 import { cn } from '@/lib/utils';
 import { OptionSelector } from '@/components/option-selector';
 import { SelectorOption } from '@/components/option-selector/types';
+import { INCOME_CATEGORY_SETTINGS_ROUTE } from '@/router/routes';
+import { useNavigate } from 'react-router-dom';
 
 const formSchema = z.object({
   transactionDate: z.date({
@@ -55,6 +57,7 @@ export const IncomeForm = ({ existingData, setOpen }: FormProps) => {
 
   const { t } = useTranslation('transaction');
   const { allAccounts } = useAccounts();
+  const navigate = useNavigate();
   const { incomeCategories } = useIncomeCategories();
   const { createTransaction } = useCreateTransaction();
   const { updateTransaction } = useUpdateTransaction();
@@ -306,6 +309,9 @@ export const IncomeForm = ({ existingData, setOpen }: FormProps) => {
                 form.setValue('incomeCategoryId', option.id);
                 setSelectorType(null);
               }}
+              createOptionCallback={() =>
+                navigate(INCOME_CATEGORY_SETTINGS_ROUTE)
+              }
             />
           )}
         </div>

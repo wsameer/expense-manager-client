@@ -26,6 +26,8 @@ import { useUpdateTransaction } from '../api/update-transaction';
 import { DateSelector } from './form-fields/date-selector';
 import { FormProps } from './types';
 import { SelectorOption } from '@/components/option-selector/types';
+import { useNavigate } from 'react-router-dom';
+import { ACCOUNT_SETTINGS_ROUTE } from '@/router/routes';
 
 const formSchema = z
   .object({
@@ -56,6 +58,7 @@ const formSchema = z
 export const TransferForm = ({ existingData, setOpen }: FormProps) => {
   const { t } = useTranslation('transaction');
   const { allAccounts } = useAccounts();
+  const navigate = useNavigate();
   const { createTransaction } = useCreateTransaction();
   const { updateTransaction } = useUpdateTransaction();
 
@@ -278,6 +281,7 @@ export const TransferForm = ({ existingData, setOpen }: FormProps) => {
                 form.setValue(showAccountSelector, value.id);
                 setShowAccountSelector(false);
               }}
+              createOptionCallback={() => navigate(ACCOUNT_SETTINGS_ROUTE)}
             />
           )}
         </div>
