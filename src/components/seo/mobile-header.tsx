@@ -17,7 +17,7 @@ export const MobileHeader = ({
   showStickyHeader = false,
 }: Props) => {
   if (!showStickyHeader) {
-    return <header className="h-14" />;
+    return <header className="h-8" />;
   }
 
   return (

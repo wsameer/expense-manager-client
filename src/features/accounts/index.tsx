@@ -5,7 +5,7 @@ import { useResponsive } from '@/hooks';
 import { Separator } from '@/components/ui/separator';
 import { cn } from '@/lib/utils';
 
-import { AccountOverviewStat } from './components/account-overview-stat';
+import { FinancialStat } from './components/financial-stat';
 import { AccountGroups } from './components/account-groups';
 import { QueryKey } from './types';
 
@@ -39,13 +39,16 @@ export const AccountsPage = () => {
         'w-1/3': isDesktop,
       })}
     >
-      <div className="bg-white border dark:bg-zinc-800 rounded-2xl px-2 py-3 shadow-sm">
+      <div className="bg-foreground border dark:bg-zinc-800 rounded-2xl px-2 py-3 shadow">
         <div className="grid grid-flow-col gap-2">
           {statsData.map((item, index) => (
             <React.Fragment key={item.id}>
-              <AccountOverviewStat {...item} />
+              <FinancialStat {...item} />
               {index < statsData.length - 1 && (
-                <Separator orientation="vertical" />
+                <Separator
+                  orientation="vertical"
+                  className="bg-background/40"
+                />
               )}
             </React.Fragment>
           ))}

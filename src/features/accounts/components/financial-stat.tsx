@@ -16,7 +16,7 @@ type Props = {
 
 type ApiResponse = { statType: string; totalBalance: number };
 
-export const AccountOverviewStat = React.memo(
+export const FinancialStat = React.memo(
   ({ label, queryKey, icon: Icon }: Props) => {
     const { data, isLoading } = useSWR(
       ACCOUNTS_STATS_API + queryKey,
@@ -53,10 +53,7 @@ export const AccountOverviewStat = React.memo(
           {isLoading ? (
             <Skeleton className="h-3 w-8 rounded-full" />
           ) : (
-            <p
-              className="font-medium leading-none"
-              style={{ fontSize: '11px' }}
-            >
+            <p className="text-xs font-medium leading-none text-background">
               {label}
             </p>
           )}
@@ -64,7 +61,9 @@ export const AccountOverviewStat = React.memo(
           {isLoading ? (
             <Skeleton className="h-4 w-14 rounded-full" />
           ) : (
-            <p className="text-xs font-mono">{formattedBalance}</p>
+            <p className="text-xs font-mono text-background">
+              {formattedBalance}
+            </p>
           )}
         </div>
       </div>
@@ -72,4 +71,4 @@ export const AccountOverviewStat = React.memo(
   },
 );
 
-AccountOverviewStat.displayName = 'AccountOverviewStat';
+FinancialStat.displayName = 'FinancialStat';
