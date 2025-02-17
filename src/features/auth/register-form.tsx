@@ -15,6 +15,8 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { toast } from '@/hooks';
 import { useAuth } from '@/hooks';
+import { Eye, EyeOff } from 'lucide-react';
+import { useState } from 'react';
 
 type RegisterFormProps = {
   onSuccess: () => void;
@@ -40,8 +42,11 @@ const registerFormSchema = z
 export type UserRegistrationParams = z.infer<typeof registerFormSchema>;
 
 export const RegisterForm = ({ onSuccess }: RegisterFormProps) => {
-  const { t } = useTranslation('auth', { keyPrefix: 'forms' });
   const { register } = useAuth();
+  const { t } = useTranslation('auth', { keyPrefix: 'forms' });
+
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const form = useForm<UserRegistrationParams>({
     resolver: zodResolver(registerFormSchema),
@@ -108,6 +113,7 @@ export const RegisterForm = ({ onSuccess }: RegisterFormProps) => {
             </FormItem>
           )}
         />
+
         <FormField
           control={form.control}
           name="password"
@@ -115,12 +121,32 @@ export const RegisterForm = ({ onSuccess }: RegisterFormProps) => {
             <FormItem className="">
               <FormLabel htmlFor="password">{t('password')}</FormLabel>
               <FormControl>
-                <Input
-                  type="password"
-                  placeholder="*******"
-                  autoComplete="new-password"
-                  {...field}
-                />
+                <div className="relative">
+                  <Input
+                    id={field.name}
+                    type={showPassword ? 'text' : 'password'}
+                    placeholder="*******"
+                    autoComplete="new-password"
+                    {...field}
+                  />
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    size="sm"
+                    disabled={!field.value}
+                    className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent"
+                    onClick={() => setShowPassword(!showPassword)}
+                    aria-label={
+                      showPassword ? 'Hide password' : 'Show password'
+                    }
+                  >
+                    {showPassword ? (
+                      <EyeOff className="h-4 w-4" />
+                    ) : (
+                      <Eye className="h-4 w-4" />
+                    )}
+                  </Button>
+                </div>
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -135,12 +161,32 @@ export const RegisterForm = ({ onSuccess }: RegisterFormProps) => {
                 {t('confirm-password')}
               </FormLabel>
               <FormControl>
-                <Input
-                  type="password"
-                  placeholder="*******"
-                  autoComplete="new-password"
-                  {...field}
-                />
+                <div className="relative">
+                  <Input
+                    id={field.name}
+                    type={showConfirmPassword ? 'text' : 'password'}
+                    placeholder="*******"
+                    autoComplete="new-password"
+                    {...field}
+                  />
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    size="sm"
+                    disabled={!field.value}
+                    className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent"
+                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                    aria-label={
+                      showConfirmPassword ? 'Hide password' : 'Show password'
+                    }
+                  >
+                    {showConfirmPassword ? (
+                      <EyeOff className="h-4 w-4" />
+                    ) : (
+                      <Eye className="h-4 w-4" />
+                    )}
+                  </Button>
+                </div>
               </FormControl>
               <FormMessage />
             </FormItem>
