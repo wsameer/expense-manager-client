@@ -25,7 +25,7 @@ import { useConfirmDialog } from '@/components/ui/confirmable';
 import { toast } from '@/hooks';
 
 import { useDeleteTransaction } from '../api/delete-transaction';
-import { StatCard } from './stat-card';
+import { StatCard } from '../../../components/shared/stat-card';
 import { Transaction, TypeTotals } from '../types';
 import { groupTransactionsByDate } from '../utils';
 import { TransactionItem } from './transaction-item';

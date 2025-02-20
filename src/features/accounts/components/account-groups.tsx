@@ -56,7 +56,7 @@ export const AccountGroups = () => {
                 id={`${id}-card-container`}
               >
                 {/* Group Header */}
-                <div className="bg-background rounded-2xl border px-3 py-2 text-sm z-50 relative">
+                <div className="bg-background dark:bg-zinc-800 dark:border-zinc-900 rounded-2xl border px-3 py-2 text-sm z-50 relative">
                   <div className="flex justify-between items-center gap-2">
                     {/* Clickable Group Info */}
                     <div
@@ -68,10 +68,10 @@ export const AccountGroups = () => {
                         e.key === 'Enter' && handleAccountGroupClick(key)
                       }
                     >
-                      <p className="text-md text-muted-foreground">
+                      <p className="text-sm text-foreground">
                         {capitalize(label)}
                       </p>
-                      <p className="text-lg text-mono text-muted-foreground">
+                      <p className="text-base text-mono text-foreground">
                         {formattedAmount(
                           getBalanceSumByGroup(key as AccountGroup),
                         )}
@@ -98,10 +98,12 @@ export const AccountGroups = () => {
                     <div
                       key={id}
                       className={cn(
-                        'relative dark:bg-zinc-900/30 bg-white dark:border-zinc-800',
-                        'flex justify-between rounded-xl border px-3 pt-4 pb-2 -mt-10',
+                        'relative bg-white dark:bg-zinc-800 border dark:border-zinc-900',
+                        'flex justify-between rounded-xl p-3 -mt-10',
                         'transition-all duration-400 ease-in-out',
-                        { '-mt-3 rounded-2xl': isCardExpanded },
+                        {
+                          '-mt-2 rounded-2xl': isCardExpanded,
+                        },
                       )}
                       style={{
                         zIndex: filteredAccounts.length - index,
@@ -109,12 +111,12 @@ export const AccountGroups = () => {
                       }}
                     >
                       <p
-                        className={`text-sm ${isCardExpanded ? 'text-muted-foreground' : 'text-transparent'}`}
+                        className={`text-sm ${isCardExpanded ? 'text-foreground' : 'text-transparent'}`}
                       >
                         {name}
                       </p>
                       <p
-                        className={`text-sm text-muted-foreground ${isCardExpanded ? 'text-muted-foreground' : 'text-transparent'}`}
+                        className={`text-sm ${isCardExpanded ? 'text-foreground' : 'text-transparent'}`}
                       >
                         {formattedAmount(balance)}
                       </p>
