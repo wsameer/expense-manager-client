@@ -36,12 +36,11 @@ export const AddAccount = ({ group }: { group: AccountGroupEnum }) => {
       >
         <DrawerTrigger asChild>
           <Button
-            className="w-full rounded-xl border-zinc-400"
+            className="rounded-xl border-zinc-400"
             variant="dashed"
-            size="lg"
+            size="icon"
           >
-            <Plus className="h-4 w-4 mr-2" />
-            <p>{t('add-new-account')}</p>
+            <Plus />
           </Button>
         </DrawerTrigger>
         <DrawerContent>

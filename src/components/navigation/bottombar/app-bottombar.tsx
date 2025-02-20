@@ -28,7 +28,7 @@ export const AppBottomBar = () => {
 
   return (
     <div
-      className={`fixed bottom-8 left-1/2 w-3/4 -translate-x-1/2 z-10 block md:hidden transition-all duration-300 ease-in-out ${
+      className={`fixed bottom-8 left-1/2 w-3/4 -translate-x-1/2 z-50 block md:hidden transition-all duration-300 ease-in-out ${
         isVisible
           ? 'translate-y-0 opacity-100'
           : 'translate-y-full opacity-0 pointer-events-none'

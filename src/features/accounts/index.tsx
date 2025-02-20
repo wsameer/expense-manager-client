@@ -39,7 +39,7 @@ export const AccountsPage = () => {
         'w-1/3': isDesktop,
       })}
     >
-      <div className="bg-foreground border dark:bg-zinc-800 rounded-2xl px-2 py-3 shadow">
+      <div className="bg-foreground border rounded-2xl px-2 py-3 shadow">
         <div className="grid grid-flow-col gap-2">
           {statsData.map((item, index) => (
             <React.Fragment key={item.id}>
@@ -47,7 +47,7 @@ export const AccountsPage = () => {
               {index < statsData.length - 1 && (
                 <Separator
                   orientation="vertical"
-                  className="bg-background/40"
+                  className="bg-zinc-700 dark:bg-zinc-300"
                 />
               )}
             </React.Fragment>

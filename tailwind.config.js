@@ -11,6 +11,10 @@ export default {
         md: 'calc(var(--radius) - 2px)',
         sm: 'calc(var(--radius) - 4px)',
       },
+      spacing: {
+        11.5: '2.85rem', // Positive spacing
+        '-11.5': '-2.85rem', // Negative spacing
+      },
       colors: {
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',

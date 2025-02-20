@@ -32,10 +32,15 @@ export function capitalize(input: string): string {
 }
 
 export const formattedAmount = (amount: number): string => {
-  return amount.toLocaleString('en-CA', {
-    style: 'currency',
-    currency: 'CAD',
-  });
+  try {
+    return amount.toLocaleString('en-CA', {
+      style: 'currency',
+      currency: 'CAD',
+    });
+  } catch (error) {
+    console.error('Error formatting amount:', error);
+    return `CAD ${amount.toFixed(2)}`;
+  }
 };
 
 export const cleanString = (str: string): string => {

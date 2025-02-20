@@ -1,12 +1,12 @@
 import React, { useMemo } from 'react';
 import { LucideIcon } from 'lucide-react';
-
 import useSWR from 'swr';
-import { ACCOUNTS_STATS_API } from '../constants';
+
 import axiosInstance from '@/lib/api-client';
-import { QueryKey } from '../types';
 import { CAD } from '@/lib/constants';
 import { Skeleton } from '@/components/ui/skeleton';
+import { QueryKey } from '../types';
+import { ACCOUNTS_STATS_API } from '../constants';
 
 type Props = {
   label: string;
