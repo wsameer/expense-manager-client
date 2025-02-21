@@ -68,7 +68,7 @@ export const AccountGroups = () => {
                         e.key === 'Enter' && handleAccountGroupClick(key)
                       }
                     >
-                      <p className="text-sm text-foreground">
+                      <p className="text-sm text-muted-foreground">
                         {capitalize(label)}
                       </p>
                       <p className="text-base text-mono text-foreground">
