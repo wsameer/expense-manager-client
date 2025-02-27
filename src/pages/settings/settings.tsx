@@ -41,7 +41,7 @@ export const SettingsRoute = () => {
 
   return (
     <PageLayout title="Settings">
-      <div className="flex flex-col min-w-0">
+      <div className="flex flex-col min-w-0 md:hidden">
         <h2 className="text-3xl font-normal text-foreground tracking-tight">
           Settings
         </h2>
@@ -51,7 +51,7 @@ export const SettingsRoute = () => {
         id="app-settings"
         className={cn('grid grid-cols-1 gap-6 w-full', isDesktop && 'w-3/5')}
       >
-        <form className="ml-auto w-full sm:flex-initial">
+        <form className="ml-auto w-full sm:flex-initial md:hidden">
           <div className="relative">
             <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
             <Input

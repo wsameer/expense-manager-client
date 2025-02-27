@@ -1,7 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
+import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
@@ -17,7 +19,6 @@ import { Button } from '@/components/ui/button';
 import { OptionSelector } from '@/components/option-selector';
 import { useAccounts } from '@/features/accounts/api/get-accounts';
 import { TransactionType } from '@/types';
-import { cn } from '@/lib/utils';
 import { useExpenseCategories } from '@/features/expense-category/api/use-expense-categories';
 import {
   Select,
@@ -26,18 +27,18 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { DateSelector } from './form-fields/date-selector';
-import { useCreateTransaction } from '../api/create-transaction';
 import { toast } from '@/hooks';
-import { useTranslation } from 'react-i18next';
-import { FormProps } from './types';
-import { useUpdateTransaction } from '../api/update-transaction';
-import { SelectorOption } from '@/components/option-selector/types';
-import { useNavigate } from 'react-router-dom';
 import {
   ACCOUNT_SETTINGS_ROUTE,
   EXPENSE_CATEGORY_SETTINGS_ROUTE,
 } from '@/router/routes';
+import { useOnClickOutside } from '@/hooks/use-on-click-outside';
+import { SelectorOption } from '@/components/option-selector/types';
+
+import { useCreateTransaction } from '../api/create-transaction';
+import { useUpdateTransaction } from '../api/update-transaction';
+import { DateSelector } from './form-fields/date-selector';
+import { FormProps } from './types';
 
 const formSchema = z.object({
   date: z.date({
@@ -61,8 +62,6 @@ const formSchema = z.object({
   ),
 });
 
-export type TransactionForm = z.infer<typeof formSchema>;
-
 export const ExpenseForm = ({ existingData, setOpen }: FormProps) => {
   const [selectorType, setSelectorType] = useState<
     'account' | 'category' | null
@@ -74,6 +73,12 @@ export const ExpenseForm = ({ existingData, setOpen }: FormProps) => {
   const { expenseCategories } = useExpenseCategories();
   const { createTransaction } = useCreateTransaction();
   const { updateTransaction } = useUpdateTransaction();
+
+  const accountSelectorRef = useRef<HTMLDivElement>(null);
+  const expenseCategorySelectorRef = useRef<HTMLDivElement>(null);
+
+  useOnClickOutside(accountSelectorRef, () => setSelectorType(null));
+  useOnClickOutside(expenseCategorySelectorRef, () => setSelectorType(null));
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -329,7 +334,7 @@ export const ExpenseForm = ({ existingData, setOpen }: FormProps) => {
                   <Input
                     className="w-3/4 text-sm"
                     placeholder={t('transaction:select-account')}
-                    onClick={() => setSelectorType('account')}
+                    onFocus={() => setSelectorType('account')}
                     value={getSelectedAccountName(field.value)}
                     readOnly
                   />
@@ -366,35 +371,33 @@ export const ExpenseForm = ({ existingData, setOpen }: FormProps) => {
           )}
         />
 
-        <div
-          className={cn('overflow-x-auto', {
-            'h-44': selectorType,
-          })}
-        >
-          {selectorType === 'account' && (
-            <OptionSelector
-              options={accountOptions}
-              onSelect={(option: any) => {
-                form.setValue('fromAccountId', option.id);
-                setSelectorType(null);
-              }}
-              createOptionCallback={() => navigate(ACCOUNT_SETTINGS_ROUTE)}
-            />
-          )}
+        {selectorType === 'account' && (
+          <OptionSelector
+            ref={accountSelectorRef}
+            className={`${selectorType ? 'h-44' : ''}`}
+            options={accountOptions}
+            onSelect={(option: any) => {
+              form.setValue('fromAccountId', option.id);
+              setSelectorType(null);
+            }}
+            createOptionCallback={() => navigate(ACCOUNT_SETTINGS_ROUTE)}
+          />
+        )}
 
-          {selectorType === 'category' && (
-            <OptionSelector
-              options={expenseCategories!}
-              onSelect={(option: any) => {
-                form.setValue('expenseCategoryId', option.id);
-                setSelectorType(null);
-              }}
-              createOptionCallback={() =>
-                navigate(EXPENSE_CATEGORY_SETTINGS_ROUTE)
-              }
-            />
-          )}
-        </div>
+        {selectorType === 'category' && (
+          <OptionSelector
+            ref={expenseCategorySelectorRef}
+            className={`${selectorType ? 'h-44' : ''}`}
+            options={expenseCategories!}
+            onSelect={(option: any) => {
+              form.setValue('expenseCategoryId', option.id);
+              setSelectorType(null);
+            }}
+            createOptionCallback={() =>
+              navigate(EXPENSE_CATEGORY_SETTINGS_ROUTE)
+            }
+          />
+        )}
 
         <Button
           type="submit"

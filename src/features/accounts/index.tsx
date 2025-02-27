@@ -36,7 +36,7 @@ export const AccountsPage = () => {
   return (
     <div
       className={cn('grid grid-cols-1 gap-6', {
-        'w-1/3': isDesktop,
+        'w-3/5': isDesktop,
       })}
     >
       <div className="bg-white border dark:bg-zinc-800 rounded-2xl p-3 shadow-sm">

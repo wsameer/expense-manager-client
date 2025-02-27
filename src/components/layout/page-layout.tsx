@@ -7,6 +7,7 @@ import { AppSidebar } from '../navigation/sidebar/app-sidebar';
 import { AppBottomBar } from '../navigation/bottombar/app-bottombar';
 import { AppHeader, Head, MobileHeader } from '../seo';
 import { cn } from '@/lib/utils';
+import { AddTransaction } from '@/features/add-transaction';
 
 interface PageLayoutProps {
   title?: string;
@@ -28,11 +29,12 @@ export const PageLayout = React.memo<PageLayoutProps>((props) => {
         <SidebarInset>
           {isMobile ? <MobileHeader {...props} /> : <AppHeader {...props} />}
           <div
-            className={cn('flex flex-1 flex-col gap-4 p-4 pt-4 pb-16', {
-              'pt-1': isMobile,
+            className={cn('flex flex-1 flex-col gap-4 p-4 pt-4 pb-12', {
+              'pt-1 pb-16': isMobile,
             })}
           >
             {children}
+            {!isMobile && <AddTransaction />}
           </div>
         </SidebarInset>
         <AppBottomBar />

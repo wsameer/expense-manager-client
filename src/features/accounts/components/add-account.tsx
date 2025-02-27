@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import {
   Dialog,
   DialogContent,
+  DialogDescription,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -64,16 +65,17 @@ export const AddAccount = ({ group }: { group: AccountGroupEnum }) => {
     >
       <DialogTrigger asChild>
         <Button
-          className="w-full"
-          variant="secondary"
+          className="rounded-xl"
+          variant="dashed"
+          size="icon"
         >
-          <Plus className="h-5 w-5 mr-2" />
-          <p>{t('add-new-account')}</p>
+          <Plus />
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle>{t('add-new-account')}</DialogTitle>
+          <DialogDescription>{t('new-account-hint')}</DialogDescription>
         </DialogHeader>
         <AccountForm
           group={group}

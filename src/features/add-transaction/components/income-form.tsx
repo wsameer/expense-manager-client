@@ -1,6 +1,8 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
+import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
@@ -16,18 +18,17 @@ import { Button } from '@/components/ui/button';
 import { useAccounts } from '@/features/accounts/api/get-accounts';
 import { useIncomeCategories } from '@/features/income-category/api/use-categories';
 import { Account } from '@/types/api';
-import { useTranslation } from 'react-i18next';
-import { DateSelector } from './form-fields/date-selector';
-import { useCreateTransaction } from '../api/create-transaction';
 import { toast } from '@/hooks';
 import { TransactionType } from '@/types';
-import { FormProps } from './types';
-import { useUpdateTransaction } from '../api/update-transaction';
-import { cn } from '@/lib/utils';
 import { OptionSelector } from '@/components/option-selector';
 import { SelectorOption } from '@/components/option-selector/types';
 import { INCOME_CATEGORY_SETTINGS_ROUTE } from '@/router/routes';
-import { useNavigate } from 'react-router-dom';
+import { useOnClickOutside } from '@/hooks/use-on-click-outside';
+
+import { useCreateTransaction } from '../api/create-transaction';
+import { useUpdateTransaction } from '../api/update-transaction';
+import { DateSelector } from './form-fields/date-selector';
+import { FormProps } from './types';
 
 const formSchema = z.object({
   transactionDate: z.date({
@@ -61,6 +62,12 @@ export const IncomeForm = ({ existingData, setOpen }: FormProps) => {
   const { incomeCategories } = useIncomeCategories();
   const { createTransaction } = useCreateTransaction();
   const { updateTransaction } = useUpdateTransaction();
+
+  const accountSelectorRef = useRef<HTMLDivElement>(null);
+  const incomeCategorySelectorRef = useRef<HTMLDivElement>(null);
+
+  useOnClickOutside(accountSelectorRef, () => setSelectorType(null));
+  useOnClickOutside(incomeCategorySelectorRef, () => setSelectorType(null));
 
   const accountOptions: SelectorOption[] = useMemo(() => {
     if (!allAccounts) return [];
@@ -287,34 +294,32 @@ export const IncomeForm = ({ existingData, setOpen }: FormProps) => {
           )}
         />
 
-        <div
-          className={cn('overflow-x-auto', {
-            'h-44': selectorType,
-          })}
-        >
-          {selectorType === 'account' && (
-            <OptionSelector
-              options={accountOptions}
-              onSelect={(value: Account) => {
-                form.setValue('toAccountId', value.id);
-                setSelectorType(null);
-              }}
-            />
-          )}
+        {selectorType === 'account' && (
+          <OptionSelector
+            ref={accountSelectorRef}
+            className={`${selectorType ? 'h-44' : ''}`}
+            options={accountOptions}
+            onSelect={(value: Account) => {
+              form.setValue('toAccountId', value.id);
+              setSelectorType(null);
+            }}
+          />
+        )}
 
-          {selectorType === 'category' && (
-            <OptionSelector
-              options={incomeCategoryOptions()}
-              onSelect={(option) => {
-                form.setValue('incomeCategoryId', option.id);
-                setSelectorType(null);
-              }}
-              createOptionCallback={() =>
-                navigate(INCOME_CATEGORY_SETTINGS_ROUTE)
-              }
-            />
-          )}
-        </div>
+        {selectorType === 'category' && (
+          <OptionSelector
+            ref={incomeCategorySelectorRef}
+            className={`${selectorType ? 'h-44' : ''}`}
+            options={incomeCategoryOptions()}
+            onSelect={(option) => {
+              form.setValue('incomeCategoryId', option.id);
+              setSelectorType(null);
+            }}
+            createOptionCallback={() =>
+              navigate(INCOME_CATEGORY_SETTINGS_ROUTE)
+            }
+          />
+        )}
 
         <Button
           type="submit"

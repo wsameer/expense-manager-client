@@ -81,7 +81,7 @@ export const AddTransaction = () => {
       >
         <DialogTrigger asChild>
           <Button
-            className="rounded-full h-12 w-12"
+            className="rounded-full h-12 w-12 hover:bg-red-700"
             variant="destructive"
             size="icon"
           >
@@ -108,8 +108,9 @@ export const AddTransaction = () => {
           <DialogFooter>
             <DialogClose asChild>
               <Button
-                className="w-full"
-                variant="secondary"
+                type="submit"
+                className="w-full rounded-full text-md"
+                size="lg"
               >
                 {t('cancel')}
               </Button>

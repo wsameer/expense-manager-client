@@ -12,7 +12,8 @@
     "save": "Save",
     "delete-account": "Delete account",
     "group": "Group",
-    "payment": "Payment"
+    "payment": "Payment",
+    "new-account-hint": "Open your new account now by providing the following details."
   },
   "your-account-has-been-deleted": "Your account has been deleted.",
   "account-failed-to-delete": "Your account cannot be deleted at the moment. Please try again.",

@@ -18,8 +18,8 @@ export const StatCard = ({
   isLoading,
 }: Props) => {
   return (
-    <div className="flex items-center gap-2">
-      {Icon && <Icon className={`h-5 w-5 ${iconClass}`} />}
+    <div className="flex items-center gap-1">
+      {Icon && <Icon className={`h-4 w-4 ${iconClass}`} />}
       <div className="flex-1 space-y-1.5">
         {isLoading ? (
           <Skeleton className="h-3 w-8 rounded-full" />
@@ -34,7 +34,7 @@ export const StatCard = ({
         {isLoading ? (
           <Skeleton className="h-4 w-14 rounded-full" />
         ) : (
-          <p className="text-xs font-mono">{CAD.format(value)}</p>
+          <p className="text-xs">{CAD.format(value)}</p>
         )}
       </div>
     </div>

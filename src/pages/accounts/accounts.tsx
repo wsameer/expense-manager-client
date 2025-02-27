@@ -7,7 +7,7 @@ export const AccountsRoute = () => {
       title="Accounts"
       subTitle="Your accounts with its latest balance"
     >
-      <div className="flex flex-col min-w-0">
+      <div className="md:hidden flex flex-col min-w-0">
         <h2 className="text-3xl font-normal text-foreground tracking-tight">
           Accounts
         </h2>
