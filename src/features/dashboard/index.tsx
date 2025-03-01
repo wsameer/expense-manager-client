@@ -4,7 +4,7 @@ import { Card } from '@/components/ui/card';
 import { TransactionType } from '@/types';
 import { CAD } from '@/lib/constants';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { capitalize } from '@/lib/utils';
+import { capitalize, formatDateToYYYYMM } from '@/lib/utils';
 import { Skeleton } from '@/components/ui/skeleton';
 import { toast } from '@/hooks';
 import { ErrorMessage } from '@/components/errors/error-message';
@@ -23,7 +23,7 @@ export const DashboardPage = memo(({ currentDate }: Props) => {
     TransactionType.EXPENSE,
   );
 
-  const month = new Date(currentDate).toISOString().slice(0, 7);
+  const month = formatDateToYYYYMM(currentDate);
 
   const { pieChartData, error, isLoading } = useChartData(
     month,

@@ -59,3 +59,9 @@ export const getFormattedDateTime = (dateTime: Date): string => {
   const formattedDate = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
   return formattedDate;
 };
+
+export const formatDateToYYYYMM = (date: Date): string => {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are 0-indexed
+  return `${year}-${month}`;
+};

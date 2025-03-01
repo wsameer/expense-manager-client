@@ -2,6 +2,7 @@ export interface IncomeCategory {
   id: number;
   name: string;
   description: string;
+  order: number;
 }
 
 export interface ApiResponse {

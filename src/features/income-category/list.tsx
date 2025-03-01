@@ -1,22 +1,17 @@
 import { useState } from 'react';
 
 import { Button } from '@/components/ui/button';
-import { MoreVertical, Pencil, Plus, Trash } from 'lucide-react';
+import { Plus } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { IncomeCategory } from './types';
 import { Busy } from '@/components/shared/busy';
 import { ErrorMessage } from '@/components/errors/error-message';
 import { useConfirmDialog } from '@/components/ui/confirmable';
 import { useIncomeCategories } from './api/use-categories';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
 import { toast } from '@/hooks';
 import { useDeleteIncomeCategory } from './api/delete-category';
 import { AddIncomeCategoryForm } from './component/add-income-form';
+import { ListItemButton } from './component/list-item-button';
 
 export const IncomeCategoryList = () => {
   const { t } = useTranslation(['common', 'categories']);
@@ -73,6 +68,17 @@ export const IncomeCategoryList = () => {
       ) : (
         <>
           {incomeCategories?.map((category) => (
+            <ListItemButton
+              key={category.id}
+              title={category.name}
+              onClickHandler={() => {
+                setOpenCategoryModal(true);
+                setSelectedCategory(category);
+              }}
+              trailing={null}
+            />
+          ))}
+          {/* {incomeCategories?.map((category) => (
             <div
               className="bg-background dark:bg-zinc-800 border rounded-xl overflow-hidden w-full"
               key={category.id}
@@ -114,14 +120,16 @@ export const IncomeCategoryList = () => {
                 </DropdownMenu>
               </div>
             </div>
-          ))}
-
-          <AddIncomeCategoryForm
-            open={openCategoryModal}
-            onOpenChange={setOpenCategoryModal}
-            selectedCategory={selectedCategory}
-          />
+          ))} */}
         </>
+      )}
+
+      {openCategoryModal && (
+        <AddIncomeCategoryForm
+          open={openCategoryModal}
+          onOpenChange={setOpenCategoryModal}
+          selectedCategory={selectedCategory}
+        />
       )}
     </div>
   );

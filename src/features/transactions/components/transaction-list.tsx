@@ -31,6 +31,7 @@ import { groupTransactionsByDate } from '../utils';
 import { TransactionItem } from './transaction-item';
 import { useTransactions } from '../api/get-transaction';
 import { ErrorMessage } from '@/components/errors/error-message';
+import { formatDateToYYYYMM } from '@/lib/utils';
 
 type Props = {
   currentDate: Date;
@@ -53,11 +54,11 @@ export const TransactionList = ({ currentDate }: Props) => {
   const { t } = useTranslation(['transaction', 'common']);
   const { openConfirmDialog } = useConfirmDialog();
   const { allTransactions, isError, isLoading } = useTransactions(
-    new Date(currentDate).toISOString().slice(0, 7),
+    formatDateToYYYYMM(currentDate),
   );
 
   const { deleteTransaction } = useDeleteTransaction(
-    new Date(currentDate).toISOString().slice(0, 7),
+    formatDateToYYYYMM(currentDate),
   );
 
   const [open, setOpen] = useState(false);

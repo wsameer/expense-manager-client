@@ -5,6 +5,7 @@ import { toast } from '@/hooks';
 import { useConfirmDialog } from '@/components/ui/confirmable';
 import { ListGroup } from '@/components/list-group';
 import { ListItem } from '@/components/list-group/list-item';
+import { formatDateToYYYYMM } from '@/lib/utils';
 
 import { ImportDataDialog } from '../import-data';
 import { useDeleteTransaction } from '../transactions/api/delete-transaction';
@@ -13,7 +14,7 @@ export const DataSettings = () => {
   const { t } = useTranslation(['common', 'settings']);
   const { openConfirmDialog } = useConfirmDialog();
   const { deleteAllTransactions } = useDeleteTransaction(
-    new Date().toISOString().slice(0, 7),
+    formatDateToYYYYMM(new Date()),
   );
 
   const handleDeleteAllTransaction = () => {

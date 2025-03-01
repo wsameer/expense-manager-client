@@ -7,6 +7,7 @@ import { useCallback } from 'react';
 
 interface CategoryInput {
   name: string;
+  order?: number;
 }
 
 const fetchExpenseCategories = async (url: string): Promise<Category[]> => {
@@ -25,16 +26,19 @@ export const useExpenseCategories = () => {
     },
   );
 
+  const lastOrderNumber = data?.[data?.length - 1].order;
+
   const createCategory = useCallback(
     async (categoryData: CategoryInput): Promise<Category> => {
+      console.log('🚀 ~ lastOrderNumber:', lastOrderNumber);
       const response = await axiosInstance.post<Category>(
         EXPENSE_CATEGORIES_API,
-        categoryData,
+        { ...categoryData, order: (lastOrderNumber ?? 0) + 1 },
       );
       // await mutate(); // Revalidate the cache
       return response.data;
     },
-    [],
+    [lastOrderNumber],
   );
 
   const updateCategory = useCallback(

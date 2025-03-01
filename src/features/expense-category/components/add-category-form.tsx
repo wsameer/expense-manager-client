@@ -65,6 +65,7 @@ export const AddExpenseCategoryForm = ({
       if (isEditing) {
         await updateCategory(selectedCategory.id.toString(), {
           name: values.categoryName,
+          order: selectedCategory.order,
         });
       } else {
         await createCategory({ name: values.categoryName });
