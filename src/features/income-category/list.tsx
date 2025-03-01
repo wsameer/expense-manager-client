@@ -11,7 +11,7 @@ import { useIncomeCategories } from './api/use-categories';
 import { toast } from '@/hooks';
 import { useDeleteIncomeCategory } from './api/delete-category';
 import { AddIncomeCategoryForm } from './component/add-income-form';
-import { ListItemButton } from './component/list-item-button';
+import { ListItemButton } from '../../components/ui/list-item-button';
 
 export const IncomeCategoryList = () => {
   const { t } = useTranslation(['common', 'categories']);

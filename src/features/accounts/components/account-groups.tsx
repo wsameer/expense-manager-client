@@ -57,7 +57,7 @@ export const AccountGroups = () => {
               >
                 {/* Group Header */}
                 <div className="bg-white hover:bg-muted dark:bg-muted dark:hover:bg-zinc-900 dark:border-zinc-900 rounded-2xl border px-3 py-2 text-sm z-50 relative">
-                  <div className="flex justify-between items-center gap-2">
+                  <div className="flex justify-between items-center gap-2 h-11">
                     {/* Clickable Group Info */}
                     <div
                       className="flex-1"
@@ -68,17 +68,22 @@ export const AccountGroups = () => {
                         e.key === 'Enter' && handleAccountGroupClick(key)
                       }
                     >
-                      <p className="text-sm text-muted-foreground">
+                      <p className="text-base text-foreground">
                         {capitalize(label)}
                       </p>
-                      <p className="text-base text-mono text-foreground">
-                        {formattedAmount(
-                          getBalanceSumByGroup(key as AccountGroup),
-                        )}
-                      </p>
+                      {key !== 'CASH' && (
+                        <p className="text-xs text-muted-foreground">
+                          {`${filteredAccounts.length} accounts`}
+                        </p>
+                      )}
                     </div>
 
                     {/* Add Account Button (if not CASH) */}
+                    <p className="text-base text-mono text-foreground pr-1">
+                      {formattedAmount(
+                        getBalanceSumByGroup(key as AccountGroup),
+                      )}
+                    </p>
                     {key !== 'CASH' && (
                       <AddAccount group={key as unknown as AccountGroupEnum} />
                     )}
@@ -88,8 +93,8 @@ export const AccountGroups = () => {
                 {/* Grouped Accounts */}
                 {filteredAccounts.map(({ id, name, balance }, index) => {
                   const isCardExpanded = expandStack.includes(key);
-                  const baseScale = 0.97;
-                  const scaleFactor = 0.03;
+                  const baseScale = 0.95;
+                  const scaleFactor = 0.05;
                   const scaleValue = isCardExpanded
                     ? 1
                     : baseScale - index * scaleFactor;
@@ -98,7 +103,7 @@ export const AccountGroups = () => {
                     <div
                       key={id}
                       className={cn(
-                        'relative bg-white dark:bg-zinc-800 border dark:border-zinc-900',
+                        'relative bg-background dark:bg-zinc-800 dark:border border',
                         'flex justify-between rounded-xl p-3 -mt-10',
                         'transition-all duration-400 ease-in-out',
                         {
