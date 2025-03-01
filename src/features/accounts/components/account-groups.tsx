@@ -56,7 +56,7 @@ export const AccountGroups = () => {
                 id={`${id}-card-container`}
               >
                 {/* Group Header */}
-                <div className="bg-background dark:bg-zinc-800 dark:border-zinc-900 rounded-2xl border px-3 py-2 text-sm z-50 relative">
+                <div className="bg-white hover:bg-muted dark:bg-muted dark:hover:bg-zinc-900 dark:border-zinc-900 rounded-2xl border px-3 py-2 text-sm z-50 relative">
                   <div className="flex justify-between items-center gap-2">
                     {/* Clickable Group Info */}
                     <div
