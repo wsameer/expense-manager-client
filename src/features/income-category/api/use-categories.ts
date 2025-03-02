@@ -29,21 +29,23 @@ export const useIncomeCategories = () => {
     },
   );
 
+  const lastOrderNumber = data?.[data?.length - 1].order;
+
   const createCategory = useCallback(
     async (categoryData: CategoryInput): Promise<IncomeCategory> => {
       const response = await axiosInstance.post<IncomeCategory>(
         INCOME_CATEGORIES_API,
-        categoryData,
+        { ...categoryData, order: (lastOrderNumber ?? 0) + 1 },
       );
       await mutate(); // Revalidate the cache
       return response.data;
     },
-    [mutate],
+    [lastOrderNumber, mutate],
   );
 
   const updateCategory = useCallback(
     async (
-      categoryId: string,
+      categoryId: number,
       categoryData: CategoryInput,
     ): Promise<IncomeCategory> => {
       const response = await axiosInstance.put<IncomeCategory>(
@@ -68,6 +70,24 @@ export const useIncomeCategories = () => {
     });
   }, [data]);
 
+  const replace = useCallback(
+    async (data: { categories: IncomeCategory[] }) => {
+      const response = await axiosInstance.put<IncomeCategory[]>(
+        `${INCOME_CATEGORIES_API}/replace`,
+        data,
+      );
+      return response.data;
+    },
+    [],
+  );
+
+  const updateCache = useCallback(
+    (newCategories: IncomeCategory[]) => {
+      mutate(newCategories, false);
+    },
+    [mutate],
+  );
+
   return {
     incomeCategories: data,
     isLoading: !error && !data,
@@ -75,5 +95,7 @@ export const useIncomeCategories = () => {
     incomeCategoryOptions,
     createCategory,
     updateCategory,
+    updateCache,
+    replace,
   };
 };

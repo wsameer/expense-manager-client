@@ -21,6 +21,7 @@
     "new-income-category": "New Income Category",
     "category-is-deleted": "Income category has been deleted",
     "failed-to-delete": "Failed to delete category",
-    "category-delete-warning-message": "This action cannot be undone. This will permanently delete the category,"
+    "category-delete-warning-message": "This action cannot be undone. This will permanently delete the category,",
+    "failed-to-update": "Failed to update categories"
   }
 }

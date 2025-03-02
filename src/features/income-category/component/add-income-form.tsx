@@ -31,11 +31,13 @@ import {
 
 import { IncomeCategory } from '../types';
 import { useIncomeCategories } from '../api/use-categories';
+import { Trash2 } from 'lucide-react';
 
 type Props = {
   open: boolean;
   onOpenChange: (value: boolean) => void;
   selectedCategory?: IncomeCategory;
+  handleOnDelete?: (categoryId: number) => void;
 };
 
 const FormSchema = z.object({
@@ -46,9 +48,10 @@ const FormSchema = z.object({
 });
 
 export const AddIncomeCategoryForm = ({
+  open,
   selectedCategory = undefined,
   onOpenChange,
-  open,
+  handleOnDelete,
 }: Props) => {
   const { isMobile } = useResponsive();
   const { t } = useTranslation();
@@ -155,7 +158,19 @@ export const AddIncomeCategoryForm = ({
       >
         <DrawerContent>
           <DrawerHeader className="text-left">
-            <DrawerTitle>{t('categories:income.income-category')}</DrawerTitle>
+            <DrawerTitle className="flex justify-between">
+              {t('categories:income.income-category')}
+              {selectedCategory && (
+                <Button
+                  className="text-red-500 hover:text-red-600 hover:bg-red-100"
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => handleOnDelete?.(selectedCategory.id)}
+                >
+                  <Trash2 className="h-3 w-3" />
+                </Button>
+              )}
+            </DrawerTitle>
           </DrawerHeader>
           <div className="px-4">{renderForm()}</div>
         </DrawerContent>

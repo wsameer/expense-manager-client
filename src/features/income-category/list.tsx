@@ -1,23 +1,52 @@
 import { useState } from 'react';
-
-import { Button } from '@/components/ui/button';
 import { Plus } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
-import { IncomeCategory } from './types';
+import {
+  DndContext,
+  closestCenter,
+  PointerSensor,
+  useSensor,
+  useSensors,
+  DragEndEvent,
+} from '@dnd-kit/core';
+import {
+  arrayMove,
+  SortableContext,
+  verticalListSortingStrategy,
+} from '@dnd-kit/sortable';
+import {
+  restrictToVerticalAxis,
+  restrictToWindowEdges,
+} from '@dnd-kit/modifiers';
+
+import { Button } from '@/components/ui/button';
 import { Busy } from '@/components/shared/busy';
 import { ErrorMessage } from '@/components/errors/error-message';
 import { useConfirmDialog } from '@/components/ui/confirmable';
-import { useIncomeCategories } from './api/use-categories';
+import { EmptyData } from '@/components/shared/empty-data';
 import { toast } from '@/hooks';
+
 import { useDeleteIncomeCategory } from './api/delete-category';
 import { AddIncomeCategoryForm } from './component/add-income-form';
-import { ListItemButton } from '../../components/ui/list-item-button';
+import { SortableItem } from './component/sortable-item';
+import { useIncomeCategories } from './api/use-categories';
+import { IncomeCategory } from './types';
 
 export const IncomeCategoryList = () => {
   const { t } = useTranslation(['common', 'categories']);
   const { openConfirmDialog } = useConfirmDialog();
   const { deleteCategory } = useDeleteIncomeCategory();
-  const { incomeCategories, isLoading, isError } = useIncomeCategories();
+  const { incomeCategories, isLoading, isError, updateCache, replace } =
+    useIncomeCategories();
+  const [isListDirty, setIsListDirty] = useState(false);
+
+  const sensors = useSensors(
+    useSensor(PointerSensor, {
+      activationConstraint: {
+        distance: 8,
+      },
+    }),
+  );
 
   const [openCategoryModal, setOpenCategoryModal] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<IncomeCategory>();
@@ -33,6 +62,7 @@ export const IncomeCategoryList = () => {
             title: t('common:alert.deleted'),
             description: t('categories:income.category-is-deleted'),
           });
+          setOpenCategoryModal(false);
         } catch (error) {
           console.error('Error deleting account:', error);
           toast({
@@ -42,6 +72,44 @@ export const IncomeCategoryList = () => {
         }
       },
     });
+  };
+
+  const handleReplaceCategories = async (categories: IncomeCategory[]) => {
+    try {
+      await replace({ categories });
+      setIsListDirty(false);
+    } catch (error) {
+      console.error('Error updating categories:', error);
+      toast({
+        title: t('common:errors.operation-failed'),
+        description: t('categories:income.failed-to-update'),
+      });
+    }
+  };
+
+  const handleDragEnd = (event: DragEndEvent) => {
+    const { active, over } = event;
+
+    if (over && active.id !== over.id) {
+      setIsListDirty(true);
+      const oldIndex = incomeCategories!.findIndex(
+        (category) => category.id === active.id,
+      );
+      const newIndex = incomeCategories!.findIndex(
+        (category) => category.id === over.id,
+      );
+
+      const reorderedItems = arrayMove(
+        incomeCategories!,
+        oldIndex,
+        newIndex,
+      ).map((item, index) => ({
+        ...item,
+        order: index + 1,
+      }));
+
+      updateCache(reorderedItems);
+    }
   };
 
   if (isError) {
@@ -67,60 +135,32 @@ export const IncomeCategoryList = () => {
         <Busy />
       ) : (
         <>
-          {incomeCategories?.map((category) => (
-            <ListItemButton
-              key={category.id}
-              title={category.name}
-              onClickHandler={() => {
-                setOpenCategoryModal(true);
-                setSelectedCategory(category);
-              }}
-              trailing={null}
-            />
-          ))}
-          {/* {incomeCategories?.map((category) => (
-            <div
-              className="bg-background dark:bg-zinc-800 border rounded-xl overflow-hidden w-full"
-              key={category.id}
+          {!incomeCategories || incomeCategories.length === 0 ? (
+            <EmptyData />
+          ) : (
+            <DndContext
+              sensors={sensors}
+              onDragEnd={handleDragEnd}
+              collisionDetection={closestCenter}
+              modifiers={[restrictToVerticalAxis, restrictToWindowEdges]}
             >
-              <div className="flex items-center justify-between space-x-4 pl-4 pr-2 py-2">
-                <div className="flex items-center gap-2">
-                  <small className="text-sm font-medium leading-none">
-                    {category.name}
-                  </small>
-                </div>
-                <DropdownMenu>
-                  <DropdownMenuTrigger asChild>
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      className="h-6 w-6"
-                    >
-                      <MoreVertical className="h-4 w-4" />
-                      <span className="sr-only">{t('common:more')}</span>
-                    </Button>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent align="end">
-                    <DropdownMenuItem
-                      onClick={() => {
-                        setOpenCategoryModal(true);
-                        setSelectedCategory(category);
-                      }}
-                    >
-                      <Pencil className="h-3.5 w-3.5 mr-2" /> {t('common:edit')}
-                    </DropdownMenuItem>
-                    <DropdownMenuItem
-                      className="text-red-500 focus:text-red-700"
-                      onClick={() => handleDeleteCategory(category.id)}
-                    >
-                      <Trash className="h-3.5 w-3.5 mr-2" />{' '}
-                      {t('common:delete')}
-                    </DropdownMenuItem>
-                  </DropdownMenuContent>
-                </DropdownMenu>
-              </div>
-            </div>
-          ))} */}
+              <SortableContext
+                items={incomeCategories}
+                strategy={verticalListSortingStrategy}
+              >
+                {incomeCategories.map((category) => (
+                  <SortableItem
+                    key={category.id}
+                    onClickHandler={(c: IncomeCategory) => {
+                      setOpenCategoryModal(true);
+                      setSelectedCategory(c);
+                    }}
+                    category={category}
+                  />
+                ))}
+              </SortableContext>
+            </DndContext>
+          )}
         </>
       )}
 
@@ -129,6 +169,7 @@ export const IncomeCategoryList = () => {
           open={openCategoryModal}
           onOpenChange={setOpenCategoryModal}
           selectedCategory={selectedCategory}
+          handleOnDelete={handleDeleteCategory}
         />
       )}
     </div>

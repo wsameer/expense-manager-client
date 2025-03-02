@@ -1,20 +1,21 @@
 import React from 'react';
 import { cn } from '@/lib/utils';
 
-interface ListItemButtonProps extends React.LiHTMLAttributes<HTMLLIElement> {
-  icon?: React.ReactNode;
+export interface ListItemButtonProps
+  extends React.LiHTMLAttributes<HTMLLIElement> {
   title: string;
   description?: string;
-  trailing?: React.ReactNode;
+  iconLeft?: React.ReactNode;
+  iconRight?: React.ReactNode;
   active?: boolean;
   onClickHandler?: React.MouseEventHandler<HTMLLIElement>;
 }
 
 export const ListItemButton = ({
-  icon,
   title,
   description,
-  trailing,
+  iconLeft,
+  iconRight,
   active = false,
   className,
   onClickHandler,
@@ -23,7 +24,7 @@ export const ListItemButton = ({
   return (
     <li
       className={cn(
-        'flex w-full items-center gap-3 rounded-xl px-4 py-3 transition-colors',
+        'flex w-full items-center gap-2 rounded-xl px-4 py-3 transition-colors',
         'bg-white dark:bg-muted hover:bg-muted dark:hover:bg-background border',
         'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
         'cursor-pointer',
@@ -41,7 +42,7 @@ export const ListItemButton = ({
       }}
       {...props}
     >
-      {icon && <div className="shrink-0">{icon}</div>}
+      {iconLeft && <div className="shrink-0">{iconLeft}</div>}
       <div className="flex-1 min-w-0">
         <div className="font-medium text-sm">{title}</div>
         {description && (
@@ -50,7 +51,7 @@ export const ListItemButton = ({
           </div>
         )}
       </div>
-      {trailing && <div className="shrink-0 ml-2">{trailing}</div>}
+      {iconRight && <div className="shrink-0 ml-2">{iconRight}</div>}
     </li>
   );
 };

@@ -30,15 +30,14 @@ export const useExpenseCategories = () => {
 
   const createCategory = useCallback(
     async (categoryData: CategoryInput): Promise<Category> => {
-      console.log('🚀 ~ lastOrderNumber:', lastOrderNumber);
       const response = await axiosInstance.post<Category>(
         EXPENSE_CATEGORIES_API,
         { ...categoryData, order: (lastOrderNumber ?? 0) + 1 },
       );
-      // await mutate(); // Revalidate the cache
+      await mutate(); // Revalidate the cache
       return response.data;
     },
-    [lastOrderNumber],
+    [lastOrderNumber, mutate],
   );
 
   const updateCategory = useCallback(

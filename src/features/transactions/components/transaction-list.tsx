@@ -8,7 +8,7 @@ import {
 } from 'lucide-react';
 
 import { Skeleton } from '@/components/ui/skeleton';
-import { EmptyTransactions } from '@/components/shared/empty-data';
+import { EmptyData } from '@/components/shared/empty-data';
 import {
   Drawer,
   DrawerClose,
@@ -130,7 +130,7 @@ export const TransactionList = ({ currentDate }: Props) => {
   }
 
   if (allTransactions?.length === 0) {
-    return <EmptyTransactions />;
+    return <EmptyData />;
   }
 
   const groupedTransactions = groupTransactionsByDate(allTransactions ?? []);

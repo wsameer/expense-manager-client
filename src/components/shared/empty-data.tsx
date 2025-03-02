@@ -1,7 +1,7 @@
 import { Ghost } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
-export const EmptyTransactions = () => {
+export const EmptyData = () => {
   const { t } = useTranslation('common');
   return (
     <div className="flex flex-col gap-2 items-center justify-center mt-40 text-center">
