@@ -5,13 +5,12 @@ import { ListItemButton } from '@/components/ui/list-item-button';
 import { IncomeCategory } from '../types';
 import { GripVertical } from 'lucide-react';
 
-export const SortableItem = ({
-  category,
-  onClickHandler,
-}: {
+type Props = {
   category: IncomeCategory;
   onClickHandler: (c: IncomeCategory) => void;
-}) => {
+};
+
+export const SortableItem = ({ category, onClickHandler }: Props) => {
   const { attributes, listeners, setNodeRef, transform, transition } =
     useSortable({
       id: category.id,

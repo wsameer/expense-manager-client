@@ -70,7 +70,7 @@ export const AddIncomeCategoryForm = ({
 
     try {
       if (isEditing) {
-        await updateCategory(selectedCategory.id.toString(), {
+        await updateCategory(selectedCategory.id, {
           name: values.categoryName,
           description: values.description ?? '',
         });

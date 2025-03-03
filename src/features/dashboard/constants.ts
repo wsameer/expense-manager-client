@@ -1,5 +1,5 @@
-import { INCOME_CATEGORIES_API } from '@/features/income-category/constants';
 import { EXPENSE_CATEGORIES_API } from '@/features/expense-category/constants';
+import { INCOME_CATEGORIES_API } from '@/features/settings/income-categories/constants';
 
 export const COLORS = [
   'var(--chart-1)',

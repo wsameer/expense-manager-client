@@ -24,7 +24,7 @@ export const ListItemButton = ({
   return (
     <li
       className={cn(
-        'flex w-full items-center gap-2 rounded-xl px-4 py-3 transition-colors',
+        'flex w-full items-center gap-2 rounded-xl p-3 transition-colors',
         'bg-white dark:bg-muted hover:bg-muted dark:hover:bg-background border',
         'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
         'cursor-pointer',

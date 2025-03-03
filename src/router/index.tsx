@@ -94,10 +94,10 @@ const createRouter = () =>
         {
           path: INCOME_CATEGORY_SETTINGS_ROUTE,
           lazy: async () => {
-            const { IncomeCategoryRoute } = await import(
-              '../pages/settings/income-category'
+            const { IncomeCategoriesSettings } = await import(
+              '../features/settings/income-categories'
             );
-            return { Component: IncomeCategoryRoute };
+            return { Component: IncomeCategoriesSettings };
           },
         },
         {

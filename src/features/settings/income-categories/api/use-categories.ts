@@ -1,10 +1,11 @@
+import { useCallback, useMemo } from 'react';
 import { AxiosError } from 'axios';
 import useSWR from 'swr';
+
 import axiosInstance from '@/lib/api-client';
-import { useCallback, useMemo } from 'react';
-import { INCOME_CATEGORIES_API } from '../constants';
-import { IncomeCategory } from '../types';
 import { cleanString } from '@/lib/utils';
+import { IncomeCategory } from '../types';
+import { INCOME_CATEGORIES_API } from '../constants';
 
 interface CategoryInput {
   name: string;
