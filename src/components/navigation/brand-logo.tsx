@@ -1,6 +1,6 @@
 import { WalletMinimal } from 'lucide-react';
 import { NavLink } from 'react-router-dom';
-import { DASHBOARD_ROUTE } from '@/router/routes';
+import { DASHBOARD_ROUTE } from '@/app/router/routes';
 
 interface BrandLogoProps {
   size?: 'small' | 'large' | 'extra-large';

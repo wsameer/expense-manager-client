@@ -16,7 +16,7 @@ import { Button } from '@/components/ui/button';
 import { Link } from '@/components/ui/link';
 import { useAuth } from '@/hooks';
 import { Checkbox } from '@/components/ui/checkbox';
-import { FORGOT_PASSWORD } from '@/router/routes';
+import { FORGOT_PASSWORD } from '@/app/router/routes';
 import { useState } from 'react';
 import { Eye, EyeOff } from 'lucide-react';
 

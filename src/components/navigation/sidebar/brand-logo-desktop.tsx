@@ -8,7 +8,7 @@ import {
   SidebarMenuItem,
 } from '@/components/ui/sidebar';
 import { NavLink } from 'react-router-dom';
-import { DASHBOARD_ROUTE } from '@/router/routes';
+import { DASHBOARD_ROUTE } from '@/app/router/routes';
 
 export const BrandLogoDesktop = ({
   team,

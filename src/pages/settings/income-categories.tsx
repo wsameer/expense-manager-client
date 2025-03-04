@@ -1,8 +1,8 @@
 import { PageLayout } from '@/components/layout/page-layout';
-import { SETTINGS_ROUTE } from '@/router/routes';
-import { IncomeCategoryList } from './list';
+import { IncomeCategoryList } from '@/features/income-categories/list';
+import { SETTINGS_ROUTE } from '@/app/router/routes';
 
-export const IncomeCategoriesSettings = () => {
+export const IncomeCategoriesSettingsPage = () => {
   return (
     <PageLayout
       title="Income Categories"

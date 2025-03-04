@@ -1,4 +1,4 @@
-import { AppRouter } from '../router';
+import { AppRouter } from './router';
 import AppProvider from './provider';
 import { ThemeProvider } from '@/features/theme/theme-provider';
 

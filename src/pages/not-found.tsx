@@ -1,7 +1,7 @@
 import { Home } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link } from '@/components/ui/link';
-import { APP_ROUTE } from '@/router/routes';
+import { APP_ROUTE } from '@/app/router/routes';
 
 export const NotFoundRoute = () => {
   return (

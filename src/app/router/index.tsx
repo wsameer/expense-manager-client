@@ -22,21 +22,21 @@ const createRouter = () =>
     {
       path: BASE_ROUTE,
       lazy: async () => {
-        const { Welcome } = await import('../pages/welcome');
+        const { Welcome } = await import('../../pages/welcome');
         return { Component: Welcome };
       },
     },
     {
       path: REGISTER_ROUTE,
       lazy: async () => {
-        const { RegisterRoute } = await import('../pages/auth/register');
+        const { RegisterRoute } = await import('../../pages/auth/register');
         return { Component: RegisterRoute };
       },
     },
     {
       path: LOGIN_ROUTE,
       lazy: async () => {
-        const { LoginRoute } = await import('../pages/auth/login');
+        const { LoginRoute } = await import('../../pages/auth/login');
         return { Component: LoginRoute };
       },
     },
@@ -51,7 +51,9 @@ const createRouter = () =>
         {
           path: TRANSACTIONS_ROUTE,
           lazy: async () => {
-            const { TransactionsRoute } = await import('../pages/transactions');
+            const { TransactionsRoute } = await import(
+              '../../pages/transactions'
+            );
             return { Component: TransactionsRoute };
           },
         },
@@ -59,7 +61,7 @@ const createRouter = () =>
           path: ACCOUNTS_ROUTE,
           lazy: async () => {
             const { AccountsRoute } = await import(
-              '../pages/accounts/accounts'
+              '../../pages/accounts/accounts'
             );
             return { Component: AccountsRoute };
           },
@@ -68,7 +70,7 @@ const createRouter = () =>
           path: `${ACCOUNTS_ROUTE}/:id`,
           lazy: async () => {
             const { AccountDetailsRoute } = await import(
-              '../pages/accounts/account'
+              '../../pages/accounts/account'
             );
             return { Component: AccountDetailsRoute };
           },
@@ -76,52 +78,50 @@ const createRouter = () =>
         {
           path: SETTINGS_ROUTE,
           lazy: async () => {
-            const { SettingsRoute } = await import(
-              '../pages/settings/settings'
-            );
-            return { Component: SettingsRoute };
+            const { SettingsPage } = await import('../../pages/settings');
+            return { Component: SettingsPage };
           },
         },
         {
           path: EXPENSE_CATEGORY_SETTINGS_ROUTE,
           lazy: async () => {
-            const { ExpenseCategoryRoute } = await import(
-              '../pages/settings/expense-category'
+            const { ExpenseCategoriesSettingsPage } = await import(
+              '../../pages/settings/expense-categories'
             );
-            return { Component: ExpenseCategoryRoute };
+            return { Component: ExpenseCategoriesSettingsPage };
           },
         },
         {
           path: INCOME_CATEGORY_SETTINGS_ROUTE,
           lazy: async () => {
-            const { IncomeCategoriesSettings } = await import(
-              '../features/settings/income-categories'
+            const { IncomeCategoriesSettingsPage } = await import(
+              '../../pages/settings/income-categories'
             );
-            return { Component: IncomeCategoriesSettings };
+            return { Component: IncomeCategoriesSettingsPage };
           },
         },
         {
           path: ACCOUNT_SETTINGS_ROUTE,
           lazy: async () => {
-            const { AccountSettingsRoute } = await import(
-              '../pages/settings/account-settings'
+            const { AccountSettingsPage } = await import(
+              '../../pages/settings/accounts'
             );
-            return { Component: AccountSettingsRoute };
+            return { Component: AccountSettingsPage };
           },
         },
         {
           path: DATA_SETTINGS_ROUTE,
           lazy: async () => {
-            const { DataSettingsRoute } = await import(
-              '../pages/settings/data-settings'
+            const { DataSettingsPage } = await import(
+              '../../pages/settings/data-setting'
             );
-            return { Component: DataSettingsRoute };
+            return { Component: DataSettingsPage };
           },
         },
         {
           path: DASHBOARD_ROUTE,
           lazy: async () => {
-            const { DashboardRoute } = await import('../pages/dashboard');
+            const { DashboardRoute } = await import('../../pages/dashboard');
             return { Component: DashboardRoute };
           },
         },
@@ -130,7 +130,7 @@ const createRouter = () =>
     {
       path: '*',
       lazy: async () => {
-        const { NotFoundRoute } = await import('../pages/not-found');
+        const { NotFoundRoute } = await import('../../pages/not-found');
         return { Component: NotFoundRoute };
       },
     },

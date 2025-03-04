@@ -1,6 +1,6 @@
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 
-import { APP_ROUTE, REGISTER_ROUTE } from '@/router/routes';
+import { APP_ROUTE, REGISTER_ROUTE } from '@/app/router/routes';
 import { useTranslation } from 'react-i18next';
 import { AuthLayout } from '@/components/layout/auth-layout';
 import { LoginForm } from '@/features/auth/login-form';

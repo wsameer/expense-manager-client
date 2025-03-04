@@ -21,14 +21,14 @@ import { toast } from '@/hooks';
 import { TransactionType } from '@/types';
 import { OptionSelector } from '@/components/option-selector';
 import { SelectorOption } from '@/components/option-selector/types';
-import { INCOME_CATEGORY_SETTINGS_ROUTE } from '@/router/routes';
+import { INCOME_CATEGORY_SETTINGS_ROUTE } from '@/app/router/routes';
 import { useOnClickOutside } from '@/hooks/use-on-click-outside';
 
 import { useCreateTransaction } from '../api/create-transaction';
 import { useUpdateTransaction } from '../api/update-transaction';
 import { DateSelector } from './form-fields/date-selector';
 import { FormProps } from './types';
-import { useIncomeCategories } from '@/features/settings/income-categories/api/use-categories';
+import { useIncomeCategories } from '@/features/income-categories/api/use-categories';
 
 const formSchema = z.object({
   transactionDate: z.date({

@@ -23,7 +23,7 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { Link } from 'react-router-dom';
-import { SETTINGS_ROUTE } from '@/router/routes';
+import { SETTINGS_ROUTE } from '@/app/router/routes';
 import { ACCOUNT_GROUPS, CREDIT_CARD } from '../constants';
 import {
   AccountGroupEnum,

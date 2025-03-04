@@ -27,7 +27,7 @@ import { DateSelector } from './form-fields/date-selector';
 import { FormProps } from './types';
 import { SelectorOption } from '@/components/option-selector/types';
 import { useNavigate } from 'react-router-dom';
-import { ACCOUNT_SETTINGS_ROUTE } from '@/router/routes';
+import { ACCOUNT_SETTINGS_ROUTE } from '@/app/router/routes';
 
 const formSchema = z
   .object({

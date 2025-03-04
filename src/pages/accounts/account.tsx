@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 import { toast } from '@/hooks';
-import { ACCOUNTS_ROUTE } from '@/router/routes';
+import { ACCOUNTS_ROUTE } from '@/app/router/routes';
 import { PageLayout } from '@/components/layout/page-layout';
 import { useConfirmDialog } from '@/components/ui/confirmable';
 import { Button } from '@/components/ui/button';

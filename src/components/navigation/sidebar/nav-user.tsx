@@ -23,7 +23,7 @@ import { getInitials } from '@/lib/utils';
 import { useAuth } from '@/hooks';
 import { useTranslation } from 'react-i18next';
 import { NavLink } from 'react-router-dom';
-import { SETTINGS_ROUTE } from '@/router/routes';
+import { SETTINGS_ROUTE } from '@/app/router/routes';
 
 type Props = {
   user: User;

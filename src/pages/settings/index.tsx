@@ -25,10 +25,10 @@ import {
   DATA_SETTINGS_ROUTE,
   EXPENSE_CATEGORY_SETTINGS_ROUTE,
   INCOME_CATEGORY_SETTINGS_ROUTE,
-} from '@/router/routes';
+} from '@/app/router/routes';
 import { Button } from '@/components/ui/button';
 
-export const SettingsRoute = () => {
+export const SettingsPage = () => {
   const navigate = useNavigate();
   const { isDesktop } = useResponsive();
   const { theme, setTheme } = useTheme();
@@ -56,7 +56,7 @@ export const SettingsRoute = () => {
             <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
             <Input
               type="search"
-              placeholder="Search products..."
+              placeholder="Search settings..."
               className="pl-8 rounded-full"
             />
           </div>

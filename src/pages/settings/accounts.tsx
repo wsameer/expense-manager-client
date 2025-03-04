@@ -1,7 +1,7 @@
 import { PageLayout } from '@/components/layout/page-layout';
-import { SETTINGS_ROUTE } from '@/router/routes';
+import { SETTINGS_ROUTE } from '@/app/router/routes';
 
-export const AccountSettingsRoute = () => {
+export const AccountSettingsPage = () => {
   return (
     <PageLayout
       title="Accounts"

@@ -13,7 +13,7 @@ import {
   TRANSACTIONS_ROUTE,
   ACCOUNTS_ROUTE,
   SETTINGS_ROUTE,
-} from '@/router/routes';
+} from '@/app/router/routes';
 
 import { SideNavigationItem } from './types';
 

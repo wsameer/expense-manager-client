@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { z } from 'zod';
@@ -21,11 +20,11 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Progress } from '@/components/ui/progress';
-import { Subcategory } from '../expense-category/types';
 import { useAccounts } from '../accounts/api/get-accounts';
 import { useCreateTransaction } from '../add-transaction/api/create-transaction';
 import { useExpenseCategories } from '../expense-category/api/use-expense-categories';
-import { useIncomeCategories } from '../income-category/api/use-categories';
+import { useIncomeCategories } from '../income-categories/api/use-categories';
+import { Subcategory } from '../expense-category/types';
 
 const csvFileSchema = z.object({
   file: z
@@ -207,6 +206,7 @@ export const ImportCsvForm = () => {
             try {
               await postTransaction(validTransactions[i]);
               setResults((prev) => ({ ...prev, success: prev.success + 1 }));
+              // eslint-disable-next-line @typescript-eslint/no-unused-vars
             } catch (error: unknown) {
               setResults((prev) => ({ ...prev, failed: prev.failed + 1 }));
               setFailedRows((prev) => [

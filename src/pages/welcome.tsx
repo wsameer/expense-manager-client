@@ -9,7 +9,7 @@ import {
   DASHBOARD_ROUTE,
   APP_ROUTE,
   REGISTER_ROUTE,
-} from '@/router/routes';
+} from '@/app/router/routes';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '@/hooks';
 import { BrandLogo } from '@/components/navigation/brand-logo';

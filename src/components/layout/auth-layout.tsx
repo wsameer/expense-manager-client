@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/hooks';
 
-import { APP_ROUTE } from '@/router/routes';
+import { APP_ROUTE } from '@/app/router/routes';
 import { Head } from '../seo';
 import { BrandLogo } from '../navigation/brand-logo';
 

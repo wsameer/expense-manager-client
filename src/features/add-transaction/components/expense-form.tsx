@@ -31,7 +31,7 @@ import { toast } from '@/hooks';
 import {
   ACCOUNT_SETTINGS_ROUTE,
   EXPENSE_CATEGORY_SETTINGS_ROUTE,
-} from '@/router/routes';
+} from '@/app/router/routes';
 import { useOnClickOutside } from '@/hooks/use-on-click-outside';
 import { SelectorOption } from '@/components/option-selector/types';
 
