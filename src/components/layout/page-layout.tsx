@@ -25,7 +25,7 @@ export const PageLayout = React.memo<PageLayoutProps>((props) => {
     <div className="flex flex-col sm:gap-2 md:pt-0">
       <SidebarProvider>
         <Head title={title} />
-        <AppSidebar />
+        {!isMobile && <AppSidebar />}
         <SidebarInset>
           {isMobile ? <MobileHeader {...props} /> : <AppHeader {...props} />}
           <div

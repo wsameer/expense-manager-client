@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import { Settings2 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
@@ -9,22 +9,45 @@ import { NavItem } from './nav-item';
 export const AppBottomBar = () => {
   const navigate = useNavigate();
 
-  const [isVisible, setIsVisible] = React.useState(true);
-  const [lastScrollY, setLastScrollY] = React.useState(0);
+  const [isVisible, setIsVisible] = useState(true);
+  const lastScrollY = useRef(0);
+  const scrollSpeedRef = useRef(0);
+  const lastScrollTimeRef = useRef(Date.now());
 
   React.useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > lastScrollY) {
+      const currentTime = Date.now();
+      const currentScrollY = window.scrollY;
+
+      // Calculate scroll speed (pixels per millisecond)
+      const timeDiff = currentTime - lastScrollTimeRef.current;
+      const distanceDiff = Math.abs(currentScrollY - lastScrollY.current);
+      const scrollSpeed = timeDiff > 0 ? distanceDiff / timeDiff : 0;
+
+      // Set scroll speed reference
+      scrollSpeedRef.current = scrollSpeed;
+
+      // Check if at the top of the page
+      const isAtTop = currentScrollY === 0;
+
+      // Determine visibility based on scroll direction, speed, and page position
+      if (currentScrollY > lastScrollY.current) {
         setIsVisible(false);
       } else {
-        setIsVisible(true);
+        setIsVisible(scrollSpeed > 0.5 || isAtTop);
       }
-      setLastScrollY(window.scrollY);
+
+      // Update references
+      lastScrollY.current = currentScrollY;
+      lastScrollTimeRef.current = currentTime;
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [lastScrollY]);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   return (
     <div

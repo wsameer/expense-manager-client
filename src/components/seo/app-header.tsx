@@ -28,7 +28,7 @@ export const AppHeader = (props: Props) => {
           className="h-4"
         />
         <div className="flex flex-col min-w-0 pl-2">
-          <h2 className="text-2xl font-medium tracking-tight truncate max-w-[180px] sm:max-w-[240px]">
+          <h2 className="text-xl font-medium tracking-tight truncate max-w-[180px] sm:max-w-[240px]">
             {props.title}
           </h2>
           <small className="text-foreground/50">{props.subTitle}</small>
