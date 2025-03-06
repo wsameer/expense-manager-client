@@ -1,26 +1,38 @@
 import { AxiosError } from 'axios';
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 import useSWR from 'swr';
 
+import { Account, AccountGroup, useAccountStore } from '@/store/accountStore';
 import axiosInstance from '@/lib/api-client';
-import { Account, AccountGroup } from '@/types/api';
 import { ACCOUNTS_API } from '../constants';
 
-const fetchAccounts = async (url: string): Promise<Account[]> => {
-  const res = await axiosInstance.get<Account[]>(url);
-  return res.data;
-};
-
 export const useAccounts = () => {
-  const { data, error } = useSWR<Account[], AxiosError>(
-    ACCOUNTS_API,
-    fetchAccounts,
-    {
-      revalidateOnFocus: false,
-      revalidateOnReconnect: false,
-      dedupingInterval: 60000, // 1 minute
-    },
-  );
+  const accountStore = useAccountStore();
+  const { accounts, error, isLoading, setAccounts, setLoading, setError } =
+    accountStore;
+
+  const fetchAccounts = async (url: string): Promise<Account[]> => {
+    setLoading(true);
+    try {
+      const res = await axiosInstance.get<Account[]>(url);
+      return res.data;
+    } catch (error) {
+      setError(error instanceof Error ? error : new Error(String(error)));
+      throw error;
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const {
+    data,
+    error: fetchError,
+    isValidating,
+  } = useSWR<Account[], AxiosError>(ACCOUNTS_API, fetchAccounts, {
+    revalidateOnFocus: false,
+    revalidateOnReconnect: false,
+    dedupingInterval: 60000, // 1 minute
+  });
 
   const getBalanceSumByGroup = useCallback(
     (group: AccountGroup): number => {
@@ -32,10 +44,23 @@ export const useAccounts = () => {
     [data],
   );
 
+  // Sync API data with Zustand store
+  useEffect(() => {
+    if (data) {
+      setAccounts(data);
+    }
+  }, [data, setAccounts]);
+
+  useEffect(() => {
+    if (fetchError) {
+      setError(fetchError);
+    }
+  }, [fetchError, setError]);
+
   return {
-    allAccounts: data,
-    isLoading: !error && !data,
-    isError: error,
+    allAccounts: accounts,
+    isLoading: isLoading || isValidating,
+    isError: !!error,
     getBalanceSumByGroup,
   };
 };

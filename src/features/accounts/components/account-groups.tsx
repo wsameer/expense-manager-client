@@ -1,4 +1,3 @@
-import { AccountGroup } from '@/types/api';
 import { capitalize, cn, formattedAmount } from '@/lib/utils';
 import { ErrorMessage } from '@/components/errors/error-message';
 
@@ -9,9 +8,9 @@ import { AddAccount } from './add-account';
 import { SkeletonLoader } from './skeleton-loaders';
 import { useState } from 'react';
 import { ScrollArea } from '@/components/ui/scroll-area';
+import { AccountGroup } from '@/store/accountStore';
 
 export const AccountGroups = () => {
-  // const navigate = useNavigate();
   const [expandStack, setExpandStack] = useState<string[]>([]);
   const { allAccounts, isError, isLoading, getBalanceSumByGroup } =
     useAccounts();
@@ -23,6 +22,7 @@ export const AccountGroups = () => {
   if (isLoading) {
     return (
       <div className="grid grid-cols-1 gap-4">
+        <SkeletonLoader />
         <SkeletonLoader />
         <SkeletonLoader />
         <SkeletonLoader />
@@ -45,7 +45,7 @@ export const AccountGroups = () => {
 
   return (
     <ScrollArea className="h-[600px] -mx-4">
-      <div className="grid grid-cols-1 p-4 gap-4">
+      <div className="p-4">
         <div className="grid gap-4">
           {ACCOUNT_GROUPS.map(({ id, label, key }) => {
             const filteredAccounts = filteredAccountsByGroup(key);
@@ -103,7 +103,7 @@ export const AccountGroups = () => {
                     <div
                       key={id}
                       className={cn(
-                        'relative bg-background dark:bg-zinc-800 dark:border border',
+                        'relative bg-background dark:bg-zinc-800 border dark:border-zinc-900',
                         'flex justify-between rounded-xl p-3 -mt-10',
                         'transition-all duration-400 ease-in-out',
                         {
@@ -132,46 +132,6 @@ export const AccountGroups = () => {
             );
           })}
         </div>
-
-        {/* {ACCOUNT_GROUPS.map(({ id, label, key }) => {
-        return (
-          <ListGroup
-            key={id}
-            title={capitalize(label)}
-            rightSideElement={
-              <p className="text-sm text-muted-foreground">
-                {formattedAmount(getBalanceSumByGroup(key as AccountGroup))}
-              </p>
-            }
-          >
-            {allAccounts?.map(({ id, name, group, balance }) => {
-              if (key === group) {
-                return (
-                  <ListItem
-                    key={id}
-                    label={name}
-                    onClick={() =>
-                      navigate(`${ACCOUNTS_ROUTE}/${id}`, {
-                        state: {
-                          fromAccountsPage: true,
-                        },
-                      })
-                    }
-                    rightElement={
-                      <p className="text-xs font-mono">
-                        {formattedAmount(balance)}
-                      </p>
-                    }
-                  />
-                );
-              }
-            })}
-            {key !== 'CASH' && (
-              <AddAccount group={key as unknown as AccountGroupEnum} />
-            )}
-          </ListGroup>
-        );
-      })} */}
       </div>
     </ScrollArea>
   );

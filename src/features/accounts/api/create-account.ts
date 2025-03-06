@@ -1,11 +1,11 @@
 import useSWRMutation from 'swr/mutation';
 
 import axiosInstance from '@/lib/api-client';
-import { Account } from '@/types/api';
 import { ACCOUNTS_API } from '../constants';
 import { CreateAccountForm } from '../types';
 import { handleError } from '@/lib/handle-error';
 import { useSWRConfig } from 'swr';
+import { Account } from '@/store/accountStore';
 
 const createAccountFetcher = async (
   url: string,

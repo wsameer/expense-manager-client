@@ -12,7 +12,6 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 
-import { AccountGroup } from '@/types/api';
 import { Button } from '@/components/ui/button';
 import { useTranslation } from 'react-i18next';
 import {
@@ -35,6 +34,7 @@ import { useAccounts } from '../api/get-accounts';
 import { useUpdateAccount } from '../api/update-account';
 import { capitalize, cn } from '@/lib/utils';
 import { useCreateAccount } from '../api/create-account';
+import { AccountGroup } from '@/store/accountStore';
 
 type Props = React.ComponentProps<'form'> & {
   name?: string;

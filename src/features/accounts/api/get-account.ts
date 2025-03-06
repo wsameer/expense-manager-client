@@ -2,8 +2,9 @@ import { AxiosError } from 'axios';
 import { useCallback } from 'react';
 import useSWR from 'swr';
 
+import { Account } from '@/store/accountStore';
 import axiosInstance from '@/lib/api-client';
-import { Account } from '@/types/api';
+
 import { ACCOUNTS_API } from '../constants';
 
 interface FetchError {
