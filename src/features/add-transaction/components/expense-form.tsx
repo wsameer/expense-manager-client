@@ -14,10 +14,10 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form';
+import { useAccountStore } from '@/store/accountsStore';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { OptionSelector } from '@/components/option-selector';
-import { useAccounts } from '@/features/accounts/api/get-accounts';
 import { TransactionType } from '@/types';
 import { useExpenseCategories } from '@/features/expense-category/api/use-expense-categories';
 import {
@@ -68,8 +68,9 @@ export const ExpenseForm = ({ existingData, setOpen }: FormProps) => {
   >(null);
 
   const { t } = useTranslation('transaction');
-  const { allAccounts } = useAccounts();
   const navigate = useNavigate();
+
+  const { accounts } = useAccountStore();
   const { expenseCategories } = useExpenseCategories();
   const { createTransaction } = useCreateTransaction();
   const { updateTransaction } = useUpdateTransaction();
@@ -106,23 +107,21 @@ export const ExpenseForm = ({ existingData, setOpen }: FormProps) => {
     Boolean(expenseCategoryId) && subcategories.length === 0;
 
   const accountOptions: SelectorOption[] = useMemo(() => {
-    if (!allAccounts) return [];
-    return allAccounts.map((acc) => {
+    if (!accounts) return [];
+    return accounts.map((acc) => {
       return {
         id: acc.id,
         name: acc.name,
       };
     });
-  }, [allAccounts]);
+  }, [accounts]);
 
   const getSelectedAccountName = useCallback(
     (id: number) => {
       if (!id) return undefined;
-      return (
-        allAccounts?.find((account) => id === account.id)?.name || undefined
-      );
+      return accounts?.find((account) => id === account.id)?.name || undefined;
     },
-    [allAccounts],
+    [accounts],
   );
 
   const getSelectedCategoryName = useCallback(

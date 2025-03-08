@@ -1,18 +1,17 @@
-import { useState } from 'react';
-
 import { PageLayout } from '@/components/layout/page-layout';
 import { useAuth, useResponsive } from '@/hooks';
 import { cn } from '@/lib/utils';
 import { MonthNavigator } from '@/components/shared/month-navigator';
 import { DashboardPage } from '@/features/dashboard';
+import { useUiStore } from '@/store/uiStore';
 
 export const DashboardRoute = () => {
-  const [currentDate, setCurrentDate] = useState(new Date());
   const { isDesktop } = useResponsive();
   const { user } = useAuth();
+  const { selectedDate, setSelectedDate } = useUiStore();
 
   const handleMonthChange = (year: number, month: number) => {
-    setCurrentDate(new Date(year, month));
+    setSelectedDate(new Date(year, month));
   };
 
   return (
@@ -36,14 +35,14 @@ export const DashboardRoute = () => {
           {/* Right Side: Month Navigator (50%) */}
           <div className="flex-none flex justify-end overflow-hidden whitespace-nowrap bg-white border shadow-sm dark:bg-zinc-800 rounded-2xl py-0.5">
             <MonthNavigator
-              currentDate={currentDate}
+              currentDate={selectedDate}
               handleMonthChange={handleMonthChange}
               options={{ timeJump: true }}
               className="justify-center gap-1"
             />
           </div>
         </div>
-        <DashboardPage currentDate={currentDate} />
+        <DashboardPage currentDate={selectedDate} />
       </div>
     </PageLayout>
   );

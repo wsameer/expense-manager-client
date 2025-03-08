@@ -2,7 +2,7 @@ import { AxiosError } from 'axios';
 import { useCallback } from 'react';
 import useSWR from 'swr';
 
-import { Account } from '@/store/accountStore';
+import { Account } from '@/store/accountsStore';
 import axiosInstance from '@/lib/api-client';
 
 import { ACCOUNTS_API } from '../constants';

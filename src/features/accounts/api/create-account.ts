@@ -1,11 +1,10 @@
 import useSWRMutation from 'swr/mutation';
 
 import axiosInstance from '@/lib/api-client';
+import { handleError } from '@/lib/handle-error';
+import { Account, useAccountStore } from '@/store/accountsStore';
 import { ACCOUNTS_API } from '../constants';
 import { CreateAccountForm } from '../types';
-import { handleError } from '@/lib/handle-error';
-import { useSWRConfig } from 'swr';
-import { Account } from '@/store/accountStore';
 
 const createAccountFetcher = async (
   url: string,
@@ -20,7 +19,7 @@ const createAccountFetcher = async (
 };
 
 export const useCreateAccount = () => {
-  const { mutate } = useSWRConfig();
+  const { addAccount } = useAccountStore();
   const { trigger, isMutating, error } = useSWRMutation(
     ACCOUNTS_API,
     createAccountFetcher,
@@ -29,11 +28,7 @@ export const useCreateAccount = () => {
   const createAccount = async (accountData: CreateAccountForm) => {
     try {
       const result = await trigger(accountData);
-      mutate(
-        ACCOUNTS_API,
-        (currentAccounts: Account[] = []) => [...currentAccounts, result],
-        false,
-      );
+      addAccount(result);
       return result;
     } catch (error) {
       console.error('Failed to create account:', error);

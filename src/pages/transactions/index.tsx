@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { PageLayout } from '@/components/layout/page-layout';
 import { useResponsive } from '@/hooks';
+import { useUiStore } from '@/store/uiStore';
 import { cn } from '@/lib/utils';
 import { TransactionList } from '@/features/transactions/components/transaction-list';
 import { Button } from '@/components/ui/button';
@@ -28,21 +29,21 @@ const getMonthsToDisplay = (date: Date): MonthData[] => {
 
 export const TransactionsRoute = () => {
   const { isDesktop } = useResponsive();
-  const [currentDate, setCurrentDate] = useState(new Date());
+  const { selectedDate, setSelectedDate } = useUiStore();
   const [displayedMonths, setDisplayedMonths] = useState(() =>
-    getMonthsToDisplay(currentDate),
+    getMonthsToDisplay(selectedDate),
   );
   const [centerMonth, setCenterMonth] = useState(() => {
-    return { month: currentDate.getMonth(), year: currentDate.getFullYear() };
+    return { month: selectedDate.getMonth(), year: selectedDate.getFullYear() };
   });
 
   const handleMonthSelect = (year: number, month: number) => {
-    setCurrentDate(new Date(year, month));
-    setDisplayedMonths(() => getMonthsToDisplay(currentDate));
+    setSelectedDate(new Date(year, month));
+    setDisplayedMonths(() => getMonthsToDisplay(selectedDate));
   };
 
   const handleMonthButtonClick = (year: number, month: number) => {
-    setCurrentDate(new Date(year, month));
+    setSelectedDate(new Date(year, month));
   };
 
   const handleMonthNavigation = (direction: number) => {
@@ -71,7 +72,7 @@ export const TransactionsRoute = () => {
           <div className="flex-none flex justify-end overflow-hidden whitespace-nowrap bg-white border shadow-sm dark:bg-zinc-800 rounded-2xl py-0.5">
             <MonthPicker
               onMonthSelect={handleMonthSelect}
-              currentDate={currentDate}
+              currentDate={selectedDate}
               className="justify-center gap-1"
             />
           </div>
@@ -94,8 +95,8 @@ export const TransactionsRoute = () => {
                   key={`${monthData.year}-${monthData.month}`}
                   monthData={monthData}
                   isSelected={
-                    monthData.month === currentDate.getMonth() &&
-                    monthData.year === currentDate.getFullYear()
+                    monthData.month === selectedDate.getMonth() &&
+                    monthData.year === selectedDate.getFullYear()
                   }
                   onSelect={handleMonthButtonClick}
                 />
@@ -113,7 +114,7 @@ export const TransactionsRoute = () => {
           </Button>
         </div>
 
-        <TransactionList currentDate={currentDate} />
+        <TransactionList />
       </div>
     </PageLayout>
   );

@@ -2,14 +2,13 @@ import { AxiosError } from 'axios';
 import { useCallback, useEffect } from 'react';
 import useSWR from 'swr';
 
-import { Account, AccountGroup, useAccountStore } from '@/store/accountStore';
+import { Account, AccountGroup, useAccountStore } from '@/store/accountsStore';
 import axiosInstance from '@/lib/api-client';
 import { ACCOUNTS_API } from '../constants';
 
 export const useAccounts = () => {
-  const accountStore = useAccountStore();
   const { accounts, error, isLoading, setAccounts, setLoading, setError } =
-    accountStore;
+    useAccountStore();
 
   const fetchAccounts = async (url: string): Promise<Account[]> => {
     setLoading(true);

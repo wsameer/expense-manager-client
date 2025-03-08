@@ -6,18 +6,20 @@ import { arrayMove } from '@dnd-kit/sortable';
 import { ErrorMessage } from '@/components/errors/error-message';
 import { Busy } from '@/components/shared/busy';
 import { toast } from '@/hooks';
-import { useIncomeCategories } from './api/use-categories';
-import { IncomeCategory } from './types';
+import { useIncomeCategoriesStore } from '@/features/income-categories/store/incomeCategoryStore';
 
+import { useIncomeCategories } from './api/use-categories';
 import { AddIncomeCategoryForm } from './features/add-income-form';
 import { CategoryActionButtons } from './components/category-action-buttons';
 import { useDeleteCategoryHandler } from './hooks/use-delete-category-handler';
 import { CategoryList } from './components/category-list';
+import { IncomeCategory } from './types';
 
 export const IncomeCategoryList = () => {
   const { t } = useTranslation(['common', 'categories']);
   const { handleDeleteCategory } = useDeleteCategoryHandler();
-  const { incomeCategories, isLoading, isError, updateCache, replace } =
+  const { setIncomeCategories } = useIncomeCategoriesStore();
+  const { incomeCategories, isLoading, isError, replace } =
     useIncomeCategories();
 
   const [isListDirty, setIsListDirty] = useState(false);
@@ -58,7 +60,7 @@ export const IncomeCategoryList = () => {
         order: index + 1,
       }));
 
-      updateCache(reorderedItems);
+      setIncomeCategories(reorderedItems);
     }
   };
 

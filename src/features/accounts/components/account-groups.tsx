@@ -8,7 +8,7 @@ import { AddAccount } from './add-account';
 import { SkeletonLoader } from './skeleton-loaders';
 import { useState } from 'react';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { AccountGroup } from '@/store/accountStore';
+import { AccountGroup } from '@/store/accountsStore';
 
 export const AccountGroups = () => {
   const [expandStack, setExpandStack] = useState<string[]>([]);
@@ -93,8 +93,8 @@ export const AccountGroups = () => {
                 {/* Grouped Accounts */}
                 {filteredAccounts.map(({ id, name, balance }, index) => {
                   const isCardExpanded = expandStack.includes(key);
-                  const baseScale = 0.95;
-                  const scaleFactor = 0.05;
+                  const baseScale = 0.97;
+                  const scaleFactor = 0.04;
                   const scaleValue = isCardExpanded
                     ? 1
                     : baseScale - index * scaleFactor;

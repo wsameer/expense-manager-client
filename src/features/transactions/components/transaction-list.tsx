@@ -32,10 +32,7 @@ import { TransactionItem } from './transaction-item';
 import { useTransactions } from '../api/get-transaction';
 import { ErrorMessage } from '@/components/errors/error-message';
 import { formatDateToYYYYMM } from '@/lib/utils';
-
-type Props = {
-  currentDate: Date;
-};
+import { useUiStore } from '@/store/uiStore';
 
 const calculateTotalsByType = (transactions: Transaction[]): TypeTotals => {
   const initialTotals: TypeTotals = {
@@ -50,15 +47,16 @@ const calculateTotalsByType = (transactions: Transaction[]): TypeTotals => {
   }, initialTotals);
 };
 
-export const TransactionList = ({ currentDate }: Props) => {
+export const TransactionList = () => {
+  const { selectedDate } = useUiStore();
   const { t } = useTranslation(['transaction', 'common']);
   const { openConfirmDialog } = useConfirmDialog();
   const { allTransactions, isError, isLoading } = useTransactions(
-    formatDateToYYYYMM(currentDate),
+    formatDateToYYYYMM(selectedDate),
   );
 
   const { deleteTransaction } = useDeleteTransaction(
-    formatDateToYYYYMM(currentDate),
+    formatDateToYYYYMM(selectedDate),
   );
 
   const [open, setOpen] = useState(false);

@@ -35,12 +35,12 @@ export const AccountsPage = () => {
 
   return (
     <div
-      className={cn('grid grid-cols-1 gap-6', {
+      className={cn('grid grid-cols-1 gap-3', {
         'w-3/5': isDesktop,
       })}
     >
-      <div className="bg-white border dark:bg-zinc-800 rounded-2xl p-3 shadow-sm">
-        <div className="grid grid-flow-col gap-2">
+      <div className="bg-white border dark:bg-zinc-800 rounded-2xl h-16 py-3 shadow-sm">
+        <div className="flex flex-row justify-evenly items-center h-full gap-1">
           {statsData.map((item, index) => (
             <React.Fragment key={item.id}>
               <FinancialStat {...item} />

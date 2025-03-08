@@ -16,7 +16,6 @@ import {
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { useAccounts } from '@/features/accounts/api/get-accounts';
-import { Account } from '@/types/api';
 import { toast } from '@/hooks';
 import { TransactionType } from '@/types';
 import { OptionSelector } from '@/components/option-selector';
@@ -29,6 +28,7 @@ import { useUpdateTransaction } from '../api/update-transaction';
 import { DateSelector } from './form-fields/date-selector';
 import { FormProps } from './types';
 import { useIncomeCategories } from '@/features/income-categories/api/use-categories';
+import { Account } from '@/store/accountsStore';
 
 const formSchema = z.object({
   transactionDate: z.date({

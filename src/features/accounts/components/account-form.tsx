@@ -34,7 +34,7 @@ import { useAccounts } from '../api/get-accounts';
 import { useUpdateAccount } from '../api/update-account';
 import { capitalize, cn } from '@/lib/utils';
 import { useCreateAccount } from '../api/create-account';
-import { AccountGroup } from '@/store/accountStore';
+import { AccountGroup } from '@/store/accountsStore';
 
 type Props = React.ComponentProps<'form'> & {
   name?: string;
