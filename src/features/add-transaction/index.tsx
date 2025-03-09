@@ -23,16 +23,20 @@ import {
 import { useTranslation } from 'react-i18next';
 import { TransactionType } from '@/types';
 import { Transactions } from './components/transactions';
+import { useUiStore } from '@/store/uiStore';
 
 export const AddTransaction = () => {
   const { t } = useTranslation('transaction');
   const [open, setOpen] = useState(false);
-  const [selectedTab, setSelectedTab] = useState(TransactionType.EXPENSE);
+  const { selectedTransactionType } = useUiStore();
   const { isMobile } = useResponsive();
 
   const tabTitle = useMemo(
-    () => (selectedTab === TransactionType.TRANSFER ? 'transfer' : selectedTab),
-    [selectedTab],
+    () =>
+      selectedTransactionType === TransactionType.TRANSFER
+        ? 'transfer'
+        : selectedTransactionType,
+    [selectedTransactionType],
   );
 
   if (isMobile) {
@@ -56,16 +60,15 @@ export const AddTransaction = () => {
           <div className="mx-auto w-full max-w-sm">
             <DrawerHeader className="text-left">
               <DrawerTitle className="text-2xl font-light">
-                Record {selectedTab === TransactionType.TRANSFER ? 'a' : 'an'}{' '}
+                Record{' '}
+                {selectedTransactionType === TransactionType.TRANSFER
+                  ? 'a'
+                  : 'an'}{' '}
                 {tabTitle}
               </DrawerTitle>
             </DrawerHeader>
             <div className="px-4">
-              <Transactions
-                selectedTab={selectedTab}
-                setSelectedTab={setSelectedTab}
-                setOpen={setOpen}
-              />
+              <Transactions setOpen={setOpen} />
             </div>
           </div>
         </DrawerContent>
@@ -91,7 +94,10 @@ export const AddTransaction = () => {
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>
             <DialogTitle>
-              Record {selectedTab === TransactionType.TRANSFER ? 'a' : 'an'}{' '}
+              Record{' '}
+              {selectedTransactionType === TransactionType.TRANSFER
+                ? 'a'
+                : 'an'}{' '}
               {tabTitle}
             </DialogTitle>
             <DialogDescription>
@@ -99,11 +105,7 @@ export const AddTransaction = () => {
             </DialogDescription>
           </DialogHeader>
           <div className="grid gap-4 pt-4">
-            <Transactions
-              selectedTab={selectedTab}
-              setSelectedTab={setSelectedTab}
-              setOpen={setOpen}
-            />
+            <Transactions setOpen={setOpen} />
           </div>
           <DialogFooter>
             <DialogClose asChild>
