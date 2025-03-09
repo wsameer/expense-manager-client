@@ -15,10 +15,14 @@ export const DashboardRoute = () => {
   };
 
   return (
-    <PageLayout title="Dashboard">
+    <PageLayout
+      title="Dashboard"
+      suppressTitle
+      showStickyHeader
+    >
       <div
         className={cn('grid grid-cols-1 gap-3', {
-          'w-3/4': isDesktop,
+          'w-2/4': isDesktop,
         })}
       >
         <div className="flex items-end justify-between gap-4 mb-2">

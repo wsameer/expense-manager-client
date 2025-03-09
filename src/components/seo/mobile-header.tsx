@@ -1,13 +1,17 @@
 import { ReactElement } from 'react';
 import { Link } from '../ui/link';
-import { ChevronLeft } from 'lucide-react';
+import { Bell, ChevronLeft, Wallet2 } from 'lucide-react';
 import { Button } from '../ui/button';
+import { SETTINGS_ROUTE } from '@/app/router/routes';
+import { Avatar } from '../ui/avatar';
+import { AvatarFallback } from '@radix-ui/react-avatar';
 
 type Props = {
   title?: string;
   backButtonUrl?: string;
   rightElement?: ReactElement;
   showStickyHeader?: boolean;
+  suppressTitle?: boolean;
 };
 
 export const MobileHeader = ({
@@ -15,6 +19,7 @@ export const MobileHeader = ({
   rightElement,
   backButtonUrl,
   showStickyHeader = false,
+  suppressTitle = false,
 }: Props) => {
   if (!showStickyHeader) {
     return <header className="h-8" />;
@@ -27,7 +32,7 @@ export const MobileHeader = ({
     >
       <div className="container h-16 flex max-w-screen-2xl items-center">
         <div className="flex-1 text-left">
-          {backButtonUrl && (
+          {backButtonUrl ? (
             <Button
               size="icon"
               variant="outline"
@@ -38,12 +43,36 @@ export const MobileHeader = ({
                 <ChevronLeft className="h-5 w-5" />
               </Link>
             </Button>
+          ) : (
+            <Wallet2 className="h-5 w-5" />
           )}
         </div>
-        <div className="flex text-center">
-          <p className="text-m font-bold leading-none">{title}</p>
+        {!suppressTitle && (
+          <div className="flex text-center">
+            <p className="text-m font-bold leading-none">{title}</p>
+          </div>
+        )}
+        <div className="flex-1 flex justify-end gap-1 text-right">
+          {rightElement}
+          <Button
+            variant="link"
+            size="icon"
+          >
+            <Bell />
+          </Button>
+          <Button
+            className="rounded-full"
+            size="icon"
+            variant="outline"
+            asChild
+          >
+            <Link to={SETTINGS_ROUTE}>
+              <Avatar className="w-auto h-auto">
+                <AvatarFallback>ST</AvatarFallback>
+              </Avatar>
+            </Link>
+          </Button>
         </div>
-        <div className="flex-1 text-right">{rightElement}</div>
       </div>
     </header>
   );

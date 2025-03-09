@@ -58,7 +58,7 @@ export const AppBottomBar = () => {
       }`}
       id="app-bottom-bar"
     >
-      <nav className="flex items-center justify-between rounded-full bg-zinc-800 dark:bg-zinc-900 dark:border dark:border-zinc-900 p-2 shadow-lg">
+      <nav className="flex items-center justify-between rounded-full bg-zinc-800 dark:bg-zinc-200 p-2 shadow-lg">
         {PRIMARY_NAV.slice(0, -1).map((item, index) => {
           const Icon = item.icon;
           return (
