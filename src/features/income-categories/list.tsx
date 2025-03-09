@@ -5,7 +5,7 @@ import { arrayMove } from '@dnd-kit/sortable';
 
 import { ErrorMessage } from '@/components/errors/error-message';
 import { Busy } from '@/components/shared/busy';
-import { toast } from '@/hooks';
+import { toast } from '@/hooks/use-toast';
 import { useIncomeCategoriesStore } from '@/features/income-categories/income-categories-store';
 
 import { useIncomeCategories } from './api/use-categories';

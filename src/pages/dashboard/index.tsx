@@ -1,9 +1,10 @@
 import { PageLayout } from '@/components/layout/page-layout';
-import { useAuth, useResponsive } from '@/hooks';
 import { cn } from '@/lib/utils';
 import { MonthNavigator } from '@/components/shared/month-navigator';
 import { DashboardPage } from '@/features/dashboard';
 import { useUiStore } from '@/store/uiStore';
+import { useResponsive } from '@/hooks/use-responsive';
+import { useAuth } from '@/hooks/use-auth';
 
 export const DashboardRoute = () => {
   const { isDesktop } = useResponsive();

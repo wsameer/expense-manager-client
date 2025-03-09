@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { useTranslation } from 'react-i18next';
 
-import { toast } from '@/hooks';
+import { toast } from '@/hooks/use-toast';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
   Form,

@@ -12,7 +12,7 @@ import {
 import { BrandLogoDesktop } from './brand-logo-desktop';
 import { NavMain } from './nav-main';
 import { NavUser } from './nav-user';
-import { useAuth } from '@/hooks';
+import { useAuth } from '@/hooks/use-auth';
 import { NavSecondary } from './nav-secondary';
 import { APP_META_DATA, PRIMARY_NAV, SECONDARY_NAV } from '../constants';
 

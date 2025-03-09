@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { PageLayout } from '@/components/layout/page-layout';
-import { useResponsive } from '@/hooks';
+import { useResponsive } from '@/hooks/use-responsive';
 import { useUiStore } from '@/store/uiStore';
 import { cn } from '@/lib/utils';
 import { TransactionList } from '@/features/transactions/transaction-list';

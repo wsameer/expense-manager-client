@@ -11,7 +11,7 @@ import {
   REGISTER_ROUTE,
 } from '@/app/router/routes';
 import { useTranslation } from 'react-i18next';
-import { useAuth } from '@/hooks';
+import { useAuth } from '@/hooks/use-auth';
 import { BrandLogo } from '@/components/navigation/brand-logo';
 import React from 'react';
 

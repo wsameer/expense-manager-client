@@ -11,7 +11,6 @@ import {
   WalletCards,
 } from 'lucide-react';
 
-import { useResponsive, useAuth } from '@/hooks';
 import { PageLayout } from '@/components/layout/page-layout';
 import { useTheme } from '@/features/theme/theme-provider';
 import { cn } from '@/lib/utils';
@@ -26,6 +25,8 @@ import {
 } from '@/app/router/routes';
 import { Button } from '@/components/ui/button';
 import { SECONDARY_NAV } from '@/components/navigation/constants';
+import { useResponsive } from '@/hooks/use-responsive';
+import { useAuth } from '@/hooks/use-auth';
 
 export const SettingsPage = () => {
   const navigate = useNavigate();

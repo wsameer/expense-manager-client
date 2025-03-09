@@ -19,7 +19,7 @@ import {
   DrawerFooter,
   DrawerClose,
 } from '@/components/ui/drawer';
-import { useResponsive } from '@/hooks';
+import { useResponsive } from '@/hooks/use-responsive';
 import { AccountForm } from './account-form';
 import { AccountGroupEnum } from '../types';
 

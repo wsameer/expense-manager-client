@@ -1,6 +1,6 @@
 import { useConfirmDialog } from '@/components/ui/confirmable';
 import { useTranslation } from 'react-i18next';
-import { toast } from '@/hooks';
+import { toast } from '@/hooks/use-toast';
 import { useIncomeCategories } from '../api/use-categories';
 
 export const useDeleteCategoryHandler = () => {

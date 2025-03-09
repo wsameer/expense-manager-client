@@ -29,7 +29,7 @@ import {
   CreateAccountForm,
   createAccountFormSchema,
 } from '../types';
-import { toast } from '@/hooks';
+import { toast } from '@/hooks/use-toast';
 import { useAccounts } from '../api/get-accounts';
 import { useUpdateAccount } from '../api/update-account';
 import { capitalize, cn } from '@/lib/utils';

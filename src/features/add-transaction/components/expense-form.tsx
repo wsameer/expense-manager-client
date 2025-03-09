@@ -27,7 +27,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { toast } from '@/hooks';
+import { toast } from '@/hooks/use-toast';
 import {
   ACCOUNT_SETTINGS_ROUTE,
   EXPENSE_CATEGORY_SETTINGS_ROUTE,

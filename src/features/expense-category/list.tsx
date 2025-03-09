@@ -23,7 +23,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { toast } from '@/hooks';
+import { toast } from '@/hooks/use-toast';
 import { useConfirmDialog } from '@/components/ui/confirmable';
 import { AddExpenseCategoryForm } from './components/add-category-form';
 import { AddExpenseSubCategory } from './components/add-expense-subcategory';

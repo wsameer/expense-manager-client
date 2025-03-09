@@ -1,7 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { Eraser, FileDown, Trash2 } from 'lucide-react';
 
-import { toast } from '@/hooks';
 import { SETTINGS_ROUTE } from '@/app/router/routes';
 import { useConfirmDialog } from '@/components/ui/confirmable';
 import { ListGroup } from '@/components/list-group';
@@ -11,6 +10,7 @@ import { PageLayout } from '@/components/layout/page-layout';
 
 import { useDeleteTransaction } from '../../features/transactions/api/delete-transaction';
 import { ImportDataDialog } from '@/features/import-data';
+import { toast } from '@/hooks/use-toast';
 
 export const DataSettingsPage = () => {
   const { t } = useTranslation(['common', 'settings']);

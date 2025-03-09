@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '@/hooks';
+import { useAuth } from '@/hooks/use-auth';
 
 import { APP_ROUTE } from '@/app/router/routes';
 import { Head } from '../seo';

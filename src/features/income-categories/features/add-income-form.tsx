@@ -20,7 +20,6 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form';
-import { toast, useResponsive } from '@/hooks';
 import { Textarea } from '@/components/ui/textarea';
 import {
   Drawer,
@@ -32,6 +31,8 @@ import {
 import { IncomeCategory } from '../types';
 import { useIncomeCategories } from '../api/use-categories';
 import { Trash2 } from 'lucide-react';
+import { useResponsive } from '@/hooks/use-responsive';
+import { toast } from '@/hooks/use-toast';
 
 type Props = {
   open: boolean;

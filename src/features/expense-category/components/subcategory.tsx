@@ -4,7 +4,7 @@ import { Pencil, Trash2 } from 'lucide-react';
 import { Separator } from '@/components/ui/separator';
 import { Button } from '@/components/ui/button';
 import { useConfirmDialog } from '@/components/ui/confirmable';
-import { toast } from '@/hooks';
+import { toast } from '@/hooks/use-toast';
 import { useExpenseSubcategories } from '../api/use-subcategories';
 import { Subcategory } from '../types';
 

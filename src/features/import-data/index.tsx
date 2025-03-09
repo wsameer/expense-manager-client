@@ -22,7 +22,7 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from '@/components/ui/drawer';
-import { useResponsive } from '@/hooks';
+import { useResponsive } from '@/hooks/use-responsive';
 import { ImportCsvForm } from './form';
 
 export const ImportDataDialog = () => {

@@ -1,7 +1,7 @@
 import React from 'react';
 import { TrendingDown, TrendingUp, DollarSign } from 'lucide-react';
 
-import { useResponsive } from '@/hooks';
+import { useResponsive } from '@/hooks/use-responsive';
 import { Separator } from '@/components/ui/separator';
 import { cn } from '@/lib/utils';
 

@@ -14,7 +14,7 @@ import { TransactionType } from '@/types';
 import { formatDateToYYYYMM } from '@/lib/utils';
 import { Transactions } from '@/features/add-transaction/components/transactions';
 import { useConfirmDialog } from '@/components/ui/confirmable';
-import { toast } from '@/hooks';
+import { toast } from '@/hooks/use-toast';
 import { ErrorMessage } from '@/components/errors/error-message';
 import { useUiStore } from '@/store/uiStore';
 

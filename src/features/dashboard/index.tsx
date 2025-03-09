@@ -6,7 +6,7 @@ import { CAD } from '@/lib/constants';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { capitalize, formatDateToYYYYMM } from '@/lib/utils';
 import { Skeleton } from '@/components/ui/skeleton';
-import { toast } from '@/hooks';
+import { toast } from '@/hooks/use-toast';
 import { ErrorMessage } from '@/components/errors/error-message';
 import { useChartData } from './api/get-chart-data';
 import { DashboardPieChart } from './components/pie-chart';

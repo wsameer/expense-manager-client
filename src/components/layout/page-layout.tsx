@@ -1,6 +1,6 @@
 import React, { ReactNode, ReactElement } from 'react';
 
-import { useResponsive } from '@/hooks';
+import { useResponsive } from '@/hooks/use-responsive';
 
 import { SidebarInset, SidebarProvider } from '../ui/sidebar';
 import { AppSidebar } from '../navigation/sidebar/app-sidebar';

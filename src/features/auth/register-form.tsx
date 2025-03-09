@@ -13,8 +13,8 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { toast } from '@/hooks';
-import { useAuth } from '@/hooks';
+import { toast } from '@/hooks/use-toast';
+import { useAuth } from '@/hooks/use-auth';
 import { Eye, EyeOff } from 'lucide-react';
 import { useState } from 'react';
 
