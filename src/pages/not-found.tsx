@@ -11,16 +11,17 @@ export const NotFoundRoute = () => {
         This page doesn't exist
       </p>
       <Button
-        className="h-12 rounded-full w-3/4"
+        className="h-12 rounded-full"
+        variant="default"
         asChild
       >
         <Link
           to={APP_ROUTE}
-          className="flex items-center dark:text-white"
+          className="flex items-center"
           replace
         >
           <Home className="h-4 w-4" />
-          Go to home
+          Go to Home
         </Link>
       </Button>
     </div>
