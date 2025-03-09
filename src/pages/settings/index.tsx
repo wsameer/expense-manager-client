@@ -25,6 +25,7 @@ import {
   INCOME_CATEGORY_SETTINGS_ROUTE,
 } from '@/app/router/routes';
 import { Button } from '@/components/ui/button';
+import { SECONDARY_NAV } from '@/components/navigation/constants';
 
 export const SettingsPage = () => {
   const navigate = useNavigate();
@@ -132,6 +133,16 @@ export const SettingsPage = () => {
               <ChevronRight className="h-4 w-4 text-zinc-600 dark:text-zinc-300" />
             }
           />
+        </ListGroup>
+
+        <ListGroup title={'Settings'}>
+          {SECONDARY_NAV.map((item) => (
+            <ListItem
+              icon={<item.icon />}
+              onClick={() => onSettingItemClick(item.path)}
+              label={item.label}
+            />
+          ))}
         </ListGroup>
 
         <Button
