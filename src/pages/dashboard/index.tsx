@@ -37,11 +37,10 @@ export const DashboardRoute = () => {
           </div>
 
           {/* Right Side: Month Navigator (50%) */}
-          <div className="flex-none flex justify-end overflow-hidden whitespace-nowrap bg-white border shadow-sm dark:bg-zinc-800 rounded-2xl py-0.5">
+          <div className="flex-none flex justify-end overflow-hidden whitespace-nowrap bg-white border shadow-sm dark:bg-zinc-800 rounded-xl py-1">
             <MonthNavigator
               currentDate={selectedDate}
               handleMonthChange={handleMonthChange}
-              options={{ timeJump: true }}
               className="justify-center gap-1"
             />
           </div>

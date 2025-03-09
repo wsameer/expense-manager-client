@@ -5,14 +5,14 @@ export const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   const { user } = useAuth();
   const location = useLocation();
 
-  if (!user) {
-    return (
-      <Navigate
-        to={`/auth/login?redirectTo=${encodeURIComponent(location.pathname)}`}
-        replace
-      />
-    );
+  if (user) {
+    return children;
   }
 
-  return children;
+  return (
+    <Navigate
+      to={`/auth/login?redirectTo=${encodeURIComponent(location.pathname)}`}
+      replace
+    />
+  );
 };

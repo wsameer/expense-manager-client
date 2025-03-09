@@ -7,8 +7,8 @@ import { TransactionList } from '@/features/transactions/transaction-list';
 import { Button } from '@/components/ui/button';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { MonthButton } from './component/month-button';
-import { MonthPicker } from './component/month-picker';
 import { getMonthsToDisplay } from './utils';
+import { MonthNavigator } from '@/components/shared/month-navigator';
 
 export type MonthData = {
   month: number;
@@ -58,10 +58,11 @@ export const TransactionsRoute = () => {
             Transactions
           </h2>
           <div className="flex-none flex justify-end overflow-hidden whitespace-nowrap bg-white border shadow-sm dark:bg-zinc-800 rounded-xl py-1">
-            <MonthPicker
-              onMonthSelect={handleMonthSelect}
+            <MonthNavigator
+              handleMonthChange={handleMonthSelect}
               currentDate={selectedDate}
-              className="justify-center gap-1"
+              className="px-3"
+              suppressNavigators
             />
           </div>
         </div>

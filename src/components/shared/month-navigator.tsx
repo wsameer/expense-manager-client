@@ -8,14 +8,19 @@ import { cn, getFullMonthAndDate } from '@/lib/utils';
 type MonthNavigatorProps = {
   currentDate: Date;
   handleMonthChange: (year: number, month: number) => void;
-  options?: {
-    timeJump?: boolean;
-  };
   className?: string;
+  timeJump?: boolean;
+  suppressNavigators?: boolean;
 };
 
 export const MonthNavigator = memo<MonthNavigatorProps>(
-  ({ currentDate, handleMonthChange, options, className }) => {
+  ({
+    currentDate,
+    handleMonthChange,
+    className,
+    timeJump = true,
+    suppressNavigators = false,
+  }) => {
     const [monthSelectorOpen, setMonthSelectorOpen] = useState(false);
 
     const handleMonthSelect = (year: number, month: number) => {
@@ -50,15 +55,17 @@ export const MonthNavigator = memo<MonthNavigatorProps>(
         id="month-navigator"
         className={cn('flex items-center px-1 w-full', className)}
       >
-        <Button
-          className="rounded-xl h-6 w-6 dark:hover:bg-background/40"
-          onClick={handlePreviousMonth}
-          variant="ghost"
-          size="icon"
-        >
-          <ChevronLeft size={20} />
-        </Button>
-        {options?.timeJump ? (
+        {!suppressNavigators && (
+          <Button
+            className="rounded-xl h-6 w-6 dark:hover:bg-background/40"
+            onClick={handlePreviousMonth}
+            variant="ghost"
+            size="icon"
+          >
+            <ChevronLeft size={20} />
+          </Button>
+        )}
+        {timeJump ? (
           <Popover
             open={monthSelectorOpen}
             onOpenChange={setMonthSelectorOpen}
@@ -81,14 +88,16 @@ export const MonthNavigator = memo<MonthNavigatorProps>(
             {getFullMonthAndDate(currentDate, 'long')}
           </p>
         )}
-        <Button
-          className="rounded-xl h-6 w-6 dark:hover:bg-background/40"
-          onClick={handleNextMonth}
-          variant="ghost"
-          size="icon"
-        >
-          <ChevronRight size={20} />
-        </Button>
+        {!suppressNavigators && (
+          <Button
+            className="rounded-xl h-6 w-6 dark:hover:bg-background/40"
+            onClick={handleNextMonth}
+            variant="ghost"
+            size="icon"
+          >
+            <ChevronRight size={20} />
+          </Button>
+        )}
       </div>
     );
   },

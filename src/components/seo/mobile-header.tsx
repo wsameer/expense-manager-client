@@ -55,7 +55,8 @@ export const MobileHeader = ({
         <div className="flex-1 flex justify-end gap-1 text-right">
           {rightElement}
           <Button
-            variant="link"
+            className="rounded-full"
+            variant="ghost"
             size="icon"
           >
             <Bell />
