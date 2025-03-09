@@ -15,6 +15,7 @@ interface PageLayoutProps {
   children?: ReactNode;
   showStickyHeader?: boolean;
   rightElement?: ReactElement;
+  suppressTitle?: boolean;
   backButtonUrl?: string;
 }
 
