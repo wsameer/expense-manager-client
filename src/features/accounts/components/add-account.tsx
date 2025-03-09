@@ -28,6 +28,9 @@ export const AddAccount = ({ group }: { group: AccountGroupEnum }) => {
   });
   const [open, setOpen] = React.useState(false);
   const { isMobile } = useResponsive();
+  const handleTriggerClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+  };
 
   if (isMobile) {
     return (
@@ -40,6 +43,7 @@ export const AddAccount = ({ group }: { group: AccountGroupEnum }) => {
             className="bg-white dark:bg-muted hover:bg-muted dark:hover:bg-background rounded-xl"
             variant="dashed"
             size="icon"
+            onClick={handleTriggerClick}
           >
             <Plus />
           </Button>

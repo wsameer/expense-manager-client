@@ -211,8 +211,6 @@ export const TransactionList = () => {
             </DrawerHeader>
             <div className="px-4">
               <Transactions
-                selectedTab={selectedTab}
-                setSelectedTab={setSelectedTab}
                 setOpen={setOpen}
                 data={transactionToEdit}
               />

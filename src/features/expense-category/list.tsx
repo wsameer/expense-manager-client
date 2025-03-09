@@ -137,9 +137,11 @@ export const ExpenseCategoryList: React.FC = () => {
                   <small className="text-sm font-medium leading-none">
                     {category.name}
                   </small>
-                  <div className="border px-2.5 py-0.5 text-xs font-semibold transition-colors border-transparent bg-primary text-primary-foreground ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
-                    {category.subcategories?.length ?? 0}
-                  </div>
+                  {category.subcategories?.length ? (
+                    <div className="border px-2.5 py-0.5 text-xs font-semibold transition-colors border-transparent bg-primary text-primary-foreground ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
+                      {category.subcategories.length}
+                    </div>
+                  ) : null}
                 </div>
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
