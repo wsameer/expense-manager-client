@@ -39,6 +39,7 @@ import { useCreateTransaction } from '../api/create-transaction';
 import { useUpdateTransaction } from '../api/update-transaction';
 import { DateSelector } from './form-fields/date-selector';
 import { FormProps } from './types';
+import { useUiStore } from '@/store/uiStore';
 
 const formSchema = z.object({
   date: z.date({
@@ -70,6 +71,7 @@ export const ExpenseForm = ({ existingData, setOpen }: FormProps) => {
   const { t } = useTranslation('transaction');
   const navigate = useNavigate();
 
+  const { selectedDate } = useUiStore();
   const { accounts } = useAccountStore();
   const { expenseCategories } = useExpenseCategories();
   const { createTransaction } = useCreateTransaction();
@@ -84,7 +86,7 @@ export const ExpenseForm = ({ existingData, setOpen }: FormProps) => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      date: new Date(),
+      date: selectedDate,
       amount: 0,
       expenseCategoryId: -1,
       fromAccountId: -1,

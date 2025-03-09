@@ -29,6 +29,7 @@ import { DateSelector } from './form-fields/date-selector';
 import { FormProps } from './types';
 import { useIncomeCategories } from '@/features/income-categories/api/use-categories';
 import { Account } from '@/store/accountsStore';
+import { useUiStore } from '@/store/uiStore';
 
 const formSchema = z.object({
   transactionDate: z.date({
@@ -55,7 +56,7 @@ export const IncomeForm = ({ existingData, setOpen }: FormProps) => {
   const [selectorType, setSelectorType] = useState<
     'account' | 'category' | null
   >(null);
-
+  const { selectedDate } = useUiStore();
   const { t } = useTranslation('transaction');
   const { allAccounts } = useAccounts();
   const navigate = useNavigate();
@@ -93,7 +94,7 @@ export const IncomeForm = ({ existingData, setOpen }: FormProps) => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      transactionDate: new Date(),
+      transactionDate: selectedDate,
       amount: 0,
     },
   });

@@ -5,17 +5,18 @@ import { Transaction } from '@/features/transactions/types';
 import { ExpenseForm } from './expense-form';
 import { IncomeForm } from './income-form';
 import { TransferForm } from './transfer-form';
+import { useUiStore } from '@/store/uiStore';
 
 type TransactionsProps = {
-  selectedTab: TransactionType;
-  setSelectedTab: (value: TransactionType) => void;
   setOpen: (value: boolean) => void;
   data?: Transaction;
 };
 
 export const Transactions: React.FC<TransactionsProps> = React.memo(
-  ({ selectedTab, data, setSelectedTab, setOpen }) => {
+  ({ data, setOpen }) => {
     const transactionTypes = useMemo(() => Object.values(TransactionType), []);
+    const { selectedTransactionType, selectedSelectedTransactionType } =
+      useUiStore();
 
     const renderContent = useCallback(
       (type: TransactionType) => {
@@ -50,8 +51,10 @@ export const Transactions: React.FC<TransactionsProps> = React.memo(
 
     return (
       <Tabs
-        defaultValue={selectedTab}
-        onValueChange={(value) => setSelectedTab(value as TransactionType)}
+        defaultValue={selectedTransactionType}
+        onValueChange={(value) =>
+          selectedSelectedTransactionType(value as TransactionType)
+        }
       >
         <TabsList className="grid w-full grid-cols-3">
           {transactionTypes.map((type) => (

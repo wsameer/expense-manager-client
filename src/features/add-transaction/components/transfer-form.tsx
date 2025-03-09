@@ -17,7 +17,6 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { OptionSelector } from '@/components/option-selector';
 import { cn } from '@/lib/utils';
-import { Account } from '@/types/api';
 import { useAccounts } from '@/features/accounts/api/get-accounts';
 import { TransactionType } from '@/types';
 
@@ -28,6 +27,7 @@ import { FormProps } from './types';
 import { SelectorOption } from '@/components/option-selector/types';
 import { useNavigate } from 'react-router-dom';
 import { ACCOUNT_SETTINGS_ROUTE } from '@/app/router/routes';
+import { useUiStore } from '@/store/uiStore';
 
 const formSchema = z
   .object({
@@ -61,6 +61,7 @@ export const TransferForm = ({ existingData, setOpen }: FormProps) => {
   const navigate = useNavigate();
   const { createTransaction } = useCreateTransaction();
   const { updateTransaction } = useUpdateTransaction();
+  const { selectedDate } = useUiStore();
 
   const [showAccountSelector, setShowAccountSelector] = useState<
     'fromAccountId' | 'toAccountId' | false
@@ -79,7 +80,7 @@ export const TransferForm = ({ existingData, setOpen }: FormProps) => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      date: new Date(),
+      date: selectedDate,
       amount: 0,
       toAccountId: -1,
       fromAccountId: -1,
@@ -277,7 +278,7 @@ export const TransferForm = ({ existingData, setOpen }: FormProps) => {
           {showAccountSelector && (
             <OptionSelector
               options={accountOptions}
-              onSelect={(value: Account) => {
+              onSelect={(value) => {
                 form.setValue(showAccountSelector, value.id);
                 setShowAccountSelector(false);
               }}
