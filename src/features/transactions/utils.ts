@@ -1,4 +1,5 @@
-import { Transaction } from './types';
+import { TransactionType } from '@/types';
+import { Transaction, TypeTotals } from './types';
 
 /**
  * This function takes a JavaScript Date object and
@@ -25,4 +26,19 @@ export const groupTransactionsByDate = (
     },
     {} as Record<string, Transaction[]>,
   );
+};
+
+export const calculateTotalsByType = (
+  transactions: Transaction[],
+): TypeTotals => {
+  const initialTotals: TypeTotals = {
+    [TransactionType.INCOME]: 0,
+    [TransactionType.EXPENSE]: 0,
+  };
+
+  return transactions.reduce((acc, { type, amount }) => {
+    // @ts-expect-error just
+    acc[type] += amount;
+    return acc;
+  }, initialTotals);
 };

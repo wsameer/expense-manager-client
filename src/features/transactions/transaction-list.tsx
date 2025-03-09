@@ -1,54 +1,34 @@
 import { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import {
-  CircleArrowDown,
-  CircleArrowUp,
-  CircleDollarSign,
-  Trash2,
-} from 'lucide-react';
+import { Trash2 } from 'lucide-react';
 
-import { Skeleton } from '@/components/ui/skeleton';
 import { EmptyData } from '@/components/shared/empty-data';
 import {
   Drawer,
-  DrawerClose,
   DrawerContent,
-  DrawerFooter,
   DrawerHeader,
   DrawerTitle,
 } from '@/components/ui/drawer';
 import { Button } from '@/components/ui/button';
 import { TransactionType } from '@/types';
+import { formatDateToYYYYMM } from '@/lib/utils';
 import { Transactions } from '@/features/add-transaction/components/transactions';
-import { Separator } from '@/components/ui/separator';
 import { useConfirmDialog } from '@/components/ui/confirmable';
 import { toast } from '@/hooks';
-
-import { useDeleteTransaction } from '../api/delete-transaction';
-import { StatCard } from '../../../components/shared/stat-card';
-import { Transaction, TypeTotals } from '../types';
-import { groupTransactionsByDate } from '../utils';
-import { TransactionItem } from './transaction-item';
-import { useTransactions } from '../api/get-transaction';
 import { ErrorMessage } from '@/components/errors/error-message';
-import { formatDateToYYYYMM } from '@/lib/utils';
 import { useUiStore } from '@/store/uiStore';
 
-const calculateTotalsByType = (transactions: Transaction[]): TypeTotals => {
-  const initialTotals: TypeTotals = {
-    [TransactionType.INCOME]: 0,
-    [TransactionType.EXPENSE]: 0,
-  };
-
-  return transactions.reduce((acc, { type, amount }) => {
-    // @ts-expect-error just
-    acc[type] += amount;
-    return acc;
-  }, initialTotals);
-};
+import { useDeleteTransaction } from './api/delete-transaction';
+import { Transaction } from './types';
+import { calculateTotalsByType, groupTransactionsByDate } from './utils';
+import { TransactionItem } from './components/transaction-item';
+import { useTransactions } from './api/get-transaction';
+import { TListLoader } from './components/list-loader';
+import { MonthlyStats } from './components/monthly-stats';
 
 export const TransactionList = () => {
-  const { selectedDate } = useUiStore();
+  const { selectedDate, selectedTransactionType, setSelectedTransactionType } =
+    useUiStore();
   const { t } = useTranslation(['transaction', 'common']);
   const { openConfirmDialog } = useConfirmDialog();
   const { allTransactions, isError, isLoading } = useTransactions(
@@ -60,18 +40,20 @@ export const TransactionList = () => {
   );
 
   const [open, setOpen] = useState(false);
-  const [selectedTab, setSelectedTab] = useState(TransactionType.EXPENSE);
   const [transactionToEdit, setTransactionToEdit] = useState<Transaction>();
 
   const onTransactionClick = (t: Transaction) => {
-    setOpen(true);
-    setSelectedTab(t.type);
+    setSelectedTransactionType(t.type);
     setTransactionToEdit(t);
+    setOpen(true);
   };
 
   const tabTitle = useMemo(
-    () => (selectedTab === TransactionType.TRANSFER ? 'transfer' : selectedTab),
-    [selectedTab],
+    () =>
+      selectedTransactionType === TransactionType.TRANSFER
+        ? 'transfer'
+        : selectedTransactionType,
+    [selectedTransactionType],
   );
 
   const handleDeleteTransaction = (id: number) => {
@@ -102,29 +84,7 @@ export const TransactionList = () => {
   }
 
   if (isLoading) {
-    return (
-      <div className="flex flex-col gap-6">
-        <div className="grid grid-cols-1 gap-2">
-          <Skeleton className="h-[25px] w-20 rounded-xl" />
-          <Skeleton className="h-[40px] w-full rounded-xl" />
-          <Skeleton className="h-[40px] w-full rounded-xl" />
-        </div>
-        <div className="grid grid-cols-1 gap-2">
-          <Skeleton className="h-[25px] w-20 rounded-xl" />
-          <Skeleton className="h-[40px] w-full rounded-xl" />
-          <Skeleton className="h-[40px] w-full rounded-xl" />
-        </div>
-        <div className="grid grid-cols-1 gap-2">
-          <Skeleton className="h-[25px] w-20 rounded-xl" />
-          <Skeleton className="h-[40px] w-full rounded-xl" />
-          <Skeleton className="h-[40px] w-full rounded-xl" />
-        </div>
-        <div className="grid grid-cols-1 gap-2">
-          <Skeleton className="h-[25px] w-20 rounded-xl" />
-          <Skeleton className="h-[40px] w-full rounded-xl" />
-        </div>
-      </div>
-    );
+    return <TListLoader />;
   }
 
   if (allTransactions?.length === 0) {
@@ -138,36 +98,9 @@ export const TransactionList = () => {
 
   const monthlyStats = calculateTotalsByType(allTransactions!);
 
-  const renderMonthlyFinanceStats = () => (
-    <div className="bg-white border dark:bg-zinc-800 rounded-2xl p-3 shadow-sm">
-      <div className="grid grid-flow-col gap-2">
-        <StatCard
-          icon={CircleArrowUp}
-          value={monthlyStats.income}
-          label="Income"
-          iconClass="text-green-500 rotate-45"
-        />
-        <Separator orientation="vertical" />
-        <StatCard
-          icon={CircleArrowDown}
-          value={monthlyStats.expense}
-          label="Expense"
-          iconClass="text-red-500 rotate-45"
-        />
-        <Separator orientation="vertical" />
-        <StatCard
-          icon={CircleDollarSign}
-          value={monthlyStats.income - monthlyStats.expense}
-          label="Total"
-          iconClass="text-zinc-500 dark:text-zinc-200"
-        />
-      </div>
-    </div>
-  );
-
   return (
     <div className="flex flex-wrap flex-col gap-4 mb-4">
-      {renderMonthlyFinanceStats()}
+      <MonthlyStats monthlyStats={monthlyStats} />
       {sortedDates.map((date: string) => (
         <div key={date}>
           <p className="text-sm mb-1">
@@ -197,7 +130,9 @@ export const TransactionList = () => {
             <DrawerHeader className="flex justify-between items-center text-left">
               <DrawerTitle>
                 {t('record')}{' '}
-                {selectedTab === TransactionType.TRANSFER ? 'a' : 'an'}{' '}
+                {selectedTransactionType === TransactionType.TRANSFER
+                  ? 'a'
+                  : 'an'}{' '}
                 {tabTitle}
               </DrawerTitle>
               <Button
@@ -215,11 +150,6 @@ export const TransactionList = () => {
                 data={transactionToEdit}
               />
             </div>
-            <DrawerFooter>
-              <DrawerClose asChild>
-                <Button variant="secondary">{t('cancel')}</Button>
-              </DrawerClose>
-            </DrawerFooter>
           </div>
         </DrawerContent>
       </Drawer>

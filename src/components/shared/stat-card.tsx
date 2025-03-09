@@ -31,7 +31,7 @@ export const StatCard = ({
         {isLoading ? (
           <Skeleton className="h-4 w-14 rounded-full" />
         ) : (
-          <p className="text-sm">{CAD.format(value)}</p>
+          <p className="text-xs">{CAD.format(value)}</p>
         )}
       </div>
     </div>

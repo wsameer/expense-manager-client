@@ -10,7 +10,7 @@ type State = {
 
 type Actions = {
   setSelectedDate: (date: Date) => void;
-  selectedSelectedTransactionType: (type: TransactionType) => void;
+  setSelectedTransactionType: (type: TransactionType) => void;
 };
 
 const initialState = {
@@ -26,7 +26,7 @@ export const useUiStore = create<State & Actions>()(
           set((state) => {
             state.selectedDate = date;
           }),
-        selectedSelectedTransactionType: (type: TransactionType) =>
+        setSelectedTransactionType: (type: TransactionType) =>
           set((state) => {
             state.selectedTransactionType = type;
           }),

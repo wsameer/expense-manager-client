@@ -19,21 +19,25 @@ export const MonthButton = ({
   return (
     <Button
       variant={isSelected ? 'default' : 'ghost'}
-      className="flex flex-col py-3 h-auto rounded-3xl hover:text-background"
+      className="flex flex-col py-4 h-auto rounded-3xl hover:text-background"
       onClick={() => onSelect(year, month)}
     >
       <p
-        className={cn('text-sm text-center text-foreground font-medium', {
-          'text-background': isSelected,
-        })}
+        className={cn(
+          'text-sm leading-3 text-center text-foreground font-medium',
+          {
+            'text-background': isSelected,
+          },
+        )}
       >
         {MONTHS[month]}
       </p>
       <p
         className={cn(
-          'text-xs text-center text-muted-foreground mt-0',
+          'text-center text-muted-foreground leading-3',
           isSelected && 'text-background',
         )}
+        style={{ fontSize: '0.6rem' }}
       >
         {year}
       </p>

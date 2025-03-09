@@ -39,7 +39,7 @@ export const TransactionItem: React.FC<TransactionItemProps> = ({
       transaction.type === TransactionType.EXPENSE &&
       transaction.expenseSubcategory
     ) {
-      return transaction.expenseSubcategory.name;
+      return ` / ${transaction.expenseSubcategory.name}`;
     }
   }, [transaction]);
 
@@ -64,37 +64,27 @@ export const TransactionItem: React.FC<TransactionItemProps> = ({
 
   return (
     <Button
-      className="flex h-12 items-center justify-between py-1 px-2 bg-white dark:bg-zinc-800 dark:hover:bg-zinc-900 border-t border-zinc-200 dark:border-zinc-900 cursor-pointer first:border-t-0"
+      className="flex h-max items-center justify-between px-3 py-2 bg-white dark:bg-zinc-800 dark:hover:bg-zinc-900 border-t border-zinc-200 dark:border-zinc-900 cursor-pointer first:border-t-0"
       onClick={() => onTransactionClick(transaction)}
       variant="ghost"
       asChild
     >
       <li className="grid grid-cols-12">
-        <div className="flex flex-col col-span-3">
-          <p className="text-xs text-zinc-600 dark:text-white text-ellipsis overflow-hidden">
-            {getCategory()}
+        <div className="flex flex-col col-span-7">
+          <p className="text-sm font-bold text-zinc-600 dark:text-white text-ellipsis overflow-hidden">
+            {transaction.note}
           </p>
           <p
             className="mt-0.5 text-muted-foreground text-ellipsis overflow-hidden"
             style={{ fontSize: '11px' }}
           >
+            {getCategory()}
             {getSubcategory()}
           </p>
         </div>
-        <div className="col-span-6 text-ellipsis overflow-hidden px-1">
-          <p className="text-xs text-zinc-600 dark:text-white">
-            {transaction.note}
-          </p>
+        <div className="flex flex-col col-span-5 text-end">
           <p
-            className="mt-0.5 text-muted-foreground"
-            style={{ fontSize: '11px' }}
-          >
-            {getBankName(transaction.type)}
-          </p>
-        </div>
-        <div className="col-span-3 text-right">
-          <p
-            className={cn('text-xs font-mono', {
+            className={cn('text-sm font-bold', {
               'text-green-600 dark:text-green-400':
                 transaction.type === TransactionType.INCOME,
               'text-red-600 dark:text-red-400':
@@ -102,6 +92,12 @@ export const TransactionItem: React.FC<TransactionItemProps> = ({
             })}
           >
             ${Math.abs(transaction.amount).toFixed(2)}
+          </p>
+          <p
+            className="mt-0.5 text-muted-foreground text-ellipsis overflow-hidden"
+            style={{ fontSize: '11px' }}
+          >
+            {getBankName(transaction.type)}
           </p>
         </div>
       </li>

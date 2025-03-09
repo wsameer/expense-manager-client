@@ -1,10 +1,5 @@
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
-
-import { useResponsive, useAuth } from '@/hooks';
-import { PageLayout } from '@/components/layout/page-layout';
-import { useTheme } from '@/features/theme/theme-provider';
-import { cn } from '@/lib/utils';
 import {
   ChevronRight,
   Coins,
@@ -12,11 +7,14 @@ import {
   Import,
   Moon,
   PiggyBank,
-  Search,
   Sun,
   WalletCards,
 } from 'lucide-react';
-import { Input } from '@/components/ui/input';
+
+import { useResponsive, useAuth } from '@/hooks';
+import { PageLayout } from '@/components/layout/page-layout';
+import { useTheme } from '@/features/theme/theme-provider';
+import { cn } from '@/lib/utils';
 import { ListGroup } from '@/components/list-group';
 import { ListItem } from '@/components/list-group/list-item';
 import { Switch } from '@/components/ui/switch';
@@ -51,7 +49,7 @@ export const SettingsPage = () => {
         id="app-settings"
         className={cn('grid grid-cols-1 gap-6 w-full', isDesktop && 'w-3/5')}
       >
-        <form className="ml-auto w-full sm:flex-initial md:hidden">
+        {/* <form className="ml-auto w-full sm:flex-initial md:hidden">
           <div className="relative">
             <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
             <Input
@@ -60,7 +58,7 @@ export const SettingsPage = () => {
               className="pl-8 rounded-full"
             />
           </div>
-        </form>
+        </form> */}
 
         <ListGroup title="Appearance">
           <ListItem

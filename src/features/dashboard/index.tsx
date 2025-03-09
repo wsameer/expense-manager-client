@@ -49,20 +49,20 @@ export const DashboardPage = memo(({ currentDate }: Props) => {
       return (
         <Card
           key={data.id}
-          className="flex justify-between bg-white dark:bg-zinc-800 rounded-2xl px-4 py-2 mb-2"
+          className="flex justify-between shadow-none items-center bg-background rounded-2xl px-4 py-2 mb-2"
         >
-          <div className="flex gap-4">
+          <div className="flex items-center gap-2">
             <CircularProgressBar
               strokeColor={COLORS[index % COLORS.length]}
               percentage={percentage}
               strokeWidth={2}
               fontSize={percentage > 99 ? 7 : 9}
             />
-            <small className="text-zinc-900 dark:text-white text-sm font-medium leading-7">
+            <small className="text-foreground text-sm font-medium">
               {data.category}
             </small>
           </div>
-          <small className="text-zinc-900 dark:text-white text-sm font-mono leading-7">
+          <small className="text-foreground text-sm">
             {CAD.format(data.totalAmount)}
           </small>
         </Card>

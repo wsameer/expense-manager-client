@@ -42,7 +42,10 @@ export const MonthPicker = ({
               {getFullMonthAndDate(currentDate, 'short')}
             </p>
           </PopoverTrigger>
-          <PopoverContent>
+          <PopoverContent
+            sideOffset={10}
+            collisionPadding={{ right: 16 }}
+          >
             <MonthSelector
               currentDate={currentDate}
               onSelectMonth={handleMonthSelect}

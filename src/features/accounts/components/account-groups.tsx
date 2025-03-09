@@ -103,7 +103,7 @@ export const AccountGroups = () => {
                       key={id}
                       className={cn(
                         'relative bg-background dark:bg-zinc-800 border dark:border-zinc-900',
-                        'flex justify-between rounded-lg p-3 -mt-10',
+                        'flex justify-between rounded-xl p-3 -mt-10',
                         'transition-all duration-400 ease-in-out',
                         {
                           '-mt-2 rounded-2xl': isCardExpanded,

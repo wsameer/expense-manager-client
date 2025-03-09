@@ -15,7 +15,7 @@ type TransactionsProps = {
 export const Transactions: React.FC<TransactionsProps> = React.memo(
   ({ data, setOpen }) => {
     const transactionTypes = useMemo(() => Object.values(TransactionType), []);
-    const { selectedTransactionType, selectedSelectedTransactionType } =
+    const { selectedTransactionType, setSelectedTransactionType } =
       useUiStore();
 
     const renderContent = useCallback(
@@ -53,7 +53,7 @@ export const Transactions: React.FC<TransactionsProps> = React.memo(
       <Tabs
         defaultValue={selectedTransactionType}
         onValueChange={(value) =>
-          selectedSelectedTransactionType(value as TransactionType)
+          setSelectedTransactionType(value as TransactionType)
         }
       >
         <TabsList className="grid w-full grid-cols-3">

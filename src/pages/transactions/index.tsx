@@ -3,28 +3,16 @@ import { PageLayout } from '@/components/layout/page-layout';
 import { useResponsive } from '@/hooks';
 import { useUiStore } from '@/store/uiStore';
 import { cn } from '@/lib/utils';
-import { TransactionList } from '@/features/transactions/components/transaction-list';
+import { TransactionList } from '@/features/transactions/transaction-list';
 import { Button } from '@/components/ui/button';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { MONTH_RANGE } from './constant';
 import { MonthButton } from './component/month-button';
 import { MonthPicker } from './component/month-picker';
+import { getMonthsToDisplay } from './utils';
 
 export type MonthData = {
   month: number;
   year: number;
-};
-
-// Helper functions
-const getMonthsToDisplay = (date: Date): MonthData[] => {
-  const currentMonth = date.getMonth();
-  const currentYear = date.getFullYear();
-
-  return MONTH_RANGE.map((offset) => {
-    const month = (currentMonth + offset + 12) % 12;
-    const year = currentYear + Math.floor((currentMonth + offset) / 12);
-    return { month, year };
-  });
 };
 
 export const TransactionsRoute = () => {
@@ -69,7 +57,7 @@ export const TransactionsRoute = () => {
           <h2 className="text-3xl font-normal text-foreground tracking-tight">
             Transactions
           </h2>
-          <div className="flex-none flex justify-end overflow-hidden whitespace-nowrap bg-white border shadow-sm dark:bg-zinc-800 rounded-2xl py-0.5">
+          <div className="flex-none flex justify-end overflow-hidden whitespace-nowrap bg-white border shadow-sm dark:bg-zinc-800 rounded-xl py-1">
             <MonthPicker
               onMonthSelect={handleMonthSelect}
               currentDate={selectedDate}
