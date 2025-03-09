@@ -1,10 +1,11 @@
 import { create } from 'zustand';
 import { devtools } from 'zustand/middleware';
 import { immer } from 'zustand/middleware/immer';
-import { IncomeCategory } from '../types';
+import { IncomeCategory } from './types';
 
 type State = {
   incomeCategories: IncomeCategory[];
+  lastFetched: number;
   error: Error | null;
 };
 
@@ -13,11 +14,13 @@ type Actions = {
   addIncomeCategory: (incomeCategory: IncomeCategory) => void;
   updateIncomeCategory: (id: number, updates: Partial<IncomeCategory>) => void;
   deleteIncomeCategory: (id: number) => void;
+  setLastFetched: (timestamp: number) => void;
   setError: (error: Error | null) => void;
 };
 
 const initialState: State = {
   incomeCategories: [],
+  lastFetched: 0,
   error: null,
 };
 
@@ -48,6 +51,7 @@ export const useIncomeCategoriesStore = create<State & Actions>()(
             (category) => category.id !== id,
           );
         }),
+      setLastFetched: (timestamp: number) => set({ lastFetched: timestamp }),
       setError: (error: Error | null) =>
         set((state) => {
           state.error = error;

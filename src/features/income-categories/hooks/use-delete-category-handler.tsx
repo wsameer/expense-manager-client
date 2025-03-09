@@ -1,12 +1,12 @@
 import { useConfirmDialog } from '@/components/ui/confirmable';
 import { useTranslation } from 'react-i18next';
-import { useDeleteIncomeCategory } from '../api/delete-category';
 import { toast } from '@/hooks';
+import { useIncomeCategories } from '../api/use-categories';
 
 export const useDeleteCategoryHandler = () => {
   const { t } = useTranslation(['common', 'categories']);
   const { openConfirmDialog } = useConfirmDialog();
-  const { deleteCategory } = useDeleteIncomeCategory();
+  const { deleteCategory } = useIncomeCategories();
 
   const handleDeleteCategory = (categoryId: number, onSuccess?: () => void) => {
     openConfirmDialog({
