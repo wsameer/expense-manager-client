@@ -1,10 +1,11 @@
-import { Account } from '@/types/api';
-import { handleError } from '@/lib/handle-error';
-import useSWRMutation from 'swr/mutation';
-import axiosInstance from '@/lib/api-client';
 import { useSWRConfig } from 'swr';
+import useSWRMutation from 'swr/mutation';
+
+import { handleError } from '@/lib/handle-error';
+import axiosInstance from '@/lib/api-client';
 import { TRANSACTIONS_API } from '@/features/transactions/constants';
 import { CreateTransactionPayload } from '@/features/transactions/types';
+import { Account } from '@/store/accountsStore';
 
 const updateTransactionFetcher = async (
   url: string,

@@ -1,7 +1,7 @@
-import { Account } from '@/types/api';
 import { Category } from '../expense-category/types';
-import { IncomeCategory } from '../income-category/types';
 import { TransactionType } from '@/types';
+import { IncomeCategory } from '../income-categories/types';
+import { Account } from '@/store/accountsStore';
 
 export const ACCOUNTS = [
   { label: 'Chequing', value: 'chequing' },

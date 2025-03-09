@@ -1,10 +1,11 @@
 import React, { forwardRef } from 'react';
-import { Button } from '../ui/button';
-import { cn } from '@/lib/utils';
-import { Account } from '@/types/api';
-import { SelectorOption } from './types';
-import { ScrollArea } from '../ui/scroll-area';
 import { Plus } from 'lucide-react';
+
+import { cn } from '@/lib/utils';
+import { Account } from '@/store/accountsStore';
+import { Button } from '../ui/button';
+import { ScrollArea } from '../ui/scroll-area';
+import { SelectorOption } from './types';
 
 type Props = {
   options: SelectorOption[];

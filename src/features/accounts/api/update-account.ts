@@ -1,9 +1,10 @@
-import { Account } from '@/types/api';
-import { handleError } from '@/lib/handle-error';
-import useSWRMutation from 'swr/mutation';
-import { ACCOUNTS_API } from '../constants';
-import axiosInstance from '@/lib/api-client';
 import { useSWRConfig } from 'swr';
+import useSWRMutation from 'swr/mutation';
+
+import axiosInstance from '@/lib/api-client';
+import { handleError } from '@/lib/handle-error';
+import { Account } from '@/store/accountsStore';
+import { ACCOUNTS_API } from '../constants';
 import { CreateAccountForm } from '../types';
 
 const updateAccountFetcher = async (
