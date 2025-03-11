@@ -92,7 +92,7 @@ export const IncomeCategoryList = () => {
   return (
     <div
       id="income-categories-settings-list-container"
-      className="grid justify-items-center grid-cols-1 gap-2 mt-4"
+      className="grid justify-items-center grid-cols-1 gap-2 mt-4 md:w-1/3"
     >
       <CategoryActionButtons
         isListDirty={isListDirty}

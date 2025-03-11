@@ -165,28 +165,32 @@ export const useIncomeCategories = (options = { forceRefresh: false }) => {
         ...categoryData,
       };
 
-      const updatedCategories = [...currentCategories];
-      updatedCategories[categoryIndex] = optimisticCategory;
+      const optimisticUpdatedCategories = currentCategories.map((category) => ({
+        ...category,
+      }));
+      optimisticUpdatedCategories[categoryIndex] = optimisticCategory;
 
-      setIncomeCategories(updatedCategories);
-      mutate(updatedCategories, false);
+      setIncomeCategories(optimisticUpdatedCategories);
+      mutate(optimisticUpdatedCategories, false);
 
       try {
         const response = await axiosInstance.put<IncomeCategory>(
           `${INCOME_CATEGORIES_API}/${categoryId}`,
-          categoryData,
+          optimisticCategory,
         );
 
-        // Update with the real data from the server
-        const serverCategory = response.data;
-        updatedCategories[categoryIndex] = serverCategory;
+        // Create a fresh copy for the server update
+        const serverUpdatedCategories = optimisticUpdatedCategories.map(
+          (category) => ({ ...category }),
+        );
+        serverUpdatedCategories[categoryIndex] = response.data;
 
         globalFetchState.lastFetchedAt = Date.now();
         setLastFetched(Date.now());
-        setIncomeCategories(updatedCategories);
-        mutate(updatedCategories, false);
+        setIncomeCategories(serverUpdatedCategories);
+        mutate(serverUpdatedCategories, false);
 
-        return serverCategory;
+        return response.data;
       } catch (error) {
         setIncomeCategories(currentCategories);
         mutate(currentCategories, false);

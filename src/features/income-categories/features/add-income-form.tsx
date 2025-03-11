@@ -9,6 +9,7 @@ import {
   DialogContent,
   DialogTitle,
   DialogHeader,
+  DialogDescription,
 } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
@@ -172,6 +173,7 @@ export const AddIncomeCategoryForm = ({
                 </Button>
               )}
             </DrawerTitle>
+            <DialogDescription></DialogDescription>
           </DrawerHeader>
           <div className="px-4">{renderForm()}</div>
         </DrawerContent>

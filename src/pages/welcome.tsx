@@ -19,6 +19,7 @@ export const Welcome = () => {
   const navigate = useNavigate();
   const { t } = useTranslation('common');
   const { user } = useAuth();
+  console.log('🚀 ~ Welcome ~ user:', user);
 
   const handleStart = () => {
     if (user) {

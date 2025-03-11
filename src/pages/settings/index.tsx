@@ -51,17 +51,6 @@ export const SettingsPage = () => {
         id="app-settings"
         className={cn('grid grid-cols-1 gap-6 w-full', isDesktop && 'w-3/5')}
       >
-        {/* <form className="ml-auto w-full sm:flex-initial md:hidden">
-          <div className="relative">
-            <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-            <Input
-              type="search"
-              placeholder="Search settings..."
-              className="pl-8 rounded-full"
-            />
-          </div>
-        </form> */}
-
         <ListGroup title="Appearance">
           <ListItem
             icon={
@@ -137,8 +126,9 @@ export const SettingsPage = () => {
         </ListGroup>
 
         <ListGroup title={'Settings'}>
-          {SECONDARY_NAV.map((item) => (
+          {SECONDARY_NAV.map((item, index) => (
             <ListItem
+              key={item.label + index}
               icon={<item.icon />}
               onClick={() => onSettingItemClick(item.path)}
               label={item.label}

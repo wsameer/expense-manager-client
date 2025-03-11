@@ -53,7 +53,7 @@ export const TransactionsRoute = () => {
           'w-3/5': isDesktop,
         })}
       >
-        <div className="md:hidden flex items-end justify-between gap-4 mb-2">
+        <div className="md:hidden flex items-center justify-between gap-4 mb-2">
           <h2 className="text-3xl font-normal text-foreground tracking-tight">
             Transactions
           </h2>

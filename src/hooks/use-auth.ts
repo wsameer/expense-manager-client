@@ -1,6 +1,6 @@
-import { AuthContext } from '@/features/auth/auth-context';
 import { useContext } from 'react';
-import { toast } from './use-toast';
+import { AxiosError, AxiosResponse, isAxiosError } from 'axios';
+
 import axiosInstance from '@/lib/api-client';
 import {
   GET_USER_API,
@@ -10,7 +10,8 @@ import {
 } from '@/lib/constants';
 import { LoginResponse } from '@/features/auth/types';
 import { User } from '@/types';
-import { AxiosError, AxiosResponse, isAxiosError } from 'axios';
+import { AuthContext } from '@/features/auth/auth-context';
+import { toast } from './use-toast';
 
 const REGISTRATION_ERROR_MESSAGE =
   'Unexpected error during registration. Please try again';

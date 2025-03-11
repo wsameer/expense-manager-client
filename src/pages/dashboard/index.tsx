@@ -27,17 +27,15 @@ export const DashboardRoute = () => {
         })}
       >
         <div className="flex items-end justify-between gap-4 mb-2">
-          {/* Left Side: Greeting Section (50%) */}
           <div className="flex flex-col min-w-0">
             <h2 className="text-2xl font-base text-foreground/40 tracking-tight">
               Hello,
             </h2>
             <h2 className="text-3xl font-base tracking-tight truncate max-w-[180px] sm:max-w-[240px]">
-              {user?.name}
+              {user?.name.split(' ')[0]}
             </h2>
           </div>
 
-          {/* Right Side: Month Navigator (50%) */}
           <div className="flex-none flex justify-end overflow-hidden whitespace-nowrap bg-white border shadow-sm dark:bg-zinc-800 rounded-xl py-1">
             <MonthNavigator
               currentDate={selectedDate}

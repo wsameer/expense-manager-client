@@ -222,7 +222,7 @@ export const ExpenseForm = ({ existingData, setOpen }: FormProps) => {
                 <FormControl className="m-0">
                   <Input
                     type="number"
-                    className="w-3/4 text-sm"
+                    className="w-3/4 text-base"
                     aria-invalid={formErrors.amount ? 'true' : 'false'}
                     onFocus={() => setSelectorType(null)}
                     {...field}
@@ -248,7 +248,7 @@ export const ExpenseForm = ({ existingData, setOpen }: FormProps) => {
                 </FormLabel>
                 <FormControl>
                   <Input
-                    className="w-3/4 text-sm"
+                    className="w-3/4 text-base"
                     placeholder={t('transaction:select-a-category')}
                     value={getSelectedCategoryName(field.value)}
                     onFocus={() => setSelectorType('category')}
@@ -267,7 +267,7 @@ export const ExpenseForm = ({ existingData, setOpen }: FormProps) => {
           render={({ field }) => {
             return (
               <FormItem>
-                <div className="flex items-center mt-4 space-y-0 space-x-4">
+                <div className="flex items-center mt-4 space-y-0 space-x-3">
                   <FormLabel
                     htmlFor="expenseSubcategoryId"
                     className="w-1/4"
@@ -333,7 +333,7 @@ export const ExpenseForm = ({ existingData, setOpen }: FormProps) => {
                 </FormLabel>
                 <FormControl className="m-0">
                   <Input
-                    className="w-3/4 text-sm"
+                    className="w-3/4 text-base"
                     placeholder={t('transaction:select-account')}
                     onFocus={() => setSelectorType('account')}
                     value={getSelectedAccountName(field.value)}
@@ -361,7 +361,7 @@ export const ExpenseForm = ({ existingData, setOpen }: FormProps) => {
                 <FormControl className="m-0">
                   <Input
                     {...field}
-                    className="w-3/4 text-sm"
+                    className="w-3/4 text-base"
                     placeholder={t('transaction:note-placeholder')}
                     onFocus={() => setSelectorType(null)}
                   />

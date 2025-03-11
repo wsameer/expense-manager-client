@@ -1,3 +1,5 @@
+import { useState } from 'react';
+import { Eye, EyeOff } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslation } from 'react-i18next';
@@ -17,8 +19,6 @@ import { Link } from '@/components/ui/link';
 import { useAuth } from '@/hooks/use-auth';
 import { Checkbox } from '@/components/ui/checkbox';
 import { FORGOT_PASSWORD } from '@/app/router/routes';
-import { useState } from 'react';
-import { Eye, EyeOff } from 'lucide-react';
 
 type LoginFormProps = {
   onSuccess: () => void;
@@ -57,6 +57,7 @@ export const LoginForm = ({ onSuccess }: LoginFormProps) => {
       <form
         id="login-form"
         className="grid gap-4"
+        autoComplete="on"
         onSubmit={form.handleSubmit(onSubmit)}
       >
         <FormField
@@ -64,9 +65,10 @@ export const LoginForm = ({ onSuccess }: LoginFormProps) => {
           name="email"
           render={({ field }) => (
             <FormItem>
-              <FormLabel htmlFor="email">{t('email')}</FormLabel>
+              <FormLabel htmlFor={field.name}>{t('email')}</FormLabel>
               <FormControl>
                 <Input
+                  id={field.name}
                   placeholder={t('email-placeholder')}
                   autoComplete="username"
                   {...field}
@@ -82,7 +84,7 @@ export const LoginForm = ({ onSuccess }: LoginFormProps) => {
           name="password"
           render={({ field }) => (
             <FormItem>
-              <FormLabel htmlFor="password">{t('password')}</FormLabel>
+              <FormLabel htmlFor={field.name}>{t('password')}</FormLabel>
               <FormControl>
                 <div className="relative">
                   <Input

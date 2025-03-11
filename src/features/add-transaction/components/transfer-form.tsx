@@ -180,7 +180,7 @@ export const TransferForm = ({ existingData, setOpen }: FormProps) => {
                 <FormControl className="m-0">
                   <Input
                     type="number"
-                    className="w-3/4 text-sm"
+                    className="w-3/4 text-base"
                     aria-invalid={formErrors.amount ? 'true' : 'false'}
                     onFocus={() => setShowAccountSelector(false)}
                     {...field}
@@ -205,7 +205,7 @@ export const TransferForm = ({ existingData, setOpen }: FormProps) => {
                   {t('transaction:from')}
                 </FormLabel>
                 <Input
-                  className="w-3/4 text-sm"
+                  className="w-3/4 text-base"
                   placeholder={t('transaction:select-account')}
                   onClick={() => setShowAccountSelector('fromAccountId')}
                   value={getSelectedAccountName(field.value)}
@@ -231,7 +231,7 @@ export const TransferForm = ({ existingData, setOpen }: FormProps) => {
                 </FormLabel>
                 <FormControl className="m-0">
                   <Input
-                    className="w-3/4 text-sm"
+                    className="w-3/4 text-base"
                     placeholder={t('transaction:select-account')}
                     onClick={() => setShowAccountSelector('toAccountId')}
                     value={getSelectedAccountName(field.value)}
@@ -258,7 +258,7 @@ export const TransferForm = ({ existingData, setOpen }: FormProps) => {
                 </FormLabel>
                 <FormControl className="m-0">
                   <Input
-                    className="w-3/4 text-sm"
+                    className="w-3/4 text-base"
                     onFocus={() => setShowAccountSelector(false)}
                     placeholder={t('transaction:note-placeholder')}
                     {...field}
