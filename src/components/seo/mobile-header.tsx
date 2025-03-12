@@ -10,7 +10,7 @@ type Props = {
   title?: string;
   backButtonUrl?: string;
   rightElement?: ReactElement;
-  showStickyHeader?: boolean;
+  suppressStickyHeader?: boolean;
   suppressTitle?: boolean;
 };
 
@@ -18,12 +18,10 @@ export const MobileHeader = ({
   title,
   rightElement,
   backButtonUrl,
-  showStickyHeader = false,
+  suppressStickyHeader = false,
   suppressTitle = false,
 }: Props) => {
-  return null;
-
-  if (!showStickyHeader) {
+  if (suppressStickyHeader) {
     return <header className="h-8" />;
   }
 

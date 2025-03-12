@@ -7,7 +7,7 @@ export const IncomeCategoriesSettingsPage = () => {
     <PageLayout
       title="Income Categories"
       backButtonUrl={SETTINGS_ROUTE}
-      showStickyHeader
+      suppressStickyHeader
     >
       <IncomeCategoryList />
     </PageLayout>

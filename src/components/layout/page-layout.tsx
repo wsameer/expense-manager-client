@@ -13,7 +13,7 @@ interface PageLayoutProps {
   title?: string;
   subTitle?: string;
   children?: ReactNode;
-  showStickyHeader?: boolean;
+  suppressStickyHeader?: boolean;
   rightElement?: ReactElement;
   suppressTitle?: boolean;
   backButtonUrl?: string;
@@ -22,11 +22,14 @@ interface PageLayoutProps {
 export const PageLayout = React.memo<PageLayoutProps>((props) => {
   const { title, children } = props;
   const { isMobile } = useResponsive();
+
   return (
     <div className="flex flex-col sm:gap-2 md:pt-0">
       <SidebarProvider>
         <Head title={title} />
+
         {!isMobile && <AppSidebar />}
+
         <SidebarInset>
           {isMobile ? <MobileHeader {...props} /> : <AppHeader {...props} />}
           <div
@@ -38,7 +41,8 @@ export const PageLayout = React.memo<PageLayoutProps>((props) => {
             {!isMobile && <AddTransaction />}
           </div>
         </SidebarInset>
-        <AppBottomBar />
+
+        {isMobile && <AppBottomBar />}
       </SidebarProvider>
     </div>
   );

@@ -12,7 +12,7 @@ import { useAccountById } from '@/features/accounts/api/get-account';
 import { EditAccount } from '@/features/accounts/components/edit-account';
 import { AccountDetails } from '@/features/accounts/components/account-details';
 
-export const AccountDetailsRoute = () => {
+export const AccountDetailsPage = () => {
   const { id } = useParams();
   const { t } = useTranslation(['common', 'account']);
   const navigate = useNavigate();

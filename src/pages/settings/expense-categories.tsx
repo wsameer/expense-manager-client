@@ -7,7 +7,7 @@ export const ExpenseCategoriesSettingsPage = () => {
     <PageLayout
       title="Expense Categories"
       backButtonUrl={SETTINGS_ROUTE}
-      showStickyHeader
+      suppressStickyHeader
     >
       <ExpenseCategoryList />
     </PageLayout>

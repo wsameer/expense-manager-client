@@ -8,7 +8,7 @@ import { Separator } from '../ui/separator';
 type Props = {
   title?: string;
   subTitle?: string;
-  showStickyHeader?: boolean;
+  suppressStickyHeader?: boolean;
   backButton?: {
     url?: string;
     title?: string;

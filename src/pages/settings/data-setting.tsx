@@ -45,7 +45,7 @@ export const DataSettingsPage = () => {
     <PageLayout
       title="Data Settings"
       backButtonUrl={SETTINGS_ROUTE}
-      showStickyHeader
+      suppressStickyHeader
     >
       <div
         id="data-settings"

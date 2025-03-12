@@ -18,7 +18,7 @@ type Props = {
   currentDate: Date;
 };
 
-export const DashboardPage = memo(({ currentDate }: Props) => {
+export const Dashboard = memo(({ currentDate }: Props) => {
   const [transactionType, setTransactionType] = useState<TransactionType>(
     TransactionType.EXPENSE,
   );
@@ -128,4 +128,4 @@ export const DashboardPage = memo(({ currentDate }: Props) => {
   );
 });
 
-DashboardPage.displayName = 'DashboardPage';
+Dashboard.displayName = 'Dashboard';
