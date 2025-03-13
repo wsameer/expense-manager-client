@@ -20,4 +20,4 @@ export const INCOME_CATEGORY_SETTINGS_ROUTE =
 export const DATA_SETTINGS_ROUTE = SETTINGS_ROUTE + '/data';
 export const ACCOUNT_SETTINGS_ROUTE = SETTINGS_ROUTE + '/accounts';
 
-export const USER_PROFILE_ROUTE = APP_ROUTE + '/users/me';
+export const USER_PROFILE_ROUTE = SETTINGS_ROUTE + '/users/me';

@@ -1,15 +1,14 @@
-import { SETTINGS_ROUTE } from '@/app/router/routes';
 import { PageLayout } from '@/components/layout/page-layout';
+import { ContributionsTracker } from './components/contributions-chart';
 import { Button } from '@/components/ui/button';
+import { SETTINGS_ROUTE } from '@/app/router/routes';
 import { Link } from '@/components/ui/link';
-import { ExpenseCategoryList } from '@/features/expense-category/list';
 import { ChevronLeft } from 'lucide-react';
 
-export const ExpenseCategoriesSettingsPage = () => {
+export const UserProfilePage = () => {
   return (
     <PageLayout
-      title="Expense Categories"
-      backButtonUrl={SETTINGS_ROUTE}
+      title="Profile"
       suppressStickyHeader
     >
       <header className="flex gap-2 min-w-0 md:hidden">
@@ -24,10 +23,18 @@ export const ExpenseCategoriesSettingsPage = () => {
           </Link>
         </Button>
         <h2 className="text-3xl font-normal text-foreground tracking-tight">
-          Expense Categories
+          Profile
         </h2>
       </header>
-      <ExpenseCategoryList />
+
+      <div className="user-profile-container">
+        <ContributionsTracker
+          title={`Contributions in ${new Date().getFullYear()}`}
+          percentage={30}
+          columns={28}
+          filledCount={44}
+        />
+      </div>
     </PageLayout>
   );
 };

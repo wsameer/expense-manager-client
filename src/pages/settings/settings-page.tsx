@@ -22,11 +22,14 @@ import {
   DATA_SETTINGS_ROUTE,
   EXPENSE_CATEGORY_SETTINGS_ROUTE,
   INCOME_CATEGORY_SETTINGS_ROUTE,
+  USER_PROFILE_ROUTE,
 } from '@/app/router/routes';
 import { Button } from '@/components/ui/button';
 import { SECONDARY_NAV } from '@/components/navigation/constants';
 import { useResponsive } from '@/hooks/use-responsive';
 import { useAuth } from '@/hooks/use-auth';
+import { Link } from '@/components/ui/link';
+import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 
 export const SettingsPage = () => {
   const navigate = useNavigate();
@@ -41,11 +44,23 @@ export const SettingsPage = () => {
 
   return (
     <PageLayout title="Settings">
-      <div className="flex flex-col min-w-0 md:hidden">
+      <header className="flex justify-between min-w-0 md:hidden">
         <h2 className="text-3xl font-normal text-foreground tracking-tight">
           Settings
         </h2>
-      </div>
+        <Button
+          className="rounded-full"
+          size="icon"
+          variant="outline"
+          asChild
+        >
+          <Link to={USER_PROFILE_ROUTE}>
+            <Avatar className="w-auto h-auto">
+              <AvatarFallback className="bg-transparent">ST</AvatarFallback>
+            </Avatar>
+          </Link>
+        </Button>
+      </header>
 
       <div
         id="app-settings"

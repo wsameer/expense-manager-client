@@ -14,6 +14,9 @@ type Props = {
   suppressTitle?: boolean;
 };
 
+/**
+ * @deprecated
+ */
 export const MobileHeader = ({
   title,
   rightElement,

@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import { Eraser, FileDown, Trash2 } from 'lucide-react';
+import { ChevronLeft, Eraser, FileDown, Trash2 } from 'lucide-react';
 
 import { SETTINGS_ROUTE } from '@/app/router/routes';
 import { useConfirmDialog } from '@/components/ui/confirmable';
@@ -11,6 +11,8 @@ import { PageLayout } from '@/components/layout/page-layout';
 import { useDeleteTransaction } from '../../features/transactions/api/delete-transaction';
 import { ImportDataDialog } from '@/features/import-data';
 import { toast } from '@/hooks/use-toast';
+import { Button } from '@/components/ui/button';
+import { Link } from '@/components/ui/link';
 
 export const DataSettingsPage = () => {
   const { t } = useTranslation(['common', 'settings']);
@@ -47,6 +49,22 @@ export const DataSettingsPage = () => {
       backButtonUrl={SETTINGS_ROUTE}
       suppressStickyHeader
     >
+      <header className="flex gap-2 min-w-0 md:hidden">
+        <Button
+          className="rounded-full"
+          size="icon"
+          variant="outline"
+          asChild
+        >
+          <Link to={SETTINGS_ROUTE}>
+            <ChevronLeft />
+          </Link>
+        </Button>
+        <h2 className="text-3xl font-normal text-foreground tracking-tight">
+          My Data
+        </h2>
+      </header>
+
       <div
         id="data-settings"
         className="grid grid-cols-1 gap-6"

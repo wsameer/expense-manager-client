@@ -56,7 +56,7 @@ export const TransactionsPage = () => {
           'w-3/5': isDesktop,
         })}
       >
-        <div className="md:hidden flex items-center justify-between gap-4 mb-2">
+        <header className="md:hidden flex items-center justify-between gap-4 mb-2">
           <h2 className="text-3xl font-normal text-foreground tracking-tight">
             Transactions
           </h2>
@@ -68,7 +68,7 @@ export const TransactionsPage = () => {
               suppressNavigators
             />
           </div>
-        </div>
+        </header>
 
         <div className="flex gap-1 items-center">
           <Button

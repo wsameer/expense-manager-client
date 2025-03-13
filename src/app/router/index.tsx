@@ -50,13 +50,6 @@ const createRouter = () =>
       ),
       children: [
         {
-          path: USER_PROFILE_ROUTE,
-          lazy: async () => {
-            const { UserProfilePage } = await import('../../pages/profile');
-            return { Component: UserProfilePage };
-          },
-        },
-        {
           path: TRANSACTIONS_ROUTE,
           lazy: async () => {
             const { TransactionsPage } = await import(
@@ -84,6 +77,15 @@ const createRouter = () =>
           lazy: async () => {
             const { SettingsPage } = await import('../../pages/settings');
             return { Component: SettingsPage };
+          },
+        },
+        {
+          path: USER_PROFILE_ROUTE,
+          lazy: async () => {
+            const { UserProfilePage } = await import(
+              '../../pages/settings/profile'
+            );
+            return { Component: UserProfilePage };
           },
         },
         {

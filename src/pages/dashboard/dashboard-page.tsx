@@ -16,30 +16,32 @@ export const DashboardPage = () => {
   };
 
   return (
-    <PageLayout title="Dashboard">
+    <PageLayout
+      title="Dashboard"
+      suppressTitle
+      suppressStickyHeader
+    >
       <div
-        className={cn('grid grid-cols-1 gap-3', {
+        className={cn('grid grid-cols-1 gap-4', {
           'w-2/4': isDesktop,
         })}
       >
-        <div className="flex items-end justify-between gap-4 mb-2">
-          <div className="flex flex-col min-w-0">
-            <h2 className="text-2xl font-base text-foreground/40 tracking-tight">
-              Hello,
-            </h2>
-            <h2 className="text-3xl font-base tracking-tight truncate max-w-[180px] sm:max-w-[240px]">
-              {user?.name.split(' ')[0]}
+        <header className="flex items-end justify-between gap-4">
+          <div className="flex flex-col min-w-0 md:hidden">
+            <p className="text-sm text-muted-foreground">Hello,</p>
+            <h2 className="text-3xl font-normal text-foreground tracking-tight">
+              {user?.name}
             </h2>
           </div>
 
-          <div className="flex-none flex justify-end overflow-hidden whitespace-nowrap bg-white border shadow-sm dark:bg-zinc-800 rounded-xl py-1">
+          <div className="flex justify-end overflow-hidden whitespace-nowrap bg-white border shadow-sm dark:bg-zinc-800 rounded-xl py-1">
             <MonthNavigator
               currentDate={selectedDate}
               handleMonthChange={handleMonthChange}
               className="justify-center gap-1"
             />
           </div>
-        </div>
+        </header>
         <Dashboard currentDate={selectedDate} />
       </div>
     </PageLayout>

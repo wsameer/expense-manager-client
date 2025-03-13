@@ -36,7 +36,7 @@ export const ContributionsTracker = ({
             {Array.from({ length: totalDots }).map((_, index) => (
               <div
                 key={index}
-                className={`w-1.5 h-1.5 rounded-full ${index < filledDots ? 'bg-black' : 'bg-gray-300'}`}
+                className={`w-1.5 h-1.5 rounded-full ${index < filledDots ? 'bg-foreground' : 'bg-zinc-200 dark:bg-zinc-600'}`}
               />
             ))}
           </div>

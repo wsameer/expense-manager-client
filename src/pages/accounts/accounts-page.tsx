@@ -38,14 +38,14 @@ export const AccountsPage = () => {
       subTitle="Your accounts with its latest balance"
       suppressStickyHeader
     >
-      <div className="md:hidden flex flex-col min-w-0">
+      <header className="md:hidden flex flex-col min-w-0">
         <h2 className="text-3xl font-normal text-foreground tracking-tight">
           Accounts
         </h2>
         <p className="text-sm text-muted-foreground">
           Your accounts with its latest balance
         </p>
-      </div>
+      </header>
 
       <div
         className={cn('grid grid-cols-1 gap-3', {
