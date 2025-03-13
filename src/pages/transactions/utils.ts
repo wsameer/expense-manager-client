@@ -1,5 +1,5 @@
-import { MonthData } from '.';
 import { MONTH_RANGE } from './constant';
+import { MonthData } from './transactions-page';
 
 export const getMonthsToDisplay = (date: Date): MonthData[] => {
   const currentMonth = date.getMonth();
