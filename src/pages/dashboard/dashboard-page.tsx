@@ -16,10 +16,7 @@ export const DashboardPage = () => {
   };
 
   return (
-    <PageLayout
-      title="Dashboard"
-      suppressStickyHeader
-    >
+    <PageLayout title="Dashboard">
       <div
         className={cn('grid grid-cols-1 gap-3', {
           'w-2/4': isDesktop,

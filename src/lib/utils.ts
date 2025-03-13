@@ -65,3 +65,10 @@ export const formatDateToYYYYMM = (date: Date): string => {
   const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are 0-indexed
   return `${year}-${month}`;
 };
+
+export const getTotalDaysInCurrentYear = () => {
+  const now = new Date();
+  const year = now.getFullYear();
+  const isLeapYear = (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
+  return isLeapYear ? 366 : 365;
+};

@@ -13,6 +13,7 @@ import {
   REGISTER_ROUTE,
   SETTINGS_ROUTE,
   TRANSACTIONS_ROUTE,
+  USER_PROFILE_ROUTE,
 } from './routes';
 import { ProtectedRoute } from '@/lib/protected-route';
 import { AppRoot } from '@/pages/root';
@@ -48,6 +49,13 @@ const createRouter = () =>
         </ProtectedRoute>
       ),
       children: [
+        {
+          path: USER_PROFILE_ROUTE,
+          lazy: async () => {
+            const { UserProfilePage } = await import('../../pages/profile');
+            return { Component: UserProfilePage };
+          },
+        },
         {
           path: TRANSACTIONS_ROUTE,
           lazy: async () => {

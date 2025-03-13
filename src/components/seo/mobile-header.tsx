@@ -2,7 +2,7 @@ import { ReactElement } from 'react';
 import { Link } from '../ui/link';
 import { Bell, ChevronLeft, Wallet2 } from 'lucide-react';
 import { Button } from '../ui/button';
-import { SETTINGS_ROUTE } from '@/app/router/routes';
+import { USER_PROFILE_ROUTE } from '@/app/router/routes';
 import { Avatar } from '../ui/avatar';
 import { AvatarFallback } from '@radix-ui/react-avatar';
 
@@ -67,7 +67,7 @@ export const MobileHeader = ({
             variant="outline"
             asChild
           >
-            <Link to={SETTINGS_ROUTE}>
+            <Link to={USER_PROFILE_ROUTE}>
               <Avatar className="w-auto h-auto">
                 <AvatarFallback>ST</AvatarFallback>
               </Avatar>
