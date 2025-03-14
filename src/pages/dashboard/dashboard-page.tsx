@@ -17,8 +17,7 @@ export const DashboardPage = () => {
 
   return (
     <PageLayout
-      title="Dashboard"
-      suppressTitle
+      title={user?.name}
       suppressStickyHeader
     >
       <div

@@ -43,11 +43,9 @@ export const SettingsPage = () => {
   const onSettingItemClick = (url: string) => navigate(url);
 
   return (
-    <PageLayout title="Settings">
-      <header className="flex justify-between min-w-0 md:hidden">
-        <h2 className="text-3xl font-normal text-foreground tracking-tight">
-          Settings
-        </h2>
+    <PageLayout
+      title="Settings"
+      rightElement={
         <Button
           className="rounded-full"
           size="icon"
@@ -60,8 +58,8 @@ export const SettingsPage = () => {
             </Avatar>
           </Link>
         </Button>
-      </header>
-
+      }
+    >
       <div
         id="app-settings"
         className={cn('grid grid-cols-1 gap-6 w-full', isDesktop && 'w-3/5')}

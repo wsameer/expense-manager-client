@@ -49,27 +49,22 @@ export const TransactionsPage = () => {
   return (
     <PageLayout
       title="Transactions"
-      suppressStickyHeader
+      rightElement={
+        <div className="flex-none flex justify-end overflow-hidden whitespace-nowrap bg-white border shadow-sm dark:bg-zinc-800 rounded-xl py-1">
+          <MonthNavigator
+            handleMonthChange={handleMonthSelect}
+            currentDate={selectedDate}
+            className="px-3"
+            suppressNavigators
+          />
+        </div>
+      }
     >
       <div
         className={cn('grid grid-cols-1 gap-4', {
           'w-3/5': isDesktop,
         })}
       >
-        <header className="md:hidden flex items-center justify-between gap-4 mb-2">
-          <h2 className="text-3xl font-normal text-foreground tracking-tight">
-            Transactions
-          </h2>
-          <div className="flex-none flex justify-end overflow-hidden whitespace-nowrap bg-white border shadow-sm dark:bg-zinc-800 rounded-xl py-1">
-            <MonthNavigator
-              handleMonthChange={handleMonthSelect}
-              currentDate={selectedDate}
-              className="px-3"
-              suppressNavigators
-            />
-          </div>
-        </header>
-
         <div className="flex gap-1 items-center">
           <Button
             className="rounded-xl h-6 w-6 dark:hover:bg-background/40"

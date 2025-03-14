@@ -6,7 +6,6 @@ export const AccountSettingsPage = () => {
     <PageLayout
       title="Accounts"
       backButtonUrl={SETTINGS_ROUTE}
-      suppressStickyHeader
     >
       <h1>Hello!</h1>
     </PageLayout>

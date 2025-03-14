@@ -1,24 +1,20 @@
 import { ReactElement } from 'react';
 import { Link } from '../ui/link';
-import { Bell, ChevronLeft, Wallet2 } from 'lucide-react';
+import { ChevronLeft } from 'lucide-react';
 import { Button } from '../ui/button';
-import { USER_PROFILE_ROUTE } from '@/app/router/routes';
-import { Avatar } from '../ui/avatar';
-import { AvatarFallback } from '@radix-ui/react-avatar';
 
 type Props = {
   title?: string;
+  subTitle?: string;
   backButtonUrl?: string;
   rightElement?: ReactElement;
   suppressStickyHeader?: boolean;
   suppressTitle?: boolean;
 };
 
-/**
- * @deprecated
- */
 export const MobileHeader = ({
   title,
+  subTitle,
   rightElement,
   backButtonUrl,
   suppressStickyHeader = false,
@@ -29,55 +25,39 @@ export const MobileHeader = ({
   }
 
   return (
-    <header
-      id="app-header-mobile"
-      className="sticky top-0 z-50 w-full border-border/40 bg-background/15 backdrop-blur supports-[backdrop-filter]:bg-background/20"
-    >
-      <div className="container h-16 flex max-w-screen-2xl items-center">
-        <div className="flex-1 text-left">
-          {backButtonUrl ? (
-            <Button
-              size="icon"
-              variant="outline"
-              className="rounded-full text-foreground"
-              asChild
-            >
-              <Link to={backButtonUrl}>
-                <ChevronLeft className="h-5 w-5" />
-              </Link>
-            </Button>
-          ) : (
-            <Wallet2 className="h-5 w-5" />
-          )}
-        </div>
-        {!suppressTitle && (
-          <div className="flex text-center">
-            <p className="text-m font-bold leading-none">{title}</p>
-          </div>
-        )}
-        <div className="flex-1 flex justify-end gap-1 text-right">
-          {rightElement}
+    <header className="flex justify-between min-w-0 md:hidden px-4 pt-10">
+      <div className="flex items-center gap-2">
+        {backButtonUrl && (
           <Button
-            className="rounded-full"
-            variant="ghost"
-            size="icon"
-          >
-            <Bell />
-          </Button>
-          <Button
-            className="rounded-full"
             size="icon"
             variant="outline"
+            className="rounded-full text-foreground"
             asChild
           >
-            <Link to={USER_PROFILE_ROUTE}>
-              <Avatar className="w-auto h-auto">
-                <AvatarFallback>ST</AvatarFallback>
-              </Avatar>
+            <Link
+              to={backButtonUrl}
+              className="h-8 w-8 text-lg [&_svg]:size-5"
+            >
+              <ChevronLeft />
             </Link>
           </Button>
-        </div>
+        )}
+        {!suppressTitle && (
+          <div className="flex flex-col">
+            <h2 className="text-3xl font-normal text-foreground tracking-tight">
+              {title}
+            </h2>
+            {subTitle && (
+              <p className="text-sm text-muted-foreground">{subTitle}</p>
+            )}
+          </div>
+        )}
       </div>
+      {rightElement && (
+        <div className="flex-1 flex justify-end gap-1 text-right">
+          {rightElement}
+        </div>
+      )}
     </header>
   );
 };

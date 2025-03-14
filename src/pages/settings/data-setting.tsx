@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import { ChevronLeft, Eraser, FileDown, Trash2 } from 'lucide-react';
+import { Eraser, FileDown, Skull, Trash2 } from 'lucide-react';
 
 import { SETTINGS_ROUTE } from '@/app/router/routes';
 import { useConfirmDialog } from '@/components/ui/confirmable';
@@ -11,8 +11,6 @@ import { PageLayout } from '@/components/layout/page-layout';
 import { useDeleteTransaction } from '../../features/transactions/api/delete-transaction';
 import { ImportDataDialog } from '@/features/import-data';
 import { toast } from '@/hooks/use-toast';
-import { Button } from '@/components/ui/button';
-import { Link } from '@/components/ui/link';
 
 export const DataSettingsPage = () => {
   const { t } = useTranslation(['common', 'settings']);
@@ -43,28 +41,13 @@ export const DataSettingsPage = () => {
     });
   };
 
+  const handleDeleteAccount = () => {};
+
   return (
     <PageLayout
-      title="Data Settings"
+      title="My Data"
       backButtonUrl={SETTINGS_ROUTE}
-      suppressStickyHeader
     >
-      <header className="flex gap-2 min-w-0 md:hidden">
-        <Button
-          className="rounded-full"
-          size="icon"
-          variant="outline"
-          asChild
-        >
-          <Link to={SETTINGS_ROUTE}>
-            <ChevronLeft />
-          </Link>
-        </Button>
-        <h2 className="text-3xl font-normal text-foreground tracking-tight">
-          My Data
-        </h2>
-      </header>
-
       <div
         id="data-settings"
         className="grid grid-cols-1 gap-6"
@@ -86,7 +69,7 @@ export const DataSettingsPage = () => {
             rightElement={undefined}
           />
         </ListGroup>
-        <ListGroup title={t('settings:other')}>
+        <ListGroup title={t('settings:dangerous')}>
           <ListItem
             icon={
               <Trash2 className="h-4 w-4 text-red-600 dark:text-zinc-300" />
@@ -94,12 +77,19 @@ export const DataSettingsPage = () => {
             label={t('settings:delete-all-transactions')}
             onClick={handleDeleteAllTransaction}
             rightElement={undefined}
+            variant="danger"
           />
           <ListItem
             icon={
               <Eraser className="h-4 w-4 text-red-600 dark:text-zinc-300" />
             }
             label={t('settings:erase-data')}
+            rightElement={undefined}
+            variant="danger"
+          />
+          <ListItem
+            icon={<Skull className="h-4 w-4 text-red-600 dark:text-zinc-300" />}
+            label={t('settings:delete-account')}
             rightElement={undefined}
             variant="danger"
           />

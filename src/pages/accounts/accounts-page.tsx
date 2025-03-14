@@ -36,17 +36,7 @@ export const AccountsPage = () => {
     <PageLayout
       title="Accounts"
       subTitle="Your accounts with its latest balance"
-      suppressStickyHeader
     >
-      <header className="md:hidden flex flex-col min-w-0">
-        <h2 className="text-3xl font-normal text-foreground tracking-tight">
-          Accounts
-        </h2>
-        <p className="text-sm text-muted-foreground">
-          Your accounts with its latest balance
-        </p>
-      </header>
-
       <div
         className={cn('grid grid-cols-1 gap-3', {
           'w-3/5': isDesktop,

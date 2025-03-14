@@ -5,7 +5,7 @@ import { useResponsive } from '@/hooks/use-responsive';
 import { SidebarInset, SidebarProvider } from '../ui/sidebar';
 import { AppSidebar } from '../navigation/sidebar/app-sidebar';
 import { AppBottomBar } from '../navigation/bottombar/app-bottombar';
-import { AppHeader, Head } from '../seo';
+import { AppHeader, Head, MobileHeader } from '../seo';
 import { cn } from '@/lib/utils';
 import { AddTransaction } from '@/features/add-transaction';
 
@@ -31,10 +31,10 @@ export const PageLayout = React.memo<PageLayoutProps>((props) => {
         {!isMobile && <AppSidebar />}
 
         <SidebarInset>
-          {!isMobile && <AppHeader {...props} />}
+          {isMobile ? <MobileHeader {...props} /> : <AppHeader {...props} />}
           <div
-            className={cn('flex flex-1 flex-col gap-4 p-4 pt-4 my-8', {
-              'pt-1 pb-16': isMobile,
+            className={cn('flex flex-1 flex-col gap-4 p-4 pt-4 my-4', {
+              'pt-1 pb-8': isMobile,
             })}
           >
             {children}

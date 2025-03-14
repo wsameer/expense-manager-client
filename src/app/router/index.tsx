@@ -110,7 +110,7 @@ const createRouter = () =>
           path: ACCOUNT_SETTINGS_ROUTE,
           lazy: async () => {
             const { AccountSettingsPage } = await import(
-              '../../pages/settings/accounts'
+              '../../pages/settings/accounts-settings'
             );
             return { Component: AccountSettingsPage };
           },
