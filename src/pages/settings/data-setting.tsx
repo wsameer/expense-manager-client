@@ -92,6 +92,7 @@ export const DataSettingsPage = () => {
             label={t('settings:delete-account')}
             rightElement={undefined}
             variant="danger"
+            onClick={handleDeleteAccount}
           />
         </ListGroup>
       </div>
