@@ -124,9 +124,10 @@ export const TransactionList = () => {
       <Drawer
         open={open}
         onOpenChange={setOpen}
+        repositionInputs={false}
       >
         <DrawerContent>
-          <div className="mx-auto w-full max-w-sm">
+          <div className="mx-auto w-full">
             <DrawerHeader className="flex justify-between items-center text-left">
               <DrawerTitle>
                 {t('record')}{' '}

@@ -62,7 +62,7 @@ export const SettingsPage = () => {
     >
       <div
         id="app-settings"
-        className={cn('grid grid-cols-1 gap-6 w-full', isDesktop && 'w-3/5')}
+        className={cn('grid grid-cols-1 gap-6 w-full', isDesktop && 'w-1/3')}
       >
         <ListGroup title="Appearance">
           <ListItem

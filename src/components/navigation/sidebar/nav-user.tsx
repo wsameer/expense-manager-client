@@ -23,7 +23,7 @@ import { getInitials } from '@/lib/utils';
 import { useAuth } from '@/hooks/use-auth';
 import { useTranslation } from 'react-i18next';
 import { NavLink } from 'react-router-dom';
-import { SETTINGS_ROUTE } from '@/app/router/routes';
+import { SETTINGS_ROUTE, USER_PROFILE_ROUTE } from '@/app/router/routes';
 
 type Props = {
   user: User;
@@ -78,9 +78,11 @@ export const NavUser = ({ user }: Props) => {
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
-              <DropdownMenuItem>
-                <User2 />
-                Profile
+              <DropdownMenuItem asChild>
+                <NavLink to={USER_PROFILE_ROUTE}>
+                  <User2 />
+                  Profile
+                </NavLink>
               </DropdownMenuItem>
               <DropdownMenuItem asChild>
                 <NavLink to={SETTINGS_ROUTE}>

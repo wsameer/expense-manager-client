@@ -6,17 +6,19 @@ import { SidebarInset, SidebarProvider } from '../ui/sidebar';
 import { AppSidebar } from '../navigation/sidebar/app-sidebar';
 import { AppBottomBar } from '../navigation/bottombar/app-bottombar';
 import { AppHeader, Head, MobileHeader } from '../seo';
-import { cn } from '@/lib/utils';
 import { AddTransaction } from '@/features/add-transaction';
 
-interface PageLayoutProps {
+export interface PageLayoutProps {
   title?: string;
   subTitle?: string;
   children?: ReactNode;
   suppressStickyHeader?: boolean;
   rightElement?: ReactElement;
   suppressTitle?: boolean;
-  backButtonUrl?: string;
+  backButtonProps?: {
+    url: string;
+    label: string;
+  };
 }
 
 export const PageLayout = React.memo<PageLayoutProps>((props) => {
@@ -32,11 +34,7 @@ export const PageLayout = React.memo<PageLayoutProps>((props) => {
 
         <SidebarInset>
           {isMobile ? <MobileHeader {...props} /> : <AppHeader {...props} />}
-          <div
-            className={cn('flex flex-1 flex-col gap-4 p-4 pt-4 my-4', {
-              'pt-1 pb-8': isMobile,
-            })}
-          >
+          <div className="flex flex-1 flex-col gap-4 m-4 pb-8">
             {children}
             {!isMobile && <AddTransaction />}
           </div>

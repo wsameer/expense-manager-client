@@ -6,9 +6,12 @@ export const UserProfilePage = () => {
   return (
     <PageLayout
       title="Profile"
-      backButtonUrl={SETTINGS_ROUTE}
+      backButtonProps={{
+        url: SETTINGS_ROUTE,
+        label: 'Settings',
+      }}
     >
-      <div className="user-profile-container">
+      <div className="md:w-1/3">
         <ContributionsTracker
           title={`Contributions in ${new Date().getFullYear()}`}
           percentage={30}

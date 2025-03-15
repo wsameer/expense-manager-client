@@ -6,7 +6,10 @@ export const ExpenseCategoriesSettingsPage = () => {
   return (
     <PageLayout
       title="Expense Categories"
-      backButtonUrl={SETTINGS_ROUTE}
+      backButtonProps={{
+        url: SETTINGS_ROUTE,
+        label: 'Settings',
+      }}
     >
       <ExpenseCategoryList />
     </PageLayout>

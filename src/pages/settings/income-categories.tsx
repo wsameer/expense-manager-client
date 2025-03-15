@@ -6,7 +6,10 @@ export const IncomeCategoriesSettingsPage = () => {
   return (
     <PageLayout
       title="Income Categories"
-      backButtonUrl={SETTINGS_ROUTE}
+      backButtonProps={{
+        url: SETTINGS_ROUTE,
+        label: 'Settings',
+      }}
     >
       <IncomeCategoryList />
     </PageLayout>

@@ -5,7 +5,10 @@ export const AccountSettingsPage = () => {
   return (
     <PageLayout
       title="Accounts"
-      backButtonUrl={SETTINGS_ROUTE}
+      backButtonProps={{
+        url: SETTINGS_ROUTE,
+        label: 'Settings',
+      }}
     >
       <h1>Hello!</h1>
     </PageLayout>

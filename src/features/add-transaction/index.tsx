@@ -44,6 +44,7 @@ export const AddTransaction = () => {
       <Drawer
         open={open}
         onOpenChange={setOpen}
+        repositionInputs={false}
       >
         <DrawerTrigger asChild>
           <Button
@@ -57,7 +58,7 @@ export const AddTransaction = () => {
           </Button>
         </DrawerTrigger>
         <DrawerContent>
-          <div className="mx-auto w-full max-w-sm">
+          <div className="mx-auto w-full">
             <DrawerHeader className="text-left">
               <DrawerTitle className="text-2xl font-light">
                 Record{' '}

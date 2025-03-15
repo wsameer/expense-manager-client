@@ -167,6 +167,7 @@ export const AddExpenseSubCategory = ({
       <Drawer
         open={open}
         onOpenChange={onOpenChange}
+        repositionInputs={false}
       >
         <DrawerContent>
           <DrawerHeader className="text-left">

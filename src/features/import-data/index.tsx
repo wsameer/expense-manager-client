@@ -62,6 +62,7 @@ export const ImportDataDialog = () => {
     <Drawer
       open={open}
       onOpenChange={setOpen}
+      repositionInputs={false}
     >
       <DrawerTrigger asChild>
         <ListItem

@@ -157,6 +157,7 @@ export const AddIncomeCategoryForm = ({
       <Drawer
         open={open}
         onOpenChange={onOpenChange}
+        repositionInputs={false}
       >
         <DrawerContent>
           <DrawerHeader className="text-left">

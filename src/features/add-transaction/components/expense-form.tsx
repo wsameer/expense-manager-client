@@ -14,7 +14,6 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form';
-import { useAccountStore } from '@/store/accountsStore';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { OptionSelector } from '@/components/option-selector';
@@ -40,6 +39,7 @@ import { useUpdateTransaction } from '../api/update-transaction';
 import { DateSelector } from './form-fields/date-selector';
 import { FormProps } from './types';
 import { useUiStore } from '@/store/uiStore';
+import { useAccounts } from '@/features/accounts/api/get-accounts';
 
 const formSchema = z.object({
   date: z.date({
@@ -72,7 +72,7 @@ export const ExpenseForm = ({ existingData, setOpen }: FormProps) => {
   const navigate = useNavigate();
 
   const { selectedDate } = useUiStore();
-  const { accounts } = useAccountStore();
+  const { allAccounts: accounts } = useAccounts();
   const { expenseCategories } = useExpenseCategories();
   const { createTransaction } = useCreateTransaction();
   const { updateTransaction } = useUpdateTransaction();

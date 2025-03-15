@@ -1,25 +1,16 @@
-import { ReactElement } from 'react';
 import { Link } from '../ui/link';
 import { ChevronLeft } from 'lucide-react';
 import { Button } from '../ui/button';
-
-type Props = {
-  title?: string;
-  subTitle?: string;
-  backButtonUrl?: string;
-  rightElement?: ReactElement;
-  suppressStickyHeader?: boolean;
-  suppressTitle?: boolean;
-};
+import { PageLayoutProps } from '../layout/page-layout';
 
 export const MobileHeader = ({
   title,
   subTitle,
   rightElement,
-  backButtonUrl,
+  backButtonProps,
   suppressStickyHeader = false,
   suppressTitle = false,
-}: Props) => {
+}: PageLayoutProps) => {
   if (suppressStickyHeader) {
     return <header className="h-8" />;
   }
@@ -27,7 +18,7 @@ export const MobileHeader = ({
   return (
     <header className="flex justify-between min-w-0 md:hidden px-4 pt-10">
       <div className="flex items-center gap-2">
-        {backButtonUrl && (
+        {backButtonProps?.url && (
           <Button
             size="icon"
             variant="outline"
@@ -35,7 +26,7 @@ export const MobileHeader = ({
             asChild
           >
             <Link
-              to={backButtonUrl}
+              to={backButtonProps.url}
               className="h-8 w-8 text-lg [&_svg]:size-5"
             >
               <ChevronLeft />

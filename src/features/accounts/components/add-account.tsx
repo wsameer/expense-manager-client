@@ -37,6 +37,7 @@ export const AddAccount = ({ group }: { group: AccountGroupEnum }) => {
       <Drawer
         open={open}
         onOpenChange={setOpen}
+        repositionInputs={false}
       >
         <DrawerTrigger asChild>
           <Button

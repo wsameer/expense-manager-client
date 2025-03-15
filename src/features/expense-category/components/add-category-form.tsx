@@ -129,6 +129,7 @@ export const AddExpenseCategoryForm = ({
       <Drawer
         open={open}
         onOpenChange={onOpenChange}
+        repositionInputs={false}
       >
         <DrawerContent>
           <DrawerHeader className="text-left">

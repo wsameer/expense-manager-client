@@ -46,7 +46,10 @@ export const DataSettingsPage = () => {
   return (
     <PageLayout
       title="My Data"
-      backButtonUrl={SETTINGS_ROUTE}
+      backButtonProps={{
+        url: SETTINGS_ROUTE,
+        label: 'Settings',
+      }}
     >
       <div
         id="data-settings"

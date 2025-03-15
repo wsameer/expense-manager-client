@@ -1,12 +1,10 @@
+import { DollarSign, TrendingDown, TrendingUp } from 'lucide-react';
+import React from 'react';
 import { PageLayout } from '@/components/layout/page-layout';
 import { Separator } from '@/components/ui/separator';
 import { AccountGroups } from '@/features/accounts/components/account-groups';
 import { FinancialStat } from '@/features/accounts/components/financial-stat';
 import { QueryKey } from '@/features/accounts/types';
-import { useResponsive } from '@/hooks/use-responsive';
-import { cn } from '@/lib/utils';
-import { DollarSign, TrendingDown, TrendingUp } from 'lucide-react';
-import React from 'react';
 
 const statsData = [
   {
@@ -30,18 +28,12 @@ const statsData = [
 ];
 
 export const AccountsPage = () => {
-  const { isDesktop } = useResponsive();
-
   return (
     <PageLayout
       title="Accounts"
       subTitle="Your accounts with its latest balance"
     >
-      <div
-        className={cn('grid grid-cols-1 gap-3', {
-          'w-3/5': isDesktop,
-        })}
-      >
+      <div className="grid grid-cols-1 gap-3 md:w-1/3">
         <div className="bg-white border dark:bg-zinc-800 rounded-2xl h-16 py-3 shadow-sm">
           <div className="flex flex-row justify-evenly items-center h-full gap-1">
             {statsData.map((item, index) => (

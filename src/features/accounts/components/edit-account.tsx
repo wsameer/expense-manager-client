@@ -50,6 +50,7 @@ export const EditAccount = ({
     return (
       <Drawer
         open={open}
+        repositionInputs={false}
         onOpenChange={setOpen}
       >
         <DrawerTrigger asChild>

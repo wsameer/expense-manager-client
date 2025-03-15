@@ -1,8 +1,6 @@
 import { useState } from 'react';
 import { PageLayout } from '@/components/layout/page-layout';
-import { useResponsive } from '@/hooks/use-responsive';
 import { useUiStore } from '@/store/uiStore';
-import { cn } from '@/lib/utils';
 import { TransactionList } from '@/features/transactions/transaction-list';
 import { Button } from '@/components/ui/button';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
@@ -16,7 +14,6 @@ export type MonthData = {
 };
 
 export const TransactionsPage = () => {
-  const { isDesktop } = useResponsive();
   const { selectedDate, setSelectedDate } = useUiStore();
   const [displayedMonths, setDisplayedMonths] = useState(() =>
     getMonthsToDisplay(selectedDate),
@@ -60,11 +57,7 @@ export const TransactionsPage = () => {
         </div>
       }
     >
-      <div
-        className={cn('grid grid-cols-1 gap-4', {
-          'w-3/5': isDesktop,
-        })}
-      >
+      <div className="grid grid-cols-1 gap-4 md:w-1/3">
         <div className="flex gap-1 items-center">
           <Button
             className="rounded-xl h-6 w-6 dark:hover:bg-background/40"
