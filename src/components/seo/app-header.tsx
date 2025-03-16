@@ -7,6 +7,7 @@ import { SidebarTrigger } from '../ui/sidebar';
 import { Separator } from '../ui/separator';
 import { Button } from '../ui/button';
 import { PageLayoutProps } from '../layout/page-layout';
+import { cn } from '@/lib/utils';
 
 export const AppHeader = ({
   backButtonProps,
@@ -38,7 +39,11 @@ export const AppHeader = ({
             <Slash className="h-4" />
           </>
         )}
-        <div className="flex flex-col min-w-0">
+        <div
+          className={cn('flex flex-col min-w-0', {
+            'pl-1': !backButtonProps,
+          })}
+        >
           <h2 className="text-xl font-medium tracking-tight truncate max-w-[180px] sm:max-w-[240px]">
             {title}
           </h2>
