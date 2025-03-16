@@ -152,7 +152,6 @@ export const ExpenseForm = ({ existingData, setOpen }: FormProps) => {
       } else {
         await createTransaction(transactionData);
       }
-
       form.reset();
       return setOpen(false);
     } catch (error: any) {

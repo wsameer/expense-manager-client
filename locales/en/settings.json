@@ -14,6 +14,17 @@
     "csv-file": "CSV File",
     "cancel": "Cancel",
     "upload-csv-file": "Upload CSV File",
-    "upload-csv-hint": "Your file must follow the given format or it won't be accepted for processing"
+    "upload-csv-hint": "Your file must follow the given format or it won't be accepted for processing."
+  },
+  "delete-transactions-modal": {
+    "hint": "This operation is irreversible. Please double check before proceeding as you'll lose data forever.",
+    "success-message": "All transactions are deleted",
+    "failure-message": "Failed to delete your transactions. Please try again."
+  },
+  "delete-account-modal": {
+    "title": "You are about to delete your account",
+    "hint": "You have up to 60 days to restore your account after deletion.",
+    "success-message": "Your account has been deleted",
+    "failure-message": "Failed to delete your account. Please try again."
   }
 }

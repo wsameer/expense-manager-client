@@ -3,7 +3,6 @@ import { useTranslation } from 'react-i18next';
 import { FileUp } from 'lucide-react';
 
 import { ListItem } from '@/components/list-group/list-item';
-import { Button } from '@/components/ui/button';
 import {
   Dialog,
   DialogContent,
@@ -14,10 +13,8 @@ import {
 } from '@/components/ui/dialog';
 import {
   Drawer,
-  DrawerClose,
   DrawerContent,
   DrawerDescription,
-  DrawerFooter,
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
@@ -78,17 +75,6 @@ export const ImportDataDialog = () => {
         </DrawerHeader>
 
         {open && <ImportCsvForm />}
-
-        <DrawerFooter className="pt-2">
-          <DrawerClose asChild>
-            <Button
-              variant="destructive"
-              onClick={() => setOpen(false)}
-            >
-              {t('data.cancel')}
-            </Button>
-          </DrawerClose>
-        </DrawerFooter>
       </DrawerContent>
     </Drawer>
   );

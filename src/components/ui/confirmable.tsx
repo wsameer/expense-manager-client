@@ -63,9 +63,14 @@ export const ConfirmDialogProvider: React.FC<{ children: React.ReactNode }> = ({
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel onClick={handleCancel}>Cancel</AlertDialogCancel>
+            <AlertDialogCancel
+              className="rounded-full"
+              onClick={handleCancel}
+            >
+              Cancel
+            </AlertDialogCancel>
             <AlertDialogAction
-              className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+              className="bg-destructive text-destructive-foreground hover:bg-destructive/90 rounded-full"
               onClick={handleConfirm}
             >
               Confirm
