@@ -25,12 +25,16 @@ import { TransactionItem } from './components/transaction-item';
 import { useTransactions } from './api/get-transaction';
 import { TListLoader } from './components/list-loader';
 import { MonthlyStats } from './components/monthly-stats';
+import { useResponsive } from '@/hooks/use-responsive';
+import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog';
 
 export const TransactionList = () => {
   const { selectedDate, selectedTransactionType, setSelectedTransactionType } =
     useUiStore();
   const { t } = useTranslation(['transaction', 'common']);
   const { openConfirmDialog } = useConfirmDialog();
+  const { isDesktop } = useResponsive();
+
   const { allTransactions, isError, isLoading } = useTransactions(
     formatDateToYYYYMM(selectedDate),
   );
@@ -101,6 +105,7 @@ export const TransactionList = () => {
   return (
     <div className="flex flex-wrap flex-col gap-4 mb-4">
       <MonthlyStats monthlyStats={monthlyStats} />
+
       {sortedDates.map((date: string) => (
         <div key={date}>
           <p className="text-sm mb-1">
@@ -121,13 +126,42 @@ export const TransactionList = () => {
         </div>
       ))}
 
-      <Drawer
-        open={open}
-        onOpenChange={setOpen}
-        repositionInputs={false}
-      >
-        <DrawerContent>
-          <div className="mx-auto w-full">
+      {isDesktop ? (
+        <Dialog
+          open={open}
+          onOpenChange={setOpen}
+        >
+          <DialogContent className="sm:max-w-[425px]">
+            <DrawerHeader className="flex justify-between items-center text-left">
+              <DialogTitle>
+                {t('record')}{' '}
+                {selectedTransactionType === TransactionType.TRANSFER
+                  ? 'a'
+                  : 'an'}{' '}
+                {tabTitle}
+              </DialogTitle>
+              <Button
+                className="text-red-500 hover:text-red-700 h-6 w-6"
+                variant="ghost"
+                size="icon"
+                onClick={() => handleDeleteTransaction(transactionToEdit!.id)}
+              >
+                <Trash2 className="h-4 w-4" />
+              </Button>
+            </DrawerHeader>
+            <Transactions
+              setOpen={setOpen}
+              data={transactionToEdit}
+            />
+          </DialogContent>
+        </Dialog>
+      ) : (
+        <Drawer
+          open={open}
+          onOpenChange={setOpen}
+          repositionInputs={false}
+        >
+          <DrawerContent className="mx-auto w-full">
             <DrawerHeader className="flex justify-between items-center text-left">
               <DrawerTitle>
                 {t('record')}{' '}
@@ -151,9 +185,9 @@ export const TransactionList = () => {
                 data={transactionToEdit}
               />
             </div>
-          </div>
-        </DrawerContent>
-      </Drawer>
+          </DrawerContent>
+        </Drawer>
+      )}
     </div>
   );
 };

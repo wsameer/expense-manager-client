@@ -11,10 +11,8 @@ import {
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
-  DialogClose,
   DialogContent,
   DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -108,17 +106,6 @@ export const AddTransaction = () => {
           <div className="grid gap-4 pt-4">
             <Transactions setOpen={setOpen} />
           </div>
-          <DialogFooter>
-            <DialogClose asChild>
-              <Button
-                type="submit"
-                className="w-full rounded-full text-md"
-                size="lg"
-              >
-                {t('cancel')}
-              </Button>
-            </DialogClose>
-          </DialogFooter>
         </DialogContent>
       </Dialog>
     </div>

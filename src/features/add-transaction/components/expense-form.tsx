@@ -267,7 +267,7 @@ export const ExpenseForm = ({ existingData, setOpen }: FormProps) => {
           render={({ field }) => {
             return (
               <FormItem>
-                <div className="flex items-center mt-4 space-y-0 space-x-3">
+                <div className="flex items-center mt-4 space-y-0 space-x-4">
                   <FormLabel
                     htmlFor="expenseSubcategoryId"
                     className="w-1/4"

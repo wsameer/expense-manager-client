@@ -5,13 +5,13 @@ import { MonthData } from '../transactions-page';
 interface MonthButtonProps {
   monthData: MonthData;
   isSelected: boolean;
-  onSelect: (year: number, month: number) => void;
+  onClickHandler: (year: number, month: number) => void;
 }
 
 export const MonthButton = ({
   monthData,
   isSelected,
-  onSelect,
+  onClickHandler,
 }: MonthButtonProps) => {
   const { month, year } = monthData;
 
@@ -19,7 +19,7 @@ export const MonthButton = ({
     <Button
       variant={isSelected ? 'default' : 'ghost'}
       className="flex flex-col py-4 h-auto rounded-3xl hover:text-background"
-      onClick={() => onSelect(year, month)}
+      onClick={() => onClickHandler(year, month)}
     >
       <p
         className={cn(
@@ -32,10 +32,9 @@ export const MonthButton = ({
         {MONTHS[month]}
       </p>
       <p
-        className={cn(
-          'text-center text-muted-foreground leading-3',
-          isSelected && 'text-background',
-        )}
+        className={cn('text-center text-muted-foreground leading-3', {
+          'text-background': isSelected,
+        })}
         style={{ fontSize: '0.6rem' }}
       >
         {year}
