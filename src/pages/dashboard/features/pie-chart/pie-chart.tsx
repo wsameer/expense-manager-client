@@ -8,10 +8,10 @@ import {
   ChartContainer,
   ChartTooltip,
 } from '@/components/ui/chart';
-import { COLORS } from '../constants';
-import { PieChartData } from '../types';
-import { CustomLabel } from './custom-label';
-import { CustomTooltip } from './custom-tooltip';
+import { PieChartData } from '../../types';
+import { COLORS } from '../../constants';
+import { CustomTooltip } from './components/custom-tooltip';
+import { CustomLabel } from './components/custom-label';
 
 type Props = {
   chartData: Array<PieChartData>;

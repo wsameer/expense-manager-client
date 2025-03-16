@@ -1,6 +1,9 @@
 import { EXPENSE_CATEGORIES_API } from '@/features/expense-category/constants';
 import { INCOME_CATEGORIES_API } from '@/features/income-categories/constants';
 
+export const EXPENSE_TOTALS_API = EXPENSE_CATEGORIES_API + '/totals';
+export const INCOME_TOTALS_API = INCOME_CATEGORIES_API + '/totals';
+
 export const COLORS = [
   'var(--chart-1)',
   'var(--chart-2)',
@@ -12,6 +15,3 @@ export const COLORS = [
   'var(--chart-9)',
   'var(--chart-8)',
 ];
-
-export const EXPENSE_TOTALS_API = EXPENSE_CATEGORIES_API + '/totals';
-export const INCOME_TOTALS_API = INCOME_CATEGORIES_API + '/totals';

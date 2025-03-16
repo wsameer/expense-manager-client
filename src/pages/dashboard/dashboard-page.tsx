@@ -2,17 +2,29 @@ import { PageLayout } from '@/components/layout/page-layout';
 import { MonthNavigator } from '@/components/shared/month-navigator';
 import { useUiStore } from '@/store/uiStore';
 import { useAuth } from '@/hooks/use-auth';
-import { Dashboard } from '@/features/dashboard';
 import { useResponsive } from '@/hooks/use-responsive';
-import { cn } from '@/lib/utils';
+import { capitalize, cn } from '@/lib/utils';
+import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { useState } from 'react';
+import { TransactionType } from '@/types';
+import { ExpenseTabContent } from './features/expense-tab';
+import { IncomeTabContent } from './features/income-tab';
 
 export const DashboardPage = () => {
   const { user } = useAuth();
   const { isDesktop } = useResponsive();
   const { selectedDate, setSelectedDate } = useUiStore();
 
+  const [transactionType, setTransactionType] = useState<TransactionType>(
+    TransactionType.EXPENSE,
+  );
+
   const handleMonthChange = (year: number, month: number) => {
     setSelectedDate(new Date(year, month));
+  };
+
+  const handleTabChange = (value: string) => {
+    setTransactionType(value as TransactionType);
   };
 
   return (
@@ -41,7 +53,22 @@ export const DashboardPage = () => {
             />
           </div>
         </div>
-        <Dashboard currentDate={selectedDate} />
+
+        <Tabs
+          defaultValue={TransactionType.EXPENSE}
+          onValueChange={handleTabChange}
+        >
+          <TabsList className="grid w-full grid-cols-2">
+            <TabsTrigger value={TransactionType.INCOME}>
+              {capitalize(TransactionType.INCOME)}
+            </TabsTrigger>
+            <TabsTrigger value={TransactionType.EXPENSE}>
+              {capitalize(TransactionType.EXPENSE)}
+            </TabsTrigger>
+          </TabsList>
+          <ExpenseTabContent transactionType={transactionType} />
+          <IncomeTabContent transactionType={transactionType} />
+        </Tabs>
       </div>
     </PageLayout>
   );

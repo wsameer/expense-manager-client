@@ -1,4 +1,4 @@
-import { COLORS } from '../constants';
+import { COLORS } from '@/pages/dashboard/constants';
 
 export const CustomLabel = ({
   cx,

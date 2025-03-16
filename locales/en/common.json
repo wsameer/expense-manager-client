@@ -25,6 +25,9 @@
     "dashboard": "Dashboard",
     "github-repo": "GitHub Repo"
   },
+  "dashboard": {
+    "empty-data-message": "Start by creating your first transaction by clicking on + icon"
+  },
   "settings": {
     "theme": {
       "toggle-theme": "Toggle theme",

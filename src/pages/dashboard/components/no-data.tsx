@@ -13,9 +13,7 @@ export const NoData = () => {
       </p>
       <Alert>
         <InfoIcon className="h-4 w-4" />
-        <AlertDescription>
-          Start by creating your first transaction by clicking on + icon
-        </AlertDescription>
+        <AlertDescription>{t('dashboard.empty-data-message')}</AlertDescription>
       </Alert>
     </div>
   );
