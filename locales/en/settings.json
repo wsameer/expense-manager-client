@@ -14,7 +14,7 @@
     "csv-file": "CSV File",
     "cancel": "Cancel",
     "upload-csv-file": "Upload CSV File",
-    "upload-csv-hint": "Your file must follow the given format or it won't be accepted for processing."
+    "upload-csv-hint": "Your file must follow the given format or it won't be accepted for processing. Also, make sure you have the Categories and Accounts created prior to importing data"
   },
   "delete-transactions-modal": {
     "hint": "This operation is irreversible. Please double check before proceeding as you'll lose data forever.",

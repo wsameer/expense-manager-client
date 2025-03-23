@@ -76,8 +76,6 @@ export const AccountGroups = () => {
                         </p>
                       )}
                     </div>
-
-                    {/* Add Account Button (if not CASH) */}
                     <p className="text-base text-mono text-foreground pr-1">
                       {formattedAmount(
                         getBalanceSumByGroup(key as AccountGroup),

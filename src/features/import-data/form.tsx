@@ -263,7 +263,7 @@ export const ImportCsvForm = () => {
               )}
             />
             <Button
-              className="w-full mt-4"
+              className="w-full rounded-full mt-4"
               type="submit"
               variant="default"
               disabled={isUploading}
