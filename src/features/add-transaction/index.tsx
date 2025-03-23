@@ -1,13 +1,7 @@
-import { useMemo, useState } from 'react';
 import { Plus } from 'lucide-react';
-import { useResponsive } from '@/hooks/use-responsive';
-import {
-  Drawer,
-  DrawerContent,
-  DrawerTitle,
-  DrawerHeader,
-  DrawerTrigger,
-} from '@/components/ui/drawer';
+import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
@@ -17,19 +11,26 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
-
-import { useTranslation } from 'react-i18next';
+import {
+  Drawer,
+  DrawerContent,
+  DrawerDescription,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from '@/components/ui/drawer';
+import { useResponsive } from '@/hooks/use-responsive';
+import { useUiStore } from '@/store/uiStore';
 import { TransactionType } from '@/types';
 import { Transactions } from './components/transactions';
-import { useUiStore } from '@/store/uiStore';
 
-export const AddTransaction = () => {
+export function AddTransaction() {
   const { t } = useTranslation('transaction');
   const [open, setOpen] = useState(false);
   const { selectedTransactionType } = useUiStore();
-  const { isMobile } = useResponsive();
+  const { isDesktop } = useResponsive();
 
-  const tabTitle = useMemo(
+  const tabTitle = React.useMemo(
     () =>
       selectedTransactionType === TransactionType.TRANSFER
         ? 'transfer'
@@ -37,45 +38,8 @@ export const AddTransaction = () => {
     [selectedTransactionType],
   );
 
-  if (isMobile) {
+  if (isDesktop) {
     return (
-      <Drawer
-        open={open}
-        onOpenChange={setOpen}
-      >
-        <DrawerTrigger asChild>
-          <Button
-            className="rounded-full h-11 w-11"
-            variant="destructive"
-            size="icon"
-          >
-            <div className="flex flex-col items-center justify-center">
-              <Plus />
-            </div>
-          </Button>
-        </DrawerTrigger>
-        <DrawerContent className="sm:max-w-[425px]">
-          <div className="mx-auto w-full">
-            <DrawerHeader className="text-left">
-              <DrawerTitle className="text-2xl font-light">
-                Record{' '}
-                {selectedTransactionType === TransactionType.TRANSFER
-                  ? 'a'
-                  : 'an'}{' '}
-                {tabTitle}
-              </DrawerTitle>
-            </DrawerHeader>
-            <div className="px-4">
-              <Transactions setOpen={setOpen} />
-            </div>
-          </div>
-        </DrawerContent>
-      </Drawer>
-    );
-  }
-
-  return (
-    <div className={'fixed bottom-6 right-6'}>
       <Dialog
         open={open}
         onOpenChange={setOpen}
@@ -94,8 +58,8 @@ export const AddTransaction = () => {
             <DialogTitle>
               Record{' '}
               {selectedTransactionType === TransactionType.TRANSFER
-                ? 'a'
-                : 'an'}{' '}
+                ? ' a '
+                : ' an '}
               {tabTitle}
             </DialogTitle>
             <DialogDescription>
@@ -107,6 +71,40 @@ export const AddTransaction = () => {
           </div>
         </DialogContent>
       </Dialog>
-    </div>
+    );
+  }
+
+  return (
+    <Drawer
+      open={open}
+      onOpenChange={setOpen}
+    >
+      <DrawerTrigger asChild>
+        <Button
+          className="rounded-full h-12 w-12 hover:bg-red-700"
+          variant="destructive"
+          size="icon"
+        >
+          <Plus />
+        </Button>
+      </DrawerTrigger>
+      <DrawerContent>
+        <DrawerHeader className="text-left">
+          <DrawerTitle className="text-2xl font-light">
+            Record
+            {selectedTransactionType === TransactionType.TRANSFER
+              ? ' a '
+              : ' an '}
+            {tabTitle}
+          </DrawerTitle>
+          <DrawerDescription>
+            {t('enter-and-submit-your-transaction')}
+          </DrawerDescription>
+        </DrawerHeader>
+        <div className="px-4 mb-4">
+          <Transactions setOpen={setOpen} />
+        </div>
+      </DrawerContent>
+    </Drawer>
   );
-};
+}

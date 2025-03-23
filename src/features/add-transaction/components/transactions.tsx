@@ -6,6 +6,7 @@ import { ExpenseForm } from './expense-form';
 import { IncomeForm } from './income-form';
 import { TransferForm } from './transfer-form';
 import { useUiStore } from '@/store/uiStore';
+import { ProfileForm } from './profile-form';
 
 type TransactionsProps = {
   setOpen: (value: boolean) => void;
@@ -71,8 +72,13 @@ export const Transactions: React.FC<TransactionsProps> = React.memo(
           <TabsContent
             key={type}
             value={type}
+            className="mt-4"
           >
-            {renderContent(type as TransactionType)}
+            {/* {renderContent(type as TransactionType)} */}
+            <ProfileForm
+              setOpen={setOpen}
+              existingData={data}
+            />
           </TabsContent>
         ))}
       </Tabs>

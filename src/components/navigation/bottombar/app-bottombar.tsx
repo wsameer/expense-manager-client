@@ -7,37 +7,15 @@ import { PRIMARY_NAV } from '../constants';
 import { NavItem } from './nav-item';
 
 export const AppBottomBar = () => {
+  const [isVisible, setIsVisible] = useState(true);
   const navigate = useNavigate();
   const location = useLocation();
   const navRef = useRef(null);
 
-  const [isVisible, setIsVisible] = useState(true);
-  const [scrollPosition, setScrollPosition] = useState(0);
-
-  React.useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollPos = window.scrollY;
-
-      if (scrollPosition > 10 && currentScrollPos > scrollPosition) {
-        setIsVisible(false);
-      } else {
-        setIsVisible(true);
-      }
-
-      setScrollPosition(currentScrollPos);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, [scrollPosition]);
-
   return (
     <div
       ref={navRef}
-      className={`fixed bottom-8 left-1/2 w-3/4 -translate-x-1/2 z-50 transition-transform duration-300 ease-in-out ${
+      className={`fixed bottom-8 left-1/2 w-3/4 -translate-x-1/2 z-50 transition-transform duration-200 ease-in-out ${
         isVisible ? 'translate-y-0' : 'translate-y-[100px]'
       }`}
       id="app-bottom-bar"
