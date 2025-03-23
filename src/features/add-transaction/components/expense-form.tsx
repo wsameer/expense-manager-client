@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { useForm } from 'react-hook-form';
+import React, { useState } from 'react';
 import { z } from 'zod';
-import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
-
+import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { FormProps } from './types';
 import {
   Form,
   FormControl,
@@ -14,11 +14,29 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
+import { useUiStore } from '@/store/uiStore';
+import { DateSelector } from './form-fields/date-selector';
+import { useTranslation } from 'react-i18next';
+import { useAccounts } from '@/features/accounts/api/get-accounts';
+import { SelectorOption } from '@/components/option-selector/types';
+import { useNavigate } from 'react-router-dom';
 import { OptionSelector } from '@/components/option-selector';
-import { TransactionType } from '@/types';
+import {
+  ACCOUNT_SETTINGS_ROUTE,
+  EXPENSE_CATEGORY_SETTINGS_ROUTE,
+} from '@/app/router/routes';
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/popover';
+import { ChevronsUpDown } from 'lucide-react';
+import { cn } from '@/lib/utils';
 import { useExpenseCategories } from '@/features/expense-category/api/use-expense-categories';
+import { useCreateTransaction } from '../api/create-transaction';
+import { useUpdateTransaction } from '../api/update-transaction';
+import { TransactionType } from '@/types';
+import { toast } from '@/hooks/use-toast';
 import {
   Select,
   SelectContent,
@@ -26,20 +44,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { toast } from '@/hooks/use-toast';
-import {
-  ACCOUNT_SETTINGS_ROUTE,
-  EXPENSE_CATEGORY_SETTINGS_ROUTE,
-} from '@/app/router/routes';
-import { useOnClickOutside } from '@/hooks/use-on-click-outside';
-import { SelectorOption } from '@/components/option-selector/types';
-
-import { useCreateTransaction } from '../api/create-transaction';
-import { useUpdateTransaction } from '../api/update-transaction';
-import { DateSelector } from './form-fields/date-selector';
-import { FormProps } from './types';
-import { useUiStore } from '@/store/uiStore';
-import { useAccounts } from '@/features/accounts/api/get-accounts';
 
 const formSchema = z.object({
   date: z.date({
@@ -68,37 +72,31 @@ export const ExpenseForm = ({ existingData, setOpen }: FormProps) => {
     'account' | 'category' | null
   >(null);
 
+  const { selectedDate } = useUiStore();
   const { t } = useTranslation('transaction');
   const navigate = useNavigate();
 
-  const { selectedDate } = useUiStore();
   const { allAccounts: accounts } = useAccounts();
   const { expenseCategories } = useExpenseCategories();
   const { createTransaction } = useCreateTransaction();
   const { updateTransaction } = useUpdateTransaction();
 
-  const accountSelectorRef = useRef<HTMLDivElement>(null);
-  const expenseCategorySelectorRef = useRef<HTMLDivElement>(null);
-
-  useOnClickOutside(accountSelectorRef, () => setSelectorType(null));
-  useOnClickOutside(expenseCategorySelectorRef, () => setSelectorType(null));
-
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       date: selectedDate,
-      amount: 0,
       expenseCategoryId: -1,
       fromAccountId: -1,
       expenseSubcategoryId: existingData?.expenseSubcategoryId ?? null,
     },
   });
+
   const formErrors = form.formState.errors;
   const expenseCategoryId = form.watch('expenseCategoryId') as
     | number
     | undefined;
 
-  const selectedCategory = useMemo(() => {
+  const selectedCategory = React.useMemo(() => {
     return expenseCategories?.find(
       (category) => expenseCategoryId === category.id,
     );
@@ -108,7 +106,7 @@ export const ExpenseForm = ({ existingData, setOpen }: FormProps) => {
   const isSubcategoriesEmpty =
     Boolean(expenseCategoryId) && subcategories.length === 0;
 
-  const accountOptions: SelectorOption[] = useMemo(() => {
+  const accountOptions: SelectorOption[] = React.useMemo(() => {
     if (!accounts) return [];
     return accounts.map((acc) => {
       return {
@@ -118,7 +116,7 @@ export const ExpenseForm = ({ existingData, setOpen }: FormProps) => {
     });
   }, [accounts]);
 
-  const getSelectedAccountName = useCallback(
+  const getSelectedAccountName = React.useCallback(
     (id: number) => {
       if (!id) return undefined;
       return accounts?.find((account) => id === account.id)?.name || undefined;
@@ -126,7 +124,7 @@ export const ExpenseForm = ({ existingData, setOpen }: FormProps) => {
     [accounts],
   );
 
-  const getSelectedCategoryName = useCallback(
+  const getSelectedCategoryName = React.useCallback(
     (id: number) => {
       if (!id) return undefined;
       return (
@@ -137,7 +135,7 @@ export const ExpenseForm = ({ existingData, setOpen }: FormProps) => {
     [expenseCategories],
   );
 
-  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+  async function onSubmit(values: z.infer<typeof formSchema>) {
     if (!values) return false;
 
     try {
@@ -161,17 +159,14 @@ export const ExpenseForm = ({ existingData, setOpen }: FormProps) => {
       });
       return false;
     }
-  };
+  }
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (existingData) {
       form.reset({
         date: new Date(existingData.date),
         amount: existingData.amount,
-        expenseCategoryId: existingData.expenseCategoryId!,
-        expenseSubcategoryId: existingData.expenseSubcategoryId ?? null,
         fromAccountId: existingData.fromAccountId,
-        note: existingData.note ?? '',
       });
     }
   }, [existingData, form]);
@@ -221,6 +216,7 @@ export const ExpenseForm = ({ existingData, setOpen }: FormProps) => {
                 <FormControl className="m-0">
                   <Input
                     type="number"
+                    placeholder="0.00"
                     className="w-3/4 text-base"
                     aria-invalid={formErrors.amount ? 'true' : 'false'}
                     onFocus={() => setSelectorType(null)}
@@ -245,15 +241,43 @@ export const ExpenseForm = ({ existingData, setOpen }: FormProps) => {
                 >
                   {t('transaction:category')}
                 </FormLabel>
-                <FormControl>
-                  <Input
-                    className="w-3/4 text-base"
-                    placeholder={t('transaction:select-a-category')}
-                    value={getSelectedCategoryName(field.value)}
-                    onFocus={() => setSelectorType('category')}
-                    readOnly
-                  />
-                </FormControl>
+                <Popover
+                  open={selectorType === 'category'}
+                  onOpenChange={(value) =>
+                    setSelectorType(value ? 'category' : null)
+                  }
+                >
+                  <PopoverTrigger asChild>
+                    <FormControl className="m-0">
+                      <Button
+                        variant="outline"
+                        role="combobox"
+                        className={cn(
+                          'w-3/4 text-base justify-between',
+                          !field.value && 'text-muted-foreground',
+                        )}
+                      >
+                        {field.value > 0
+                          ? getSelectedCategoryName(field.value)
+                          : t('transaction:select-a-category')}
+                        <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                      </Button>
+                    </FormControl>
+                  </PopoverTrigger>
+                  <PopoverContent className="w-80 rounded-xl px-1 py-2">
+                    <OptionSelector
+                      className="h-fit"
+                      options={expenseCategories!}
+                      onSelect={(option) => {
+                        form.setValue('expenseCategoryId', option.id);
+                        setSelectorType(null);
+                      }}
+                      createOptionCallback={() =>
+                        navigate(EXPENSE_CATEGORY_SETTINGS_ROUTE)
+                      }
+                    />
+                  </PopoverContent>
+                </Popover>
               </div>
               <FormMessage role="alert" />
             </FormItem>
@@ -330,15 +354,43 @@ export const ExpenseForm = ({ existingData, setOpen }: FormProps) => {
                 >
                   {t('transaction:account')}
                 </FormLabel>
-                <FormControl className="m-0">
-                  <Input
-                    className="w-3/4 text-base"
-                    placeholder={t('transaction:select-account')}
-                    onFocus={() => setSelectorType('account')}
-                    value={getSelectedAccountName(field.value)}
-                    readOnly
-                  />
-                </FormControl>
+                <Popover
+                  open={selectorType === 'account'}
+                  onOpenChange={(value) =>
+                    setSelectorType(value ? 'account' : null)
+                  }
+                >
+                  <PopoverTrigger asChild>
+                    <FormControl className="m-0">
+                      <Button
+                        variant="outline"
+                        role="combobox"
+                        className={cn(
+                          'w-3/4 text-base justify-between',
+                          !field.value && 'text-muted-foreground',
+                        )}
+                      >
+                        {field.value > 0
+                          ? getSelectedAccountName(field.value)
+                          : t('transaction:select-account')}
+                        <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                      </Button>
+                    </FormControl>
+                  </PopoverTrigger>
+                  <PopoverContent className="w-80 rounded-xl px-1 py-2">
+                    <OptionSelector
+                      className="h-fit"
+                      options={accountOptions}
+                      onSelect={(option) => {
+                        form.setValue('fromAccountId', option.id);
+                        setSelectorType(null);
+                      }}
+                      createOptionCallback={() =>
+                        navigate(ACCOUNT_SETTINGS_ROUTE)
+                      }
+                    />
+                  </PopoverContent>
+                </Popover>
               </div>
               <FormMessage role="alert" />
             </FormItem>
@@ -370,34 +422,6 @@ export const ExpenseForm = ({ existingData, setOpen }: FormProps) => {
             </FormItem>
           )}
         />
-
-        {selectorType === 'account' && (
-          <OptionSelector
-            ref={accountSelectorRef}
-            className={`${selectorType ? 'h-44' : ''}`}
-            options={accountOptions}
-            onSelect={(option: any) => {
-              form.setValue('fromAccountId', option.id);
-              setSelectorType(null);
-            }}
-            createOptionCallback={() => navigate(ACCOUNT_SETTINGS_ROUTE)}
-          />
-        )}
-
-        {selectorType === 'category' && (
-          <OptionSelector
-            ref={expenseCategorySelectorRef}
-            className={`${selectorType ? 'h-44' : ''}`}
-            options={expenseCategories!}
-            onSelect={(option: any) => {
-              form.setValue('expenseCategoryId', option.id);
-              setSelectorType(null);
-            }}
-            createOptionCallback={() =>
-              navigate(EXPENSE_CATEGORY_SETTINGS_ROUTE)
-            }
-          />
-        )}
 
         <Button
           type="submit"

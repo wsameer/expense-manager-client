@@ -14,7 +14,6 @@ import {
 import {
   Drawer,
   DrawerContent,
-  DrawerDescription,
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
@@ -97,9 +96,6 @@ export function AddTransaction() {
               : ' an '}
             {tabTitle}
           </DrawerTitle>
-          <DrawerDescription>
-            {t('enter-and-submit-your-transaction')}
-          </DrawerDescription>
         </DrawerHeader>
         <div className="px-4 mb-4">
           <Transactions setOpen={setOpen} />

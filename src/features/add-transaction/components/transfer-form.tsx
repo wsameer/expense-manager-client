@@ -81,7 +81,6 @@ export const TransferForm = ({ existingData, setOpen }: FormProps) => {
     resolver: zodResolver(formSchema),
     defaultValues: {
       date: selectedDate,
-      amount: 0,
       toAccountId: -1,
       fromAccountId: -1,
     },

@@ -179,7 +179,7 @@ export const TransactionList = () => {
                 <Trash2 className="h-4 w-4" />
               </Button>
             </DrawerHeader>
-            <div className="px-4">
+            <div className="mb-8 px-4">
               <Transactions
                 setOpen={setOpen}
                 data={transactionToEdit}

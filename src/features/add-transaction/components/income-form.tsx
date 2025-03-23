@@ -95,7 +95,6 @@ export const IncomeForm = ({ existingData, setOpen }: FormProps) => {
     resolver: zodResolver(formSchema),
     defaultValues: {
       transactionDate: selectedDate,
-      amount: 0,
     },
   });
   const formErrors = form.formState.errors;
