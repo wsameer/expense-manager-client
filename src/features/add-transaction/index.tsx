@@ -97,7 +97,7 @@ export function AddTransaction() {
             {tabTitle}
           </DrawerTitle>
         </DrawerHeader>
-        <div className="px-4 mb-4">
+        <div className="px-4 mb-10">
           <Transactions setOpen={setOpen} />
         </div>
       </DrawerContent>

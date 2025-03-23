@@ -27,7 +27,7 @@ export const OptionSelector = React.memo(
           ref={ref}
           className={className}
         >
-          <div className="grid grid-cols-3 gap-2 px-1">
+          <div className="grid grid-cols-3 gap-2 p-1">
             {filledOptions.map((option, index) => {
               const isCreateButton =
                 option === null &&

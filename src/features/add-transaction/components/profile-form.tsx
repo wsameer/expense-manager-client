@@ -21,10 +21,7 @@ import { useAccounts } from '@/features/accounts/api/get-accounts';
 import { SelectorOption } from '@/components/option-selector/types';
 import { useNavigate } from 'react-router-dom';
 import { OptionSelector } from '@/components/option-selector';
-import {
-  ACCOUNT_SETTINGS_ROUTE,
-  EXPENSE_CATEGORY_SETTINGS_ROUTE,
-} from '@/app/router/routes';
+import { ACCOUNT_SETTINGS_ROUTE } from '@/app/router/routes';
 import {
   Popover,
   PopoverContent,
@@ -32,52 +29,46 @@ import {
 } from '@/components/ui/popover';
 import { ChevronsUpDown } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { useExpenseCategories } from '@/features/expense-category/api/use-expense-categories';
 import { useCreateTransaction } from '../api/create-transaction';
 import { useUpdateTransaction } from '../api/update-transaction';
 import { TransactionType } from '@/types';
 import { toast } from '@/hooks/use-toast';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
 
-const formSchema = z.object({
-  date: z.date({
-    required_error: 'A date is required',
-  }),
-  amount: z.coerce
-    .number({
-      required_error: 'Amount is required',
-      invalid_type_error: 'Amount must be a number',
-    })
-    .nonnegative(),
-  expenseCategoryId: z.coerce.number({
-    required_error: 'Please select a category',
-  }),
-  expenseSubcategoryId: z.coerce.number().nullable(),
-  fromAccountId: z.coerce.number({
-    required_error: 'Please select an account',
-  }),
-  note: z.optional(
-    z.string().max(128, { message: 'Note can be of max 128 characters' }),
-  ),
-});
+const formSchema = z
+  .object({
+    date: z.date({
+      required_error: 'A date is required',
+    }),
+    amount: z.coerce
+      .number({
+        required_error: 'Amount is required',
+        invalid_type_error: 'Amount must be a number',
+      })
+      .nonnegative(),
+    fromAccountId: z.coerce.number({
+      required_error: 'Please select an account',
+    }),
+    toAccountId: z.coerce.number({
+      required_error: 'Please select an account',
+    }),
+    note: z.optional(
+      z.string().max(128, { message: 'Note can be of max 128 characters' }),
+    ),
+  })
+  .refine((data) => data.fromAccountId !== data.toAccountId, {
+    message: 'From and To accounts must be different',
+    path: ['toAccountId'],
+  });
 
 export const ProfileForm = ({ existingData, setOpen }: FormProps) => {
-  const [selectorType, setSelectorType] = useState<
-    'account' | 'category' | null
-  >(null);
+  const [showAccountSelector, setShowAccountSelector] = useState<
+    'fromAccountId' | 'toAccountId' | false
+  >(false);
 
   const { selectedDate } = useUiStore();
   const { t } = useTranslation('transaction');
   const navigate = useNavigate();
-
-  const { allAccounts: accounts } = useAccounts();
-  const { expenseCategories } = useExpenseCategories();
+  const { allAccounts } = useAccounts();
   const { createTransaction } = useCreateTransaction();
   const { updateTransaction } = useUpdateTransaction();
 
@@ -85,54 +76,30 @@ export const ProfileForm = ({ existingData, setOpen }: FormProps) => {
     resolver: zodResolver(formSchema),
     defaultValues: {
       date: selectedDate,
-      expenseCategoryId: -1,
+      toAccountId: -1,
       fromAccountId: -1,
-      expenseSubcategoryId: existingData?.expenseSubcategoryId ?? null,
     },
   });
-
   const formErrors = form.formState.errors;
-  const expenseCategoryId = form.watch('expenseCategoryId') as
-    | number
-    | undefined;
-
-  const selectedCategory = React.useMemo(() => {
-    return expenseCategories?.find(
-      (category) => expenseCategoryId === category.id,
-    );
-  }, [expenseCategoryId, expenseCategories]);
-
-  const subcategories = selectedCategory?.subcategories || [];
-  const isSubcategoriesEmpty =
-    Boolean(expenseCategoryId) && subcategories.length === 0;
 
   const accountOptions: SelectorOption[] = React.useMemo(() => {
-    if (!accounts) return [];
-    return accounts.map((acc) => {
+    if (!allAccounts) return [];
+    return allAccounts.map((acc) => {
       return {
         id: acc.id,
         name: acc.name,
       };
     });
-  }, [accounts]);
+  }, [allAccounts]);
 
   const getSelectedAccountName = React.useCallback(
     (id: number) => {
       if (!id) return undefined;
-      return accounts?.find((account) => id === account.id)?.name || undefined;
-    },
-    [accounts],
-  );
-
-  const getSelectedCategoryName = React.useCallback(
-    (id: number) => {
-      if (!id) return undefined;
       return (
-        expenseCategories?.find((category) => id === category.id)?.name ||
-        undefined
+        allAccounts?.find((account) => id === account.id)?.name || undefined
       );
     },
-    [expenseCategories],
+    [allAccounts],
   );
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
@@ -141,8 +108,8 @@ export const ProfileForm = ({ existingData, setOpen }: FormProps) => {
     try {
       const transactionData = {
         ...values,
-        date: values.date.toISOString(), // has to be ISO as DB doesn't understand else
-        type: TransactionType.EXPENSE,
+        date: values.date.toISOString(),
+        type: TransactionType.TRANSFER,
       };
 
       if (existingData) {
@@ -157,7 +124,6 @@ export const ProfileForm = ({ existingData, setOpen }: FormProps) => {
         title: 'Operation failed!',
         description: error.message,
       });
-      return false;
     }
   }
 
@@ -167,6 +133,8 @@ export const ProfileForm = ({ existingData, setOpen }: FormProps) => {
         date: new Date(existingData.date),
         amount: existingData.amount,
         fromAccountId: existingData.fromAccountId,
+        toAccountId: existingData.toAccountId!,
+        note: existingData.note ?? '',
       });
     }
   }, [existingData, form]);
@@ -193,7 +161,7 @@ export const ProfileForm = ({ existingData, setOpen }: FormProps) => {
                   aria-invalid={formErrors.date ? 'true' : 'false'}
                   selected={field.value}
                   onSelect={(value: Date) => field.onChange(value)}
-                  closeOtherControls={() => setSelectorType(null)}
+                  closeOtherControls={() => setShowAccountSelector(false)}
                 />
               </div>
               <FormMessage role="alert" />
@@ -219,7 +187,7 @@ export const ProfileForm = ({ existingData, setOpen }: FormProps) => {
                     placeholder="0.00"
                     className="w-3/4 text-base"
                     aria-invalid={formErrors.amount ? 'true' : 'false'}
-                    onFocus={() => setSelectorType(null)}
+                    onFocus={() => setShowAccountSelector(false)}
                     {...field}
                   />
                 </FormControl>
@@ -227,119 +195,6 @@ export const ProfileForm = ({ existingData, setOpen }: FormProps) => {
               <FormMessage role="alert" />
             </FormItem>
           )}
-        />
-
-        <FormField
-          name="expenseCategoryId"
-          control={form.control}
-          render={({ field }) => (
-            <FormItem>
-              <div className="flex items-center mt-4 space-y-0 space-x-2">
-                <FormLabel
-                  htmlFor="expenseCategoryId"
-                  className="w-1/4"
-                >
-                  {t('transaction:category')}
-                </FormLabel>
-                <Popover
-                  open={selectorType === 'category'}
-                  onOpenChange={(value) =>
-                    setSelectorType(value ? 'category' : null)
-                  }
-                >
-                  <PopoverTrigger asChild>
-                    <FormControl className="m-0">
-                      <Button
-                        variant="outline"
-                        role="combobox"
-                        className={cn(
-                          'w-3/4 text-base justify-between',
-                          !field.value && 'text-muted-foreground',
-                        )}
-                      >
-                        {field.value > 0
-                          ? getSelectedCategoryName(field.value)
-                          : t('transaction:select-a-category')}
-                        <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-                      </Button>
-                    </FormControl>
-                  </PopoverTrigger>
-                  <PopoverContent className="w-80 rounded-xl px-1 py-2">
-                    <OptionSelector
-                      className="h-fit"
-                      options={expenseCategories!}
-                      onSelect={(option) => {
-                        form.setValue('expenseCategoryId', option.id);
-                        setSelectorType(null);
-                      }}
-                      createOptionCallback={() =>
-                        navigate(EXPENSE_CATEGORY_SETTINGS_ROUTE)
-                      }
-                    />
-                  </PopoverContent>
-                </Popover>
-              </div>
-              <FormMessage role="alert" />
-            </FormItem>
-          )}
-        />
-
-        <FormField
-          name="expenseSubcategoryId"
-          control={form.control}
-          render={({ field }) => {
-            return (
-              <FormItem>
-                <div className="flex items-center mt-4 space-y-0 space-x-4">
-                  <FormLabel
-                    htmlFor="expenseSubcategoryId"
-                    className="w-1/4"
-                  >
-                    {t('transaction:sub-category')}
-                  </FormLabel>
-                  <Select
-                    onValueChange={field.onChange}
-                    value={field.value?.toString() || undefined}
-                    disabled={isSubcategoriesEmpty}
-                  >
-                    <FormControl>
-                      <SelectTrigger>
-                        <SelectValue
-                          placeholder={
-                            !expenseCategoryId
-                              ? 'Select category first'
-                              : isSubcategoriesEmpty
-                                ? 'No subcategories'
-                                : 'Select a subcategory'
-                          }
-                        />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      {isSubcategoriesEmpty ? (
-                        <SelectItem
-                          value={'empty'}
-                          disabled
-                        >
-                          {t('transaction:no-subcategories')}
-                        </SelectItem>
-                      ) : (
-                        subcategories.map((subcategory) => (
-                          <SelectItem
-                            key={subcategory.id}
-                            value={subcategory.id.toString()}
-                          >
-                            {subcategory.name}
-                          </SelectItem>
-                        ))
-                      )}
-                    </SelectContent>
-                  </Select>
-                </div>
-                <FormMessage role="alert" />
-              </FormItem>
-            );
-          }}
         />
 
         <FormField
@@ -355,10 +210,10 @@ export const ProfileForm = ({ existingData, setOpen }: FormProps) => {
                   {t('transaction:account')}
                 </FormLabel>
                 <Popover
-                  open={selectorType === 'account'}
-                  onOpenChange={(value) =>
-                    setSelectorType(value ? 'account' : null)
-                  }
+                  open={showAccountSelector === 'fromAccountId'}
+                  onOpenChange={(value) => {
+                    setShowAccountSelector(value ? 'fromAccountId' : false);
+                  }}
                 >
                   <PopoverTrigger asChild>
                     <FormControl className="m-0">
@@ -377,13 +232,68 @@ export const ProfileForm = ({ existingData, setOpen }: FormProps) => {
                       </Button>
                     </FormControl>
                   </PopoverTrigger>
-                  <PopoverContent className="w-80 rounded-xl px-1 py-2">
+                  <PopoverContent className="w-80 rounded-xl p-2">
                     <OptionSelector
                       className="h-fit"
                       options={accountOptions}
-                      onSelect={(option) => {
-                        form.setValue('fromAccountId', option.id);
-                        setSelectorType(null);
+                      onSelect={(value) => {
+                        form.setValue('fromAccountId', value.id);
+                        setShowAccountSelector(false);
+                      }}
+                      createOptionCallback={() =>
+                        navigate(ACCOUNT_SETTINGS_ROUTE)
+                      }
+                    />
+                  </PopoverContent>
+                </Popover>
+              </div>
+              <FormMessage role="alert" />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          name="toAccountId"
+          control={form.control}
+          render={({ field }) => (
+            <FormItem>
+              <div className="flex items-center mt-4 space-y-0 space-x-2">
+                <FormLabel
+                  htmlFor="toAccountId"
+                  className="w-1/4"
+                >
+                  {t('transaction:account')}
+                </FormLabel>
+                <Popover
+                  open={showAccountSelector === 'toAccountId'}
+                  onOpenChange={(value) => {
+                    setShowAccountSelector(value ? 'toAccountId' : false);
+                  }}
+                >
+                  <PopoverTrigger asChild>
+                    <FormControl className="m-0">
+                      <Button
+                        variant="outline"
+                        role="combobox"
+                        className={cn(
+                          'w-3/4 text-base justify-between',
+                          !field.value && 'text-muted-foreground',
+                        )}
+                      >
+                        {field.value > 0
+                          ? getSelectedAccountName(field.value)
+                          : t('transaction:select-account')}
+                        <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                      </Button>
+                    </FormControl>
+                  </PopoverTrigger>
+                  <PopoverContent className="w-80 rounded-xl p-2">
+                    <OptionSelector
+                      className="h-fit"
+                      options={accountOptions}
+                      onSelect={(value) => {
+                        form.setValue('toAccountId', value.id);
+                        setShowAccountSelector(false);
                       }}
                       createOptionCallback={() =>
                         navigate(ACCOUNT_SETTINGS_ROUTE)
@@ -414,7 +324,7 @@ export const ProfileForm = ({ existingData, setOpen }: FormProps) => {
                     {...field}
                     className="w-3/4 text-base"
                     placeholder={t('transaction:note-placeholder')}
-                    onFocus={() => setSelectorType(null)}
+                    onFocus={() => setShowAccountSelector(false)}
                   />
                 </FormControl>
               </div>

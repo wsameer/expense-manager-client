@@ -264,7 +264,7 @@ export const ExpenseForm = ({ existingData, setOpen }: FormProps) => {
                       </Button>
                     </FormControl>
                   </PopoverTrigger>
-                  <PopoverContent className="w-80 rounded-xl px-1 py-2">
+                  <PopoverContent className="w-80 rounded-xl p-2">
                     <OptionSelector
                       className="h-fit"
                       options={expenseCategories!}
@@ -377,7 +377,7 @@ export const ExpenseForm = ({ existingData, setOpen }: FormProps) => {
                       </Button>
                     </FormControl>
                   </PopoverTrigger>
-                  <PopoverContent className="w-80 rounded-xl px-1 py-2">
+                  <PopoverContent className="w-80 rounded-xl p-2">
                     <OptionSelector
                       className="h-fit"
                       options={accountOptions}
