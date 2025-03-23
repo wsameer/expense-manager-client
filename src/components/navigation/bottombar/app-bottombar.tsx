@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { Settings2 } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import { AddTransaction } from '@/features/add-transaction';
 import { PRIMARY_NAV } from '../constants';
@@ -8,53 +8,37 @@ import { NavItem } from './nav-item';
 
 export const AppBottomBar = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const navRef = useRef(null);
 
   const [isVisible, setIsVisible] = useState(true);
-  const lastScrollY = useRef(0);
-  const scrollSpeedRef = useRef(0);
-  const lastScrollTimeRef = useRef(Date.now());
+  const [scrollPosition, setScrollPosition] = useState(0);
 
   React.useEffect(() => {
     const handleScroll = () => {
-      const currentTime = Date.now();
-      const currentScrollY = window.scrollY;
+      const currentScrollPos = window.scrollY;
 
-      // Calculate scroll speed (pixels per millisecond)
-      const timeDiff = currentTime - lastScrollTimeRef.current;
-      const distanceDiff = Math.abs(currentScrollY - lastScrollY.current);
-      const scrollSpeed = timeDiff > 0 ? distanceDiff / timeDiff : 0;
-
-      // Set scroll speed reference
-      scrollSpeedRef.current = scrollSpeed;
-
-      // Check if at the top of the page
-      const isAtTop = currentScrollY === 0;
-
-      // Determine visibility based on scroll direction, speed, and page position
-      if (currentScrollY > lastScrollY.current) {
+      if (scrollPosition > 10 && currentScrollPos > scrollPosition) {
         setIsVisible(false);
       } else {
-        setIsVisible(scrollSpeed > 0.5 || isAtTop);
+        setIsVisible(true);
       }
 
-      // Update references
-      lastScrollY.current = currentScrollY;
-      lastScrollTimeRef.current = currentTime;
+      setScrollPosition(currentScrollPos);
     };
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('scroll', handleScroll);
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, []);
+  }, [scrollPosition]);
 
   return (
     <div
-      className={`fixed bottom-8 left-1/2 w-3/4 -translate-x-1/2 z-50 block md:hidden transition-all duration-300 ease-in-out ${
-        isVisible
-          ? 'translate-y-0 opacity-100'
-          : 'translate-y-full opacity-0 pointer-events-none'
+      ref={navRef}
+      className={`fixed bottom-8 left-1/2 w-3/4 -translate-x-1/2 z-50 transition-transform duration-300 ease-in-out ${
+        isVisible ? 'translate-y-0' : 'translate-y-[100px]'
       }`}
       id="app-bottom-bar"
     >
