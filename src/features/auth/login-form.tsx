@@ -58,6 +58,7 @@ export const LoginForm = ({ onSuccess }: LoginFormProps) => {
         id="login-form"
         className="grid gap-4"
         autoComplete="on"
+        name="login"
         onSubmit={form.handleSubmit(onSubmit)}
       >
         <FormField
@@ -70,7 +71,7 @@ export const LoginForm = ({ onSuccess }: LoginFormProps) => {
                 <Input
                   id={field.name}
                   placeholder={t('email-placeholder')}
-                  autoComplete="username"
+                  autoComplete="email"
                   {...field}
                 />
               </FormControl>
@@ -91,7 +92,7 @@ export const LoginForm = ({ onSuccess }: LoginFormProps) => {
                     id={field.name}
                     type={showPassword ? 'text' : 'password'}
                     placeholder="*******"
-                    autoComplete="current-password"
+                    autoComplete="password"
                     {...field}
                   />
                   <Button
