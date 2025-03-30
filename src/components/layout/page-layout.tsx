@@ -27,21 +27,26 @@ export const PageLayout = React.memo<PageLayoutProps>((props) => {
 
   return (
     <div className="flex flex-col sm:gap-2 md:pt-0">
-      <SidebarProvider>
-        <Head title={title} />
-
-        {!isMobile && <AppSidebar />}
-
-        <SidebarInset>
-          {isMobile ? <MobileHeader {...props} /> : <AppHeader {...props} />}
-          <div className="flex flex-1 flex-col gap-4 m-4 pb-8">
-            {children}
-            {!isMobile && <AddTransaction />}
-          </div>
-        </SidebarInset>
-
-        {isMobile && <AppBottomBar />}
-      </SidebarProvider>
+      {isMobile ? (
+        <div>
+          <Head title={title} />
+          <MobileHeader {...props} />
+          <div className="flex gap-4 m-4 pb-8">{children}</div>
+          <AppBottomBar />
+        </div>
+      ) : (
+        <SidebarProvider>
+          <Head title={title} />
+          <AppSidebar />
+          <SidebarInset>
+            <AppHeader {...props} />
+            <div className="flex gap-4 m-4 pb-8">
+              {children}
+              <AddTransaction />
+            </div>
+          </SidebarInset>
+        </SidebarProvider>
+      )}
     </div>
   );
 });
