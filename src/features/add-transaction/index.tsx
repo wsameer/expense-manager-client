@@ -44,13 +44,15 @@ export function AddTransaction() {
         onOpenChange={setOpen}
       >
         <DialogTrigger asChild>
-          <Button
-            className="rounded-full h-12 w-12 hover:bg-red-700"
-            variant="destructive"
-            size="icon"
-          >
-            <Plus className="h-6 w-6" />
-          </Button>
+          <div className="fixed bottom-6 right-6 z-50">
+            <Button
+              className="rounded-full h-12 w-12 hover:bg-red-700"
+              variant="destructive"
+              size="icon"
+            >
+              <Plus className="h-6 w-6" />
+            </Button>
+          </div>
         </DialogTrigger>
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>

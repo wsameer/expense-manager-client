@@ -33,7 +33,7 @@ export const AccountsPage = () => {
       title="Accounts"
       subTitle="Your accounts with its latest balance"
     >
-      <div className="grid grid-cols-1 gap-3 md:w-1/3">
+      <div className="w-full grid grid-cols-1 gap-3 md:w-1/3">
         <div className="bg-white border dark:bg-zinc-800 rounded-2xl h-16 py-3 shadow-sm">
           <div className="flex flex-row justify-evenly items-center h-full gap-1">
             {statsData.map((item, index) => (
