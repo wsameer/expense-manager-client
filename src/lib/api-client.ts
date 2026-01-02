@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { LOGIN_ROUTE } from '@/app/router/routes';
 import axios from 'axios';
+import { LOGIN_ROUTE } from '@/app/router/routes';
 import { API_BASE_URL, USER_KEY } from './constants';
 
 const snakeToCamel = (str: string): string =>

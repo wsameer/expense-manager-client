@@ -1,8 +1,6 @@
-import { API_BASE_URL } from '@/lib/constants';
-
-export const ACCOUNTS_API = API_BASE_URL + 'accounts';
-export const ACCOUNT_BY_ID_API = API_BASE_URL + 'accounts/:id';
-export const ACCOUNTS_STATS_API = API_BASE_URL + 'accounts-stats';
+export const ACCOUNTS_API = 'accounts';
+export const ACCOUNT_BY_ID_API = 'accounts/:id';
+export const ACCOUNTS_STATS_API = 'accounts-stats';
 
 export const ACCOUNT_GROUPS = [
   { key: 'CASH', label: 'cash', id: 1 },

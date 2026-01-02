@@ -15,14 +15,14 @@ type AppProviderProps = {
 
 const AppProvider = ({ children }: AppProviderProps) => {
   return (
-    <React.Suspense
-      fallback={
-        <div className="flex h-screen w-screen items-center justify-center">
-          <Spinner size="xl" />
-        </div>
-      }
-    >
-      <ErrorBoundary FallbackComponent={MainErrorFallback}>
+    <ErrorBoundary FallbackComponent={MainErrorFallback}>
+      <React.Suspense
+        fallback={
+          <div className="flex h-screen w-screen items-center justify-center">
+            <Spinner size="xl" />
+          </div>
+        }
+      >
         <HelmetProvider>
           <TooltipProvider>
             <AuthProvider>
@@ -33,8 +33,8 @@ const AppProvider = ({ children }: AppProviderProps) => {
             </AuthProvider>
           </TooltipProvider>
         </HelmetProvider>
-      </ErrorBoundary>
-    </React.Suspense>
+      </React.Suspense>
+    </ErrorBoundary>
   );
 };
 
